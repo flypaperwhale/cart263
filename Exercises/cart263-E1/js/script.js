@@ -2,7 +2,20 @@
 Find Sausage Game
 Frankie Latreille
 
-This is a game where Sausage must be found.
+This is an adaptation of the "Where is Sausage Dog Game". It remains a Where's Waldo
+type of game except instead of needing to find the Sausage Dog, the player must find
+the 3 animals that are looking left.
+
+*/
+
+/*
+What needs to be done:
+- change sausage dog file name to generic animal name
+- change sausage dog class to leftist class
+- have a setTimeout that changes the background color as well as changes
+  the random positions of the animals
+- make it so that when a leftist animal is clicked they spin in place
+  and do not change random positions anymore.
 */
 
 "use strict";
