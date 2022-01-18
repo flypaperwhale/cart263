@@ -18,6 +18,7 @@ function preload() {
     let animalImage = loadImage(`assets/images/animal${i}.png`);
     animalImages.push(animalImage);
   }
+  let sausageDogImage = loadImage(`assets/images/sausage-dog.png`);
 }
 
 
@@ -36,5 +37,9 @@ function setup() {
 
 
 function draw() {
+  background(255,255,0);
 
+  for (let i = 0; i < animals.length; i++){
+    animals[i].update();
+  }
 }
