@@ -1,33 +1,28 @@
 /**
-Title of Project
-Author Name
+Find Sausage Game
+Frankie Latreille
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This is a game where Sausage must be found.
 */
 
 "use strict";
 
+const NUM_ANIMAL_IMAGES = 10;
+const NUM_ANIMALS = 100;
 
-/**
-Description of preload
-*/
+let animalImages = [];
+let animals = [];
+
 function preload() {
 
 }
 
 
-/**
-Description of setup
-*/
 function setup() {
 
 }
 
 
-/**
-Description of draw()
-*/
 function draw() {
 
 }
