@@ -14,7 +14,10 @@ let animalImages = [];
 let animals = [];
 
 function preload() {
-
+  for (let i = 0; i < NUM_ANIMAL_IMAGES; i++){
+    let animalImage = loadImage(`assets/images/animal${i}.png`);
+    animalImages.push(animalImage);
+  }
 }
 
 
