@@ -20,6 +20,11 @@ class Animal {
     pop();
   }
 
+  changePosition(){
+      this.x = random(0,windowWidth);
+      this.y = random(0,windowHeight);
+  }
+
   overlap(x,y){
     if (x > this.x - this.image.width/2 &&
         x < this.x + this.image.width/2 &&
