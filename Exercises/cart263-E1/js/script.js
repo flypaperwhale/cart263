@@ -20,10 +20,10 @@ What needs to be done:
 
 "use strict";
 
-const NUM_ANIMAL_IMAGES = 11;
-const NUM_ANIMALS = 10;
+const NUM_ANIMAL_IMAGES = 11; // every animal, including sausage dog
+const NUM_ANIMALS = 10; // ### CHANGE TO VARIABLE
 
-let backgroundColor = `yellow`;
+let backgroundColor = `yellow`; // background starts off yellow
 
 let state = `Title`; // can be Title, Game, End
 
@@ -66,18 +66,19 @@ function draw() {
   if (backgroundColor === `yellow`){
     background(255,255,0);
 
-    setTimeout(changeBackgroundColor, 8000);
+    setTimeout(changeBGtoGreen, 1000);
   }
   else if (backgroundColor === `green`){
     background(0,255,0);
 
-    setTimeout(changeBackgroundColor, 8000);
+    setTimeout(changeBGtoYellow, 1000);
   }
 
   if (state === `Title`){
 
     push();
     textAlign(CENTER,CENTER);
+    textSize(40);
     if (backgroundColor === `yellow`){
       fill(0,255,0);
     }
@@ -85,26 +86,36 @@ function draw() {
       fill(255,255,0);
     }
     text(`Welcome to
-      "Pick out the Leftists"`)
+      "Pick out the Leftists"`, width/2, height/2)
     pop();
 
   }
 
+if (state === `Game`){
   for (let i = 0; i < animals.length; i++){
     animals[i].update();
   }
 
   sausageDog.update();
 }
+}
 
-function changeBackgroundColor(){
-    if (backgroundColor === `yellow`){
-      backgroundColor = `green`;
-    }
-    else if (backgroundColor === `green`){
+
+function changeBGtoYellow(){
+  // gotta get it to trigger only once, going to use a trigger
+  if (backgroundColor === `green`){
       backgroundColor = `yellow`;
     }
-}
+  }
+
+function changeBGtoGreen(){
+  // gotta get it to trigger only once, going to use a trigger
+  if (backgroundColor === `yellow`){
+      backgroundColor = `green`;
+    }
+  }
+
+
 
 function mousePressed(){
   if (state === `Title`){
