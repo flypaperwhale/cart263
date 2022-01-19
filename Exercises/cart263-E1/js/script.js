@@ -156,6 +156,15 @@ function shuffleAnimals() {
       //if (i === animals.length - 1) {
         //trigger = 1;
       }
+      for (let i = 0; i < leftists.length; i++){
+        if (leftists[i].found){
+          // do nothing
+        }
+        else {
+          leftists[i].changePosition();
+        }
+
+      }
     }
 //  }
 //}
