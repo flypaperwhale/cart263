@@ -126,11 +126,13 @@ if (backgroundColor === `green`) { // animals shuffle when background is green
 }
 
 for (let i = 0; i < leftists.length; i++){
-  if (leftists[i].found === false){
-    leftistsFound--;
-  }
-  if (leftists[i].found === true){
-    leftistsFound++;
+  if (leftists[i].foundCounter === true){
+    let trigger = 0;
+    if (trigger === 0){
+      leftistsFound++;
+      trigger = 1;
+      leftists[i].foundCounter = false;
+    }
   }
 }
 
@@ -208,6 +210,7 @@ function mousePressed(){
     leftists[i].mousePressed();
   }
   if (state === `End`){
+    leftistsFound = 0;
       leftists.splice(0,3);
     for (let i = 0; i < NUM_LEFTISTS; i++){
       let x = random (0,width);

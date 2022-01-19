@@ -2,6 +2,7 @@ class Leftist extends Animal{
   constructor(x,y,image){
     super(x,y,image);
     this.found = false;
+    this.foundCounter = undefined;
     this.rotationSpeed = -0.30;
   }
 
@@ -26,6 +27,7 @@ class Leftist extends Animal{
   mousePressed(){
     if (this.overlap(mouseX,mouseY)){
       this.found = true;
+      this.foundCounter = true;
     }
   }
 }
