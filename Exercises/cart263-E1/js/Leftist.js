@@ -3,12 +3,11 @@ class Leftist extends Animal{
     super(x,y,image);
     this.found = false;
     this.foundCounter = undefined;
-    this.rotationSpeed = -0.30;
+    this.rotationSpeed = -0.25;
   }
 
   update(){
     this.display();
-
     if (this.found){
       this.angle += this.rotationSpeed;
     }
@@ -26,8 +25,8 @@ class Leftist extends Animal{
 
   mousePressed(){
     if (this.overlap(mouseX,mouseY)){
-      this.found = true;
-      this.foundCounter = true;
+      this.found = true; // when leftist is found it spins and remains in place during shuffle
+      this.foundCounter = true; // foundCounter permits tabulation of found leftists
     }
   }
 }

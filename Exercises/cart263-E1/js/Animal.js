@@ -3,7 +3,6 @@ class Animal {
     this.x = x;
     this.y = y;
     this.image = image;
-
     this.angle = 0;
   }
 
@@ -20,7 +19,8 @@ class Animal {
     pop();
   }
 
-  changePosition(){
+  changePosition(){ // used during shuffle to randomly select new position
+    // used by ALL animals, left or right
       this.x = random(0,width);
       this.y = random(0,height);
   }
