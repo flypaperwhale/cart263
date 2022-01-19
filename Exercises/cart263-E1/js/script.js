@@ -20,8 +20,10 @@ What needs to be done:
 
 "use strict";
 
-const NUM_ANIMAL_IMAGES = 10;
-const NUM_ANIMALS = 175;
+const NUM_ANIMAL_IMAGES = 11;
+const NUM_ANIMALS = 10;
+
+let state = `Title`; // can be Title, Game, End
 
 let animalImages = [];
 let animals = [];
@@ -35,7 +37,7 @@ function preload() {
     animalImages.push(animalImage);
   }
 
-  sausageDogImage = loadImage(`assets/images/sausage-dog.png`);
+  sausageDogImage = loadImage(`assets/images/animal10.png`);
 }
 
 function setup() {
@@ -50,7 +52,7 @@ function setup() {
     animals.push(animal);
   }
 
-  // Create the sausageDog
+  // Create the leftward animals
   let x = random (0,width);
   let y = random (0,height);
   sausageDog = new SausageDog(x,y,sausageDogImage);
