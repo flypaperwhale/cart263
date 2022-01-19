@@ -4,24 +4,16 @@ Frankie Latreille
 
 This is an adaptation of the "Where is Sausage Dog Game". It remains a Where's Waldo
 type of game except instead of needing to find the Sausage Dog, the player must find
-the 3 animals that are looking left.
+the 3 animals that are looking left. The challenge is to catch the leftward animals
+before they shuffle away amongst the masses.
 
 */
 
-/*
-What needs to be done:
-- change sausage dog file name to generic animal name
-- change sausage dog class to leftist class
-- have a setTimeout that changes the background color as well as changes
-  the random positions of the animals
-- make it so that when a leftist animal is clicked they spin in place
-  and do not change random positions anymore.
-*/
 
 "use strict";
 
 const NUM_ANIMAL_IMAGES = 11; // every animal, including sausage dog
-const NUM_ANIMALS = 50; // ### CHANGE TO VARIABLE
+let numAnimals = 10; // ### CHANGE TO VARIABLE
 const NUM_LEFTISTS = 3; // will remain at 3 even as NUM_ANIMALS goes up
 
 let backgroundColor = `yellow`; // background starts off yellow
@@ -49,10 +41,10 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth -250, windowHeight -50);
 
   // Create the animals
-  for (let i = 0; i < NUM_ANIMALS; i++){
+  for (let i = 0; i < numAnimals; i++){
     let x = random (0,width);
     let y = random (0,height);
     let animalImage = random(animalImages);
@@ -214,6 +206,15 @@ function mousePressed(){
     leftists[i].mousePressed();
   }
   if (state === `End`){
+    animals.splice(0,numAnimals);
+    for (let i = 0; i < numAnimals+15; i++){
+      let x = random (0,width);
+      let y = random (0,height);
+      let animalImage = random(animalImages);
+      let animal = new Animal(x,y,animalImage);
+      animals.push(animal);
+    }
+
     leftistsFound = 0;
       leftists.splice(0,3);
     for (let i = 0; i < NUM_LEFTISTS; i++){

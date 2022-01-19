@@ -21,8 +21,8 @@ class Animal {
   }
 
   changePosition(){
-      this.x = random(0,windowWidth);
-      this.y = random(0,windowHeight);
+      this.x = random(0,width);
+      this.y = random(0,height);
   }
 
   overlap(x,y){
