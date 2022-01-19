@@ -36,7 +36,8 @@ let leftists = [];
 let sausageDogImage = undefined;
 let sausageDog = undefined;
 
-let trigger = undefined;
+let leftistsFound = 0;
+//let trigger = undefined;
 
 function preload() {
   for (let i = 0; i < NUM_ANIMAL_IMAGES; i++){
@@ -103,6 +104,7 @@ function draw() {
   }
 
 if (state === `Game`){
+  leftistsFound = constrain(leftistsFound, 0,3);
 if (backgroundColor === `yellow`) {
   //setTimeout(shuffleAnimals, 1000);
   for (let i = 0; i < animals.length; i++) {
@@ -123,8 +125,37 @@ if (backgroundColor === `green`) { // animals shuffle when background is green
     }
 }
 
+for (let i = 0; i < leftists.length; i++){
+  if (leftists[i].found === false){
+    leftistsFound--;
+  }
+  if (leftists[i].found === true){
+    leftistsFound++;
+  }
+}
+
+if (leftistsFound === 3){
+  state = `End`;
+}
   //sausageDog.update();
 }
+
+if (state === `End`){
+  push();
+  textAlign(CENTER,CENTER);
+  textSize(40);
+  if (backgroundColor === `yellow`){ // if background is yellow
+    fill(0,255,0); // text is green
+  }
+  else if (backgroundColor === `green`){ // if background is green
+    fill(255,255,0); // text is yellow
+  }
+  text(`  Those pesky leftists
+    were no match for you!
+    Click to play again!`, width/2, height/2)
+  pop();
+}
+
 
 
 }
@@ -169,12 +200,22 @@ function shuffleAnimals() {
 //  }
 //}
 
-
 function mousePressed(){
   if (state === `Title`){
     state = `Game`;
   }
   for (let i = 0; i < leftists.length; i++){
     leftists[i].mousePressed();
+  }
+  if (state === `End`){
+      leftists.splice(0,3);
+    for (let i = 0; i < NUM_LEFTISTS; i++){
+      let x = random (0,width);
+      let y = random (0,height);
+      let animalImage = random(animalImages);
+      let animal = new Leftist(x,y,animalImage);
+      leftists.push(animal);
+    }
+    state = `Game`;
   }
 }
