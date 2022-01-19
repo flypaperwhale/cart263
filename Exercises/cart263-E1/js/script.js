@@ -21,7 +21,7 @@ What needs to be done:
 "use strict";
 
 const NUM_ANIMAL_IMAGES = 11; // every animal, including sausage dog
-const NUM_ANIMALS = 10; // ### CHANGE TO VARIABLE
+const NUM_ANIMALS = 50; // ### CHANGE TO VARIABLE
 const NUM_LEFTISTS = 3; // will remain at 3 even as NUM_ANIMALS goes up
 
 let backgroundColor = `yellow`; // background starts off yellow
@@ -31,10 +31,12 @@ let state = `Title`; // can be Title, Game, End
 let animalImages = [];
 let animals = [];
 
+let leftists = [];
+
 let sausageDogImage = undefined;
 let sausageDog = undefined;
 
-let trigger = 0;
+let trigger = undefined;
 
 function preload() {
   for (let i = 0; i < NUM_ANIMAL_IMAGES; i++){
@@ -42,7 +44,7 @@ function preload() {
     animalImages.push(animalImage);
   }
 
-  sausageDogImage = loadImage(`assets/images/animal10.png`);
+  //sausageDogImage = loadImage(`assets/images/animal10.png`);
 }
 
 function setup() {
@@ -58,9 +60,17 @@ function setup() {
   }
 
   // Create the leftward animals
-  let x = random (0,width);
-  let y = random (0,height);
-  sausageDog = new Leftist (x,y,sausageDogImage);
+  for (let i = 0; i < NUM_LEFTISTS; i++){
+    let x = random (0,width);
+    let y = random (0,height);
+    let animalImage = random(animalImages);
+    let animal = new Leftist(x,y,animalImage);
+    leftists.push(animal);
+  }
+
+  // let x = random (0,width);
+  // let y = random (0,height);
+  // sausageDog = new Leftist (x,y,sausageDogImage);
 }
 
 
@@ -94,18 +104,26 @@ function draw() {
 
 if (state === `Game`){
 if (backgroundColor === `yellow`) {
+  //setTimeout(shuffleAnimals, 1000);
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();}
 
-  setTimeout(shuffleAnimals, 1000);}
+  for (let i = 0; i < leftists.length; i++) {
+    leftists[i].update();
+  }}
 
-if (backgroundColor === `green`) {
+if (backgroundColor === `green`) { // animals shuffle when background is green
+
+  shuffleAnimals();
+
   for (let i = 0; i < animals.length; i++) {
     animals[i].update();}
+    for (let i = 0; i < leftists.length; i++) {
+      leftists[i].update();
+    }
+}
 
-  setTimeout(shuffleAnimals, 1000);}
-
-  sausageDog.update();
+  //sausageDog.update();
 }
 
 
@@ -126,21 +144,28 @@ function changeBGtoGreen(){
     }
   }
 
-function shuffleAnimals(){
-  if (trigger === 0){
+// function primeTrigger(){
+//   trigger = 0;
+// }
+
+function shuffleAnimals() {
+//  trigger = 0;
+  //if (trigger === 0) {
     for (let i = 0; i < animals.length; i++) {
       animals[i].changePosition();
-      if (i === animals.length - 1){
-        trigger = 1;
-  }
+      //if (i === animals.length - 1) {
+        //trigger = 1;
+      }
+    }
+//  }
+//}
 
-  }
-  }
-  }
 
 function mousePressed(){
   if (state === `Title`){
     state = `Game`;
   }
-  sausageDog.mousePressed();
+  for (let i = 0; i < leftists.length; i++){
+    leftists[i].mousePressed();
+  }
 }
