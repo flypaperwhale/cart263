@@ -94,47 +94,21 @@ function draw() {
 
 if (state === `Game`){
 if (backgroundColor === `yellow`) {
-  //trigger = 0;
-  if (trigger === 0) {
-    for (let i = 0; i < animals.length; i++) {
-      animals[i].changePosition();
-      if (i === animals.length - 1) {
-        trigger = 1;
-      }
-    }
-  }
-  if (trigger === 1) {
-    for (let i = 0; i < animals.length; i++) {
-      animals[i].update();
-      if (i === animals.length - 1) {
-        trigger = 0;
-      }
-    }
-  }
-}
+  for (let i = 0; i < animals.length; i++) {
+    animals[i].update();}
+
+  setTimeout(shuffleAnimals, 1000);}
 
 if (backgroundColor === `green`) {
-  //trigger = 0;
-  if (trigger === 0) {
-    for (let i = 0; i < animals.length; i++) {
-      animals[i].changePosition();
-      if (i === animals.length - 1) {
-        trigger = 1;
-      }
-    }
-  }
-  if (trigger === 1) {
-    for (let i = 0; i < animals.length; i++) {
-      animals[i].update();
-      if (i === animals.length - 1) {
-        trigger = 0;
-      }
-    }
-  }
-}
+  for (let i = 0; i < animals.length; i++) {
+    animals[i].update();}
+
+  setTimeout(shuffleAnimals, 1000);}
 
   sausageDog.update();
 }
+
+
 }
 
 
@@ -152,7 +126,17 @@ function changeBGtoGreen(){
     }
   }
 
+function shuffleAnimals(){
+  if (trigger === 0){
+    for (let i = 0; i < animals.length; i++) {
+      animals[i].changePosition();
+      if (i === animals.length - 1){
+        trigger = 1;
+  }
 
+  }
+  }
+  }
 
 function mousePressed(){
   if (state === `Title`){
