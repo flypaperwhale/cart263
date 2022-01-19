@@ -23,6 +23,8 @@ What needs to be done:
 const NUM_ANIMAL_IMAGES = 11;
 const NUM_ANIMALS = 10;
 
+let backgroundColor = `yellow`;
+
 let state = `Title`; // can be Title, Game, End
 
 let animalImages = [];
@@ -60,7 +62,33 @@ function setup() {
 
 
 function draw() {
-  background(255,255,0);
+
+  if (backgroundColor === `yellow`){
+    background(255,255,0);
+
+    setTimeout(changeBackgroundColor, 8000);
+  }
+  else if (backgroundColor === `green`){
+    background(0,255,0);
+
+    setTimeout(changeBackgroundColor, 8000);
+  }
+
+  if (state === `Title`){
+
+    push();
+    textAlign(CENTER,CENTER);
+    if (backgroundColor === `yellow`){
+      fill(0,255,0);
+    }
+    else if (backgroundColor === `green`){
+      fill(255,255,0);
+    }
+    text(`Welcome to
+      "Pick out the Leftists"`)
+    pop();
+
+  }
 
   for (let i = 0; i < animals.length; i++){
     animals[i].update();
@@ -69,6 +97,18 @@ function draw() {
   sausageDog.update();
 }
 
+function changeBackgroundColor(){
+    if (backgroundColor === `yellow`){
+      backgroundColor = `green`;
+    }
+    else if (backgroundColor === `green`){
+      backgroundColor = `yellow`;
+    }
+}
+
 function mousePressed(){
+  if (state === `Title`){
+    state = `Game`;
+  }
   sausageDog.mousePressed();
 }
