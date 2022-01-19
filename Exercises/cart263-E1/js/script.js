@@ -98,7 +98,10 @@ function draw() {
       fill(255,255,0); // text is yellow
     }
     text(`  Welcome to
-    "Pick out the Leftists"`, width/2, height/2)
+    "Pick out the Leftists"
+
+    3 backwards beasts hide...
+    Will they evade you?`, width/2, height/2)
     pop();
 
   }
@@ -127,12 +130,12 @@ if (backgroundColor === `green`) { // animals shuffle when background is green
 
 for (let i = 0; i < leftists.length; i++){
   if (leftists[i].foundCounter === true){
-    let trigger = 0;
-    if (trigger === 0){
+    //let trigger = 0;
+    //if (trigger === 0){
       leftistsFound++;
-      trigger = 1;
+      //trigger = 1;
       leftists[i].foundCounter = false;
-    }
+    //}
   }
 }
 
@@ -154,6 +157,7 @@ if (state === `End`){
   }
   text(`  Those pesky leftists
     were no match for you!
+
     Click to play again!`, width/2, height/2)
   pop();
 }
