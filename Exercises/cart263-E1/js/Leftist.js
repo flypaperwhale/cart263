@@ -1,4 +1,4 @@
-class SausageDog extends Animal{
+class Leftist extends Animal{
   constructor(x,y,image){
     super(x,y,image);
     this.found = false;

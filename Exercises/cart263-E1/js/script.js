@@ -55,7 +55,7 @@ function setup() {
   // Create the leftward animals
   let x = random (0,width);
   let y = random (0,height);
-  sausageDog = new SausageDog(x,y,sausageDogImage);
+  sausageDog = new Leftist (x,y,sausageDogImage);
 }
 
 
