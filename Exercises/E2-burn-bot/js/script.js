@@ -23,6 +23,11 @@ let bot = undefined;
 
 let trigger = 0;
 
+let botNegativeReply, botPositiveReply, botDontKnowReply;
+
+let negativeTanArray = [`Cool story`];
+let positiveTanArray = [`OK let me help you then`];
+
 /**
 Description of preload
 */
@@ -43,25 +48,13 @@ function setup() {
     alert(`Sorry, this page requires speech recognition. Please use Chrome on a desktop computer.`);
   }
 
-  //responsiveVoice.setDefaultVoice(`US English Male`);
+  responsiveVoice.setDefaultVoice("UK English Male");
 
   bot = new BurnBot();
 
 
 
 
-}
-
-function negativeTan(){
-console.log("I'm listening");
-}
-
-function positiveTan(){
-console.log("I'm listening");
-}
-
-function dontKnow(){
-console.log("I'm listening");
 }
 
 /**
@@ -95,16 +88,12 @@ if (trigger === 0){
 if (trigger === 1){
   //annyang listening!
     let commands = {
-      "yes *wtv": negativeTan,
-      "no *wtv": positiveTan,
+      "yes *yeswtv": negativeTan,
+      "no *nowtv": positiveTan,
       "I don't *wtv": dontKnow,};
     annyang.addCommands(commands);
     // annyang.start();
 }
-
-
-
-
 
   }
 
@@ -113,8 +102,30 @@ if (trigger === 1){
 function botIntro(){
   responsiveVoice.speak(`Hello, I am your general virtual assistant, here to serve you.
     Well, , do you need my help?`,
-    "UK English Male" ); // {onstart: botTalk, onend: botListen}
+     ); // {onstart: botTalk, onend: botListen}
     setTimeout(annyang.start(), 5000);
+}
+
+
+function negativeTan(){
+  botNegativeReply = random(negativeTanArray);
+  responsiveVoice.speak(botNegativeReply);
+
+console.log("NO NO NO");
+}
+
+function positiveTan(){
+  botPositiveReply = random(positiveTanArray);
+  responsiveVoice.speak(botPositiveReply);
+
+console.log("YEA YEA YEA");
+}
+
+function dontKnow(){
+  botDontKnowReply = `Oooo-oooo-oooo, I don't ${wtv}`;
+  responsiveVoice.speak(botDontKnowReply, {pitch:2});
+
+console.log("LOL");
 }
 
 function botTalk(){
