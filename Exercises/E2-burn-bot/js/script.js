@@ -9,7 +9,7 @@ yes or no questions
 
 /**
 to do:
-- make bot class with 3 faces (offline, listening, talking)
+√ make bot class with 3 faces (offline, listening, talking)
 - setup aanyang to receive "yes" "no" or "I don't" ('get it' or 'know' or 'understand')
 - setup responsiveVoice arrays for yesTangents and noTangents (SCRIPTING)
 - have start state, middle state, after 3 responses (goodbye state?)
@@ -72,6 +72,14 @@ if (trigger === 0){
 }
 
 //annyang listening!
+annyang.start();
+
+if (annyang) { // *** I would like to drop this and permit users to type answers ***
+  // annyang code in here
+}
+else {
+  alert(`Sorry, this page requires speech recognition. Please use Chrome on a desktop computer.`);
+}
 
   }
 
