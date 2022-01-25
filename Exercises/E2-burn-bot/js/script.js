@@ -32,7 +32,7 @@ function preload() {
 Description of setup
 */
 function setup() {
-  createCanvas(500,600);
+  createCanvas(400,500);
 
   bot = new BurnBot();
 
@@ -43,7 +43,7 @@ function setup() {
 Description of draw()
 */
 function draw() {
-  background (255);
+  background (0);
 
   bot.update();
 
