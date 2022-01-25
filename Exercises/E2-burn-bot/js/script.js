@@ -10,10 +10,10 @@ yes or no questions
 /**
 to do:
 √ make bot class with 3 faces (offline, listening, talking)
-- setup aanyang to receive "yes" "no" or "I don't" ('get it' or 'know' or 'understand')
+√ setup aanyang to receive "yes" "no" or "I don't" ('get it' or 'know' or 'understand')
 - setup responsiveVoice arrays for yesTangents and noTangents (SCRIPTING)
 - have start state, middle state, after 3 responses (goodbye state?)
-- have "I don't *" particular response higher pitch, red screen "Ooo I don't *whatever user said"
+√ have "I don't *" particular response higher pitch, red screen "Ooo I don't *whatever user said"
 */
 
 "use strict";
@@ -114,7 +114,6 @@ function negativeTan() {
     onend: botListen,
   });
   bot.turnsSpoken++;
-
   console.log("NO NO NO");
 }
 
@@ -140,7 +139,7 @@ function dontKnow(whatever) {
 }
 
 function botInsult(insult) {
-  botInsultBack = `No, you're ${insult}`;
+  botInsultBack = `Actually, you're ${insult}`;
   responsiveVoice.speak(botInsultBack, "UK English Male", {
     pitch: 0.5,
     onstart: botTalk,
@@ -152,13 +151,11 @@ function botInsult(insult) {
 
 function botTalk() {
   bot.speechState = `Talking`;
-
   console.log(bot.speechState);
 }
 
 function botListen() {
   bot.speechState = `Listening`;
-
   console.log(bot.speechState);
 }
 
