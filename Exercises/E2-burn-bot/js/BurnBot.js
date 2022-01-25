@@ -21,6 +21,7 @@ class BurnBot {
       pop();
     }
     if (this.speechState === `Talking`){
+      console.log(`bot is talking`);
       push();
       fill(255);
       rectMode(CENTER);
