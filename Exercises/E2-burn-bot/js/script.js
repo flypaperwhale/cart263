@@ -71,6 +71,8 @@ if (trigger === 0){
   trigger = 1;
 }
 
+//annyang listening!
+
   }
 
 }
