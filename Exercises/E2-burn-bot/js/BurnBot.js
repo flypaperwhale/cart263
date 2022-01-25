@@ -1,6 +1,6 @@
 class BurnBot {
   constructor(){
-    this.speechState = `Listening`; // can be Offline, Listening, Talking
+    this.speechState = `Talking`; // can be Offline, Listening, Talking
   }
 
   update(){
@@ -23,8 +23,10 @@ class BurnBot {
     if (this.speechState === `Talking`){
       fill(255);
       rectMode(CENTER);
-      rect(width/4,height/4, 90,20);
-      rect(width/2+width/4,height/4, 90,20);
+      rect(width/2,height/2+height/4-40, 117,20);
+      rect(width/4+25,height/2+height/4-20, 32,20);
+      rect(width/2+width/4-25,height/2+height/4-20, 32,20);
+      rect(width/2,height/2+height/4, 117,20);
       pop();
     }
     if (this.speechState === `Listening`){
