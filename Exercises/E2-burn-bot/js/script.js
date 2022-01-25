@@ -83,7 +83,9 @@ function draw() {
     if (trigger === 1) {
       //annyang listening!
       let commands = {
+        "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
+        "bye *wtv": positiveTan,
         "no *wtv": positiveTan,
         "I don't *whatever": dontKnow,
         "That doesn't *whatever": dontKnow,
@@ -99,15 +101,16 @@ function draw() {
 
 function botIntro() {
   responsiveVoice.speak(
-    `Hello, I am your general virtual assistant, here to serve you.
+    `Hi there. I am your general virtual assistant, here to serve you.
     Well, , do you need my help?`,
     "UK English Male",
     { onstart: botTalk, onend: botListen }
   ); //
-  setTimeout(annyang.start(), 4500);
+  setTimeout(annyang.start(), 5000);
 }
 
 function negativeTan() {
+  annyang.pause();
   botNegativeReply = random(negativeTanArray);
   responsiveVoice.speak(botNegativeReply, "UK English Male", {
     onstart: botTalk,
@@ -118,6 +121,7 @@ function negativeTan() {
 }
 
 function positiveTan() {
+  annyang.pause();
   botPositiveReply = random(positiveTanArray);
   responsiveVoice.speak(botPositiveReply, "UK English Male", {
     onstart: botTalk,
@@ -128,6 +132,7 @@ function positiveTan() {
 }
 
 function dontKnow(whatever) {
+  annyang.pause();
   botDontKnowReply = `Oooo-oooo-oooo, I don't ${whatever}`;
   responsiveVoice.speak(botDontKnowReply, "UK English Male", {
     pitch: 1.5,
@@ -139,7 +144,8 @@ function dontKnow(whatever) {
 }
 
 function botInsult(insult) {
-  botInsultBack = `Actually, you're ${insult}`;
+  annyang.pause();
+  botInsultBack = `Actually, you! are ${insult}`;
   responsiveVoice.speak(botInsultBack, "UK English Male", {
     pitch: 0.5,
     onstart: botTalk,
@@ -151,11 +157,15 @@ function botInsult(insult) {
 
 function botTalk() {
   bot.speechState = `Talking`;
+  //annyang.pause();
   console.log(bot.speechState);
 }
 
 function botListen() {
   bot.speechState = `Listening`;
+  if ((trigger = 1)) {
+    setTimeout(annyang.resume(), 1000);
+  }
   console.log(bot.speechState);
 }
 
