@@ -24,7 +24,7 @@ let bot = undefined;
 let trigger = 0;
 
 //let whatever;
-let botNegativeReply, botPositiveReply, botDontKnowReply;
+let botNegativeReply, botPositiveReply, botDontKnowReply, botInsultBack;
 
 let negativeTanArray = [`Cool story`];
 let positiveTanArray = [`OK let me help you then`];
@@ -83,14 +83,16 @@ function draw() {
     if (trigger === 1) {
       //annyang listening!
       let commands = {
-        "yes *yeswtv": negativeTan,
-        "no *nowtv": positiveTan,
+        "yes *wtv": negativeTan,
+        "no *wtv": positiveTan,
         "I don't *whatever": dontKnow,
         "That doesn't *whatever": dontKnow,
         "What do you *whatever": dontKnow,
+        "You're *insult": botInsult,
       };
       annyang.addCommands(commands);
       // annyang.start();
+      //annyang.debug();
     }
   }
 }
@@ -111,6 +113,7 @@ function negativeTan() {
     onstart: botTalk,
     onend: botListen,
   });
+  bot.turnsSpoken++;
 
   console.log("NO NO NO");
 }
@@ -121,7 +124,7 @@ function positiveTan() {
     onstart: botTalk,
     onend: botListen,
   });
-
+  bot.turnsSpoken++;
   console.log("YEA YEA YEA");
 }
 
@@ -132,17 +135,30 @@ function dontKnow(whatever) {
     onstart: botTalk,
     onend: botListen,
   });
-
+  bot.turnsSpoken++;
   console.log("LOL");
+}
+
+function botInsult(insult) {
+  botInsultBack = `No, you're ${insult}`;
+  responsiveVoice.speak(botInsultBack, "UK English Male", {
+    pitch: 0.5,
+    onstart: botTalk,
+    onend: botListen,
+  });
+  bot.turnsSpoken++;
+  console.log("LOL insult");
 }
 
 function botTalk() {
   bot.speechState = `Talking`;
+
   console.log(bot.speechState);
 }
 
 function botListen() {
   bot.speechState = `Listening`;
+
   console.log(bot.speechState);
 }
 
@@ -152,5 +168,8 @@ function mousePressed() {
     if (state === `Online`) {
       bot.speechState = `Listening`;
     }
+  }
+  if ((state = `Online`)) {
+    console.log(bot.turnsSpoken);
   }
 }
