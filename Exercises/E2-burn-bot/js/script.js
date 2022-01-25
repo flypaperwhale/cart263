@@ -86,6 +86,7 @@ function draw() {
         "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
         "bye *wtv": positiveTan,
+        "goodbye *wtv": positiveTan,
         "no *wtv": positiveTan,
         "I don't *whatever": dontKnow,
         "That doesn't *whatever": dontKnow,
