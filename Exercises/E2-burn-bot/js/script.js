@@ -36,12 +36,33 @@ Description of setup
 function setup() {
   createCanvas(400,500);
 
+  if (annyang) { // *** I would like to drop this and permit users to type answers ***
+    // annyang code in here
+  }
+  else {
+    alert(`Sorry, this page requires speech recognition. Please use Chrome on a desktop computer.`);
+  }
+
   //responsiveVoice.setDefaultVoice(`US English Male`);
 
   bot = new BurnBot();
 
+
+
+
 }
 
+function negativeTan(){
+console.log("I'm listening");
+}
+
+function positiveTan(){
+console.log("I'm listening");
+}
+
+function dontKnow(){
+console.log("I'm listening");
+}
 
 /**
 Description of draw()
@@ -67,28 +88,33 @@ function draw() {
     bot.speechState = `Listening`;
 
 if (trigger === 0){
-  setTimeout(botIntro, 3000);
+  setTimeout(botIntro, 1500);
   trigger = 1;
 }
 
-//annyang listening!
-annyang.start();
+if (trigger === 1){
+  //annyang listening!
+    let commands = {
+      "yes *wtv": negativeTan,
+      "no *wtv": positiveTan,
+      "I don't *wtv": dontKnow,};
+    annyang.addCommands(commands);
+    // annyang.start();
+}
 
-if (annyang) { // *** I would like to drop this and permit users to type answers ***
-  // annyang code in here
-}
-else {
-  alert(`Sorry, this page requires speech recognition. Please use Chrome on a desktop computer.`);
-}
+
+
+
 
   }
 
 }
 
 function botIntro(){
-  responsiveVoice.speak(`Hello stranger, I am Service Bot, here to serve you.
+  responsiveVoice.speak(`Hello, I am your general virtual assistant, here to serve you.
     Well, , do you need my help?`,
     "UK English Male" ); // {onstart: botTalk, onend: botListen}
+    setTimeout(annyang.start(), 5000);
 }
 
 function botTalk(){
