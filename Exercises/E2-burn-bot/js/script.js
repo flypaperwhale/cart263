@@ -21,6 +21,8 @@ to do:
 let state = `Title`; // can be Title, Online, GoodNight
 let bot = undefined;
 
+let trigger = 0;
+
 /**
 Description of preload
 */
@@ -33,6 +35,8 @@ Description of setup
 */
 function setup() {
   createCanvas(400,500);
+
+  //responsiveVoice.setDefaultVoice(`US English Male`);
 
   bot = new BurnBot();
 
@@ -47,6 +51,10 @@ function draw() {
 
   bot.update();
 
+  // if (responsiveVoice.isPlaying()){
+  //   bot.speechState = `Talking`;
+  // }
+
   if (state === `Title`){
     push();
     fill(255);
@@ -57,8 +65,28 @@ function draw() {
 
   if (state === `Online`){
     bot.speechState = `Listening`;
+
+if (trigger === 0){
+  setTimeout(botIntro, 3000);
+  trigger = 1;
+}
+
   }
 
+}
+
+function botIntro(){
+  responsiveVoice.speak(`Hello stranger, I am Service Bot, here to serve you.
+    Well, , do you need my help?`,
+    "UK English Male" ); // {onstart: botTalk, onend: botListen}
+}
+
+function botTalk(){
+  bot.speechState = `Talking`;
+}
+
+function botListen(){
+  bot.speechState = `Listening`;
 }
 
 function mousePressed(){

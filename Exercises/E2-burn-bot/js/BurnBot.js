@@ -21,6 +21,7 @@ class BurnBot {
       pop();
     }
     if (this.speechState === `Talking`){
+      push();
       fill(255);
       rectMode(CENTER);
       rect(width/2,height/2+height/4-40, 117,20);
@@ -30,6 +31,7 @@ class BurnBot {
       pop();
     }
     if (this.speechState === `Listening`){
+      push();
       fill(255);
       rectMode(CENTER);
       rect(width/4,height/2+height/4-20, 50,20);
