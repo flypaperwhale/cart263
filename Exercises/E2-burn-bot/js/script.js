@@ -18,7 +18,7 @@ to do:
 
 "use strict";
 
-let state = `Title`;
+let state = `Title`; // can be Title, Online, GoodNight
 let bot = undefined;
 
 /**
@@ -47,4 +47,22 @@ function draw() {
 
   bot.update();
 
+  if (state === `Title`){
+    push();
+    fill(255);
+    textAlign(CENTER);
+    text(`Poke me`, width/2, height/4);
+    pop();
+  }
+
+  if (state === `Online`){
+    bot.speechState = `Listening`;
+  }
+
+}
+
+function mousePressed(){
+  if (state === `Title`){
+    state = `Online`;
+  }
 }
