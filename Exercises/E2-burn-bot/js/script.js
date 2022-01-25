@@ -1,5 +1,5 @@
 /**
-Burn This Bot
+Burn this Bot!
 Frankie Latreille
 
 The bot will prompt the user with yes or no questions that will be registered through annyang
@@ -18,12 +18,13 @@ to do:
 
 "use strict";
 
+let state = `Title`;
+let bot = undefined;
 
 /**
 Description of preload
 */
 function preload() {
-
 }
 
 
@@ -31,6 +32,9 @@ function preload() {
 Description of setup
 */
 function setup() {
+  createCanvas(500,600);
+
+  bot = new BurnBot();
 
 }
 
@@ -39,5 +43,8 @@ function setup() {
 Description of draw()
 */
 function draw() {
+  background (255);
+
+  bot.update();
 
 }
