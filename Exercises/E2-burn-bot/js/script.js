@@ -7,15 +7,6 @@ The bot will prompt the user with yes or no questions that will be registered th
 yes or no questions
 */
 
-/**
-to do:
-√ make bot class with 3 faces (offline, listening, talking)
-√ setup aanyang to receive "yes" "no" or "I don't" ('get it' or 'know' or 'understand')
-- setup responsiveVoice arrays for yesTangents and noTangents (SCRIPTING)
-- have start state, middle state, after 3 responses (goodbye state?)
-√ have "I don't *" particular response higher pitch, red screen "Ooo I don't *whatever user said"
-*/
-
 "use strict";
 
 let state = `Title`; // can be Title, Online, GoodNight
@@ -42,6 +33,10 @@ let negativeTanArray = [
   `can I ask you some questions to get to know you?`,
   `what do you like the most about being human?`,
   `is that environmentally friendly?`,
+  `i'm sorry, I didn't get that. can you repeat?`,
+  `are you trying to look for images of cats online?`,
+  `are you currently being held against your will in a dark basement?`,
+  `are you looking for a soulmate?`,
 ];
 
 let positiveTanArray = [
@@ -59,6 +54,12 @@ let positiveTanArray = [
   `would you like me to teach you something?`,
   `what do you like the most about human beings?`,
   `do you care about those you love?`,
+  `it's been a pleasure helping you today. is there anything else i can do for you?`,
+  `i'm happy to help. are you ready to receive my assistance?`,
+  `ok then, is there anything unrelated to anything that I can help you with?`,
+  `might I help you with your tax returns?`,
+  `can I help you with something technical?`,
+  `can I help you with something personal?`,
 ];
 
 /**
@@ -102,7 +103,7 @@ function draw() {
     push();
     fill(255);
     textAlign(CENTER);
-    text(`Poke me`, width / 2, height / 4);
+    text(`Poke to wake`, width / 2, height / 4 - 20);
     pop();
   }
 
