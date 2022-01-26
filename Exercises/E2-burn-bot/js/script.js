@@ -111,17 +111,17 @@ function onlineState() {
     if (trigger === 1) {
       // annyang commands
       let commands = {
-        hello: negativeTan,
+        "hello": negativeTan,
         "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
-        yes: negativeTan,
-        yesssss: negativeTan,
-        maybe: positiveTan,
+        "yes": negativeTan,
+        "yesssss": negativeTan,
+        "maybe": positiveTan,
         "maybe *wtv": positiveTan,
-        sure: negativeTan,
+        "sure": negativeTan,
         "bye *wtv": positiveTan,
         "goodbye *wtv": positiveTan,
-        no: positiveTan,
+        "no": positiveTan,
         "no *wtv": positiveTan,
         "I don't *whatever": dontKnow,
         "That doesn't *whatever": dontKnow,
