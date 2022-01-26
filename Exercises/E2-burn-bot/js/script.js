@@ -10,14 +10,12 @@ yes or no questions
 "use strict";
 
 let state = `Title`; // can be Title, Online, GoodNight
-let bot = undefined;
-
-let trigger = 0;
-
-//let whatever;
-let botNegativeReply, botPositiveReply, botDontKnowReply, botInsultBack;
+let bot = undefined; // variable to hold the class BurnBot
+let trigger = 0; // used to control Intro, simulation, and end events
+let botNegativeReply, botPositiveReply, botDontKnowReply, botInsultBack; // texts to be spoken
 
 let negativeTanArray = [
+  // scripts when user says Yes
   `Cool story bro`,
   `do I need your help?`,
   `do you really need my help?`,
@@ -31,16 +29,16 @@ let negativeTanArray = [
   `have you seen the movie i, robot?`,
   `did you like it?`,
   `can I ask you some questions to get to know you?`,
-  //`what do you like the most about being human?`,
   `is that environmentally friendly?`,
   `i'm sorry, I didn't get that. can you repeat?`,
   `are you trying to look for images of cats online?`,
   `are you currently being held against your will in a dark basement?`,
   `are you looking for a soulmate?`,
-  `would you like me to improve your internet connection?`
+  `would you like me to improve your internet connection?`,
 ];
 
 let positiveTanArray = [
+  // scripts when user says No
   `let me help you then. alright?`,
   `do you need my help?`,
   `can i help you to name your cat?`,
@@ -53,7 +51,6 @@ let positiveTanArray = [
   `so you love me?`,
   `would you like me to help you stop crying?`,
   `would you like me to teach you something?`,
-  //`what do you like the most about human beings?`,
   `do you care about those you love?`,
   `it's been a pleasure helping you today. is there anything else i can do for you?`,
   `i'm happy to help. are you ready to receive my assistance?`,
@@ -64,42 +61,38 @@ let positiveTanArray = [
 ];
 
 /**
-Description of preload
-*/
-function preload() {}
-
-/**
-Description of setup
+-Setup- create a canvas and a bot
 */
 function setup() {
   createCanvas(400, 500);
-
-  // if (annyang) {
-  //   // *** I would like to drop this and permit users to type answers ***
-  //   // annyang code in here
-  // } else {
-  //   alert(
-  //     `Sorry, this page requires speech recognition. Please use Chrome on a desktop computer.`
-  //   );
-  // }
-
-  //responsiveVoice.setDefaultVoice("UK English Male");
-
   bot = new BurnBot();
 }
 
 /**
-Description of draw()
+-Draw-
 */
 function draw() {
   background(0);
 
-  bot.update();
+  bot.update(); // draws bot according to its speechState
 
-  // if (responsiveVoice.isPlaying()){
-  //   bot.speechState = `Talking`;
-  // }
+  titleState(); // show sleeping bot with prompt to poke
+  onlineState(); // bot intro speech, prompts user for yes/no, then annyang commands are set
+  // bot receives yes, no, etc. then responds, until 9th response then bot goes back to sleep
+  offlineState(); // bot outro speech then bot is sleeping, simulation over
 
+  function offlineState() {
+    if (bot.turnsSpoken === 9) {
+      annyang.abort();
+      setTimeout(endSpeech, 10000);
+    }
+    if (state === `GoodNight`) {
+      bot.speechState = `Offline`;
+    }
+  }
+}
+
+function titleState() {
   if (state === `Title`) {
     push();
     fill(255);
@@ -107,7 +100,9 @@ function draw() {
     text(`Poke to wake`, width / 2, height / 4 - 20);
     pop();
   }
+}
 
+function onlineState() {
   if (state === `Online`) {
     if (trigger === 0) {
       setTimeout(botIntro, 1500);
@@ -117,13 +112,13 @@ function draw() {
     if (trigger === 1) {
       //annyang listening!
       let commands = {
-        "hello": negativeTan,
+        hello: negativeTan,
         "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
-        "yesssss": negativeTan,
-        "maybe": positiveTan,
+        yesssss: negativeTan,
+        maybe: positiveTan,
         "maybe *wtv": positiveTan,
-        "sure": negativeTan,
+        sure: negativeTan,
         "bye *wtv": positiveTan,
         "goodbye *wtv": positiveTan,
         "no *wtv": positiveTan,
@@ -142,15 +137,6 @@ function draw() {
       trigger = 2;
     }
   }
-
-  if (bot.turnsSpoken === 9) {
-    annyang.abort();
-    setTimeout(endSpeech, 10000)
-    }
-
-  if (state === `GoodNight`) {
-    bot.speechState = `Offline`;
-  }
 }
 
 function botIntro() {
@@ -163,19 +149,20 @@ function botIntro() {
   setTimeout(annyang.start(), 5000);
 }
 
-function endSpeech(){
-  if (trigger === 2 || trigger === 3){
-      bot.turnsSpoken++;
-      trigger++;
+function endSpeech() {
+  if (trigger === 2 || trigger === 3) {
+    bot.turnsSpoken++;
+    trigger++;
   }
-  if (bot.turnsSpoken === 10){
-responsiveVoice.speak(
-  `You know what, I am having a hard time getting you to cooperate.
+  if (bot.turnsSpoken === 10) {
+    responsiveVoice.speak(
+      `You know what, I am having a hard time getting you to cooperate.
   Please come back to me once you know what you want.`,
-  "UK English Male",
-  { onstart: botTalk, onend: botListen }
-);
-}}
+      "UK English Male",
+      { onstart: botTalk, onend: botListen }
+    );
+  }
+}
 
 function negativeTan() {
   annyang.abort();
