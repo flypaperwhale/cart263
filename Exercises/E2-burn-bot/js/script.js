@@ -130,7 +130,7 @@ function onlineState() {
         "that's *insult": botInsult,
       };
       annyang.addCommands(commands);
-      annyand.debug();
+      annyang.debug();
     }
 
     if (bot.turnsSpoken === 1) {
