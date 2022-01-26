@@ -31,16 +31,17 @@ let negativeTanArray = [
   `have you seen the movie i, robot?`,
   `did you like it?`,
   `can I ask you some questions to get to know you?`,
-  `what do you like the most about being human?`,
+  //`what do you like the most about being human?`,
   `is that environmentally friendly?`,
   `i'm sorry, I didn't get that. can you repeat?`,
   `are you trying to look for images of cats online?`,
   `are you currently being held against your will in a dark basement?`,
   `are you looking for a soulmate?`,
+  `would you like me to improve your internet connection?`
 ];
 
 let positiveTanArray = [
-  `let me help you then. ok?`,
+  `let me help you then. alright?`,
   `do you need my help?`,
   `can i help you to name your cat?`,
   `Ben! isn't that a good name?`,
@@ -52,7 +53,7 @@ let positiveTanArray = [
   `so you love me?`,
   `would you like me to help you stop crying?`,
   `would you like me to teach you something?`,
-  `what do you like the most about human beings?`,
+  //`what do you like the most about human beings?`,
   `do you care about those you love?`,
   `it's been a pleasure helping you today. is there anything else i can do for you?`,
   `i'm happy to help. are you ready to receive my assistance?`,
@@ -120,6 +121,7 @@ function draw() {
         "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
         "yesssss": negativeTan,
+        "maybe": positiveTan,
         "maybe *wtv": positiveTan,
         "sure": negativeTan,
         "bye *wtv": positiveTan,
