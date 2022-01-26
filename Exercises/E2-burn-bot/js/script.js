@@ -14,6 +14,10 @@ let bot = undefined; // variable to hold the class BurnBot
 let trigger = 0; // used to control Intro, simulation, and end events
 let botNegativeReply, botPositiveReply, botDontKnowReply, botInsultBack; // texts to be spoken
 
+let maxBotReplies = 9; // amount of replies bot will do before ending program
+let endingBotRepliesCount = 10; // reply count when bot speaks ending speech
+let sleepBotRepliesCount = 11; // end of the line, bot is asleep
+
 let negativeTanArray = [
   // scripts when user says Yes
   `Cool story bro`,
@@ -79,19 +83,11 @@ function draw() {
   titleState(); // show sleeping bot with prompt to poke
   onlineState(); // bot intro speech, prompts user for yes/no, then annyang commands are set
   // bot receives yes, no, etc. then responds, until 9th response then bot goes back to sleep
-  offlineState(); // bot outro speech then bot is sleeping, simulation over
-
-  function offlineState() {
-    if (bot.turnsSpoken === 9) {
-      annyang.abort();
-      setTimeout(endSpeech, 10000);
-    }
-    if (state === `GoodNight`) {
-      bot.speechState = `Offline`;
-    }
-  }
+  offlineState(); // annyang is turned off a set number of bot responses
+  // then bot outro speech then bot is sleeping, simulation over
 }
 
+// Title state
 function titleState() {
   if (state === `Title`) {
     push();
@@ -102,15 +98,18 @@ function titleState() {
   }
 }
 
+// Online state
 function onlineState() {
   if (state === `Online`) {
     if (trigger === 0) {
-      setTimeout(botIntro, 1500);
+      // only happens once after click
+      setTimeout(botIntro, 1500); // after bot smiles 1.5 seconds, intro speech
+      // when intro is over annyang is listening
       trigger = 1;
     }
 
     if (trigger === 1) {
-      //annyang listening!
+      // annyang commands
       let commands = {
         hello: negativeTan,
         "hello *wtv": negativeTan,
@@ -129,32 +128,48 @@ function onlineState() {
         "that's *insult": botInsult,
       };
       annyang.addCommands(commands);
-      // annyang.start();
-      annyang.debug();
     }
 
     if (bot.turnsSpoken === 1) {
+      // only set commands once
       trigger = 2;
     }
   }
 }
 
+// Offline state
+function offlineState() {
+  if (bot.turnsSpoken === maxBotReplies) {
+    annyang.abort();
+    setTimeout(endSpeech, 10000);
+  }
+  if (state === `GoodNight`) {
+    bot.speechState = `Offline`;
+  }
+}
+
+// Bot introduction
 function botIntro() {
   responsiveVoice.speak(
     `Hi there. I am your general virtual assistant, here to serve you.
     Well, , do you need my help?`,
     "UK English Male",
-    { onstart: botTalk, onend: botListen }
+    { onstart: botTalk, onend: botListen } // when responsiveVoice speech, bot talk visual
+    // when responsiveVoice speech is over, bot listening visual
   ); //
-  setTimeout(annyang.start(), 5000);
+  setTimeout(annyang.start(), 5000); // 5 seconds after intro, annyang starts listening
 }
 
+// Bot ending
 function endSpeech() {
   if (trigger === 2 || trigger === 3) {
+    // trigger goes up twice, ends up at 4
+    // to let end speech log only once with bot.turnsSpoken going 9 -> 10 -> 11.
+    // 11 to turn bot visual offline
     bot.turnsSpoken++;
     trigger++;
   }
-  if (bot.turnsSpoken === 10) {
+  if (bot.turnsSpoken === endingBotRepliesCount) {
     responsiveVoice.speak(
       `You know what, I am having a hard time getting you to cooperate.
   Please come back to me once you know what you want.`,
@@ -164,30 +179,31 @@ function endSpeech() {
   }
 }
 
+// negatively tangential responses to Yes
 function negativeTan() {
-  annyang.abort();
+  annyang.abort(); // stop listening
   botNegativeReply = random(negativeTanArray);
   responsiveVoice.speak(botNegativeReply, "UK English Male", {
     onstart: botTalk,
     onend: botListen,
   });
   bot.turnsSpoken++;
-  console.log("NO NO NO");
 }
 
+// positively tangential responses to No
 function positiveTan() {
-  annyang.abort();
+  annyang.abort(); // stop listening
   botPositiveReply = random(positiveTanArray);
   responsiveVoice.speak(botPositiveReply, "UK English Male", {
     onstart: botTalk,
     onend: botListen,
   });
   bot.turnsSpoken++;
-  console.log("YEA YEA YEA");
 }
 
+// I don't understand Easter Egg
 function dontKnow(whatever) {
-  annyang.abort();
+  annyang.abort(); // stop listening
   botDontKnowReply = `Oooo-oooo-oooo, I don't ${whatever}`;
   responsiveVoice.speak(botDontKnowReply, "UK English Male", {
     pitch: 1.5,
@@ -195,11 +211,11 @@ function dontKnow(whatever) {
     onend: botListen,
   });
   bot.turnsSpoken++;
-  console.log("LOL");
 }
 
+// Insult Bot Easter Egg
 function botInsult(insult) {
-  annyang.abort();
+  annyang.abort(); // stop listening
   botInsultBack = `Actually, you! are ${insult}`;
   responsiveVoice.speak(botInsultBack, "UK English Male", {
     pitch: 0.5,
@@ -207,39 +223,35 @@ function botInsult(insult) {
     onend: botListen,
   });
   bot.turnsSpoken++;
-  console.log("LOL insult");
 }
 
+// Activate visual when bot is talking
 function botTalk() {
   bot.speechState = `Talking`;
-  //annyang.pause();
-  console.log(bot.speechState);
 }
 
+// Activate visual when bot is listening
 function botListen() {
   bot.speechState = `Listening`;
   if (trigger === 2) {
     annyang.start();
   }
-  if (bot.turnsSpoken === 11) {
+  if (bot.turnsSpoken === sleepBotRepliesCount) {
+    // when turnsSpoken reaches 11, bot visual is offline
     state = `GoodNight`;
   }
-  console.log(bot.speechState);
 }
 
+// mousePressed function to start simulation (poke bot)
 function mousePressed() {
   if (state === `Title`) {
+    // during title state, starts the simulation
     alert(
+      // an alert to give user minor indications
       `This bot generally responds to yes or no
       but it understands everything you say.
       You may have to repeat yourself a few times...`
     );
-    state = `Online`;
-    if (state === `Online`) {
-      bot.speechState = `Listening`;
-    }
-  }
-  if ((state = `Online`)) {
-    console.log(bot.turnsSpoken);
+    state = `Online`; // state is turned online
   }
 }
