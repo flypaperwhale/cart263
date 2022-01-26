@@ -251,8 +251,8 @@ function mousePressed() {
     // during title state, starts the simulation
     alert(
       // an alert to give user minor indications
-      `This bot generally responds to yes or no
-      but it understands everything you say.
+      `This bot generally responds to yes please or no
+      thank you, but it understands everything you say.
       You may have to repeat yourself a few times...`
     );
     state = `Online`; // state is turned online
