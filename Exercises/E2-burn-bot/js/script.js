@@ -120,6 +120,7 @@ function onlineState() {
         sure: negativeTan,
         "bye *wtv": positiveTan,
         "goodbye *wtv": positiveTan,
+        no: positiveTan,
         "no *wtv": positiveTan,
         "I don't *whatever": dontKnow,
         "That doesn't *whatever": dontKnow,
