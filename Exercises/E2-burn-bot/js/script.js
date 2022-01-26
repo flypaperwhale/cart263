@@ -114,6 +114,7 @@ function onlineState() {
         hello: negativeTan,
         "hello *wtv": negativeTan,
         "yes *wtv": negativeTan,
+        yes: negativeTan,
         yesssss: negativeTan,
         maybe: positiveTan,
         "maybe *wtv": positiveTan,
