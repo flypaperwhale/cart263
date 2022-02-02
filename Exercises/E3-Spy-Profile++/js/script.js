@@ -16,7 +16,8 @@ https://github.com/dariusk/corpora/
 
 
 // URLs to JSON data
-const TAROT_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
+const ERGATIVE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/words/ergative_verbs.json`;
+const RHYMELESS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/words/rhymeless_words.json`;
 const CLUE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/cluedo.json`;
 const ZELDACHARS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/zelda.json`;
 // The key used to save and load the data for this program
@@ -30,7 +31,8 @@ let spyProfile = {
   password: `**REDACTED**`
 };
 // Variables to store JSON data for generating the profile
-let tarotData;
+let ergativeData;
+let rhymelessData;
 let weaponsData;
 let zeldaData;
 
@@ -38,7 +40,8 @@ let zeldaData;
 Loads the JSON data used to generate the profile
 */
 function preload() {
-  tarotData = loadJSON(TAROT_DATA_URL);
+  ergativeData = loadJSON(ERGATIVE_DATA_URL);
+  rhymelessData = loadJSON(RHYMELESS_DATA_URL);
   weaponsData = loadJSON(CLUE_DATA_URL);
   zeldaData = loadJSON(ZELDACHARS_DATA_URL);
 }
@@ -95,8 +98,9 @@ function generateSpyProfile() {
   // Generate a secret weapon from a random object
   spyProfile.secretWeapon = random(weaponsData.weapons.Clue);
   // Generate a password from a random keyword for a random tarot card
-  let card = random(tarotData.tarot_interpretations);
-  spyProfile.password = random(card.keywords);
+  let passwordFirst = random(ergativeData.ergative_verbs);
+  let passwordSecond = random(rhymelessData.words);
+  spyProfile.password = passwordFirst + passwordSecond;
   // Save the resulting profile to local storage
   localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyProfile));
 }
