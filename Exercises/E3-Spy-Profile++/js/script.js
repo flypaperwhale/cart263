@@ -18,7 +18,7 @@ https://github.com/dariusk/corpora/
 // URLs to JSON data
 const TAROT_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
 const OBJECT_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json`;
-const INSTRUMENT_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json`;
+const ZELDACHARS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/zelda.json`;
 // The key used to save and load the data for this program
 const PROFILE_DATA_KEY = `spy-profile-data`;
 
@@ -40,7 +40,7 @@ Loads the JSON data used to generate the profile
 function preload() {
   tarotData = loadJSON(TAROT_DATA_URL);
   objectsData = loadJSON(OBJECT_DATA_URL);
-  instrumentsData = loadJSON(INSTRUMENT_DATA_URL);
+  zeldaCharsData = loadJSON(ZELDACHARS_DATA_URL);
 }
 
 /**
@@ -83,9 +83,9 @@ Generates a spy profile from JSON data
 */
 function generateSpyProfile() {
   // Ask for the user's name and store it
-  spyProfile.name = prompt(`What's ya name?`);
+  spyProfile.name = prompt(`Enter your name`);
   // Generate an alias from a random instrument
-  spyProfile.alias = `The ${random(instrumentsData.instruments)}`;
+  spyProfile.alias = `${random(instrumentsData.instruments)}`;
   // Generate a secret weapon from a random object
   spyProfile.secretWeapon = random(objectsData.objects);
   // Generate a password from a random keyword for a random tarot card
