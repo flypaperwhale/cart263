@@ -1,13 +1,11 @@
 "use strict";
-
 /*****************
 Spy Profile Generator ++
 by Frankie Latreille (built off of Pippin Barr's Spy Profile Generator)
-
 Asks the user for their name and generates a spy profile for them! Uses
-JSON data to create the profile. Generates a password and requires that
-password to view the profile when the program is loaded again.
-
+JSON data to create the profile. Generates a password and requires name and
+password to view the profile when the program is loaded again. It is possible
+to delete saved data by pressing Q
 Uses:
 Darius Kazemi's corpora project:
 https://github.com/dariusk/corpora/
@@ -20,25 +18,18 @@ const CLUE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/
 const ZELDACHARS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/zelda.json`;
 // The key used to save and load the data for this program
 const PROFILE_DATA_KEY = `spy-profile-data`;
-
 // The spy profile data while the program is running
-let spyProfiles = {
-  key: "PROFILE_DATA_KEY",
-  spies: [
-    {
-      name: `**REDACTED**`,
-      alias: `**REDACTED**`,
-      secretWeapon: `**REDACTED**`,
-      password: `**REDACTED**`,
-    },
-  ],
+let spyProfile = {
+  name: `**REDACTED**`,
+  alias: `**REDACTED**`,
+  secretWeapon: `**REDACTED**`,
+  password: `**REDACTED**`,
 };
 // Variables to store JSON data for generating the profile
 let ergativeData;
 let rhymelessData;
 let weaponsData;
 let zeldaData;
-
 /**
 Loads the JSON data used to generate the profile
 */
@@ -48,9 +39,8 @@ function preload() {
   weaponsData = loadJSON(CLUE_DATA_URL);
   zeldaData = loadJSON(ZELDACHARS_DATA_URL);
 }
-
 /**
-Creates a canvas then handles loading profile data, checking password,
+Creates a canvas then handles loading profile data, checking name and password,
 and generating a profile as necessary.
 */
 function setup() {
@@ -60,47 +50,38 @@ function setup() {
   let data = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
   // Check if there was data to load
   if (data !== null) {
-    let newProfileAsk = prompt(`Are you a returning agent? y/n`);
-    if (newProfileAsk === `y`) {
-      // If so, ask for name and password
-      let name = prompt(`Enter your name`);
-      let password = prompt(`Enter your password`);
-      // Check if the password is correct
-      for (let i = 0; i < data.spies.length; i++) {
-        if (
-          name === data.spies[i].name &&
-          password === data.spies[i].password
-        ) {
-          // If is is, then setup the spy profile with the data
-          setupSpyProfile(data.spies[i]);
-        }
-      }
-    } else if (newProfileAsk === `n`) {
-      generateSpyProfile();
+    // If so, ask for name and password
+    let name = prompt(`Enter your name`);
+    let password = prompt(`Enter your password`);
+    // Check if the password is correct
+    if (name === data.name && password === data.password) {
+      // If is is, then setup the spy profile with the data
+      setupSpyProfile(data);
     }
   } else {
     // If there is no data, generate a spy profile for the user
     generateSpyProfile();
   }
 }
-
 /**
 Assigns across the profile properties from the data to the current profile
 */
 function setupSpyProfile(data) {
-  spyProfiles.spies.name = data.name;
-  spyProfiles.spies.alias = data.alias;
-  spyProfiles.spies.secretWeapon = data.secretWeapon;
-  spyProfiles.spies.password = data.password;
+  spyProfile.name = data.name;
+  spyProfile.alias = data.alias;
+  spyProfile.secretWeapon = data.secretWeapon;
+  spyProfile.password = data.password;
 }
-
 /**
 Generates a spy profile from JSON data
 */
 function generateSpyProfile() {
-  // Generate an alias from a random instrument
+  // Ask for the user's name and store it
+  spyProfile.name = prompt(`Enter your name`);
+  // Generate an alias from a random character name in the Legend of Zelda: Link's Awakening
   let zeldaGame = zeldaData.games["Link's Awakening"];
-  let potentialAlias = `${random(zeldaGame.characters)}`;
+  let potentialAlias = `${random(zeldaGame.characters)}`; // temporarily save alias to remove less interesting names
+  console.log(potentialAlias);
   while (
     potentialAlias === `Sale` ||
     potentialAlias === `Photographer` ||
@@ -109,38 +90,28 @@ function generateSpyProfile() {
     // loop random Alias to exclude these two names
     potentialAlias = `${random(zeldaGame.characters)}`;
   }
-
-  // Generate a password from a random keyword for a random tarot card
+  spyProfile.alias = potentialAlias;
+  // Generate a secret weapon from a random weapon from Clue
+  spyProfile.secretWeapon = random(weaponsData.weapons.Clue);
+  // Generate a password by concatenating an ergative verb with a rhymeless word
   let passwordFirst = random(ergativeData.ergative_verbs);
   let passwordSecond = random(rhymelessData.words);
-
-  let spy = {
-    // Ask for the user's name and store it
-    name: prompt(`Enter your name`),
-    alias: potentialAlias,
-    // Generate a secret weapon from a random object
-    secretWeapon: random(weaponsData.weapons.Clue),
-    password: passwordFirst + passwordSecond,
-  };
-
-  spyProfiles.spies.push(spy);
+  spyProfile.password = passwordFirst + passwordSecond;
   // Save the resulting profile to local storage
-  localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyProfiles));
+  localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyProfile));
 }
-
 /**
 Displays the current spy profile.
 */
 function draw() {
   background(255);
-
   // Generate the profile as a string using the data
   let spyText = `** TOP SECRET SPY PROFILE **
 
-Name: ${spyProfiles.spies.name}
-Alias: ${spyProfiles.spies.alias}
-With the ${spyProfiles.spies.secretWeapon}
-Password: ${spyProfiles.spies.password}`;
+ Name: ${spyProfile.name}
+ Alias: ${spyProfile.alias}
+ With the ${spyProfile.secretWeapon}
+ Password: ${spyProfile.password}`;
 
   // Display the profile
   push();
@@ -151,11 +122,10 @@ Password: ${spyProfiles.spies.password}`;
   text(spyText, 50, 50);
   pop();
 }
-
-// Remove the data currently locally saved
+// Remove the data currently locally saved by pressing Q
 function keyPressed() {
   if (keyCode === 81)
     // press Q
     // Remove the data
-    localStorage.removeItem(PROFILE_DATA_KEY); // Delete the data!
+    localStorage.removeItem(PROFILE_DATA_KEY);
 }
