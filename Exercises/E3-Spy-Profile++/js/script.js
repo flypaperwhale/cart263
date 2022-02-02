@@ -124,6 +124,7 @@ Password: ${spyProfile.password}`;
   pop();
 }
 
+// Remove the data currently locally saved 
 function keyPressed(){
   if (keyCode === 81) // press Q
   // Remove the data
