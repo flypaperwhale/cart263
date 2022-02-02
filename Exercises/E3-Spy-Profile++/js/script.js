@@ -13,8 +13,6 @@ Darius Kazemi's corpora project:
 https://github.com/dariusk/corpora/
 ******************/
 
-
-
 // URLs to JSON data
 const ERGATIVE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/words/ergative_verbs.json`;
 const RHYMELESS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/words/rhymeless_words.json`;
@@ -24,11 +22,16 @@ const ZELDACHARS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/m
 const PROFILE_DATA_KEY = `spy-profile-data`;
 
 // The spy profile data while the program is running
-let spyProfile = {
-  name: `**REDACTED**`,
-  alias: `**REDACTED**`,
-  secretWeapon: `**REDACTED**`,
-  password: `**REDACTED**`
+let spyProfiles = {
+  key: "PROFILE_DATA_KEY",
+  spies: [
+    {
+      name: `**REDACTED**`,
+      alias: `**REDACTED**`,
+      secretWeapon: `**REDACTED**`,
+      password: `**REDACTED**`,
+    },
+  ],
 };
 // Variables to store JSON data for generating the profile
 let ergativeData;
@@ -57,16 +60,25 @@ function setup() {
   let data = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
   // Check if there was data to load
   if (data !== null) {
-    // If so, ask for name and password
-    let name = prompt(`Enter your name`)
-    let password = prompt(`Enter your password`);
-    // Check if the password is correct
-    if (name === data.name && password === data.password) {
-      // If is is, then setup the spy profile with the data
-      setupSpyProfile(data);
+    let newProfileAsk = prompt(`Are you a returning agent? y/n`);
+    if (newProfileAsk === `y`) {
+      // If so, ask for name and password
+      let name = prompt(`Enter your name`);
+      let password = prompt(`Enter your password`);
+      // Check if the password is correct
+      for (let i = 0; i < data.spies.length; i++) {
+        if (
+          name === data.spies[i].name &&
+          password === data.spies[i].password
+        ) {
+          // If is is, then setup the spy profile with the data
+          setupSpyProfile(data.spies[i]);
+        }
+      }
+    } else if (newProfileAsk === `n`) {
+      generateSpyProfile();
     }
-  }
-  else {
+  } else {
     // If there is no data, generate a spy profile for the user
     generateSpyProfile();
   }
@@ -76,34 +88,44 @@ function setup() {
 Assigns across the profile properties from the data to the current profile
 */
 function setupSpyProfile(data) {
-  spyProfile.name = data.name;
-  spyProfile.alias = data.alias;
-  spyProfile.secretWeapon = data.secretWeapon;
-  spyProfile.password = data.password;
+  spyProfiles.spies.name = data.name;
+  spyProfiles.spies.alias = data.alias;
+  spyProfiles.spies.secretWeapon = data.secretWeapon;
+  spyProfiles.spies.password = data.password;
 }
 
 /**
 Generates a spy profile from JSON data
 */
 function generateSpyProfile() {
-  // Ask for the user's name and store it
-  spyProfile.name = prompt(`Enter your name`);
   // Generate an alias from a random instrument
   let zeldaGame = zeldaData.games["Link's Awakening"];
   let potentialAlias = `${random(zeldaGame.characters)}`;
-  console.log(potentialAlias);
-  while (potentialAlias === `Sale` || potentialAlias === `Photographer` || potentialAlias === `Fishermen`){ // loop random Alias to exclude these two names
+  while (
+    potentialAlias === `Sale` ||
+    potentialAlias === `Photographer` ||
+    potentialAlias === `Fishermen`
+  ) {
+    // loop random Alias to exclude these two names
     potentialAlias = `${random(zeldaGame.characters)}`;
   }
-  spyProfile.alias = potentialAlias ;
-  // Generate a secret weapon from a random object
-  spyProfile.secretWeapon = random(weaponsData.weapons.Clue);
+
   // Generate a password from a random keyword for a random tarot card
   let passwordFirst = random(ergativeData.ergative_verbs);
   let passwordSecond = random(rhymelessData.words);
-  spyProfile.password = passwordFirst + passwordSecond;
+
+  let spy = {
+    // Ask for the user's name and store it
+    name: prompt(`Enter your name`),
+    alias: potentialAlias,
+    // Generate a secret weapon from a random object
+    secretWeapon: random(weaponsData.weapons.Clue),
+    password: passwordFirst + passwordSecond,
+  };
+
+  spyProfiles.spies.push(spy);
   // Save the resulting profile to local storage
-  localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyProfile));
+  localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyProfiles));
 }
 
 /**
@@ -115,10 +137,10 @@ function draw() {
   // Generate the profile as a string using the data
   let spyText = `** TOP SECRET SPY PROFILE **
 
-Name: ${spyProfile.name}
-Alias: ${spyProfile.alias}
-With the ${spyProfile.secretWeapon}
-Password: ${spyProfile.password}`;
+Name: ${spyProfiles.spies.name}
+Alias: ${spyProfiles.spies.alias}
+With the ${spyProfiles.spies.secretWeapon}
+Password: ${spyProfiles.spies.password}`;
 
   // Display the profile
   push();
@@ -131,9 +153,9 @@ Password: ${spyProfile.password}`;
 }
 
 // Remove the data currently locally saved
-function keyPressed(){
-  if (keyCode === 81) // press Q
-  // Remove the data
-localStorage.removeItem(PROFILE_DATA_KEY); // Delete the data!
-
+function keyPressed() {
+  if (keyCode === 81)
+    // press Q
+    // Remove the data
+    localStorage.removeItem(PROFILE_DATA_KEY); // Delete the data!
 }
