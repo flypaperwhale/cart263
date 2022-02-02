@@ -86,7 +86,12 @@ function generateSpyProfile() {
   spyProfile.name = prompt(`Enter your name`);
   // Generate an alias from a random instrument
   let zeldaGame = zeldaData.games["Link's Awakening"];
-  spyProfile.alias = `${random(zeldaGame.characters)}`;
+  let potentialAlias = `${random(zeldaGame.characters)}`;
+  console.log(potentialAlias);
+  while (potentialAlias === `Sale` || potentialAlias === `Photographer`){ // loop random Alias to exclude these two names
+    potentialAlias = `${random(zeldaGame.characters)}`;
+  }
+  spyProfile.alias = potentialAlias ;
   // Generate a secret weapon from a random object
   spyProfile.secretWeapon = random(objectsData.objects);
   // Generate a password from a random keyword for a random tarot card
