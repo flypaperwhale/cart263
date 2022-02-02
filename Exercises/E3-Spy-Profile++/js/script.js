@@ -57,10 +57,11 @@ function setup() {
   let data = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
   // Check if there was data to load
   if (data !== null) {
-    // If so, ask for the password
-    let password = prompt(`What's ya password?`);
+    // If so, ask for name and password
+    let name = prompt(`Enter your name`)
+    let password = prompt(`Enter your password`);
     // Check if the password is correct
-    if (password === data.password) {
+    if (name === data.name && password === data.password) {
       // If is is, then setup the spy profile with the data
       setupSpyProfile(data);
     }
@@ -91,7 +92,7 @@ function generateSpyProfile() {
   let zeldaGame = zeldaData.games["Link's Awakening"];
   let potentialAlias = `${random(zeldaGame.characters)}`;
   console.log(potentialAlias);
-  while (potentialAlias === `Sale` || potentialAlias === `Photographer`){ // loop random Alias to exclude these two names
+  while (potentialAlias === `Sale` || potentialAlias === `Photographer` || potentialAlias === `Fishermen`){ // loop random Alias to exclude these two names
     potentialAlias = `${random(zeldaGame.characters)}`;
   }
   spyProfile.alias = potentialAlias ;
