@@ -1,15 +1,19 @@
 "use strict";
 
 /*****************
-Spy Profile Generator
-Pippin Barr
+Spy Profile Generator ++
+by Frankie Latreille (built off of Pippin Barr's Spy Profile Generator)
+
 Asks the user for their name and generates a spy profile for them! Uses
 JSON data to create the profile. Generates a password and requires that
 password to view the profile when the program is loaded again.
+
 Uses:
 Darius Kazemi's corpora project:
 https://github.com/dariusk/corpora/
 ******************/
+
+
 
 // URLs to JSON data
 const TAROT_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json`;
@@ -49,7 +53,7 @@ function setup() {
   // Try to load the data
   let data = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
   // Check if there was data to load
-  if (data) {
+  if (data !== null) {
     // If so, ask for the password
     let password = prompt(`What's ya password?`);
     // Check if the password is correct
