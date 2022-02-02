@@ -32,7 +32,7 @@ let spyProfile = {
 // Variables to store JSON data for generating the profile
 let tarotData;
 let objectsData;
-let instrumentsData;
+let zeldaData;
 
 /**
 Loads the JSON data used to generate the profile
@@ -40,7 +40,7 @@ Loads the JSON data used to generate the profile
 function preload() {
   tarotData = loadJSON(TAROT_DATA_URL);
   objectsData = loadJSON(OBJECT_DATA_URL);
-  zeldaCharsData = loadJSON(ZELDACHARS_DATA_URL);
+  zeldaData = loadJSON(ZELDACHARS_DATA_URL);
 }
 
 /**
@@ -85,7 +85,9 @@ function generateSpyProfile() {
   // Ask for the user's name and store it
   spyProfile.name = prompt(`Enter your name`);
   // Generate an alias from a random instrument
-  spyProfile.alias = `${random(instrumentsData.instruments)}`;
+  let zeldaGame = zeldaData.games["Link's Awakening"];
+  console.log(zeldaGame);
+  spyProfile.alias = `${random(zeldaGame.characters)}`;
   // Generate a secret weapon from a random object
   spyProfile.secretWeapon = random(objectsData.objects);
   // Generate a password from a random keyword for a random tarot card
@@ -116,4 +118,11 @@ Password: ${spyProfile.password}`;
   fill(0);
   text(spyText, 0, 0);
   pop();
+}
+
+function keyPressed(){
+  if (keyCode === 81) // press Q
+  // Remove the data
+localStorage.removeItem(PROFILE_DATA_KEY); // Delete the data!
+
 }
