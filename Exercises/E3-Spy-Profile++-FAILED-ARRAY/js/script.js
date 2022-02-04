@@ -57,33 +57,23 @@ function setup() {
   // Create the canvas
   createCanvas(windowWidth, windowHeight);
 
-  //currentSpy = spyData.spyProfiles[0]; // currentSpy is redacteds **
-  //console.log(spyData.spyProfiles);
-
   // Try to load the data
   let data = JSON.parse(localStorage.getItem(SPYPROFILE_DATA_KEY));
-  console.log(data);
-
   // Check if there was data to load
   if (data) {
     // if there is data ask for returning agent or new agent
-    console.log(data);
     let spyData = data;
-
     newProfileAsk = prompt(`Are you a returning agent? y/n`);
-
     // If agent is returning ask for name and password
     if (newProfileAsk === `y`) {
       login(spyData);
     }
-
     // if it is a new agent generate newSpy
     else if (newProfileAsk === `n`) {
       alert(`Welcome to the agency`);
       registerNewSpy(spyData);
     }
   }
-
   // If there is no data yet, generate a spy profile for the user
   else {
     alert(`Welcome to the agency`);
@@ -105,29 +95,10 @@ function login(spyData) {
   for (let i = 0; i < spyData.length; i++) {
     if (name === spyData[i].name && password === spyData[i].password) {
       // If it is, then setup the spy profile with the data
-      //setupSpyProfileData(data.spyProfiles[i]);
       currentSpy = spyData[i];
     }
   }
 }
-
-/**
-Assigns across the profile properties from the data to the current profile
-*/
-// function setupSpyProfileData(data) {
-//   console.log(`in func setupspypro data is ${data} and spypro is ${spyData}`);
-//   spyData.spyProfiles.name = data.name;
-//   spyData.spyProfiles.alias = data.alias;
-//   spyData.spyProfiles.secretWeapon = data.secretWeapon;
-//   spyData.spyProfiles.password = data.password;
-// }
-
-// function setupSpyProfileWOData(newSpy) {
-//   spyData.spyProfiles.name = newSpy.name;
-//   spyData.spyProfiles.alias = newSpy.alias;
-//   spyData.spyProfiles.secretWeapon = newSpy.secretWeapon;
-//   spyData.spyProfiles.password = newSpy.password;
-// }
 
 /**
 Generates a spy profile from JSON data
@@ -151,8 +122,6 @@ function generateSpyProfile() {
   let passwordFirst = random(ergativeData.ergative_verbs);
   let passwordSecond = random(rhymelessData.words);
 
-  console.log(passwordFirst + passwordSecond);
-
   let newSpy = {
     // Ask for the user's name and store it
     name: prompt(`Enter your name`),
@@ -161,13 +130,7 @@ function generateSpyProfile() {
     secretWeapon: random(weaponsData.weapons.Clue),
     password: passwordFirst + passwordSecond,
   };
-
-  console.log(newSpy.alias);
-
   return newSpy;
-  // if (newProfileAsk === undefined || newProfileAsk === `n`) {
-  //   console.log(`i do see you`);
-  // }
 }
 
 /**
@@ -201,8 +164,4 @@ function keyPressed() {
     // press Q
     // Remove the data
     localStorage.removeItem(SPYPROFILE_DATA_KEY); // Delete the data!
-}
-
-function mousePressed() {
-  console.log(spyData);
 }
