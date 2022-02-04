@@ -18,23 +18,20 @@ const ERGATIVE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/mas
 const RHYMELESS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/words/rhymeless_words.json`;
 const CLUE_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/cluedo.json`;
 const ZELDACHARS_DATA_URL = `https://raw.githubusercontent.com/dariusk/corpora/master/data/games/zelda.json`;
+
+let currentSpy = {
+  name: `**REDACTED**`,
+  alias: `**REDACTED**`,
+  secretWeapon: `**REDACTED**`,
+  password: `**REDACTED**`,
+};
 // The key used to save and load the data for this program
-const PROFILE_DATA_KEY = `spy-profile-data`;
+const SPYPROFILE_DATA_KEY = `spy-profile-data`;
 
 let newProfileAsk;
-let newSpy;
 
 // The spy profile data while the program is running
-let spyData = {
-  //key: "PROFILE_DATA_KEY",
-  spyProfiles: [{
-      name: `**REDACTED**`,
-      alias: `**REDACTED**`,
-      secretWeapon: `**REDACTED**`,
-      password: `**REDACTED**`
-    }
-  ]
-};
+let spyData = []; // profiles name, alias, weapon, password
 
 // Variables to store JSON data for generating the profile
 let ergativeData;
@@ -59,63 +56,86 @@ and generating a profile as necessary.
 function setup() {
   // Create the canvas
   createCanvas(windowWidth, windowHeight);
+
+  //currentSpy = spyData.spyProfiles[0]; // currentSpy is redacteds **
+  //console.log(spyData.spyProfiles);
+
   // Try to load the data
-  let data = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
+  let data = JSON.parse(localStorage.getItem(SPYPROFILE_DATA_KEY));
+  console.log(data);
+
   // Check if there was data to load
-  if (data !== null) {
+  if (data) {
+    // if there is data ask for returning agent or new agent
+    console.log(data);
+    let spyData = data;
+
     newProfileAsk = prompt(`Are you a returning agent? y/n`);
+
+    // If agent is returning ask for name and password
     if (newProfileAsk === `y`) {
-      // If so, ask for name and password
-      let name = prompt(`Enter your name`);
-      let password = prompt(`Enter your password`);
-      // Check if the password is correct
-      for (let i = 0; i < data.spyProfiles.length; i++) {
-        if (
-          name === data.spyProfiles[i].name &&
-          password === data.spyProfiles[i].password
-        ) {
-          // If is is, then setup the spy profile with the data
-          setupSpyProfileWithData(data.spyProfiles[i]);
-        }
-      }
-    } else if (newProfileAsk === `n`) {
-      generateSpyProfile();
-      setupSpyProfileWOData(newSpy);
+      login(spyData);
     }
-  } else {
-    // If there is no data, generate a spy profile for the user
-    generateSpyProfile();
-    console.log(`newspy before setup is ${newSpy}`);
-    setupSpyProfileWOData(newSpy);
+
+    // if it is a new agent generate newSpy
+    else if (newProfileAsk === `n`) {
+      alert(`Welcome to the agency`);
+      registerNewSpy(spyData);
+    }
+  }
+
+  // If there is no data yet, generate a spy profile for the user
+  else {
+    alert(`Welcome to the agency`);
+    registerNewSpy(spyData);
+  }
+}
+
+function registerNewSpy(spyData) {
+  let newSpy = generateSpyProfile();
+  spyData.push(newSpy); // push newSpy into the spyProfiles array
+  localStorage.setItem(SPYPROFILE_DATA_KEY, JSON.stringify(spyData));
+  currentSpy = newSpy;
+}
+
+function login(spyData) {
+  let name = prompt(`Enter your name`);
+  let password = prompt(`Enter your password`);
+  // Check if the password is correct
+  for (let i = 0; i < spyData.length; i++) {
+    if (name === spyData[i].name && password === spyData[i].password) {
+      // If it is, then setup the spy profile with the data
+      //setupSpyProfileData(data.spyProfiles[i]);
+      currentSpy = spyData[i];
+    }
   }
 }
 
 /**
 Assigns across the profile properties from the data to the current profile
 */
-function setupSpyProfileWithData(data) {
-  console.log(
-    `in func setupspypro data is ${data} and spypro is ${spyData}`
-  );
-  spyData.spyProfiles.name = data.name;
-  spyData.spyProfiles.alias = data.alias;
-  spyData.spyProfiles.secretWeapon = data.secretWeapon;
-  spyData.spyProfiles.password = data.password;
-}
+// function setupSpyProfileData(data) {
+//   console.log(`in func setupspypro data is ${data} and spypro is ${spyData}`);
+//   spyData.spyProfiles.name = data.name;
+//   spyData.spyProfiles.alias = data.alias;
+//   spyData.spyProfiles.secretWeapon = data.secretWeapon;
+//   spyData.spyProfiles.password = data.password;
+// }
 
-function setupSpyProfileWOData(newSpy) {
-  spyData.spyProfiles.name = newSpy.name;
-  spyData.spyProfiles.alias = newSpy.alias;
-  spyData.spyProfiles.secretWeapon = newSpy.secretWeapon;
-  spyData.spyProfiles.password = newSpy.password;
-}
+// function setupSpyProfileWOData(newSpy) {
+//   spyData.spyProfiles.name = newSpy.name;
+//   spyData.spyProfiles.alias = newSpy.alias;
+//   spyData.spyProfiles.secretWeapon = newSpy.secretWeapon;
+//   spyData.spyProfiles.password = newSpy.password;
+// }
 
 /**
 Generates a spy profile from JSON data
 */
-function generateSpyProfile() { // should return a spy object ###
+function generateSpyProfile() {
+  // should return a spy object ###
 
-  // Generate an alias from a random instrument
+  // Generate an alias from a Link's Awakening character
   let zeldaGame = zeldaData.games["Link's Awakening"];
   let potentialAlias = `${random(zeldaGame.characters)}`;
   while (
@@ -123,7 +143,7 @@ function generateSpyProfile() { // should return a spy object ###
     potentialAlias === `Photographer` ||
     potentialAlias === `Fishermen`
   ) {
-    // loop random Alias to exclude these two names
+    // loop random Alias to exclude these three names
     potentialAlias = `${random(zeldaGame.characters)}`;
   }
 
@@ -140,26 +160,14 @@ function generateSpyProfile() { // should return a spy object ###
     // Generate a secret weapon from a random object
     secretWeapon: random(weaponsData.weapons.Clue),
     password: passwordFirst + passwordSecond,
-  }
-
-console.log(newProfileAsk);
-console.log(newSpy.alias);
-
-  if (newProfileAsk === undefined || newProfileAsk === `n`){
-    console.log(`i do see you`);
-    return newSpy;
   };
 
-//return newSpy;
+  console.log(newSpy.alias);
 
-// Push the generated profile to the array of profiles
-spyData.spyProfiles.push(newSpy);
-console.log(`Spy pro ${spyData.spyProfiles}`);
-// Save resulting profiles data into local storage
-localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(spyData));
-
-
-
+  return newSpy;
+  // if (newProfileAsk === undefined || newProfileAsk === `n`) {
+  //   console.log(`i do see you`);
+  // }
 }
 
 /**
@@ -172,10 +180,10 @@ function draw() {
   // Generate the profile as a string using the data
   let spyText = `** TOP SECRET SPY PROFILE **
 
-Name: ${spyData.spyProfiles.name}
-Alias: ${spyData.spyProfiles.alias}
-With the ${spyData.spyProfiles.secretWeapon}
-Password: ${spyData.spyProfiles.password}`;
+Name: ${currentSpy.name}
+Alias: ${currentSpy.alias}
+With the ${currentSpy.secretWeapon}
+Password: ${currentSpy.password}`;
 
   // Display the profile
   push();
@@ -192,7 +200,7 @@ function keyPressed() {
   if (keyCode === 81)
     // press Q
     // Remove the data
-    localStorage.removeItem(PROFILE_DATA_KEY); // Delete the data!
+    localStorage.removeItem(SPYPROFILE_DATA_KEY); // Delete the data!
 }
 
 function mousePressed() {
