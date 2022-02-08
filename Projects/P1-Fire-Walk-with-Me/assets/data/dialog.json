@@ -1,0 +1,113 @@
+{
+  "characters": {
+    "laura": {
+      "name": "Laura Palmer",
+      "age": 17
+    },
+    "trucker": {
+      "name": "Trucker",
+      "age": 38
+    },
+    "log lady": {
+      "name": "Log Lady",
+      "age": 60
+    },
+    "bob": {
+      "name": "Bob",
+      "age": 1000
+    },
+    "angel": {
+      "name": "Jacqueline du Pré",
+      "age": 77
+    }
+  },
+  "dialog": {
+    "scene1 comment": "Laura arrives at the bar, a trucker approaches her in the parking lot. They exchange innuendo.",
+    "scene1": [
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "..."
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "..."
+      },
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "..."
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "Say you're going to go all the way."
+      }
+    ],
+    "scene2 comment": "Laura dissociates. Log Lady approaches her to warn her of her descent into Hell.",
+    "scene2": [
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "Do you know what they call a Quarter Pounder in France?"
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "No? What? Tell me..."
+      },
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "A... Royale with Cheese"
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "A Royale with Cheese!"
+      }
+    ],
+    "scene3 comment": "Laura enter the depths of awareness. She meets with Bob.",
+    "scene3": [
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "Do you know what they call a Quarter Pounder in France?"
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "No? What? Tell me..."
+      },
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "A... Royale with Cheese"
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "A Royale with Cheese!"
+      }
+    ],
+    "scene4 comment": "If Laura has met with Log Lady or Bob and returns to the parking lot waking state...",
+    "scene4": [
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "You're already high out of your mind? Started the party without me?"
+      },
+      {
+        "type": "speech",
+        "character": "laura",
+        "speech": "..."
+      },
+      {
+        "type": "speech",
+        "character": "trucker",
+        "speech": "So, tell me you're going to go all the way"
+      }
+    ]
+  }
+}
