@@ -24,6 +24,10 @@ her, and then continues her decent into Hell
 // */
 // function draw() {}
 
+// states
+let state = `Title`; // states are: Title, introAnimation, parkingLot,
+// transitionAnimation, semiconscious, redRoom
+
 // To store the loaded data
 let data = undefined;
 // The current scene (there's only one in the data, but this would be how you display different scenes)
@@ -89,9 +93,8 @@ whereas dialog from interlocutors should arrive from the right side
   // Display the character name
   push();
   textSize(24);
-  //fill(characterData.backgroundColor);
   fill(230, 220, 220);
-  textAlign(LEFT, BOTTOM); // characterData.nameXPosition
+  textAlign(LEFT, BOTTOM);
   text(characterData.name, characterData.nameXPosition, height - dialogHeight);
   pop();
 
@@ -119,6 +122,15 @@ function mousePressed() {
 /**
 Iterates through the array, returns to 0 at the end, but you
 would probably want to change to the next scene etc.
+*/
+/* I don't want to have the dialog repeat when the data.dialog[currentScene].length
+reaches last object in the array...
+I would rather when the last object in the array is reached
+-> for a symbol to prompt the user to speak
+depending on what the user says,
+either what they've been told to say
+or something they've been hinted into saying
+they will enter a new scene!
 */
 function nextLine() {
   currentLine++;
