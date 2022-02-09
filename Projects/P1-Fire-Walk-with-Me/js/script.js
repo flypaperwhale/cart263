@@ -31,7 +31,7 @@ let currentScene = `scene1`;
 // The current line in the current scene (going through an array of dialog, so starts at 0)
 let currentLine = 0;
 // The height of our dialog box
-let dialogHeight = 100;
+let dialogHeight = 50;
 
 /**
 Loads the JSON data for our little play
@@ -44,7 +44,7 @@ function preload() {
 Creates the canvas
 */
 function setup() {
-  createCanvas(320, 240);
+  createCanvas(600, 400);
 }
 
 /**
@@ -74,11 +74,15 @@ function displayCurrentLine() {
   // property name corresponding to our character
   let characterData = data.characters[lineData.character];
 
+  // DIALOG //
+  /* Laura's dialog should appear from the left (POV)
+whereas dialog from interlocutors should arrive from the right side
+*/
   // Draw the dialog background
   push();
   noStroke();
   //fill(characterData.backgroundColor);
-  fill(100, 50, 0);
+  fill(230, 220, 220);
   rect(0, height - dialogHeight, width, dialogHeight);
   pop();
 
@@ -86,9 +90,9 @@ function displayCurrentLine() {
   push();
   textSize(24);
   //fill(characterData.backgroundColor);
-  fill(100, 50, 0);
-  textAlign(LEFT, BOTTOM);
-  text(characterData.name, 0, height - dialogHeight);
+  fill(230, 220, 220);
+  textAlign(LEFT, BOTTOM); // characterData.nameXPosition
+  text(characterData.name, characterData.nameXPosition, height - dialogHeight);
   pop();
 
   // Display the character's line
@@ -96,13 +100,18 @@ function displayCurrentLine() {
   textSize(16);
   fill(0);
   textAlign(LEFT, TOP);
-  text(lineData.speech, 0, height - dialogHeight, width, dialogHeight);
+  // characterData.dialogXposition?
+  text(lineData.speech, 10, height - dialogHeight + 5, width, dialogHeight);
   pop();
 }
 
 /**
 Goes to the next line in the "play"
 */
+/* may want to have user press the dialog box to move to next piece,
+or a NEXT button... have user feel they are responding as Laura...
+*/
+
 function mousePressed() {
   nextLine();
 }
@@ -122,8 +131,9 @@ function nextLine() {
 Switch to scene two on a keypress, just to show the very
 beginnings of multiple scenes.
 */
-/* ##### Scenes are going to change after the user speaks a response
-when the last dialog piece has been said*/
+/* ##### Scenes are going to change after the user speaks a response (annyang)
+when the last dialog piece has been said...
+*/
 function keyPressed() {
   currentScene = `scene2`;
   currentLine = 0;

@@ -2,22 +2,27 @@
   "characters": {
     "laura": {
       "name": "Laura Palmer",
+      "nameXPosition": 10,
       "age": 17
     },
     "trucker": {
       "name": "Trucker",
+      "nameXPosition": 480,
       "age": 38
     },
     "log lady": {
       "name": "Log Lady",
+      "nameXPosition": 440,
       "age": 60
     },
     "bob": {
       "name": "Bob",
+      "nameXPosition": 440,
       "age": 1000
     },
     "angel": {
       "name": "Jacqueline du Pré",
+      "nameXPosition": 440,
       "age": 77
     }
   },
@@ -27,7 +32,7 @@
       {
         "type": "speech",
         "character": "laura",
-        "speech": "..."
+        "speech": "Say this really long thing that just keeps going on and on so that I can see how it looks like in the window"
       },
       {
         "type": "speech",
