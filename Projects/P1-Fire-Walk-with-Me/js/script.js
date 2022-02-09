@@ -57,7 +57,23 @@ Displays the current line
 function draw() {
   background(0);
 
-  displayCurrentLine();
+  if (state === `Title`) {
+    push();
+    textSize(24);
+    fill(230, 220, 220);
+    textAlign(CENTER, CENTER);
+    text(
+      `Fire Walk with Me
+      Press space for simulation`,
+      250,
+      200
+    );
+    pop();
+  }
+
+  if (state === `parkingLot`) {
+    displayCurrentLine();
+  }
 }
 
 /**
@@ -145,8 +161,11 @@ beginnings of multiple scenes.
 */
 /* ##### Scenes are going to change after the user speaks a response (annyang)
 when the last dialog piece has been said...
+currentScene = `scene2`;
+currentLine = 0;
 */
 function keyPressed() {
-  currentScene = `scene2`;
-  currentLine = 0;
+  if (keyCode === 32) {
+    state = `parkingLot`;
+  }
 }
