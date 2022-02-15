@@ -1,5 +1,5 @@
 /**
-Fire Walk with Me
+Fire Walk with Me // "Monkey Business"
 Frankie Latreille
 
 Reimagined scenes of David Lynch's Fire Walk with Me. Laura meets a trucker who wants
