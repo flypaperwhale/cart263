@@ -24,6 +24,8 @@ Description of setup
 */
 function setup() {
   createCanvas(600, 400);
+
+  setInterval(snowTransition, 100);
 }
 
 /**
@@ -32,8 +34,7 @@ Description of draw()
 function draw() {
   background(0);
 
-  //setInterval(snowTransition, 1000);
-  snowTransition();
+  //snowTransition();
 
   push();
   imageMode(CENTER);
@@ -51,5 +52,9 @@ function draw() {
 }
 
 function snowTransition() {
+  let currentSnowDirection = snowDirection;
   snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  if (currentSnowDirection === snowDirection) {
+    snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  }
 }
