@@ -97,8 +97,8 @@ function preload() {
   sc2LogLadyTouch1 = loadImage("assets/images/scene-2/sc2-laura2.png");
   // scene 3 images
   redRoomBgImg = loadImage("assets/images/scene-3/redroom-bg.png");
-  sc3BobImg1 = loadImage("assets/images/scene-3/bob1.png");
-  sc3BobImg2 = loadImage("assets/images/scene-3/bob2.png");
+  sc3BobImg2 = loadImage("assets/images/scene-3/bob1.png");
+  sc3BobImg1 = loadImage("assets/images/scene-3/bob2.png");
   sc3LauraHands = loadImage("assets/images/scene-3/laurahands.png");
   sc3LauraScreams = loadImage("assets/images/scene-3/laurascreams.png");
   sc3RingImg = loadImage("assets/images/scene-3/ringpixed.png");
@@ -242,12 +242,32 @@ function draw() {
   if (state === `redRoom`) {
     // show background image
     // redroom entryway
+    //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
+
     // redroom background
+    image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
+
     // Bob chat
+    //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
+
     // Bob excited rage
+    //image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+
     // Laura looks at hand
-    // Laura screaming
+    //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
+
     // The ring
+    //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+
+    // Laura screaming
+    //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+
+    push();
+    imageMode(CENTER);
+    tint(255, 150);
+    //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+    pop();
+
     // The angel (?)
 
     // show dialog
@@ -345,6 +365,6 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `semiconscious`;
+    state = `redRoom`;
   }
 }
