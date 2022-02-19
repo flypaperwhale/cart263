@@ -42,6 +42,13 @@ Loads the JSON data for our little play
 */
 function preload() {
   data = loadJSON(`assets/data/dialog.json`);
+
+  // introduction images
+  cursor.image = loadImage("assets/images/hermes-staff.png");
+  // scene 1 images
+  // scene 2 images
+  // scene 3 images
+  // other images
 }
 
 /**
@@ -72,6 +79,23 @@ function draw() {
   }
 
   if (state === `parkingLot`) {
+    // show background image
+
+    // show dialog
+    displayCurrentLine();
+  }
+
+  if (state === `semiconscious`) {
+    // show background image
+
+    // show dialog
+    displayCurrentLine();
+  }
+
+  if (state === `redRoom`) {
+    // show background image
+
+    // show dialog
     displayCurrentLine();
   }
 }
