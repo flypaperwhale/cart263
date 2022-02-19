@@ -24,6 +24,37 @@ her, and then continues her decent into Hell
 // */
 // function draw() {}
 
+// scene intro images
+let introLauraImg, introRoadBgImg, introThumbImg, introSkyImg;
+
+// scene 1 images
+let barBgImg,
+  sc1LauraLightsUp,
+  sc1LauraSmokes,
+  sc1BusinessmanAcosts,
+  sc1BusinessmanChats,
+  sc1BusinessmanSmirks,
+  sc1BusinessmanSnark;
+// scene 2 images
+let semiconsciousBgImg,
+  sc2LauraImg,
+  sc2LogLadyFrontImg,
+  sc2LogLadySideImg,
+  sc2LauraXLogLady,
+  sc2LogLadyTouch1,
+  sc2LogLadyTouch2;
+
+// scene 3 images
+let redRoomBgImg,
+  sc3BobImg1,
+  sc3BobImg2,
+  sc3LauraHands,
+  sc3LauraScreams,
+  sc3RingImg;
+
+// other images
+let monkeyFaceImg, redRoomEntryImg, transitionSnowImg;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -44,11 +75,37 @@ function preload() {
   data = loadJSON(`assets/data/dialog.json`);
 
   // introduction images
-  cursor.image = loadImage("assets/images/hermes-staff.png");
+  introLauraImg = loadImage("assets/images/intro-scene/intro-laura.png");
+  introRoadBgImg = loadImage("assets/images/intro-scene/intro-road.png");
+  introThumbImg = loadImage("assets/images/intro-scene/intro-thumb.png");
+  introSkyImg = loadImage("assets/images/intro-scene/intro-sky.png");
   // scene 1 images
+  barBgImg = loadImage("assets/images/bar-bg1.png");
+  sc1LauraLightsUp = loadImage("assets/images/scene-1/lauralights.png");
+  sc1LauraSmokes = loadImage("assets/images/scene-1/lauracig.png");
+  sc1BusinessmanAcosts = loadImage("assets/images/scene-1/licksbrett.png");
+  sc1BusinessmanChats = loadImage("assets/images/scene-1/neutbrett.png");
+  sc1BusinessmanSmirks = loadImage("assets/images/scene-1/brettsmirk.png");
+  sc1BusinessmanSnark = loadImage("assets/images/scene-1/brettsnark.png");
   // scene 2 images
+  semiconsciousBgImg = loadImage("assets/images/scene-2/semiconscious-bg.png");
+  sc2LauraImg = loadImage("assets/images/scene-2/laurastand.png");
+  sc2LogLadyFrontImg = loadImage("assets/images/scene-2/loglady.png");
+  sc2LogLadySideImg = loadImage("assets/images/scene-2/logladystand.png");
+  sc2LauraXLogLady = loadImage("assets/images/scene-2/logladytouchlaura.png");
+  sc2LogLadyTouch1 = loadImage("assets/images/scene-2/sc2-laura1.png");
+  sc2LogLadyTouch2 = loadImage("assets/images/scene-2/sc2-laura2.png");
   // scene 3 images
+  redRoomBgImg = loadImage("assets/images/scene-3/redroom-bg.png");
+  sc3BobImg1 = loadImage("assets/images/scene-3/bob1.png");
+  sc3BobImg2 = loadImage("assets/images/scene-3/bob2.png");
+  sc3LauraHands = loadImage("assets/images/scene-3/laurahands.png");
+  sc3LauraScreams = loadImage("assets/images/scene-3/laurascreams.png");
+  sc3RingImg = loadImage("assets/images/scene-3/ringpixed.png");
   // other images
+  monkeyFaceImg = loadImage("assets/images/intro-scene/monkeyface.png");
+  redRoomEntryImg = loadImage("assets/images/scene-3/redroom-entry.png");
+  transitionSnowImg = loadImage("assets/images/transitionSnow.png");
 }
 
 /**
