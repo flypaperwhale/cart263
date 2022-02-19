@@ -135,10 +135,10 @@ function draw() {
     pop();
   }
 
-  if (state === `parkingLot`) {
+  if (state === `introAnimation`) {
     // show background image
     // Sky background
-    image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 300);
+    image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 400, 0, 50);
 
     // Road background
     //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
@@ -162,8 +162,35 @@ function draw() {
     displayCurrentLine();
   }
 
+  if (state === `parkingLot`) {
+    // show background image
+    // Bar parking background
+    image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
+
+    // Laura lights up
+    //image(sc1LauraLightsUp, 50, 76, canvas.width - 1020, canvas.height - 520);
+
+    // Laura smokes
+    image(sc1LauraSmokes, 50, 75, canvas.width - 1020, canvas.height - 520);
+
+    // Leering businessman approaches
+    // Businessman chats
+    // Businessman smirks
+    // Businessman sniding (? in another 4th scene?)
+
+    // show dialog
+    displayCurrentLine();
+  }
+
   if (state === `semiconscious`) {
     // show background image
+    // Semicounscious eerie background
+    // Loglady stands alone
+    // Laura facing right
+    // Loglady facing left
+    // Loglady touching Laura
+    // Laura touched closeup 1
+    // Laura touched closeup 2
 
     // show dialog
     displayCurrentLine();
@@ -171,6 +198,14 @@ function draw() {
 
   if (state === `redRoom`) {
     // show background image
+    // redroom entryway
+    // redroom background
+    // Bob chat
+    // Bob excited rage
+    // Laura looks at hand
+    // Laura screaming
+    // The ring
+    // The angel (?)
 
     // show dialog
     displayCurrentLine();
