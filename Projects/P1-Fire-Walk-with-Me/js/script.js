@@ -66,7 +66,7 @@ let currentScene = `scene1`;
 // The current line in the current scene (going through an array of dialog, so starts at 0)
 let currentLine = 0;
 // The height of our dialog box
-let dialogHeight = 50;
+let dialogHeight = 85;
 
 /**
 Loads the JSON data for our little play
@@ -168,15 +168,37 @@ function draw() {
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // Laura lights up
-    //image(sc1LauraLightsUp, 50, 76, canvas.width - 1020, canvas.height - 520);
+    //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
 
     // Laura smokes
-    image(sc1LauraSmokes, 50, 75, canvas.width - 1020, canvas.height - 520);
+    //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
 
     // Leering businessman approaches
-    // Businessman chats
+    // image(
+    //   sc1BusinessmanAcosts,
+    //   320,
+    //   115,
+    //   canvas.width - 910,
+    //   canvas.height - 600
+    // );
+
     // Businessman smirks
+    // image(
+    //   sc1BusinessmanSmirks,
+    //   320,
+    //   115,
+    //   canvas.width - 950,
+    //   canvas.height - 600
+    // );
+
     // Businessman sniding (? in another 4th scene?)
+    // image(
+    //   sc1BusinessmanSnark,
+    //   310,
+    //   115,
+    //   canvas.width - 880,
+    //   canvas.height - 580
+    // );
 
     // show dialog
     displayCurrentLine();
