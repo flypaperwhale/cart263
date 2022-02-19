@@ -80,7 +80,7 @@ function preload() {
   introThumbImg = loadImage("assets/images/intro-scene/intro-thumb.png");
   introSkyImg = loadImage("assets/images/intro-scene/intro-sky.png");
   // scene 1 images
-  barBgImg = loadImage("assets/images/bar-bg1.png");
+  barBgImg = loadImage("assets/images/scene-1/bar-bg1.png");
   sc1LauraLightsUp = loadImage("assets/images/scene-1/lauralights.png");
   sc1LauraSmokes = loadImage("assets/images/scene-1/lauracig.png");
   sc1BusinessmanAcosts = loadImage("assets/images/scene-1/licksbrett.png");
@@ -137,6 +137,7 @@ function draw() {
 
   if (state === `parkingLot`) {
     // show background image
+    image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
 
     // show dialog
     displayCurrentLine();
