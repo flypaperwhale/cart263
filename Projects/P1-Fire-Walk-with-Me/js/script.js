@@ -137,7 +137,26 @@ function draw() {
 
   if (state === `parkingLot`) {
     // show background image
-    image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    // Sky background
+    image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 300);
+
+    // Road background
+    //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+
+    // Laura close up
+    //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
+
+    // Thumb close up
+    //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+
+    // prompt player for name and flash monkey
+    push();
+    imageMode(CENTER);
+    tint(255, 195);
+    //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+    pop();
+
+    // overlay redroom and read player name backwards
 
     // show dialog
     displayCurrentLine();
