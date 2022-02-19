@@ -93,8 +93,8 @@ function preload() {
   sc2LogLadyFrontImg = loadImage("assets/images/scene-2/loglady.png");
   sc2LogLadySideImg = loadImage("assets/images/scene-2/logladystand.png");
   sc2LauraXLogLady = loadImage("assets/images/scene-2/logladytouchlaura.png");
-  sc2LogLadyTouch1 = loadImage("assets/images/scene-2/sc2-laura1.png");
-  sc2LogLadyTouch2 = loadImage("assets/images/scene-2/sc2-laura2.png");
+  sc2LogLadyTouch2 = loadImage("assets/images/scene-2/sc2-laura1.png");
+  sc2LogLadyTouch1 = loadImage("assets/images/scene-2/sc2-laura2.png");
   // scene 3 images
   redRoomBgImg = loadImage("assets/images/scene-3/redroom-bg.png");
   sc3BobImg1 = loadImage("assets/images/scene-3/bob1.png");
@@ -206,13 +206,34 @@ function draw() {
 
   if (state === `semiconscious`) {
     // show background image
+    // Bar parking background
+    //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     // Semicounscious eerie background
+    image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
+
     // Loglady stands alone
+    //image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
+
     // Laura facing right
+    // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
+
     // Loglady facing left
+    // image(
+    //   sc2LogLadySideImg,
+    //   350,
+    //   101,
+    //   canvas.width - 1020,
+    //   canvas.height - 520
+    // );
+
     // Loglady touching Laura
+    //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
+
     // Laura touched closeup 1
+    //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
+
     // Laura touched closeup 2
+    //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // show dialog
     displayCurrentLine();
@@ -324,6 +345,6 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `parkingLot`;
+    state = `semiconscious`;
   }
 }
