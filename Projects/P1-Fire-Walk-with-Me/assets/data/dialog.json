@@ -1,117 +1,355 @@
 {
   "characters": {
-    "laura": {
-      "name": "Laura Palmer",
+
+    "narrator": {
+      "name": "Narrator",
+      "nameXPosition": 10,
+      "age": 0
+    },
+    "laura palmer": {
+      "name": "Laura",
       "nameXPosition": 10,
       "age": 17
     },
-    "trucker": {
-      "name": "Trucker",
+    "businessman": {
+      "name": "John",
       "nameXPosition": 480,
       "age": 38
     },
-    "log lady": {
-      "name": "Log Lady",
+    "margaret lanterman": {
+      "name": "Margaret",
       "nameXPosition": 440,
-      "age": 60
+      "age": 49
     },
     "bob": {
-      "name": "Bob",
+      "name": "BOB",
       "nameXPosition": 440,
-      "age": 1000
+      "age": 44
     },
     "angel": {
-      "name": "Jacqueline du Pré",
+      "name": "angel",
       "nameXPosition": 440,
-      "age": 77
+      "age": 0
     }
   },
+
   "dialog": {
-    "scene1 comment": "Laura arrives at the bar, a trucker approaches her in the parking lot. They exchange innuendo.",
-    "scene1": [
-      {
+    "scene0 comment1": "Introduction. Laura is hitchhiking. Narrator prepares player to speak",
+    "scene0 background": "sky and road",
+    "scene0": [
+  {
         "type": "speech",
-        "character": "laura",
-        "speech": "Say this really long thing that just keeps going on and on so that I can see how it looks like in the window"
+        "character": "narrator",
+        "speech": " "
+      },
+ {
+        "type": "speech",
+        "character": "narrator",
+        "speech": " "
+      },
+ {
+        "type": "speech",
+        "character": "narrator",
+        "speech": " "
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "..."
+        "character": "narrator",
+        "speech": " "
+      },
+  {
+        "type": "speech",
+        "character": "narrator",
+        "speech": " "
+      },
+  {
+        "type": "speech",
+        "character": "narrator",
+        "speech": " "
       },
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "..."
-      },
-      {
-        "type": "speech",
-        "character": "trucker",
-        "speech": "Say you're going to go all the way."
+        "character": "narrator",
+        "speech": " "
       }
     ],
-    "scene2 comment": "Laura dissociates. Log Lady approaches her to warn her of her descent into Hell.",
+    "scene1 comment1": "Laura arrives at the bar, a man on a business trip approaches her in the parking lot. They exchange innuendo.",
+    "scene1 background": "bar parking lot",
+    "scene1": [
+  {
+        "type": "speech",
+	      "image": "leer",
+        "character": "businessman",
+        "speech": " ... "
+      },
+ {
+        "type": "speech",
+        "image": "leer",
+        "character": "businessman",
+        "speech": "Running away from home are we? "
+      },
+ {
+        "type": "speech",
+        "image": "smirk",
+        "character": "businessman",
+        "speech": "Did you lose your way little lady?"
+      },
+      {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "I know where I am."
+      },
+      {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Do you know where you are?"
+      },
+  {
+        "type": "speech",
+        "image": "smirk",
+        "character": "businessman",
+        "speech": "I can take you someplace else if you like. What do you say?"
+      },
+  {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Wouldn't you like taking me around the world?"
+      },
+      {
+            "type": "speech",
+            "image": "none",
+            "character": "laura palmer",
+            "speech": "...if you have what it takes."
+          },
+      {
+        "type": "speech",
+        "image": "smirk",
+        "character": "businessman",
+        "speech": "I do."
+      },
+      {
+        "type": "speech",
+        "image": "smirk",
+        "character": "businessman",
+        "speech": "...do you go all the way little girl?"
+      },
+  {
+        "type": "speech",
+        "image":" none",
+        "character": "laura palmer",
+        "speech": "Sooner or later."
+      },
+ {
+        "type": "speech",
+        "image": "snide",
+        "character": "businessman",
+        "speech": "You do, don't you?"
+      },
+      {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Babe, all the way for me means, all the way - DEAD."
+      },
+      {
+        "type": "speech",
+        "image": "smirk",
+        "character": "businessman",
+        "speech": "Tell me you're going to go all the way."
+      },
+{
+        "type": "listen",
+        "character": "narrator",
+        "speech": "Speak: I'm going to go all the way."
+      }
+    ],
+    "scene1 comment2": "When the listen type, overlay snow, display text differently than speech, have annyang listen for answer",
+    "scene2 comment1": "Laura dissociates. Log Lady approaches her to warn her of her descent into Hell.",
+    "scene2 background": "semiconscious",
     "scene2": [
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "Do you know what they call a Quarter Pounder in France?"
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Maragaret?"
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "No? What? Tell me..."
+        "image": "log lady frontal",
+        "character": "margaret lanterman",
+        "speech": "He's here."
       },
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "A... Royale with Cheese"
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Who?"
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "A Royale with Cheese!"
+        "image": "log lady leftward",
+        "character": "margaret lanterman",
+        "speech": "My dear... The tender bows of innocence burn, and when the wind raises and all goodness is in jeopardy."
+      },
+  {
+        "type": "speech",
+        "image": "log lady leftward",
+        "character": "margaret lanterman",
+        "speech": "When this kind of fire starts, it is very hard to put out."
+      },
+  {
+        "type": "speech",
+        "image": "laura rightward",
+        "character": "laura palmer",
+        "speech": "He's here, BOB?"
+      },
+  {
+        "type": "speech",
+        "image": "sc2 closeup1",
+        "character": "margaret lanterman",
+        "speech": "Have you thought about asking for help?"
+      },
+  {
+        "type": "speech",
+        "image": "sc2 closeup2",
+        "character": "laura palmer",
+        "speech": "Wait, you do believe me? He is real."
+      },
+{
+        "type": "listen",
+        "character": "narrator",
+        "speech": "Speak: BOB is real!"
       }
     ],
-    "scene3 comment": "Laura enter the depths of awareness. She meets with Bob.",
+    "scene3 comment": "Laura enter the depths of awareness. She meets with BOB.",
+    "scene3 background": "the red room",
     "scene3": [
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "Do you know what they call a Quarter Pounder in France?"
+        "image": "bob chat",
+        "character": "bob",
+        "speech": "Hello Laura."
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "No? What? Tell me..."
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "It's you!"
+      },
+ {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Who are you?"
+      },
+ {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "Who are you really?"
       },
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "A... Royale with Cheese"
+        "image": "bob chat",
+        "character": "bob",
+        "speech": "I am the one who wants to breathe through your nose,"
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "A Royale with Cheese!"
+        "image": "bob chat",
+        "character": "bob",
+        "speech": "and taste through your mouth."
+      },
+      {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "No..."
+      },
+ {
+        "type": "speech",
+        "image": "bob wild",
+        "character": "bob",
+        "speech": "Look at how dirty we've become."
+      },
+      {
+             "type": "speech",
+             "image": "bob wild",
+             "character": "bob",
+             "speech": "Let me show you all we can do."
+           },
+           {
+                  "type": "speech",
+                  "image": "laura hands",
+                  "character": "laura palmer",
+                  "speech": "No... "
+                },
+      {
+        "type": "speech",
+        "image": "bob wild",
+        "character": "bob",
+        "speech": "I want to kill through you. I want to kill with your hands."
+      },
+ {
+        "type": "speech",
+        "image": "laura hands",
+        "character": "laura palmer",
+        "speech": "Never!"
+      },
+ {
+        "type": "speech",
+        "image": "none",
+        "character": "laura palmer",
+        "speech": "You'll have to kill ME!"
+      },
+ {
+        "type": "speech",
+        "image": "none",
+        "character": "narrator",
+        "speech": "BOB has vanished."
+      },
+{
+        "type": "speech",
+        "image":"none",
+        "character": "BOB",
+        "speech": "If you take the ring, you will discover my true identity."
       }
-    ],
-    "scene4 comment": "If Laura has met with Log Lady or Bob and returns to the parking lot waking state...",
-    "scene4": [
+],
+  "scene4 comment": "If Laura has met with Bob and asked for help, she goes back to the parking lot waking state...",
+  "scene4 background": "bar parking lot",
+  "scene4": [
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "You're already high out of your mind? Started the party without me?"
+        "image": "snide",
+        "character": "businessman",
+        "speech": "Hey, you were dazed there for a moment. Where? Where are you going?"
       },
       {
         "type": "speech",
-        "character": "laura",
-        "speech": "..."
+        "image":"none",
+        "character": "laura palmer",
+        "speech": "I'm going to find my way back!"
       },
       {
         "type": "speech",
-        "character": "trucker",
-        "speech": "So, tell me you're going to go all the way"
+        "image":"snide",
+        "character": "businessman",
+        "speech": "What the hell? Are you high or something?"
+      },
+  {
+        "type": "speech",
+        "image":"smirk",
+        "character": "businessman",
+        "speech": "Started the party without me"
+      },
+      {
+        "type": "speech",
+        "image": "none",
+        "character": "narrator",
+        "speech": "You know you can fuck off?"
       }
     ]
   }

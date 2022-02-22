@@ -174,13 +174,13 @@ function draw() {
     //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
 
     // Leering businessman approaches
-    // image(
-    //   sc1BusinessmanAcosts,
-    //   320,
-    //   115,
-    //   canvas.width - 910,
-    //   canvas.height - 600
-    // );
+    image(
+      sc1BusinessmanAcosts,
+      320,
+      115,
+      canvas.width - 910,
+      canvas.height - 600
+    );
 
     // Businessman smirks
     // image(
@@ -308,7 +308,8 @@ whereas dialog from interlocutors should arrive from the right side
   // Display the character name
   push();
   textSize(24);
-  fill(230, 220, 220);
+  fill(0);
+  //fill(230, 220, 220);
   textAlign(LEFT, BOTTOM);
   text(characterData.name, characterData.nameXPosition, height - dialogHeight);
   pop();
@@ -365,6 +366,6 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `redRoom`;
+    state = `parkingLot`;
   }
 }
