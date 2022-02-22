@@ -3,17 +3,17 @@
 
     "narrator": {
       "name": "Narrator",
-      "nameXPosition": 10,
+      "nameXPosition": 35,
       "age": 0
     },
     "laura palmer": {
       "name": "Laura",
-      "nameXPosition": 10,
+      "nameXPosition": 35,
       "age": 17
     },
     "businessman": {
       "name": "John",
-      "nameXPosition": 480,
+      "nameXPosition": 435,
       "age": 38
     },
     "margaret lanterman": {
@@ -192,7 +192,7 @@
         "type": "speech",
         "image": "log lady leftward",
         "character": "margaret lanterman",
-        "speech": "My dear... The tender bows of innocence burn, and when the wind raises and all goodness is in jeopardy."
+        "speech": "My dear... The tender bows of innocence burn, and when the wind raises all goodness is in jeopardy."
       },
   {
         "type": "speech",
@@ -273,7 +273,7 @@
         "type": "speech",
         "image": "bob wild",
         "character": "bob",
-        "speech": "Look at how dirty we've become."
+        "speech": "Look at how filthy you've become."
       },
       {
              "type": "speech",

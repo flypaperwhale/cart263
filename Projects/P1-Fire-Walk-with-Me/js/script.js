@@ -62,7 +62,7 @@ let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // To store the loaded data
 let data = undefined;
 // The current scene (there's only one in the data, but this would be how you display different scenes)
-let currentScene = `scene1`;
+let currentScene = `scene3`;
 // The current line in the current scene (going through an array of dialog, so starts at 0)
 let currentLine = 0;
 // The height of our dialog box
@@ -212,7 +212,7 @@ function draw() {
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
 
     // Loglady stands alone
-    //image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
+    image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
 
     // Laura facing right
     // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
@@ -251,7 +251,7 @@ function draw() {
     //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
 
     // Bob excited rage
-    //image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+    image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
 
     // Laura looks at hand
     //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
@@ -308,7 +308,7 @@ whereas dialog from interlocutors should arrive from the right side
   // Display the character name
   push();
   textSize(24);
-  fill(0);
+  fill(255,0,0);
   //fill(230, 220, 220);
   textAlign(LEFT, BOTTOM);
   text(characterData.name, characterData.nameXPosition, height - dialogHeight);
@@ -366,6 +366,6 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `parkingLot`;
+    state = `redRoom`;
   }
 }
