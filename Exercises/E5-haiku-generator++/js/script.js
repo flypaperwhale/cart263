@@ -6,6 +6,22 @@ of lines of the correct syllable length. Also swaps out lines if the user
 clicks on them with a fade in and out effect.
 */
 
+/*
+This program is built off of Pippin's Haiku Generator.
+
+It should prompt the user for 1 word, which should flavor the generated poem.
+- prompt -
+- retrieve JSON array from the prompt -
+
+The poems should have a gothic feel.
+- rewrite poems with a gothic feel -
+
+I will try to make the esthetics gothic too (reds, purples, blacks, oranges). Maybe have an image of the user's prompt.
+- play with the style-
+- add an image appear according to prompt (check the random clown image code) - 
+
+*/
+
 "use strict";
 
 // Our pre-made haiku lines

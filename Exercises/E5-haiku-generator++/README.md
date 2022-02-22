@@ -1,3 +1,9 @@
-# Template p5 project
+# Haiku Generator ++
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This program is built off of Pippin's Haiku Generator.
+
+It should prompt the user for 1 word, which should flavor the generated poem.
+
+The poems should have a gothic feel.
+
+I will try to make the esthetics gothic too (reds, purples, blacks, oranges). Maybe have an image of the user's prompt.
