@@ -55,6 +55,9 @@ let redRoomBgImg,
 // other images
 let monkeyFaceImg, redRoomEntryImg, transitionSnowImg;
 
+let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
+let snowDirection = 1;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -62,7 +65,7 @@ let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // To store the loaded data
 let data = undefined;
 // The current scene (there's only one in the data, but this would be how you display different scenes)
-let currentScene = `scene3`;
+let currentScene = `scene0`;
 // The current line in the current scene (going through an array of dialog, so starts at 0)
 let currentLine = 0;
 // The height of our dialog box
@@ -113,6 +116,9 @@ Creates the canvas
 */
 function setup() {
   createCanvas(600, 400);
+
+  setInterval(snowTransition, 100);
+
 }
 
 /**
@@ -120,6 +126,21 @@ Displays the current line
 */
 function draw() {
   background(0);
+
+// display snow //
+  push();
+  imageMode(CENTER);
+  if (snowDirection === 1) {
+    scale(1, 1);
+  } else if (snowDirection === 2) {
+    scale(1, -1);
+  } else if (snowDirection === 3) {
+    scale(-1, 1);
+  } else if (snowDirection === 4) {
+    scale(-1, -1);
+  }
+  image(transitionSnowImg, 0, 0, canvas.width, canvas.height);
+  pop();
 
   if (state === `Title`) {
     push();
@@ -275,22 +296,33 @@ function draw() {
   }
 }
 
+function snowTransition() {
+  let currentSnowDirection = snowDirection;
+  snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  if (currentSnowDirection === snowDirection) {
+    snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  }
+}
+
 /**
 Uses the dialog and character data to display a dialog box
 colored and labelled by character and with the current line
 displayed in it.
 */
-function displayCurrentLine() {
+function displayCurrentLine() { // ### CHANGE NAME BLOCKING ###
   // Get the current scene and line data object
   // NOTE: Notice how we can use *variables* to choose
   // a property in an object like data.dialog! This gives
   // us a lot of flexibility because we can store the property
   // name we want in a variable and change it (like the current
   // scene name!)
-  let lineData = data.dialog[currentScene][currentLine];
+  let lineData = data.blocking[currentScene][currentLine];
   // Get the data for the character who is speaking, note
   // we're using the same trick of a variable containing the
   // property name corresponding to our character
+
+  // based on type, manipulat line differently
+if (lineData.type=== "dialog"){
   let characterData = data.characters[lineData.character];
 
   // DIALOG //
@@ -320,8 +352,14 @@ whereas dialog from interlocutors should arrive from the right side
   fill(0);
   textAlign(LEFT, TOP);
   // characterData.dialogXposition?
-  text(lineData.speech, 10, height - dialogHeight + 5, width, dialogHeight);
+  text(lineData.dialog, 10, height - dialogHeight + 5, width, dialogHeight);
   pop();
+
+}
+else if (lineData.type === "sound cue"){
+  // do sound cue thing
+}
+
 }
 
 /**
@@ -350,8 +388,27 @@ they will enter a new scene!
 */
 function nextLine() {
   currentLine++;
-  if (currentLine === data.dialog[currentScene].length) {
-    currentLine = 0;
+  if (currentLine >= data.blocking[currentScene].length) {
+    if (currentScene=== "scene0"){
+      currentScene= "scene1";
+    }
+    else if (currentScene=== "scene1"){
+          // currentLine = 0;
+      currentScene= "scene2";
+    }
+    else if (currentScene=== "scene2"){
+          // currentLine = 0;
+      currentScene= "scene3";
+    }
+    else if (currentScene=== "scene3"){
+          // currentLine = 0;
+      currentScene= "scene4";
+    }
+    else if (currentScene === "scene4"){
+      alert("the end");
+      currentScene = undefined;
+    }
+      currentLine = 0;
   }
 }
 
@@ -366,6 +423,6 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `redRoom`;
+    state = `introAnimation`;
   }
 }

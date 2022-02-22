@@ -33,324 +33,472 @@
     }
   },
 
-  "dialog": {
+  "blocking": {
     "scene0 comment1": "Introduction. Laura is hitchhiking. Narrator prepares player to speak",
     "scene0 background": "sky and road",
-    "scene0": [
-  {
-        "type": "speech",
+    "scene0": [{
+        "type": "visual cue",
+        "image": "introSkyImg",
         "character": "narrator",
-        "speech": " "
-      },
- {
-        "type": "speech",
-        "character": "narrator",
-        "speech": " "
-      },
- {
-        "type": "speech",
-        "character": "narrator",
-        "speech": " "
+        "dialog": "show the sky"
       },
       {
-        "type": "speech",
+        "type": "sound cue",
         "character": "narrator",
-        "speech": " "
-      },
-  {
-        "type": "speech",
-        "character": "narrator",
-        "speech": " "
-      },
-  {
-        "type": "speech",
-        "character": "narrator",
-        "speech": " "
+        "dialog": "ominous melody"
       },
       {
-        "type": "speech",
+        "type": "sound cue",
         "character": "narrator",
-        "speech": " "
+        "dialog": "cars drive by"
+      },
+      {
+        "type": "visual cue",
+        "image": "introRoadBgImg",
+        "character": "narrator",
+        "dialog": "show the road"
+      },
+      {
+        "tag": "0",
+        "type": "dialog",
+        "image": "introRoadBgImg",
+        "character": "narrator",
+        "dialog": "Laura Palmer has been falling..."
+      },
+      {
+        "type": "visual cue",
+        "image": "introThumbImg",
+        "character": "narrator",
+        "dialog": "show laura palmer's thumb"
+      },
+      {
+        "tag": "1",
+        "type": "dialog",
+        "image": "introThumbImg",
+        "character": "narrator",
+        "dialog": "Laura is of two minds..."
+      },
+      {
+        "type": "visual cue",
+        "image": "introLauraImg",
+        "character": "narrator",
+        "dialog": "show laura palmer"
+      },
+      {
+        "type": "dialog",
+        "image": "introLauraImg",
+        "character": "narrator",
+        "dialog": "What is your name?"
+      },
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snow over"
+      },
+      {
+        "type": "listen",
+        "character": "narrator",
+        "dialog": "Speak: My name is ________"
+      },
+      {
+        "type": "visual cue",
+        "image": "none",
+        "character": "narrator",
+        "dialog": "snow is gone"
+      },
+      {
+        "type": "visual cue",
+        "image": "monkeyFaceImg",
+        "character": "narrator",
+        "dialog": "flash monkey face"
+      },
+      {
+        "type": "spoken",
+        "character": "narrator",
+        "dialog": "{name (reversed?)}, don't let Laura put on the ring!"
+      },
+      {
+        "type": "visual cue",
+        "image": "introRoadBgImg",
+        "character": "narrator",
+        "dialog": "show the road again"
+      },
+      {
+        "type": "dialog",
+        "image": "introRoadBgImg",
+        "character": "narrator",
+        "dialog": "You've been falling..."
+      },
+      {
+        "type": "dialog",
+        "image": "introRoadBgImg",
+        "character": "narrator",
+        "dialog": "You've been catching fire..."
+      },
+      {
+        "type": "sound cue",
+        "character": "narrator",
+        "dialog": "car breaks"
+      },
+      {
+        "type": "visual cue",
+        "image": "fadeout",
+        "character": "narrator",
+        "dialog": "transition fade out"
       }
     ],
     "scene1 comment1": "Laura arrives at the bar, a man on a business trip approaches her in the parking lot. They exchange innuendo.",
     "scene1 background": "bar parking lot",
-    "scene1": [
-  {
-        "type": "speech",
-	      "image": "leer",
-        "character": "businessman",
-        "speech": " ... "
+    "scene1": [{
+        "type": "visual cue",
+        "image": "barsign",
+        "character": "narrator",
+        "dialog": "bar sign"
       },
- {
-        "type": "speech",
+      {
+        "type": "visual cue",
+        "image": "sc1LauraLightsUp",
+        "character": "narrator",
+        "dialog": "Laura is standing in the parking lot, her fire is on 3 seconds"
+      },
+      {
+        "type": "visual cue",
+        "image": "sc1LauraSmokes",
+        "character": "narrator",
+        "dialog": "Laura is lighting her cigarette"
+      },
+      {
+        "type": "dialog",
         "image": "leer",
         "character": "businessman",
-        "speech": "Running away from home are we? "
-      },
- {
-        "type": "speech",
-        "image": "smirk",
-        "character": "businessman",
-        "speech": "Did you lose your way little lady?"
+        "dialog": " ... "
       },
       {
-        "type": "speech",
+        "type": "dialog",
+        "image": "leer",
+        "character": "businessman",
+        "dialog": "Running away from home are we?"
+      },
+      {
+        "type": "visual cue",
+        "image": "none",
+        "character": "narrator",
+        "dialog": "Laura isn't in sight anymore. we get her POV now"
+      },
+      {
+        "type": "dialog",
+        "image": "smirk",
+        "character": "businessman",
+        "dialog": "Did you lose your way little lady?"
+      },
+      {
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "I know where I am."
+        "dialog": "I know where I am."
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "Do you know where you are?"
+        "dialog": "Do you know where you are?"
       },
-  {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "smirk",
         "character": "businessman",
-        "speech": "I can take you someplace else if you like. What do you say?"
+        "dialog": "I can take you someplace else if you like. What do you say?"
       },
-  {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "Wouldn't you like taking me around the world?"
+        "dialog": "Wouldn't you like taking me around the world?"
       },
       {
-            "type": "speech",
-            "image": "none",
-            "character": "laura palmer",
-            "speech": "...if you have what it takes."
-          },
-      {
-        "type": "speech",
-        "image": "smirk",
-        "character": "businessman",
-        "speech": "I do."
-      },
-      {
-        "type": "speech",
-        "image": "smirk",
-        "character": "businessman",
-        "speech": "...do you go all the way little girl?"
-      },
-  {
-        "type": "speech",
-        "image":" none",
+        "type": "dialog",
+        "image": "none",
         "character": "laura palmer",
-        "speech": "Sooner or later."
+        "dialog": "...sure you have what it takes?"
       },
- {
-        "type": "speech",
+      {
+        "type": "dialog",
+        "image": "smirk",
+        "character": "businessman",
+        "dialog": "I do."
+      },
+      {
+        "type": "dialog",
+        "image": "smirk",
+        "character": "businessman",
+        "dialog": "...do you go all the way little girl?"
+      },
+      {
+        "type": "dialog",
+        "image": " none",
+        "character": "laura palmer",
+        "dialog": "Sooner or later."
+      },
+      {
+        "type": "dialog",
         "image": "snide",
         "character": "businessman",
-        "speech": "You do, don't you?"
+        "dialog": "You do, don't you?"
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "Babe, all the way for me means, all the way - DEAD."
+        "dialog": "Babe, all the way for me means, all the way - DEAD."
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "smirk",
         "character": "businessman",
-        "speech": "Tell me you're going to go all the way."
+        "dialog": "Tell me you're going to go all the way."
       },
-{
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snow over"
+      },
+      {
         "type": "listen",
         "character": "narrator",
-        "speech": "Speak: I'm going to go all the way."
+        "dialog": "Speak: I'm going to go all the way."
+      },
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snowy transition"
       }
     ],
-    "scene1 comment2": "When the listen type, overlay snow, display text differently than speech, have annyang listen for answer",
+    "scene1 comment2": "When the listen type, overlay snow, display text differently than dialog, have annyang listen for answer",
     "scene2 comment1": "Laura dissociates. Log Lady approaches her to warn her of her descent into Hell.",
     "scene2 background": "semiconscious",
-    "scene2": [
-      {
-        "type": "speech",
+    "scene2": [{
+        "type": "visual cue",
+        "image": "logladystand",
+        "character": "narrator",
+        "dialog": "log lady stands there"
+      },
+       {
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "Maragaret?"
+        "dialog": "Maragaret?"
       },
       {
-        "type": "speech",
-        "image": "log lady frontal",
+        "type": "dialog",
+        "image": "logladystand",
         "character": "margaret lanterman",
-        "speech": "He's here."
+        "dialog": "He's here."
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "Who?"
+        "dialog": "Who?"
       },
       {
-        "type": "speech",
-        "image": "log lady leftward",
+        "type": "dialog",
+        "image": "sc2LogLadySideImg",
         "character": "margaret lanterman",
-        "speech": "My dear... The tender bows of innocence burn, and when the wind raises all goodness is in jeopardy."
+        "dialog": "My dear... The tender bows of innocence burn, and when the wind raises all goodness is in jeopardy."
       },
-  {
-        "type": "speech",
-        "image": "log lady leftward",
+      {
+        "type": "dialog",
+        "image": "sc2LogLadySideImg",
         "character": "margaret lanterman",
-        "speech": "When this kind of fire starts, it is very hard to put out."
+        "dialog": "When this kind of fire starts, it is very hard to put out."
       },
-  {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "laura rightward",
         "character": "laura palmer",
-        "speech": "He's here, BOB?"
+        "dialog": "He's here, BOB?"
       },
-  {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "sc2 closeup1",
         "character": "margaret lanterman",
-        "speech": "Have you thought about asking for help?"
+        "dialog": "Think about asking for help?"
       },
-  {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "sc2 closeup2",
         "character": "laura palmer",
-        "speech": "Wait, you do believe me? He is real."
+        "dialog": "Wait, you do believe me? He is real."
       },
-{
+      {
+        "type": "visual cue",
+        "image" : "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snow over."
+      },
+      {
         "type": "listen",
         "character": "narrator",
-        "speech": "Speak: BOB is real!"
+        "dialog": "Speak: BOB is real!"
+      },
+      {
+        "type": "sound cue",
+        "character": "narrator",
+        "dialog": "BOB laughs"
+      },
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snowy transition"
       }
     ],
     "scene3 comment": "Laura enter the depths of awareness. She meets with BOB.",
     "scene3 background": "the red room",
-    "scene3": [
-      {
-        "type": "speech",
+    "scene3": [{
+        "type": "dialog",
         "image": "bob chat",
         "character": "bob",
-        "speech": "Hello Laura."
+        "dialog": "Hello Laura."
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "It's you!"
-      },
- {
-        "type": "speech",
-        "image": "none",
-        "character": "laura palmer",
-        "speech": "Who are you?"
-      },
- {
-        "type": "speech",
-        "image": "none",
-        "character": "laura palmer",
-        "speech": "Who are you really?"
+        "dialog": "It's you!"
       },
       {
-        "type": "speech",
+        "type": "dialog",
+        "image": "none",
+        "character": "laura palmer",
+        "dialog": "Who are you?"
+      },
+      {
+        "type": "dialog",
+        "image": "none",
+        "character": "laura palmer",
+        "dialog": "Who are you really?"
+      },
+      {
+        "type": "dialog",
         "image": "bob chat",
         "character": "bob",
-        "speech": "I am the one who wants to breathe through your nose,"
+        "dialog": "I am the one who wants to breathe through your nose,"
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "bob chat",
         "character": "bob",
-        "speech": "and taste through your mouth."
+        "dialog": "and taste through your mouth."
       },
       {
-        "type": "speech",
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "No..."
+        "dialog": "No..."
       },
- {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "bob wild",
         "character": "bob",
-        "speech": "Look at how filthy you've become."
+        "dialog": "Look at how filthy you've become."
       },
       {
-             "type": "speech",
-             "image": "bob wild",
-             "character": "bob",
-             "speech": "Let me show you all we can do."
-           },
-           {
-                  "type": "speech",
-                  "image": "laura hands",
-                  "character": "laura palmer",
-                  "speech": "No... "
-                },
-      {
-        "type": "speech",
+        "type": "dialog",
         "image": "bob wild",
         "character": "bob",
-        "speech": "I want to kill through you. I want to kill with your hands."
+        "dialog": "Let me show you all we can do."
       },
- {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "laura hands",
         "character": "laura palmer",
-        "speech": "Never!"
+        "dialog": "No... "
       },
- {
-        "type": "speech",
+      {
+        "type": "dialog",
+        "image": "bob wild",
+        "character": "bob",
+        "dialog": "I want to kill through you. I want to kill with your hands."
+      },
+      {
+        "type": "dialog",
+        "image": "laura hands",
+        "character": "laura palmer",
+        "dialog": "Never!"
+      },
+      {
+        "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "speech": "You'll have to kill ME!"
+        "dialog": "You'll have to kill ME!"
       },
- {
-        "type": "speech",
+      {
+        "type": "dialog",
         "image": "none",
         "character": "narrator",
-        "speech": "BOB has vanished."
+        "dialog": "BOB has vanished."
       },
-{
-        "type": "speech",
-        "image":"none",
-        "character": "BOB",
-        "speech": "If you take the ring, you will discover my true identity."
-      }
-],
-  "scene4 comment": "If Laura has met with Bob and asked for help, she goes back to the parking lot waking state...",
-  "scene4 background": "bar parking lot",
-  "scene4": [
       {
-        "type": "speech",
+        "type": "dialog",
+        "image": "ring",
+        "character": "bob",
+        "dialog": "If you take the ring, you will discover my true identity."
+      },
+      {
+        "type": "listen",
+        "character": "narrator",
+        "dialog": "Help Me!"
+      },
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "snowy transition"
+      }
+    ],
+    "scene4 comment": "If Laura has met with Bob and asked for help, she goes back to the parking lot waking state...",
+    "scene4 background": "bar parking lot",
+    "scene4": [{
+        "type": "dialog",
         "image": "snide",
         "character": "businessman",
-        "speech": "Hey, you were dazed there for a moment. Where? Where are you going?"
+        "dialog": "Hey, you were dazed there for a moment. Where? Where are you going?"
       },
       {
-        "type": "speech",
-        "image":"none",
+        "type": "dialog",
+        "image": "none",
         "character": "laura palmer",
-        "speech": "I'm going to find my way back!"
+        "dialog": "I'm going to find my way back!"
       },
       {
-        "type": "speech",
-        "image":"snide",
+        "type": "dialog",
+        "image": "snide",
         "character": "businessman",
-        "speech": "What the hell? Are you high or something?"
-      },
-  {
-        "type": "speech",
-        "image":"smirk",
-        "character": "businessman",
-        "speech": "Started the party without me"
+        "dialog": "What the hell? Are you high or something?"
       },
       {
-        "type": "speech",
+        "type": "dialog",
+        "image": "smirk",
+        "character": "businessman",
+        "dialog": "...started the party without me."
+      },
+      {
+        "type": "dialog",
         "image": "none",
         "character": "narrator",
-        "speech": "You know you can fuck off?"
+        "dialog": "You know, you can fuck off."
+      },
+      {
+        "type": "visual cue",
+        "image": "fadeout",
+        "character": "narrator",
+        "dialog": "transition fade out"
       }
+
     ]
   }
 }
