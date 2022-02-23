@@ -378,15 +378,15 @@
     "scene3": [
       {
         "type": "visual cue",
-        "image": "snowCover4",
-        "character": "narrator",
-        "dialog": "snow stays for a moment"
-      },
-      {
-        "type": "visual cue",
         "image": "noSnow",
         "character": "narrator",
         "dialog": "snow goes away"
+      },
+      {
+        "type": "visual cue",
+        "image": "bobChat",
+        "character": "bob",
+        "dialog": "Hello."
       },
       {
         "type": "dialog",
@@ -426,15 +426,15 @@
       },
       {
         "type": "dialog",
-        "image": "none",
-        "character": "laura palmer",
-        "dialog": "No..."
-      },
-      {
-        "type": "dialog",
         "image": "bobRage",
         "character": "bob",
         "dialog": "Look at how filthy you've become."
+      },
+      {
+        "type": "dialog",
+        "image": "lauraHands",
+        "character": "laura palmer",
+        "dialog": "No..."
       },
       {
         "type": "dialog",
@@ -444,7 +444,7 @@
       },
       {
         "type": "dialog",
-        "image": "lauraHands",
+        "image": "none",
         "character": "laura palmer",
         "dialog": "No... "
       },
@@ -462,9 +462,15 @@
       },
       {
         "type": "dialog",
-        "image": "noLaura",
+        "image": "lauraHands",
         "character": "laura palmer",
         "dialog": "You'll have to kill ME!"
+      },
+      {
+        "type": "visual cue",
+        "image": "noLaura",
+        "character": "laura palmer",
+        "dialog": "no laura"
       },
       {
         "type": "dialog",
@@ -525,8 +531,8 @@
       },
       {
         "type": "dialog",
-        "image": "none",
-        "character": "narrator",
+        "image": "brettSnide",
+        "character": "laura palmer",
         "dialog": "You know, you can fuck off."
       },
       {

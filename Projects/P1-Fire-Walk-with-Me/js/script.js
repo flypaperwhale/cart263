@@ -393,7 +393,8 @@ function draw() {
 
     if (currentVisualCue === "snowTransition2") {
       snowTransition2Toggle = true;
-      switchStateToSc3();
+      snowCover4Toggle = true;
+      setTimeout(switchStateToSc3, 2000);
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
     }
@@ -459,9 +460,19 @@ function draw() {
     // redroom background
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 400);
 
+    // if (currentVisualCue === "noSnow") {
+    //   snowTransition2Toggle = false;
+    //   sc2CloseUp2Toggle = false;
+    // }
     if (currentVisualCue === "noSnow") {
+      snowCover3Toggle = false;
+      snowCover4Toggle = false;
       snowTransition2Toggle = false;
-      sc2CloseUp2Toggle = false;
+      //snowTransition2Toggle = false;
+      //roadBGToggle = false;
+    }
+    if (currentVisualCue === "noLaura") {
+      lauraHandsToggle = false;
     }
     if (currentVisualCue === "bobChat") {
       // Bob chat
@@ -492,9 +503,10 @@ function draw() {
       pop();
     } else if (currentVisualCue === "snowTransition3") {
       snowTransition3Toggle = true;
-      switchStateToSc4();
-    } else if (currentVisualCue === "snowCover3") {
-      snowCover3Toggle = true;
+      snowCover2Toggle = true;
+      setTimeout(switchStateToSc4, 2000);
+    } else if (currentVisualCue === "snowCover4") {
+      snowCover4Toggle = true;
       //snowTransitionToggle = true;
     }
 
@@ -551,6 +563,7 @@ function switchStateToSc3() {
 }
 function switchStateToSc4() {
   if (state === `redRoom`) {
+    barBgImgToggle = true;
     state = `parkingLot`;
   }
 }
