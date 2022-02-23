@@ -261,6 +261,7 @@ function draw() {
       roadBGToggle = false;
     }
     if (currentVisualCue === "lauraLight") {
+      fadeoutToggle = false;
       // Laura lights up
       lauraLightToggle = true;
     } else if (currentVisualCue === "lauraCig") {
@@ -283,6 +284,7 @@ function draw() {
       brettSmirkToggle = true;
     } else if (currentVisualCue === "brettSnide") {
       // Businessman sniding (? in another 4th scene?)
+      snowCover2Toggle = false;
       brettSmirkToggle = false;
       brettSnideToggle = true;
     }
@@ -295,7 +297,10 @@ function draw() {
       //snowTransition2Toggle = true;
       brettSmirkToggle = false;
       barBgImgToggle = false;
-      setTimeout(switchStateToSc2, 2000);
+      setTimeout(switchStateToSc2, 1000);
+    } else if (currentVisualCue === "endFadeout") {
+      // roadBGToggle = false;
+      fadeoutToggle = true;
     }
 
     if (lauraLightToggle === true) {
@@ -348,6 +353,16 @@ function draw() {
     }
     if (snowTransition1Toggle === true) {
       displaySnow(255, 255);
+    } else {
+    }
+    if (fadeoutToggle === true) {
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+      setTimeout(switchStateToSc1, 2000);
+    } else {
     }
 
     // show dialog
@@ -394,7 +409,8 @@ function draw() {
     if (currentVisualCue === "snowTransition2") {
       snowTransition2Toggle = true;
       snowCover4Toggle = true;
-      setTimeout(switchStateToSc3, 2000);
+      bobChatToggle = true;
+      setTimeout(switchStateToSc3, 1000);
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
     }
@@ -504,7 +520,7 @@ function draw() {
     } else if (currentVisualCue === "snowTransition3") {
       snowTransition3Toggle = true;
       snowCover2Toggle = true;
-      setTimeout(switchStateToSc4, 2000);
+      setTimeout(switchStateToSc4, 1000);
     } else if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
       //snowTransitionToggle = true;

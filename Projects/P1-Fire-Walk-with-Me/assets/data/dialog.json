@@ -383,12 +383,6 @@
         "dialog": "snow goes away"
       },
       {
-        "type": "visual cue",
-        "image": "bobChat",
-        "character": "bob",
-        "dialog": "Hello."
-      },
-      {
         "type": "dialog",
         "image": "bobChat",
         "character": "bob",
@@ -438,7 +432,7 @@
       },
       {
         "type": "dialog",
-        "image": "bobRage",
+        "image": "lauraHands",
         "character": "bob",
         "dialog": "Let me show you all we can do."
       },
@@ -479,6 +473,12 @@
         "dialog": "BOB has vanished."
       },
       {
+        "type": "visual cue",
+        "image": "theRing",
+        "character": "narrator",
+        "dialog": "ring appears."
+      },
+      {
         "type": "dialog",
         "image": "theRing",
         "character": "bob",
@@ -509,7 +509,13 @@
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
-        "dialog": "Hey, you were dazed there for a moment. Where? Where are you going?"
+        "dialog": "Hey, you were dazed there for a moment."
+      },
+      {
+        "type": "dialog",
+        "image": "brettSnide",
+        "character": "businessman",
+        "dialog": "Where? Where are you going?"
       },
       {
         "type": "dialog",
@@ -531,13 +537,19 @@
       },
       {
         "type": "dialog",
-        "image": "brettSnide",
+        "image": "brettSmirk",
         "character": "laura palmer",
         "dialog": "You know, you can fuck off."
       },
       {
         "type": "visual cue",
-        "image": "fadeout",
+        "image": "brettSnide",
+        "character": "narrator",
+        "dialog": "transition fade out"
+      },
+      {
+        "type": "visual cue",
+        "image": "endFadeout",
         "character": "narrator",
         "dialog": "transition fade out"
       }
