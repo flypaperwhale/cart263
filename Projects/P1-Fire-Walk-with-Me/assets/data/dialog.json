@@ -72,12 +72,6 @@
         "dialog": "Laura Palmer has been falling..."
       },
       {
-        "type": "visual cue",
-        "image": "thumbUp",
-        "character": "narrator",
-        "dialog": "show laura palmer's thumb"
-      },
-      {
         "tag": "1",
         "type": "dialog",
         "image": "thumbUp",
@@ -86,15 +80,21 @@
       },
       {
         "type": "visual cue",
-        "image": "lauraIntro",
+        "image": "thumbUp",
         "character": "narrator",
-        "dialog": "show laura palmer"
+        "dialog": "show laura palmer's thumb"
       },
       {
         "type": "dialog",
-        "image": "lauraIntro",
+        "image": "thumbUp",
         "character": "narrator",
         "dialog": "What is your name?"
+      },
+      {
+        "type": "visual cue",
+        "image": "lauraIntro",
+        "character": "narrator",
+        "dialog": "show laura palmer"
       },
       {
         "type": "visual cue",
@@ -104,6 +104,7 @@
       },
       {
         "type": "listen",
+        "image": "monkeyFace",
         "character": "narrator",
         "dialog": "Speak: My name is ________"
       },
@@ -112,12 +113,6 @@
         "image": "noSnow",
         "character": "narrator",
         "dialog": "snow is gone"
-      },
-      {
-        "type": "visual cue",
-        "image": "monkeyFace",
-        "character": "narrator",
-        "dialog": "flash monkey face"
       },
       {
         "type": "spoken",
@@ -267,6 +262,7 @@
       },
       {
         "type": "listen",
+        "image": "none",
         "character": "narrator",
         "dialog": "Speak: I'm going to go all the way."
       },
@@ -343,6 +339,7 @@
       },
       {
         "type": "listen",
+        "image": "none",
         "character": "narrator",
         "dialog": "Speak: BOB is real!"
       },

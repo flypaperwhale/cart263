@@ -45,7 +45,33 @@ let snowDirection = 1;
 
 let currentVisualCue;
 let snowTransitionToggle;
+let snowCoverToggle;
 let introSkyToggle;
+let roadBGToggle;
+let lauraIntroToggle;
+let thumbUpToggle;
+let monkeyFaceToggle;
+let lauraLightToggle;
+let lauraCigToggle;
+let brettLeerToggle;
+let brettSmirkToggle;
+let brettSnideToggle;
+let frontLogLadyToggle;
+let lauraLookRToggle;
+let logLadyLookLToggle;
+let logXLauraToggle;
+let sc2CloseUp1Toggle;
+let sc2CloseUp2Toggle;
+let bobChatToggle;
+let bobRageToggle;
+let lauraHandsToggle;
+let theRingToggle;
+let lauraScreamsToggle;
+let noSnowToggle;
+let noLauraToggle;
+let noBobToggle;
+let fadeoutToggle;
+let noneToggle;
 
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
@@ -115,7 +141,7 @@ Displays the current line
 */
 function draw() {
   background(0);
-  console.log(snowTransitionToggle);
+  //console.log(snowTransitionToggle);
   // display snow //
   if (snowTransitionToggle === true) {
     push();
@@ -159,20 +185,21 @@ function draw() {
       // Sky background
     } else if (currentVisualCue === "roadBG") {
       // Road background
-      //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+      roadBGToggle = true;
     } else if (currentVisualCue === "lauraIntro") {
       // Laura close up
-      //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
+      thumbUpToggle = false;
+      lauraIntroToggle = true;
     } else if (currentVisualCue === "thumbUp") {
       // Thumb close up
-      //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+      lauraIntroToggle = false;
+      thumbUpToggle = true;
     } else if (currentVisualCue === "monkeyFace") {
       // prompt player for name and flash monkey
-      push();
-      imageMode(CENTER);
-      tint(255, 195);
-      //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
-      pop();
+      monkeyFaceToggle = true;
+    } else if (currentVisualCue === "noSnow") {
+      monkeyFaceToggle = false;
+      snowCoverToggle = false;
     }
 
     // overlay redroom and read player name backwards
@@ -180,6 +207,26 @@ function draw() {
     // Sky background
     if (introSkyToggle === true) {
       image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 350, 0, 50);
+    } else {
+    }
+    if (roadBGToggle === true) {
+      image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    } else {
+    }
+    if (lauraIntroToggle === true) {
+      image(introLauraImg, 0, 0, canvas.width - 570, canvas.height - 400);
+    } else {
+    }
+    if (thumbUpToggle === true) {
+      image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    } else {
+    }
+    if (monkeyFaceToggle === true) {
+      push();
+      imageMode(CENTER);
+      tint(255, 195);
+      image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+      pop();
     } else {
     }
 
@@ -391,7 +438,7 @@ whereas dialog from interlocutors should arrive from the right side
     pop();
   } else if (lineData.type === "sound cue") {
     // do sound cue thing
-  } else if (lineData.type === "visual cue") {
+  } else if (lineData.type === "visual cue" || lineData.type === "listen") {
     // so visual cue thing
     //imageCueToggle = true;
     currentVisualCue = lineData.image;
