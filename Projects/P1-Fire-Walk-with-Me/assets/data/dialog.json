@@ -38,7 +38,7 @@
     "scene0": [
       {
         "type": "visual cue",
-        "image": "snowTransition",
+        "image": "snowTransition0",
         "character": "narrator",
         "dialog": "hold snow before next image"
       },
@@ -98,7 +98,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowCover",
+        "image": "snowCover1",
         "character": "narrator",
         "dialog": "snow over"
       },
@@ -262,7 +262,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowCover",
+        "image": "snowCover2",
         "character": "narrator",
         "dialog": "snow over"
       },
@@ -274,7 +274,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowTransition",
+        "image": "snowTransition1",
         "character": "narrator",
         "dialog": "snowy transition"
       }
@@ -351,7 +351,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowCover",
+        "image": "snowCover3",
         "character": "narrator",
         "dialog": "snow over."
       },
@@ -363,7 +363,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowTransition",
+        "image": "snowTransition2",
         "character": "narrator",
         "dialog": "snowy transition"
       },
@@ -474,7 +474,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowCover",
+        "image": "snowCover4",
         "character": "narrator",
         "dialog": "snow over."
       },
@@ -485,7 +485,7 @@
       },
       {
         "type": "visual cue",
-        "image": "snowTransition",
+        "image": "snowTransition3",
         "character": "narrator",
         "dialog": "snowy transition"
       }
