@@ -185,6 +185,9 @@ function draw() {
     } else if (currentVisualCue === "noSnow") {
       monkeyFaceToggle = false;
       snowCoverToggle = false;
+    } else if (currentVisualCue === "fadeout") {
+      roadBGToggle = false;
+      fadeoutToggle = true;
     }
 
     // overlay redroom and read player name backwards
@@ -208,6 +211,7 @@ function draw() {
     }
     if (snowCoverToggle === true) {
       displaySnow();
+    } else {
     }
     if (monkeyFaceToggle === true) {
       push();
@@ -215,6 +219,15 @@ function draw() {
       tint(255, 195);
       image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
       pop();
+    } else {
+    }
+    if (fadeoutToggle === true) {
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+      setTimeout(switchStateToSc1, 4000);
     } else {
     }
 
@@ -230,37 +243,28 @@ function draw() {
     // if (visualCueToggle === true) {
     if (currentVisualCue === "lauraLight") {
       // Laura lights up
-      //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
+      snowTransitionToggle = false;
+      fadeoutToggle = false;
+      roadBGToggle = false;
+      lauraLightToggle = true;
     } else if (currentVisualCue === "lauraCig") {
       // Laura smokes
-      //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
+      lauraLightToggle = false;
+      lauraCigToggle = true;
     } else if (currentVisualCue === "brettLeer") {
       // Leering businessman approaches
-      image(
-        sc1BusinessmanAcosts,
-        320,
-        115,
-        canvas.width - 910,
-        canvas.height - 600
-      );
+      brettLeerToggle = true;
+      console.log(brettLeerToggle);
     } else if (currentVisualCue === "brettSmirk") {
       // Businessman smirks
-      // image(
-      //   sc1BusinessmanSmirks,
-      //   320,
-      //   115,
-      //   canvas.width - 950,
-      //   canvas.height - 600
-      // );
+      brettSnideToggle = false;
+      lauraCigToggle = false;
+      brettLeerToggle = false;
+      brettSmirkToggle = true;
     } else if (currentVisualCue === "brettSnide") {
       // Businessman sniding (? in another 4th scene?)
-      // image(
-      //   sc1BusinessmanSnark,
-      //   310,
-      //   115,
-      //   canvas.width - 880,
-      //   canvas.height - 580
-      // );
+      brettSmirkToggle = false;
+      brettSnideToggle = true;
     }
     //}
     if (currentVisualCue === "snowTransition") {
@@ -268,6 +272,63 @@ function draw() {
     } else if (currentVisualCue === "snowCover") {
       snowTransitionToggle = true;
       // have this be transparent;
+    }
+    if (currentVisualCue === "noLaura") {
+      brettLeerToggle = false;
+      brettSmirkToggle = true;
+      lauraCigToggle = false;
+    }
+
+    if (lauraLightToggle === true) {
+      image(
+        sc1LauraLightsUp,
+        50,
+        101,
+        canvas.width - 1000,
+        canvas.height - 500
+      );
+    } else {
+    }
+    if (lauraCigToggle === true) {
+      image(sc1LauraSmokes, 50, 100, canvas.width - 1000, canvas.height - 500);
+    } else {
+    }
+    if (brettLeerToggle === true) {
+      image(
+        sc1BusinessmanAcosts,
+        320,
+        115,
+        canvas.width - 910,
+        canvas.height - 600
+      );
+    } else {
+    }
+    if (brettSmirkToggle === true) {
+      image(
+        sc1BusinessmanSmirks,
+        320,
+        115,
+        canvas.width - 950,
+        canvas.height - 600
+      );
+    } else {
+    }
+    if (brettSnideToggle === true) {
+      image(
+        sc1BusinessmanSnark,
+        310,
+        115,
+        canvas.width - 880,
+        canvas.height - 580
+      );
+    } else {
+    }
+    if (snowCoverToggle === true) {
+      displaySnow();
+    } else {
+    }
+    if (snowTransitionToggle === true) {
+      displaySnow();
     }
 
     // show dialog
@@ -367,6 +428,12 @@ function draw() {
   }
 }
 
+function switchStateToSc1() {
+  if (state === `introAnimation`) {
+    state = `parkingLot`;
+  }
+}
+
 function displaySnow() {
   // display snow //
   if (snowTransitionToggle === true) {
@@ -416,6 +483,7 @@ function manipBlockingData() {
 
   // based on type, manipulat line differently
   if (lineData.type === "dialog") {
+    currentVisualCue = lineData.image;
     let characterData = data.characters[lineData.character];
 
     // DIALOG //
