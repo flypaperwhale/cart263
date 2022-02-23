@@ -9,21 +9,6 @@ her, and then continues her decent into Hell
 
 "use strict";
 
-// /**
-// Description of preload
-// */
-// function preload() {}
-//
-// /**
-// Description of setup
-// */
-// function setup() {}
-//
-// /**
-// Description of draw()
-// */
-// function draw() {}
-
 // scene intro images
 let introLauraImg, introRoadBgImg, introThumbImg, introSkyImg;
 
@@ -118,7 +103,6 @@ function setup() {
   createCanvas(600, 400);
 
   setInterval(snowTransition, 100);
-
 }
 
 /**
@@ -127,7 +111,7 @@ Displays the current line
 function draw() {
   background(0);
 
-// display snow //
+  // display snow //
   push();
   imageMode(CENTER);
   if (snowDirection === 1) {
@@ -159,32 +143,34 @@ function draw() {
   if (state === `introAnimation`) {
     // show background image
 
-    if (visualCueToggle === true){
-      if (currentVisualCue === "introSky"){
+      if (currentVisualCue === "introSky") {
         // Sky background
-        image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 500, 0, 50);
-    }
-    else if (currentVisualCue === "roadBG"){
-      // Road background
-      //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
-    }
-    else if (currentVisualCue === "lauraIntro"){
-      // Laura close up
-      //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
-    }
-    else if (currentVisualCue === "thumbUp"){
-      // Thumb close up
-      //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+        image(
+          introSkyImg,
+          0,
+          0,
+          canvas.width - 600,
+          canvas.height - 500,
+          0,
+          50
+        );
+      } else if (currentVisualCue === "roadBG") {
+        // Road background
+        //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+      } else if (currentVisualCue === "lauraIntro") {
+        // Laura close up
+        //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
+      } else if (currentVisualCue === "thumbUp") {
+        // Thumb close up
+        //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+      } else if (currentVisualCue === "monkeyFace") {
+        // prompt player for name and flash monkey
+        push();
+        imageMode(CENTER);
+        tint(255, 195);
+        //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+        pop();
       }
-else if (currentVisualCue === "monkeyFace"){
-  // prompt player for name and flash monkey
-  push();
-  imageMode(CENTER);
-  tint(255, 195);
-  //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
-  pop();
-}
-    }
 
     // overlay redroom and read player name backwards
 
@@ -197,45 +183,42 @@ else if (currentVisualCue === "monkeyFace"){
     // Bar parking background
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
-    if (visualCueToggle === true){
-      if (currentVisualCue === "lauraLight"){
+    // if (visualCueToggle === true) {
+      if (currentVisualCue === "lauraLight") {
         // Laura lights up
         //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
-    }
-    else if (currentVisualCue === "lauraCig"){
-      // Laura smokes
-      //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
-    }
-    else if (currentVisualCue === "brettLeer"){
-      // Leering businessman approaches
-      image(
-        sc1BusinessmanAcosts,
-        320,
-        115,
-        canvas.width - 910,
-        canvas.height - 600
-      );
-    }
-    else if (currentVisualCue === "brettSmirk"){
-      // Businessman smirks
-      // image(
-      //   sc1BusinessmanSmirks,
-      //   320,
-      //   115,
-      //   canvas.width - 950,
-      //   canvas.height - 600
-      // );
-    }
-    else if (currentVisualCue === "brettSnide"){
-      // Businessman sniding (? in another 4th scene?)
-      // image(
-      //   sc1BusinessmanSnark,
-      //   310,
-      //   115,
-      //   canvas.width - 880,
-      //   canvas.height - 580
-      // );
-    }}
+      } else if (currentVisualCue === "lauraCig") {
+        // Laura smokes
+        //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
+      } else if (currentVisualCue === "brettLeer") {
+        // Leering businessman approaches
+        image(
+          sc1BusinessmanAcosts,
+          320,
+          115,
+          canvas.width - 910,
+          canvas.height - 600
+        );
+      } else if (currentVisualCue === "brettSmirk") {
+        // Businessman smirks
+        // image(
+        //   sc1BusinessmanSmirks,
+        //   320,
+        //   115,
+        //   canvas.width - 950,
+        //   canvas.height - 600
+        // );
+      } else if (currentVisualCue === "brettSnide") {
+        // Businessman sniding (? in another 4th scene?)
+        // image(
+        //   sc1BusinessmanSnark,
+        //   310,
+        //   115,
+        //   canvas.width - 880,
+        //   canvas.height - 580
+        // );
+      }
+    //}
 
     // show dialog
     manipBlockingData();
@@ -248,30 +231,35 @@ else if (currentVisualCue === "monkeyFace"){
     // Semicounscious eerie background
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
 
-    // Loglady stands alone
-    image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
-
-    // Laura facing right
-    // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
-
-    // Loglady facing left
-    // image(
-    //   sc2LogLadySideImg,
-    //   350,
-    //   101,
-    //   canvas.width - 1020,
-    //   canvas.height - 520
-    // );
-
-    // Loglady touching Laura
-    //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
-
-    // Laura touched closeup 1
-    //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
-
-    // Laura touched closeup 2
-    //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
-
+    if (currentVisualCue === "frontLogLady") {
+      // Loglady stands alone
+      image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
+    } else if (currentVisualCue === "lauraLookR") {
+      // Laura facing right
+      // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
+    }
+    else if (currentVisualCue === "logLadyLookL") {
+      // Loglady facing left
+      // image(
+      //   sc2LogLadySideImg,
+      //   350,
+      //   101,
+      //   canvas.width - 1020,
+      //   canvas.height - 520
+      // );
+    }
+    else if (currentVisualCue === "logXLaura") {
+      // Loglady touching Laura
+      //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
+    }
+    else if (currentVisualCue === "sc2CloseUp1") {
+      // Laura touched closeup 1
+      //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
+    }
+    else if (currentVisualCue === "sc2CloseUp2") {
+      // Laura touched closeup 2
+      //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
+    }
     // show dialog
     manipBlockingData();
   }
@@ -284,20 +272,26 @@ else if (currentVisualCue === "monkeyFace"){
     // redroom background
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
 
-    // Bob chat
-    //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
 
-    // Bob excited rage
-    image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
-
-    // Laura looks at hand
-    //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
-
-    // The ring
-    //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
-
-    // Laura screaming
-    //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    if (currentVisualCue === "frontLogLady") {
+      // Bob chat
+      //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
+    } else if (currentVisualCue === "lauraLookR") {
+      // Bob excited rage
+      image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+    }
+    else if (currentVisualCue === "logLadyLookL") {
+      // Laura looks at hand
+      //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
+    }
+    else if (currentVisualCue === "lauraLookR") {
+      // The ring
+      //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+    }
+    else if (currentVisualCue === "logLadyLookL") {
+      // Laura screaming
+      //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    }
 
     push();
     imageMode(CENTER);
@@ -310,6 +304,7 @@ else if (currentVisualCue === "monkeyFace"){
     // show dialog
     manipBlockingData();
   }
+//
 }
 
 function snowTransition() {
@@ -325,7 +320,8 @@ Uses the dialog and character data to display a dialog box
 colored and labelled by character and with the current line
 displayed in it.
 */
-function manipBlockingData() { // ### CHANGE NAME BLOCKING ###
+function manipBlockingData() {
+  // ### CHANGE NAME BLOCKING ###
   // Get the current scene and line data object
   // NOTE: Notice how we can use *variables* to choose
   // a property in an object like data.dialog! This gives
@@ -338,49 +334,49 @@ function manipBlockingData() { // ### CHANGE NAME BLOCKING ###
   // property name corresponding to our character
 
   // based on type, manipulat line differently
-if (lineData.type=== "dialog"){
-  let characterData = data.characters[lineData.character];
+  if (lineData.type === "dialog") {
+    let characterData = data.characters[lineData.character];
 
-  // DIALOG //
-  /* Laura's dialog should appear from the left (POV)
+    // DIALOG //
+    /* Laura's dialog should appear from the left (POV)
 whereas dialog from interlocutors should arrive from the right side
 */
-  // Draw the dialog background
-  push();
-  noStroke();
-  //fill(characterData.backgroundColor);
-  fill(230, 220, 220);
-  rect(0, height - dialogHeight, width, dialogHeight);
-  pop();
+    // Draw the dialog background
+    push();
+    noStroke();
+    //fill(characterData.backgroundColor);
+    fill(230, 220, 220);
+    rect(0, height - dialogHeight, width, dialogHeight);
+    pop();
 
-  // Display the character name
-  push();
-  textSize(24);
-  fill(255,0,0);
-  //fill(230, 220, 220);
-  textAlign(LEFT, BOTTOM);
-  text(characterData.name, characterData.nameXPosition, height - dialogHeight);
-  pop();
+    // Display the character name
+    push();
+    textSize(24);
+    fill(255, 0, 0);
+    //fill(230, 220, 220);
+    textAlign(LEFT, BOTTOM);
+    text(
+      characterData.name,
+      characterData.nameXPosition,
+      height - dialogHeight
+    );
+    pop();
 
-  // Display the character's line
-  push();
-  textSize(16);
-  fill(0);
-  textAlign(LEFT, TOP);
-  // characterData.dialogXposition?
-  text(lineData.dialog, 10, height - dialogHeight + 5, width, dialogHeight);
-  pop();
-
-}
-else if (lineData.type === "sound cue"){
-  // do sound cue thing
-}
-else if (lineData.type === "visual cue"){
-  // so visual cue thing
-  imageCueToggle = true;
-  currentImageCue = lineData.image;
-}
-
+    // Display the character's line
+    push();
+    textSize(16);
+    fill(0);
+    textAlign(LEFT, TOP);
+    // characterData.dialogXposition?
+    text(lineData.dialog, 10, height - dialogHeight + 5, width, dialogHeight);
+    pop();
+  } else if (lineData.type === "sound cue") {
+    // do sound cue thing
+  } else if (lineData.type === "visual cue") {
+    // so visual cue thing
+    imageCueToggle = true;
+    currentImageCue = lineData.image;
+  }
 }
 
 /**
@@ -410,26 +406,22 @@ they will enter a new scene!
 function nextLine() {
   currentLine++;
   if (currentLine >= data.blocking[currentScene].length) {
-    if (currentScene=== "scene0"){
-      currentScene= "scene1";
-    }
-    else if (currentScene=== "scene1"){
-          // currentLine = 0;
-      currentScene= "scene2";
-    }
-    else if (currentScene=== "scene2"){
-          // currentLine = 0;
-      currentScene= "scene3";
-    }
-    else if (currentScene=== "scene3"){
-          // currentLine = 0;
-      currentScene= "scene4";
-    }
-    else if (currentScene === "scene4"){
+    if (currentScene === "scene0") {
+      currentScene = "scene1";
+    } else if (currentScene === "scene1") {
+      // currentLine = 0;
+      currentScene = "scene2";
+    } else if (currentScene === "scene2") {
+      // currentLine = 0;
+      currentScene = "scene3";
+    } else if (currentScene === "scene3") {
+      // currentLine = 0;
+      currentScene = "scene4";
+    } else if (currentScene === "scene4") {
       alert("the end");
       currentScene = undefined;
     }
-      currentLine = 0;
+    currentLine = 0;
   }
 }
 
