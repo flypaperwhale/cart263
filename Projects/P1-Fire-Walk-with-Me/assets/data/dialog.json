@@ -285,6 +285,12 @@
     "scene2": [
       {
         "type": "visual cue",
+        "image": "noSnow",
+        "character": "narrator",
+        "dialog": "snow goes away"
+      },
+      {
+        "type": "visual cue",
         "image": "frontLogLady",
         "character": "narrator",
         "dialog": "log lady stands there"
@@ -326,6 +332,12 @@
         "dialog": "He's here, BOB?"
       },
       {
+        "type": "visual cue",
+        "image": "logXLaura",
+        "character": "narrator",
+        "dialog": "log lady touches laura's face."
+      },
+      {
         "type": "dialog",
         "image": "sc2CloseUp1",
         "character": "margaret lanterman",
@@ -350,20 +362,26 @@
         "dialog": "Speak: BOB is real!"
       },
       {
-        "type": "sound cue",
-        "character": "narrator",
-        "dialog": "BOB laughs"
-      },
-      {
         "type": "visual cue",
         "image": "snowTransition",
         "character": "narrator",
         "dialog": "snowy transition"
+      },
+      {
+        "type": "sound cue",
+        "character": "narrator",
+        "dialog": "BOB laughs"
       }
     ],
     "scene3 comment": "Laura enter the depths of awareness. She meets with BOB.",
     "scene3 background": "the red room",
     "scene3": [
+      {
+        "type": "visual cue",
+        "image": "noSnow",
+        "character": "narrator",
+        "dialog": "snow goes away"
+      },
       {
         "type": "dialog",
         "image": "bobChat",

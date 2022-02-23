@@ -227,7 +227,7 @@ function draw() {
       fill(0);
       rect(width / 2, height / 2, width, height);
       pop();
-      setTimeout(switchStateToSc1, 4000);
+      setTimeout(switchStateToSc1, 2000);
     } else {
     }
 
@@ -241,11 +241,13 @@ function draw() {
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // if (visualCueToggle === true) {
-    if (currentVisualCue === "lauraLight") {
-      // Laura lights up
+    if (currentVisualCue === "noSnow") {
       snowTransitionToggle = false;
       fadeoutToggle = false;
       roadBGToggle = false;
+    }
+    if (currentVisualCue === "lauraLight") {
+      // Laura lights up
       lauraLightToggle = true;
     } else if (currentVisualCue === "lauraCig") {
       // Laura smokes
@@ -269,8 +271,9 @@ function draw() {
     //}
     if (currentVisualCue === "snowTransition") {
       snowTransitionToggle = true;
+      switchStateToSc2();
     } else if (currentVisualCue === "snowCover") {
-      snowTransitionToggle = true;
+      snowTransition1Toggle = true;
       // have this be transparent;
     }
     if (currentVisualCue === "noLaura") {
@@ -327,7 +330,7 @@ function draw() {
       displaySnow();
     } else {
     }
-    if (snowTransitionToggle === true) {
+    if (snowTransition1Toggle === true) {
       displaySnow();
     }
 
@@ -336,49 +339,96 @@ function draw() {
   }
 
   if (state === `semiconscious`) {
+    snowTransition1Toggle = false;
     // show background image
     // Bar parking background
     //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     // Semicounscious eerie background
-    image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
+    image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
+    if (currentVisualCue === "noSnow") {
+      snowTransition1Toggle = false;
+      roadBGToggle = false;
+    }
     if (currentVisualCue === "frontLogLady") {
       // Loglady stands alone
-      image(
-        sc2LogLadyFrontImg,
-        130,
-        80,
-        canvas.width - 850,
-        canvas.height - 520
-      );
+      frontLogLadyToggle = true;
     } else if (currentVisualCue === "lauraLookR") {
       // Laura facing right
-      // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
+      frontLogLadyToggle = false;
+      lauraLookRToggle = true;
     } else if (currentVisualCue === "logLadyLookL") {
       // Loglady facing left
-      // image(
-      //   sc2LogLadySideImg,
-      //   350,
-      //   101,
-      //   canvas.width - 1020,
-      //   canvas.height - 520
-      // );
+      logLadyLookLToggle = true;
     } else if (currentVisualCue === "logXLaura") {
+      lauraLookRToggle = false;
+      logLadyLookLToggle = false;
+      logXLauraToggle = true;
       // Loglady touching Laura
-      //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
     } else if (currentVisualCue === "sc2CloseUp1") {
+      sc2CloseUp1Toggle = true;
       // Laura touched closeup 1
-      //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
     } else if (currentVisualCue === "sc2CloseUp2") {
+      sc2CloseUp2Toggle = true;
       // Laura touched closeup 2
-      //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
     }
 
     if (currentVisualCue === "snowTransition") {
-      snowTransitionToggle = true;
+      snowTransition2Toggle = true;
+      // switchStateToSc3();
     } else if (currentVisualCue === "snowCover") {
-      snowTransitionToggle = true;
+      //snowTransitionToggle = true;
       // transparency
+    }
+
+    if (frontLogLadyToggle === true) {
+      image(
+        sc2LogLadyFrontImg,
+        130,
+        130,
+        canvas.width - 780,
+        canvas.height - 530
+      );
+    }
+    if (lauraLookRToggle === true) {
+      image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
+    } else {
+    }
+    if (logLadyLookLToggle === true) {
+      image(
+        sc2LogLadySideImg,
+        350,
+        101,
+        canvas.width - 1020,
+        canvas.height - 520
+      );
+    } else {
+    }
+    if (logXLauraToggle === true) {
+      image(
+        sc2LauraXLogLady,
+        130,
+        120,
+        canvas.width - 830,
+        canvas.height - 520
+      );
+    } else {
+    }
+    if (sc2CloseUp1Toggle === true) {
+      image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
+    } else {
+    }
+    if (sc2CloseUp2Toggle) {
+      image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
+    } else {
+    }
+    if (snowCoverToggle === true) {
+      displaySnow();
+    } else {
+    }
+    if (snowTransition2Toggle === true) {
+      displaySnow();
+    } else {
     }
     // show dialog
     manipBlockingData();
@@ -392,21 +442,29 @@ function draw() {
     // redroom background
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
 
+    if (currentVisualCue === "noSnow") {
+      snowTransitionToggle = false;
+      sc2CloseUp2Toggle = false;
+    }
     if (currentVisualCue === "bobChat") {
       // Bob chat
-      //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
+      bobChatToggle = true;
     } else if (currentVisualCue === "bobRage") {
       // Bob excited rage
-      image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+      bobChatToggle = false;
+      bobRageToggle = true;
     } else if (currentVisualCue === "lauraHands") {
       // Laura looks at hand
-      //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
+      bobRageToggle = false;
+      lauraHandsToggle = true;
     } else if (currentVisualCue === "theRing") {
       // The ring
-      //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+      lauraHandsToggle = false;
+      theRingToggle = true;
     } else if (currentVisualCue === "lauraScreams") {
       // Laura screaming
-      //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+      theRingToggle = false;
+      lauraScreamsToggle = true;
     }
 
     if (currentVisualCue === "monkeyFace") {
@@ -421,6 +479,27 @@ function draw() {
       snowTransitionToggle = true;
     }
 
+    if (bobChatToggle === true) {
+      image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
+    } else {
+    }
+    bobRageToggle = true;
+    if (bobRageToggle === true) {
+      image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+    } else {
+    }
+    if (lauraHandsToggle === true) {
+      image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
+    } else {
+    }
+    if (theRingToggle === true) {
+      image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+    } else {
+    }
+    if (lauraScreamsToggle === true) {
+      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    } else {
+    }
     // The angel (?)
 
     // show dialog
@@ -431,6 +510,16 @@ function draw() {
 function switchStateToSc1() {
   if (state === `introAnimation`) {
     state = `parkingLot`;
+  }
+}
+function switchStateToSc2() {
+  if (state === `parkingLot`) {
+    state = `semiconscious`;
+  }
+}
+function switchStateToSc3() {
+  if (state === `semiconscious`) {
+    state = `redRoom`;
   }
 }
 
