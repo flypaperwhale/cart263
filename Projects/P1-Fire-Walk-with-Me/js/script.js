@@ -454,7 +454,7 @@ function draw() {
     //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
 
     // redroom background
-    image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
+    image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 400);
 
     if (currentVisualCue === "noSnow") {
       snowTransition2Toggle = false;
@@ -499,7 +499,6 @@ function draw() {
       image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
     } else {
     }
-    bobRageToggle = true;
     if (bobRageToggle === true) {
       image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
     } else {
@@ -668,6 +667,9 @@ whereas dialog from interlocutors should arrive from the right side
     //imageCueToggle = true;
     currentVisualCue = lineData.image;
     console.log(`what is currentVisualCue ? ${currentVisualCue}`);
+  }
+  if (lineData.type === "listen") {
+    //user cannot click to advance anymore
   }
 }
 
