@@ -291,10 +291,11 @@ function draw() {
       snowCover2Toggle = true;
     } else if (currentVisualCue === "snowTransition1") {
       snowTransition1Toggle = true;
-      snowCover2Toggle = false;
+      snowCover3Toggle = true;
+      //snowTransition2Toggle = true;
       brettSmirkToggle = false;
       barBgImgToggle = false;
-      switchStateToSc2();
+      setTimeout(switchStateToSc2, 2000);
     }
 
     if (lauraLightToggle === true) {
@@ -354,7 +355,6 @@ function draw() {
   }
 
   if (state === `semiconscious`) {
-    snowTransition1Toggle = false;
     // show background image
     // Bar parking background
     //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
@@ -362,7 +362,10 @@ function draw() {
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     if (currentVisualCue === "noSnow") {
+      snowCover2Toggle = false;
+      snowCover3Toggle = false;
       snowTransition1Toggle = false;
+      //snowTransition2Toggle = false;
       roadBGToggle = false;
     }
     if (currentVisualCue === "frontLogLady") {
