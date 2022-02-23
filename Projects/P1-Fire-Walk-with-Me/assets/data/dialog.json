@@ -104,9 +104,15 @@
       },
       {
         "type": "listen",
-        "image": "monkeyFace",
+        "image": "none",
         "character": "narrator",
         "dialog": "Speak: My name is ________"
+      },
+      {
+        "type": "visual cue",
+        "image": "monkeyFace",
+        "character": "narrator",
+        "dialog": "monkeyface is flashed ResponsiveVoice"
       },
       {
         "type": "visual cue",
