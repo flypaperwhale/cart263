@@ -18,13 +18,14 @@ The poems should have a gothic feel.
 
 I will try to make the esthetics gothic too (reds, purples, blacks, oranges). Maybe have an image of the user's prompt.
 - play with the style-
-- add an image appear according to prompt (check the random clown image code) - 
+- add an image appear according to prompt (check the random clown image code) -
 
 */
 
 "use strict";
 
 // Our pre-made haiku lines
+// ### generate haiku lines!!
 let haikuLines = {
   fiveSyllables: [
     `O, to be a tree`,

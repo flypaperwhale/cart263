@@ -158,29 +158,38 @@ function draw() {
 
   if (state === `introAnimation`) {
     // show background image
-    // Sky background
-    image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 400, 0, 50);
 
-    // Road background
-    //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
-
-    // Laura close up
-    //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
-
-    // Thumb close up
-    //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
-
-    // prompt player for name and flash monkey
-    push();
-    imageMode(CENTER);
-    tint(255, 195);
-    //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
-    pop();
+    if (visualCueToggle === true){
+      if (currentVisualCue === "introSky"){
+        // Sky background
+        image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 500, 0, 50);
+    }
+    else if (currentVisualCue === "roadBG"){
+      // Road background
+      //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    }
+    else if (currentVisualCue === "lauraIntro"){
+      // Laura close up
+      //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
+    }
+    else if (currentVisualCue === "thumbUp"){
+      // Thumb close up
+      //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+      }
+else if (currentVisualCue === "monkeyFace"){
+  // prompt player for name and flash monkey
+  push();
+  imageMode(CENTER);
+  tint(255, 195);
+  //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+  pop();
+}
+    }
 
     // overlay redroom and read player name backwards
 
     // show dialog
-    displayCurrentLine();
+    manipBlockingData();
   }
 
   if (state === `parkingLot`) {
@@ -188,41 +197,48 @@ function draw() {
     // Bar parking background
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
-    // Laura lights up
-    //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
-
-    // Laura smokes
-    //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
-
-    // Leering businessman approaches
-    image(
-      sc1BusinessmanAcosts,
-      320,
-      115,
-      canvas.width - 910,
-      canvas.height - 600
-    );
-
-    // Businessman smirks
-    // image(
-    //   sc1BusinessmanSmirks,
-    //   320,
-    //   115,
-    //   canvas.width - 950,
-    //   canvas.height - 600
-    // );
-
-    // Businessman sniding (? in another 4th scene?)
-    // image(
-    //   sc1BusinessmanSnark,
-    //   310,
-    //   115,
-    //   canvas.width - 880,
-    //   canvas.height - 580
-    // );
+    if (visualCueToggle === true){
+      if (currentVisualCue === "lauraLight"){
+        // Laura lights up
+        //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
+    }
+    else if (currentVisualCue === "lauraCig"){
+      // Laura smokes
+      //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
+    }
+    else if (currentVisualCue === "brettLeer"){
+      // Leering businessman approaches
+      image(
+        sc1BusinessmanAcosts,
+        320,
+        115,
+        canvas.width - 910,
+        canvas.height - 600
+      );
+    }
+    else if (currentVisualCue === "brettSmirk"){
+      // Businessman smirks
+      // image(
+      //   sc1BusinessmanSmirks,
+      //   320,
+      //   115,
+      //   canvas.width - 950,
+      //   canvas.height - 600
+      // );
+    }
+    else if (currentVisualCue === "brettSnide"){
+      // Businessman sniding (? in another 4th scene?)
+      // image(
+      //   sc1BusinessmanSnark,
+      //   310,
+      //   115,
+      //   canvas.width - 880,
+      //   canvas.height - 580
+      // );
+    }}
 
     // show dialog
-    displayCurrentLine();
+    manipBlockingData();
   }
 
   if (state === `semiconscious`) {
@@ -257,7 +273,7 @@ function draw() {
     //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // show dialog
-    displayCurrentLine();
+    manipBlockingData();
   }
 
   if (state === `redRoom`) {
@@ -292,7 +308,7 @@ function draw() {
     // The angel (?)
 
     // show dialog
-    displayCurrentLine();
+    manipBlockingData();
   }
 }
 
@@ -309,7 +325,7 @@ Uses the dialog and character data to display a dialog box
 colored and labelled by character and with the current line
 displayed in it.
 */
-function displayCurrentLine() { // ### CHANGE NAME BLOCKING ###
+function manipBlockingData() { // ### CHANGE NAME BLOCKING ###
   // Get the current scene and line data object
   // NOTE: Notice how we can use *variables* to choose
   // a property in an object like data.dialog! This gives
@@ -358,6 +374,11 @@ whereas dialog from interlocutors should arrive from the right side
 }
 else if (lineData.type === "sound cue"){
   // do sound cue thing
+}
+else if (lineData.type === "visual cue"){
+  // so visual cue thing
+  imageCueToggle = true;
+  currentImageCue = lineData.image;
 }
 
 }
