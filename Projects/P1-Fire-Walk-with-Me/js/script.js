@@ -44,7 +44,12 @@ let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
 let snowDirection = 1;
 
 let currentVisualCue;
-let snowTransitionToggle;
+let snowTransition0Toggle = true;
+let snowTransition1Toggle;
+let snowTransition2Toggle;
+let snowTransition3Toggle;
+let snowTransition4Toggle;
+
 let snowCoverToggle;
 let introSkyToggle;
 let roadBGToggle;
@@ -132,7 +137,7 @@ Creates the canvas
 function setup() {
   createCanvas(600, 400);
 
-  snowTransitionToggle = true;
+  snowTransition0Toggle = true;
   setInterval(snowTransition, 100);
 }
 
@@ -143,7 +148,7 @@ function draw() {
   background(0);
   //console.log(snowTransitionToggle);
 
-  displaySnow();
+  displaySnow(255, 255);
 
   if (state === `Title`) {
     push();
@@ -164,7 +169,7 @@ function draw() {
 
     if (currentVisualCue === "introSkyImg") {
       // turn snow off
-      snowTransitionToggle = false;
+      snowTransition0Toggle = false;
       introSkyToggle = true;
       // Sky background
     } else if (currentVisualCue === "roadBG") {
@@ -175,6 +180,8 @@ function draw() {
       // Laura close up
       thumbUpToggle = false;
       lauraIntroToggle = true;
+    } else if (currentVisualCue === "snowCover") {
+      snowCoverToggle = true;
     } else if (currentVisualCue === "thumbUp") {
       // Thumb close up
       lauraIntroToggle = false;
@@ -210,7 +217,7 @@ function draw() {
     } else {
     }
     if (snowCoverToggle === true) {
-      displaySnow();
+      displaySnow(255, 100);
     } else {
     }
     if (monkeyFaceToggle === true) {
@@ -242,7 +249,7 @@ function draw() {
 
     // if (visualCueToggle === true) {
     if (currentVisualCue === "noSnow") {
-      snowTransitionToggle = false;
+      snowTransition0Toggle = false;
       fadeoutToggle = false;
       roadBGToggle = false;
     }
@@ -269,12 +276,11 @@ function draw() {
       brettSnideToggle = true;
     }
     //}
-    if (currentVisualCue === "snowTransition") {
-      snowTransitionToggle = true;
+    if (currentVisualCue === "snowTransition1") {
+      snowTransition1Toggle = true;
       switchStateToSc2();
     } else if (currentVisualCue === "snowCover") {
-      snowTransition1Toggle = true;
-      // have this be transparent;
+      snowCoverToggle = true;
     }
     if (currentVisualCue === "noLaura") {
       brettLeerToggle = false;
@@ -327,11 +333,11 @@ function draw() {
     } else {
     }
     if (snowCoverToggle === true) {
-      displaySnow();
+      displaySnow(255, 100);
     } else {
     }
     if (snowTransition1Toggle === true) {
-      displaySnow();
+      displaySnow(255, 255);
     }
 
     // show dialog
@@ -347,7 +353,7 @@ function draw() {
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     if (currentVisualCue === "noSnow") {
-      snowTransition1Toggle = false;
+      snowTransition2Toggle = false;
       roadBGToggle = false;
     }
     if (currentVisualCue === "frontLogLady") {
@@ -423,11 +429,11 @@ function draw() {
     } else {
     }
     if (snowCoverToggle === true) {
-      displaySnow();
+      displaySnow(255, 100);
     } else {
     }
     if (snowTransition2Toggle === true) {
-      displaySnow();
+      displaySnow(255, 255);
     } else {
     }
     // show dialog
@@ -443,7 +449,7 @@ function draw() {
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
 
     if (currentVisualCue === "noSnow") {
-      snowTransitionToggle = false;
+      snowTransition2Toggle = false;
       sc2CloseUp2Toggle = false;
     }
     if (currentVisualCue === "bobChat") {
@@ -474,9 +480,11 @@ function draw() {
       //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
       pop();
     } else if (currentVisualCue === "snowTransition") {
-      snowTransitionToggle = true;
+      snowTransition3Toggle = true;
+      switchStateToSc4();
     } else if (currentVisualCue === "snowCover") {
-      snowTransitionToggle = true;
+      snowCoverToggle = true;
+      //snowTransitionToggle = true;
     }
 
     if (bobChatToggle === true) {
@@ -498,6 +506,15 @@ function draw() {
     }
     if (lauraScreamsToggle === true) {
       image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    } else {
+    }
+
+    if (snowCoverToggle === true) {
+      displaySnow(255, 100);
+    } else {
+    }
+    if (snowTransition3Toggle === true) {
+      displaySnow(255, 255);
     } else {
     }
     // The angel (?)
@@ -522,10 +539,29 @@ function switchStateToSc3() {
     state = `redRoom`;
   }
 }
+function switchStateToSc4() {
+  if (state === `redRoom`) {
+    state = `parkingLot`;
+  }
+}
 
-function displaySnow() {
+function displaySnow(gray, alpha) {
   // display snow //
-  if (snowTransitionToggle === true) {
+  console.log(`in displaySnow gray = ${gray} and alpha = ${alpha}`);
+  console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
+    snowTransition1Toggle = ${snowTransition1Toggle}
+    snowTransition2Toggle = ${snowTransition2Toggle}
+    snowTransition3Toggle = ${snowTransition3Toggle}
+    snowTransition0Toggle = ${snowTransition0Toggle}`);
+
+  if (
+    snowTransition0Toggle === true ||
+    snowTransition1Toggle === true ||
+    snowTransition2Toggle === true ||
+    snowTransition3Toggle === true ||
+    snowTransition4Toggle === true ||
+    snowCoverToggle === true
+  ) {
     push();
     imageMode(CENTER);
     if (snowDirection === 1) {
@@ -537,9 +573,16 @@ function displaySnow() {
     } else if (snowDirection === 4) {
       scale(-1, -1);
     }
+    tint(gray, alpha);
     image(transitionSnowImg, 0, 0, canvas.width, canvas.height);
     pop();
-  } else if (snowTransitionToggle === false) {
+  } else if (
+    snowTransition0Toggle === false ||
+    snowTransition1Toggle === false ||
+    snowTransition2Toggle === false ||
+    snowTransition3Toggle === false ||
+    snowTransition4Toggle === false
+  ) {
     //do nothing
   }
 }
