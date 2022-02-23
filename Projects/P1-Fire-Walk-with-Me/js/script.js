@@ -43,6 +43,10 @@ let monkeyFaceImg, redRoomEntryImg, transitionSnowImg;
 let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
 let snowDirection = 1;
 
+let currentVisualCue;
+let snowTransitionToggle;
+let introSkyToggle;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -102,6 +106,7 @@ Creates the canvas
 function setup() {
   createCanvas(600, 400);
 
+  snowTransitionToggle = true;
   setInterval(snowTransition, 100);
 }
 
@@ -110,21 +115,25 @@ Displays the current line
 */
 function draw() {
   background(0);
-
+  console.log(snowTransitionToggle);
   // display snow //
-  push();
-  imageMode(CENTER);
-  if (snowDirection === 1) {
-    scale(1, 1);
-  } else if (snowDirection === 2) {
-    scale(1, -1);
-  } else if (snowDirection === 3) {
-    scale(-1, 1);
-  } else if (snowDirection === 4) {
-    scale(-1, -1);
+  if (snowTransitionToggle === true) {
+    push();
+    imageMode(CENTER);
+    if (snowDirection === 1) {
+      scale(1, 1);
+    } else if (snowDirection === 2) {
+      scale(1, -1);
+    } else if (snowDirection === 3) {
+      scale(-1, 1);
+    } else if (snowDirection === 4) {
+      scale(-1, -1);
+    }
+    image(transitionSnowImg, 0, 0, canvas.width, canvas.height);
+    pop();
+  } else if (snowTransitionToggle === false) {
+    //do nothing
   }
-  image(transitionSnowImg, 0, 0, canvas.width, canvas.height);
-  pop();
 
   if (state === `Title`) {
     push();
@@ -143,36 +152,36 @@ function draw() {
   if (state === `introAnimation`) {
     // show background image
 
-      if (currentVisualCue === "introSky") {
-        // Sky background
-        image(
-          introSkyImg,
-          0,
-          0,
-          canvas.width - 600,
-          canvas.height - 500,
-          0,
-          50
-        );
-      } else if (currentVisualCue === "roadBG") {
-        // Road background
-        //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
-      } else if (currentVisualCue === "lauraIntro") {
-        // Laura close up
-        //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
-      } else if (currentVisualCue === "thumbUp") {
-        // Thumb close up
-        //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
-      } else if (currentVisualCue === "monkeyFace") {
-        // prompt player for name and flash monkey
-        push();
-        imageMode(CENTER);
-        tint(255, 195);
-        //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
-        pop();
-      }
+    if (currentVisualCue === "introSkyImg") {
+      // turn snow off
+      snowTransitionToggle = false;
+      introSkyToggle = true;
+      // Sky background
+    } else if (currentVisualCue === "roadBG") {
+      // Road background
+      //image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    } else if (currentVisualCue === "lauraIntro") {
+      // Laura close up
+      //image(introLauraImg, 0, 0, canvas.width - 600, canvas.height - 450);
+    } else if (currentVisualCue === "thumbUp") {
+      // Thumb close up
+      //image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
+    } else if (currentVisualCue === "monkeyFace") {
+      // prompt player for name and flash monkey
+      push();
+      imageMode(CENTER);
+      tint(255, 195);
+      //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
+      pop();
+    }
 
     // overlay redroom and read player name backwards
+
+    // Sky background
+    if (introSkyToggle === true) {
+      image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 350, 0, 50);
+    } else {
+    }
 
     // show dialog
     manipBlockingData();
@@ -184,127 +193,137 @@ function draw() {
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // if (visualCueToggle === true) {
-      if (currentVisualCue === "lauraLight") {
-        // Laura lights up
-        //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
-      } else if (currentVisualCue === "lauraCig") {
-        // Laura smokes
-        //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
-      } else if (currentVisualCue === "brettLeer") {
-        // Leering businessman approaches
-        image(
-          sc1BusinessmanAcosts,
-          320,
-          115,
-          canvas.width - 910,
-          canvas.height - 600
-        );
-      } else if (currentVisualCue === "brettSmirk") {
-        // Businessman smirks
-        // image(
-        //   sc1BusinessmanSmirks,
-        //   320,
-        //   115,
-        //   canvas.width - 950,
-        //   canvas.height - 600
-        // );
-      } else if (currentVisualCue === "brettSnide") {
-        // Businessman sniding (? in another 4th scene?)
-        // image(
-        //   sc1BusinessmanSnark,
-        //   310,
-        //   115,
-        //   canvas.width - 880,
-        //   canvas.height - 580
-        // );
-      }
-    //}
-
-    // show dialog
-    manipBlockingData();
-  }
-
-  if (state === `semiconscious`) {
-    // show background image
-    // Bar parking background
-    //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
-    // Semicounscious eerie background
-    image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
-
-    if (currentVisualCue === "frontLogLady") {
-      // Loglady stands alone
-      image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
-    } else if (currentVisualCue === "lauraLookR") {
-      // Laura facing right
-      // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
-    }
-    else if (currentVisualCue === "logLadyLookL") {
-      // Loglady facing left
+    if (currentVisualCue === "lauraLight") {
+      // Laura lights up
+      //image(sc1LauraLightsUp, 50, 101, canvas.width - 1020, canvas.height - 520);
+    } else if (currentVisualCue === "lauraCig") {
+      // Laura smokes
+      //image(sc1LauraSmokes, 50, 100, canvas.width - 1020, canvas.height - 520);
+    } else if (currentVisualCue === "brettLeer") {
+      // Leering businessman approaches
+      image(
+        sc1BusinessmanAcosts,
+        320,
+        115,
+        canvas.width - 910,
+        canvas.height - 600
+      );
+    } else if (currentVisualCue === "brettSmirk") {
+      // Businessman smirks
       // image(
-      //   sc2LogLadySideImg,
-      //   350,
-      //   101,
-      //   canvas.width - 1020,
-      //   canvas.height - 520
+      //   sc1BusinessmanSmirks,
+      //   320,
+      //   115,
+      //   canvas.width - 950,
+      //   canvas.height - 600
+      // );
+    } else if (currentVisualCue === "brettSnide") {
+      // Businessman sniding (? in another 4th scene?)
+      // image(
+      //   sc1BusinessmanSnark,
+      //   310,
+      //   115,
+      //   canvas.width - 880,
+      //   canvas.height - 580
       // );
     }
-    else if (currentVisualCue === "logXLaura") {
-      // Loglady touching Laura
-      //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
+    //}
+    if (currentVisualCue === "snowTransition") {
+      snowTransitionToggle = true;
+    } else if (currentVisualCue === "snowCover") {
+      snowTransitionToggle = true;
+      // have this be transparent;
     }
-    else if (currentVisualCue === "sc2CloseUp1") {
-      // Laura touched closeup 1
-      //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
-    }
-    else if (currentVisualCue === "sc2CloseUp2") {
-      // Laura touched closeup 2
-      //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
-    }
-    // show dialog
-    manipBlockingData();
   }
 
-  if (state === `redRoom`) {
-    // show background image
-    // redroom entryway
-    //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
+  // show dialog
+  manipBlockingData();
+}
 
-    // redroom background
-    image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
+if (state === `semiconscious`) {
+  // show background image
+  // Bar parking background
+  //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
+  // Semicounscious eerie background
+  image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 450);
 
+  if (currentVisualCue === "frontLogLady") {
+    // Loglady stands alone
+    image(sc2LogLadyFrontImg, 130, 80, canvas.width - 850, canvas.height - 520);
+  } else if (currentVisualCue === "lauraLookR") {
+    // Laura facing right
+    // image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
+  } else if (currentVisualCue === "logLadyLookL") {
+    // Loglady facing left
+    // image(
+    //   sc2LogLadySideImg,
+    //   350,
+    //   101,
+    //   canvas.width - 1020,
+    //   canvas.height - 520
+    // );
+  } else if (currentVisualCue === "logXLaura") {
+    // Loglady touching Laura
+    //image(sc2LauraXLogLady, 130, 80, canvas.width - 850, canvas.height - 520);
+  } else if (currentVisualCue === "sc2CloseUp1") {
+    // Laura touched closeup 1
+    //image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
+  } else if (currentVisualCue === "sc2CloseUp2") {
+    // Laura touched closeup 2
+    //image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
+  }
 
-    if (currentVisualCue === "frontLogLady") {
-      // Bob chat
-      //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
-    } else if (currentVisualCue === "lauraLookR") {
-      // Bob excited rage
-      image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
-    }
-    else if (currentVisualCue === "logLadyLookL") {
-      // Laura looks at hand
-      //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
-    }
-    else if (currentVisualCue === "lauraLookR") {
-      // The ring
-      //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
-    }
-    else if (currentVisualCue === "logLadyLookL") {
-      // Laura screaming
-      //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
-    }
+  if (currentVisualCue === "snowTransition") {
+    snowTransitionToggle = true;
+  } else if (currentVisualCue === "snowCover") {
+    snowTransitionToggle = true;
+    // transparency
+  }
+  // show dialog
+  manipBlockingData();
+}
 
+if (state === `redRoom`) {
+  // show background image
+  // redroom entryway
+  //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
+
+  // redroom background
+  image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 450);
+
+  if (currentVisualCue === "bobChat") {
+    // Bob chat
+    //image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
+  } else if (currentVisualCue === "bobRage") {
+    // Bob excited rage
+    image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
+  } else if (currentVisualCue === "lauraHands") {
+    // Laura looks at hand
+    //image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
+  } else if (currentVisualCue === "theRing") {
+    // The ring
+    //image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+  } else if (currentVisualCue === "lauraScreams") {
+    // Laura screaming
+    //image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+  }
+
+  if (currentVisualCue === "monkeyFace") {
     push();
     imageMode(CENTER);
     tint(255, 150);
     //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
     pop();
-
-    // The angel (?)
-
-    // show dialog
-    manipBlockingData();
+  } else if (currentVisualCue === "snowTransition") {
+    snowTransitionToggle = true;
+  } else if (currentVisualCue === "snowCover") {
+    snowTransitionToggle = true;
   }
-//
+
+  // The angel (?)
+
+  // show dialog
+  manipBlockingData();
 }
 
 function snowTransition() {
@@ -374,8 +393,9 @@ whereas dialog from interlocutors should arrive from the right side
     // do sound cue thing
   } else if (lineData.type === "visual cue") {
     // so visual cue thing
-    imageCueToggle = true;
-    currentImageCue = lineData.image;
+    //imageCueToggle = true;
+    currentVisualCue = lineData.image;
+    console.log(`what is currentVisualCue ? ${currentVisualCue}`);
   }
 }
 

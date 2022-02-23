@@ -1,6 +1,5 @@
 {
   "characters": {
-
     "narrator": {
       "name": "Narrator",
       "nameXPosition": 35,
@@ -36,7 +35,14 @@
   "blocking": {
     "scene0 comment1": "Introduction. Laura is hitchhiking. Narrator prepares player to speak",
     "scene0 background": "sky and road",
-    "scene0": [{
+    "scene0": [
+      {
+        "type": "visual cue",
+        "image": "transitionSnowImg",
+        "character": "narrator",
+        "dialog": "hold snow before next image"
+      },
+      {
         "type": "visual cue",
         "image": "introSkyImg",
         "character": "narrator",
@@ -150,7 +156,8 @@
     ],
     "scene1 comment1": "Laura arrives at the bar, a man on a business trip approaches her in the parking lot. They exchange innuendo.",
     "scene1 background": "bar parking lot",
-    "scene1": [{
+    "scene1": [
+      {
         "type": "visual cue",
         "image": "barsign",
         "character": "narrator",
@@ -208,7 +215,7 @@
         "type": "dialog",
         "image": "smirk",
         "character": "businessman",
-        "dialog": "I can take you someplace else if you like. What do you say?"
+        "dialog": "We can go someplace else if you like. What do you say?"
       },
       {
         "type": "dialog",
@@ -220,7 +227,7 @@
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "...sure you have what it takes?"
+        "dialog": "...do you have what it takes?"
       },
       {
         "type": "dialog",
@@ -279,13 +286,14 @@
     "scene1 comment2": "When the listen type, overlay snow, display text differently than dialog, have annyang listen for answer",
     "scene2 comment1": "Laura dissociates. Log Lady approaches her to warn her of her descent into Hell.",
     "scene2 background": "semiconscious",
-    "scene2": [{
+    "scene2": [
+      {
         "type": "visual cue",
         "image": "logladystand",
         "character": "narrator",
         "dialog": "log lady stands there"
       },
-       {
+      {
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
@@ -335,7 +343,7 @@
       },
       {
         "type": "visual cue",
-        "image" : "transitionSnowImg",
+        "image": "transitionSnowImg",
         "character": "narrator",
         "dialog": "snow over."
       },
@@ -358,7 +366,8 @@
     ],
     "scene3 comment": "Laura enter the depths of awareness. She meets with BOB.",
     "scene3 background": "the red room",
-    "scene3": [{
+    "scene3": [
+      {
         "type": "dialog",
         "image": "bob chat",
         "character": "bob",
@@ -462,7 +471,8 @@
     ],
     "scene4 comment": "If Laura has met with Bob and asked for help, she goes back to the parking lot waking state...",
     "scene4 background": "bar parking lot",
-    "scene4": [{
+    "scene4": [
+      {
         "type": "dialog",
         "image": "snide",
         "character": "businessman",
@@ -498,7 +508,6 @@
         "character": "narrator",
         "dialog": "transition fade out"
       }
-
     ]
   }
 }
