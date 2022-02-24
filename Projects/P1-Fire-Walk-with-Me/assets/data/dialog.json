@@ -37,6 +37,12 @@
     "scene0 background": "sky and road",
     "scene0": [
       {
+        "type": "sound cue",
+        "sound": "introMelody",
+        "character": "narrator",
+        "dialog": "game theme"
+      },
+      {
         "type": "visual cue",
         "image": "snowTransition0",
         "character": "narrator",
@@ -50,13 +56,9 @@
       },
       {
         "type": "sound cue",
+        "sound": "highwaySound",
         "character": "narrator",
-        "dialog": "ominous melody"
-      },
-      {
-        "type": "sound cue",
-        "character": "narrator",
-        "dialog": "cars drive by"
+        "dialog": "highway sound"
       },
       {
         "type": "visual cue",
@@ -65,18 +67,10 @@
         "dialog": "show the road"
       },
       {
-        "tag": "0",
         "type": "dialog",
         "image": "roadBG",
         "character": "narrator",
-        "dialog": "Laura Palmer has been falling..."
-      },
-      {
-        "tag": "1",
-        "type": "dialog",
-        "image": "thumbUp",
-        "character": "narrator",
-        "dialog": "Laura is of two minds..."
+        "dialog": "Laura Palmer, homecoming queen, has been falling..."
       },
       {
         "type": "visual cue",
@@ -88,7 +82,7 @@
         "type": "dialog",
         "image": "thumbUp",
         "character": "narrator",
-        "dialog": "What is your name?"
+        "dialog": "Tonight, Laura is of two minds..."
       },
       {
         "type": "visual cue",
@@ -97,12 +91,20 @@
         "dialog": "show laura palmer"
       },
       {
+        "type": "dialog",
+        "image": "lauraIntro",
+        "character": "narrator",
+        "dialog": "What is your name?"
+      },
+
+      {
         "type": "visual cue",
         "image": "snowCover1",
         "character": "narrator",
         "dialog": "snow over"
       },
       {
+        "comment": "this must break the snow sound",
         "type": "listen",
         "image": "none",
         "character": "narrator",
@@ -113,6 +115,12 @@
         "image": "monkeyFace",
         "character": "narrator",
         "dialog": "monkeyface is flashed ResponsiveVoice"
+      },
+      {
+        "type": "sound cue",
+        "sound": "accentSound",
+        "character": "narrator",
+        "dialog": "accent"
       },
       {
         "type": "visual cue",
@@ -132,21 +140,28 @@
         "dialog": "show the road again"
       },
       {
+        "type": "sound cue",
+        "sound": "rideStopsSound",
+        "character": "narrator",
+        "dialog": "car breaks"
+      },
+      {
         "type": "dialog",
         "image": "roadBG",
         "character": "narrator",
         "dialog": "You've been falling..."
       },
       {
+        "type": "visual cue",
+        "image": "none",
+        "character": "narrator",
+        "dialog": "beat"
+      },
+      {
         "type": "dialog",
         "image": "roadBG",
         "character": "narrator",
         "dialog": "You've been catching fire..."
-      },
-      {
-        "type": "sound cue",
-        "character": "narrator",
-        "dialog": "car breaks"
       },
       {
         "type": "visual cue",
@@ -158,6 +173,12 @@
     "scene1 comment1": "Laura arrives at the bar, a man on a business trip approaches her in the parking lot. They exchange innuendo.",
     "scene1 background": "bar parking lot",
     "scene1": [
+      {
+        "type": "sound cue",
+        "sound": "carDoorSound",
+        "character": "narrator",
+        "dialog": "laura steps out of ride"
+      },
       {
         "type": "visual cue",
         "image": "lauraLight",
@@ -255,6 +276,12 @@
         "dialog": "Babe, all the way for me means, all the way - DEAD."
       },
       {
+        "type": "sound cue",
+        "sound": "accentSound",
+        "character": "narrator",
+        "dialog": "eerie accent, reprises earlier theme"
+      },
+      {
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
@@ -341,7 +368,7 @@
         "type": "dialog",
         "image": "sc2CloseUp1",
         "character": "margaret lanterman",
-        "dialog": "Think about asking for help?"
+        "dialog": "Maybe ask for help?"
       },
       {
         "type": "dialog",

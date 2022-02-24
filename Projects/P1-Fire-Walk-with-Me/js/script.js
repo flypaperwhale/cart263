@@ -83,6 +83,21 @@ let fadeoutToggle;
 let noneToggle;
 let barBgImgToggle = true;
 
+let currentSoundCue;
+
+let introMelody;
+let highwaySound;
+let rideStopsSound;
+let carDoorSound;
+let accentSound;
+let weirdAccent;
+let redRoomTransitionTheme;
+let bobLaughsSound;
+let bobAttacksSound;
+
+let lauraScreamsSound;
+let snowSound;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -101,6 +116,19 @@ Loads the JSON data for our little play
 */
 function preload() {
   data = loadJSON(`assets/data/dialog.json`);
+
+  // load sounds
+  introMelody = loadSound("assets/sounds/indianflute.mp3");
+  highwaySound = loadSound("assets/sounds/bythehighway.wav");
+  rideStopsSound = loadSound("assets/sounds/hitchcarstops.mp3");
+  carDoorSound = loadSound("assets/sounds/stepoutcar.mp3");
+  accentSound = loadSound("assets/sounds/monkey-business-accent.mp3");
+  weirdAccent = loadSound("assets/sounds/weirdaccent.wav");
+  redRoomTransitionTheme = loadSound("assets/sounds/transition2RedRoom.wav");
+  bobLaughsSound = loadSound("assets/sounds/bobLaugh.wav");
+  bobAttacksSound = loadSound("assets/sounds/bobattacks.wav");
+  lauraScreamsSound = loadSound("assets/sounds/lauraScream.mp3");
+  snowSound = loadSound("assets/sounds/snow.wav");
 
   // introduction images
   introLauraImg = loadImage("assets/images/intro-scene/intro-laura.png");
@@ -172,11 +200,27 @@ function draw() {
   if (state === `introAnimation`) {
     // show background image
 
+    if (currentSoundCue === "introMelody") {
+      //play monkey intro song once
+      push();
+      introMelody.playMode("untilDone");
+      introMelody.play();
+      pop();
+      currentSoundCue = undefined;
+    }
     if (currentVisualCue === "introSkyImg") {
       // turn snow off
       snowTransition0Toggle = false;
       introSkyToggle = true;
       // Sky background
+      if (currentSoundCue === "highwaySound") {
+        //play monkey intro song once
+        push();
+        highwaySound.playMode("untilDone");
+        highwaySound.play();
+        pop();
+        currentSoundCue = undefined;
+      }
     } else if (currentVisualCue === "roadBG") {
       // Road background
       lauraIntroToggle = false;
@@ -185,12 +229,25 @@ function draw() {
       // Laura close up
       thumbUpToggle = false;
       lauraIntroToggle = true;
+    } else if (currentSoundCue === "snowSound") {
+      //play monkey intro song once
+      // push();
+      // snowSound.duration(1);
+      // snowSound.playMode("untilDone");
+      // snowSound.play();
+      // pop();
     } else if (currentVisualCue === "snowCover1") {
       snowCover1Toggle = true;
     } else if (currentVisualCue === "thumbUp") {
       // Thumb close up
       lauraIntroToggle = false;
       thumbUpToggle = true;
+    } else if (currentSoundCue === "accentSound") {
+      push();
+      accentSound.playMode("untilDone");
+      accentSound.play();
+      pop();
+      currentSoundCue = undefined;
     } else if (currentVisualCue === "monkeyFace") {
       // prompt player for name and flash monkey
       monkeyFaceToggle = true;
@@ -202,6 +259,14 @@ function draw() {
       fadeoutToggle = true;
     }
 
+    if (currentSoundCue === "rideStopsSound") {
+      console.log("so come here!");
+      push();
+      rideStopsSound.playMode("untilDone");
+      rideStopsSound.play();
+      pop();
+      currentSoundCue = undefined;
+    }
     // overlay redroom and read player name backwards
 
     // Sky background
@@ -694,6 +759,10 @@ whereas dialog from interlocutors should arrive from the right side
     pop();
   } else if (lineData.type === "sound cue") {
     // do sound cue thing
+    currentSoundCue = lineData.sound;
+
+    //manipulate current sound right away
+    console.log(`what is currentSoundCue ? ${currentSoundCue}`);
   } else if (lineData.type === "visual cue" || lineData.type === "listen") {
     // so visual cue thing
     //imageCueToggle = true;
