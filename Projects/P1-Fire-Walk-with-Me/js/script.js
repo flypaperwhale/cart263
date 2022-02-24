@@ -626,6 +626,8 @@ function draw() {
       // you are touching ring
       touchingRingToggle = true;
       // change scene to
+    } else {
+      touchingRingToggle = false;
     }
 
     if (currentVisualCue === "monkeyFace") {
@@ -842,6 +844,7 @@ function mousePressed() {
   //else {
   if (touchingRingToggle === true) {
     //switch to scene 5
+    console.log("so what?");
   } else {
     nextLine();
   }
