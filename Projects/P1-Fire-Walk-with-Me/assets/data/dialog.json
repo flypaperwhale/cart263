@@ -181,6 +181,12 @@
       },
       {
         "type": "visual cue",
+        "image": "noSnow",
+        "character": "narrator",
+        "dialog": "moment before Laura steps in view"
+      },
+      {
+        "type": "visual cue",
         "image": "lauraLight",
         "character": "narrator",
         "dialog": "Laura is standing in the parking lot, her fire is on 3 seconds"
@@ -300,6 +306,12 @@
         "dialog": "Speak: I'm going to go all the way."
       },
       {
+        "type": "sound cue",
+        "sound": "sc1TransitionAccent",
+        "character": "narrator",
+        "dialog": "laura steps out of ride"
+      },
+      {
         "type": "visual cue",
         "image": "snowTransition1",
         "character": "narrator",
@@ -356,7 +368,7 @@
         "type": "dialog",
         "image": "lauraLookR",
         "character": "laura palmer",
-        "dialog": "He's here, BOB?"
+        "dialog": "Who's here, BOB?"
       },
       {
         "type": "visual cue",
@@ -374,7 +386,7 @@
         "type": "dialog",
         "image": "sc2CloseUp2",
         "character": "laura palmer",
-        "dialog": "Wait, you do believe me? He is real."
+        "dialog": "Wait, you believe me don't you? He is real."
       },
       {
         "type": "visual cue",
@@ -389,6 +401,12 @@
         "dialog": "Speak: BOB is real!"
       },
       {
+        "type": "sound cue",
+        "sound": "redRoomTransitionTheme",
+        "character": "narrator",
+        "dialog": "high pitch mood"
+      },
+      {
         "type": "visual cue",
         "image": "snowTransition2",
         "character": "narrator",
@@ -396,6 +414,7 @@
       },
       {
         "type": "sound cue",
+        "sound": "bobLaughsSound",
         "character": "narrator",
         "dialog": "BOB laughs"
       }
@@ -474,6 +493,12 @@
         "image": "bobRage",
         "character": "bob",
         "dialog": "I want to kill through you. I want to kill with your hands."
+      },
+      {
+        "type": "sound cue",
+        "sound": "accentSound",
+        "character": "narrator",
+        "dialog": "bwoommm"
       },
       {
         "type": "dialog",

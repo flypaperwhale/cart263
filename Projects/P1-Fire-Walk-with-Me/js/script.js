@@ -37,6 +37,10 @@ let redRoomBgImg,
   sc3LauraScreams,
   sc3RingImg;
 
+let ringX = 410;
+let ringY = 50;
+let ringSize = 100;
+
 // other images
 let monkeyFaceImg, redRoomEntryImg, transitionSnowImg;
 
@@ -88,6 +92,7 @@ let currentSoundCue;
 let introMelody;
 let highwaySound;
 let rideStopsSound;
+let sc1TransitionAccent;
 let carDoorSound;
 let accentSound;
 let weirdAccent;
@@ -97,6 +102,8 @@ let bobAttacksSound;
 
 let lauraScreamsSound;
 let snowSound;
+
+let touchingRingToggle;
 
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
@@ -119,9 +126,10 @@ function preload() {
 
   // load sounds
   introMelody = loadSound("assets/sounds/indianflute.mp3");
+  sc1TransitionAccent = loadSound("assets/sounds/boom-intro.mp3");
   highwaySound = loadSound("assets/sounds/bythehighway.wav");
-  rideStopsSound = loadSound("assets/sounds/hitchcarstops.mp3");
-  carDoorSound = loadSound("assets/sounds/stepoutcar.mp3");
+  rideStopsSound = loadSound("assets/sounds/hitchcarstops2.mp3");
+  carDoorSound = loadSound("assets/sounds/stepoutcar2.mp3");
   accentSound = loadSound("assets/sounds/monkey-business-accent.mp3");
   weirdAccent = loadSound("assets/sounds/weirdaccent.wav");
   redRoomTransitionTheme = loadSound("assets/sounds/transition2RedRoom.wav");
@@ -213,6 +221,7 @@ function draw() {
       snowTransition0Toggle = false;
       introSkyToggle = true;
       // Sky background
+
       if (currentSoundCue === "highwaySound") {
         //play monkey intro song once
         push();
@@ -274,6 +283,7 @@ function draw() {
       image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 350, 0, 50);
     } else {
     }
+
     if (roadBGToggle === true) {
       image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
     } else {
@@ -318,7 +328,13 @@ function draw() {
       // Bar parking background
       image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     }
-
+    if (currentSoundCue === "carDoorSound") {
+      push();
+      carDoorSound.playMode("untilDone");
+      carDoorSound.play();
+      pop();
+      currentSoundCue = undefined;
+    }
     // if (visualCueToggle === true) {
     if (currentVisualCue === "noSnow") {
       // snowTransition0Toggle = false;
@@ -347,6 +363,12 @@ function draw() {
       lauraCigToggle = false;
       brettLeerToggle = false;
       brettSmirkToggle = true;
+    } else if (currentSoundCue === "accentSound") {
+      push();
+      accentSound.playMode("untilDone");
+      accentSound.play();
+      pop();
+      currentSoundCue = undefined;
     } else if (currentVisualCue === "brettSnide") {
       // Businessman sniding (? in another 4th scene?)
       snowCover2Toggle = false;
@@ -356,13 +378,19 @@ function draw() {
     //}
     if (currentVisualCue === "snowCover2") {
       snowCover2Toggle = true;
+    } else if (currentSoundCue === "sc1TransitionAccent") {
+      push();
+      sc1TransitionAccent.playMode("untilDone");
+      sc1TransitionAccent.play();
+      pop();
+      currentSoundCue = undefined;
     } else if (currentVisualCue === "snowTransition1") {
       snowTransition1Toggle = true;
       snowCover3Toggle = true;
       //snowTransition2Toggle = true;
       brettSmirkToggle = false;
       barBgImgToggle = false;
-      setTimeout(switchStateToSc2, 1000);
+      setTimeout(switchStateToSc2, 1500);
     } else if (currentVisualCue === "endFadeout") {
       // roadBGToggle = false;
       fadeoutToggle = true;
@@ -469,13 +497,17 @@ function draw() {
     } else if (currentVisualCue === "sc2CloseUp2") {
       sc2CloseUp2Toggle = true;
       // Laura touched closeup 2
-    }
-
-    if (currentVisualCue === "snowTransition2") {
+    } else if (currentVisualCue === "snowTransition2") {
       snowTransition2Toggle = true;
       snowCover4Toggle = true;
       bobChatToggle = true;
       setTimeout(switchStateToSc3, 1000);
+    } else if (currentSoundCue === "redRoomTransitionTheme") {
+      push();
+      redRoomTransitionTheme.playMode("untilDone");
+      redRoomTransitionTheme.play();
+      pop();
+      currentSoundCue = undefined;
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
     }
@@ -551,11 +583,15 @@ function draw() {
       snowTransition2Toggle = false;
       //snowTransition2Toggle = false;
       //roadBGToggle = false;
-    }
-    if (currentVisualCue === "noLaura") {
+    } else if (currentSoundCue === "bobLaughsSound") {
+      push();
+      bobLaughsSound.playMode("untilDone");
+      bobLaughsSound.play();
+      pop();
+      currentSoundCue = undefined;
+    } else if (currentVisualCue === "noLaura") {
       lauraHandsToggle = false;
-    }
-    if (currentVisualCue === "bobChat") {
+    } else if (currentVisualCue === "bobChat") {
       // Bob chat
       bobChatToggle = true;
     } else if (currentVisualCue === "bobRage") {
@@ -574,6 +610,22 @@ function draw() {
       // Laura screaming
       theRingToggle = false;
       lauraScreamsToggle = true;
+    }
+
+    if (currentSoundCue === "accentSound") {
+      push();
+      accentSound.playMode("untilDone");
+      accentSound.play();
+      pop();
+      currentSoundCue = undefined;
+    }
+
+    let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
+    if (theRingToggle === true && d < ringSize / 2) {
+      console.log("yes, you're in");
+      // you are touching ring
+      touchingRingToggle = true;
+      // change scene to
     }
 
     if (currentVisualCue === "monkeyFace") {
@@ -604,7 +656,12 @@ function draw() {
     } else {
     }
     if (theRingToggle === true) {
-      image(sc3RingImg, 410, 50, canvas.width - 1100, canvas.height - 700);
+      image(sc3RingImg, ringX, ringY, canvas.width - 1100, canvas.height - 700);
+      console.log(
+        `canvasW - 1100 ${canvas.width - 1100} canvasH - 700 ${
+          canvas.height - 700
+        }`
+      );
     } else {
     }
     if (lauraScreamsToggle === true) {
@@ -782,7 +839,12 @@ or a NEXT button... have user feel they are responding as Laura...
 */
 
 function mousePressed() {
-  nextLine();
+  //else {
+  if (touchingRingToggle === true) {
+    //switch to scene 5
+  } else {
+    nextLine();
+  }
 }
 
 /**
