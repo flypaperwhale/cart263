@@ -214,10 +214,10 @@ function draw() {
 
     if (currentSoundCue === "introMelody") {
       //play monkey intro song once
-      push();
-      introMelody.playMode("untilDone");
-      introMelody.play();
-      pop();
+      // push();
+      // introMelody.playMode("untilDone");
+      // introMelody.play();
+      // pop();
       currentSoundCue = undefined;
       push();
       textSize(24);
@@ -238,7 +238,7 @@ function draw() {
       // Sky background
 
       if (currentSoundCue === "highwaySound") {
-        //play monkey intro song once
+        //  play monkey intro song once
         push();
         highwaySound.playMode("untilDone");
         highwaySound.play();
@@ -291,11 +291,11 @@ function draw() {
 
     if (currentSoundCue === "rideStopsSound") {
       console.log("so come here!");
-      push();
-      rideStopsSound.playMode("untilDone");
-      rideStopsSound.play();
-      pop();
-      currentSoundCue = undefined;
+      // push();
+      // rideStopsSound.playMode("untilDone");
+      // rideStopsSound.play();
+      // pop();
+      // currentSoundCue = undefined;
     }
     // overlay redroom and read player name backwards
 
@@ -342,11 +342,15 @@ function draw() {
     if (dontTakeTheRingVoiceToggle === true) {
       console.log(`what color is ${currentVoice}`);
       dontTakeTheRingVoiceToggle = false;
-      responsiveVoice.speak("don't take the ring", "UK English Male", {
-        pitch: 0.9,
-        rate: 5,
-        volume: 1,
-      });
+      responsiveVoice.speak(
+        "Don't take the ring Anna. Don't take the ring",
+        "Hindi Male",
+        {
+          pitch: 1.1,
+          rate: 0.55,
+          volume: 1,
+        }
+      );
       currentVoice = undefined;
       nextLine();
     }

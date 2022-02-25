@@ -213,7 +213,7 @@
         "type": "dialog",
         "image": "brettLeer",
         "character": "businessman",
-        "dialog": "Running away from home are we?"
+        "dialog": "                                                                           Running away from home are we?"
       },
       {
         "type": "visual cue",
@@ -225,7 +225,7 @@
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "Did you lose your way little lady?"
+        "dialog": "                                                                        Did you lose your way little lady?"
       },
       {
         "type": "dialog",
@@ -243,13 +243,13 @@
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "We can go someplace else if you like. What do you say?"
+        "dialog": "                                         We can go someplace else if you like. What do you say?"
       },
       {
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "Wouldn't you like taking me around the world?"
+        "dialog": "Wouldn't you like to take me around the world?"
       },
       {
         "type": "dialog",
@@ -261,13 +261,13 @@
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "I do."
+        "dialog": "                                                                                                   I do."
       },
       {
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "...do you go all the way little girl?"
+        "dialog": "                                                                       ...do you go all the way little girl?"
       },
       {
         "type": "dialog",
@@ -279,7 +279,7 @@
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
-        "dialog": "You do, don't you?"
+        "dialog": "                                                                                         You do, don't you?"
       },
       {
         "type": "dialog",
@@ -297,7 +297,7 @@
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "Tell me you're going to go all the way."
+        "dialog": "                                                                     Tell me you're going to go all the way."
       },
       {
         "type": "visual cue",
