@@ -4,33 +4,83 @@
 // replace variables in poem with random from particular categories
 // change html "body" with the poem, revealing one verse at a time?
 // let poulpeImg = document.getElementById(`poulpe-img-button`);
-document.querySelector(`poulpe-img-button`).addEventListener(‘click’, function(event){
-  console.log("we're in heaven");
-});
+// document.querySelector(`poulpe-img-button`).addEventListener(‘click’, function(event){
+//   console.log("we're in heaven");
+// });
 
 // do whatever you want here
 // select words for madlibs
 // dissapear the pictures and
 // display the poem
 
-
-console.log(document);
-
-poulpeImg.addEventListener(`click`, function (event) {
-  console.log("sup fuckass poulpy");
-});
-
+let poulpeImg = document.getElementById("squidImg");
+// console.log(poulpeImg);
 let glassImg = document.getElementById(`glass-img-button`);
-
-glassImg.addEventListener(`click`, function (event) {
-  console.log("sup fuckass tombolombo");
-});
 
 let tombImg = document.getElementById(`tomb-img-button`);
 
-tombImg.addEventListener(`click`, function (event) {
-  console.log("sup fuckass ave maria");
-});
+// Set up the starting lines
+setupLines();
+// Listen for clicks on each element and respond by changing them
+addListeners();
+
+function setupLine() {
+  poulpeImg.addEventListener(`click`, function (event) {
+    console.log("sup fuckass poulpy");
+  });
+
+  glassImg.addEventListener(`click`, function (event) {
+    console.log("sup fuckass tombolombo");
+  });
+
+  tombImg.addEventListener(`click`, function (event) {
+    console.log("sup fuckass ave maria");
+  });
+}
+
+/**
+Adds event listeners for changing each line of the poem
+*/
+function addListeners() {
+  squidImg.addEventListener(`click`, changeLine);
+  glassImg.addEventListener(`click`, changeLine);
+  tombImg.addEventListener(`click`, changeLine);
+}
+
+/**
+Triggers a fade out when a line is clicked
+*/
+function changeLine(event) {
+  // turn image to a poem
+  fadeOut(event.target, 1); // event.target should be <p>image
+  // other <p>images turned off.
+}
+
+/**
+Reduces the opacity of the provided element until it reaches zero
+then changes its line and triggers a fade in
+*/
+function fadeOut(element, opacity) {
+  // ### should fadeout image, then fade in poem, line by line
+  // Change the opacity of the line
+  opacity -= 0.01;
+  element.style[`opacity`] = opacity;
+  // Check if the opacity is greater than 0...
+  if (opacity > 0) {
+    // If so, keep fading on the next frame
+    // Note the use of an anonymous function here so we can pass
+    // arguments to fadeOut()
+    requestAnimationFrame(function () {
+      fadeOut(element, opacity);
+    });
+  } else {
+    // If not, we can switch lines and fade in...
+    // Set a new line of poem for the element
+    setNewLine(element);
+    // Trigger a fade in
+    fadeIn(element, 0);
+  }
+}
 
 // URLs to JSON data
 const GREAT_OLD_ONES_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/mythology/lovecraft.json`;

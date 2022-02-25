@@ -32,19 +32,20 @@ let haikuLines = {
     `The cat does not know`,
     `We are all forests`,
     `You have done your best`,
-    `They are all gone now`
+    `They are all gone now`,
   ],
   sevenSyllables: [
     `Say the things left unsaid`,
     `Never believe the wind's lies`,
     `The autumn stretches its legs`,
     `Nothing can satisfy you`,
-    `They will not come back again`
-  ]
+    `They will not come back again`,
+  ],
 };
 
 // Our three elements on the page that contain each line of the poem
 let line1 = document.getElementById(`line-1`);
+console.log(line1);
 let line2 = document.getElementById(`line-2`);
 let line3 = document.getElementById(`line-3`);
 
@@ -91,11 +92,10 @@ function fadeOut(element, opacity) {
     // If so, keep fading on the next frame
     // Note the use of an anonymous function here so we can pass
     // arguments to fadeOut()
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       fadeOut(element, opacity);
     });
-  }
-  else {
+  } else {
     // If not, we can switch lines and fade in...
     // Set a new line of poem for the element
     setNewLine(element);
@@ -116,11 +116,10 @@ function fadeIn(element, opacity) {
   if (opacity < 1) {
     // Keep fading. Note the use of an anonymous function here so we
     // can pass arguments to fadeIn()
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       fadeIn(element, opacity);
     });
-  }
-  else {
+  } else {
     // Do nothing - we're done!
   }
 }
@@ -133,8 +132,7 @@ function setNewLine(element) {
   if (element === line1 || element === line3) {
     // If the element is line1 or line3, use five syllables
     element.innerText = random(haikuLines.fiveSyllables);
-  }
-  else {
+  } else {
     // If the element is line2 use seven
     element.innerText = random(haikuLines.sevenSyllables);
   }
