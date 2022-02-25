@@ -111,6 +111,12 @@
         "dialog": "Speak: My name is ________"
       },
       {
+        "type": "spoken",
+        "image": "dontTakeTheRing",
+        "character": "narrator",
+        "dialog": "monkeyface is flashed ResponsiveVoice"
+      },
+      {
         "type": "visual cue",
         "image": "monkeyFace",
         "character": "narrator",
@@ -338,7 +344,7 @@
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "Maragaret?"
+        "dialog": "Margaret?"
       },
       {
         "type": "dialog",
