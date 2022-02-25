@@ -1485,10 +1485,10 @@ Does thy life destroy.`;
   console.log(squidImg);
 
   let tombImg = document.getElementById(`tombImg`);
-  console.log(squidImg);
+  console.log(tombImg);
 
   let glassImg = document.getElementById(`glassImg`);
-  console.log(squidImg); //fill in squid madlibs
+  console.log(glassImg); //fill in squid madlibs
   /*
   god: greatOldOnesData.
   adj1: archSettingsData.
@@ -1516,17 +1516,26 @@ Does thy life destroy.`;
 }
 squidImg.addEventListener(`click`, function (event) {
   console.log("your image has been clicked");
+  event.target.innerText = squidPoem;
+  tombImg.innerText = "";
+  glassImg.innerText = "";
   //if poulpe is clicked, madlibs get filled here  // load in new poem with appropriate madlibs
   // erase all images and display new poem
 });
 tombImg.addEventListener(`click`, function (event) {
   console.log("your image has been clicked");
+  event.target.innerText = tombPoem;
+  squidImg.innerText = "";
+  glassImg.innerText = "";
   //if tomb is clicked, madlibs get filled here
   // load in new poem with appropriate madlibs
   // erase all images and display new poem
 });
 glassImg.addEventListener(`click`, function (event) {
   console.log("your image has been clicked");
+  event.target.innerText = glassPoem;
+  squidImg.innerText = "";
+  tombImg.innerText = "";
   //if glass is clicked, madlibs get filled here
   // load in new poem with appropriate madlibs
   // erase all images and display new poem
