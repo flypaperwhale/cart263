@@ -3,14 +3,14 @@
 // change html "body" with the poem, revealing one verse at a time?
 
 let thePoemDisplayed = `
-O Rose thou art sick.
+O ${god} thou art ${adj1}.
 The invisible worm,
-That flies in the night
+That ${verb1} in the night
 In the howling storm:
 
-Has found out thy bed
+Has found out thy ${corridor}
 Of crimson joy:
-And his dark secret love
+And his dark secret ${object}
 Does thy life destroy.`;
 
 /*`
