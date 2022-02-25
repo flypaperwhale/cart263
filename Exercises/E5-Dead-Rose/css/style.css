@@ -10,20 +10,27 @@ Also hides overflow.
 **********************************************/
 
 body {
-  padding: 0;
-  margin: 0;
+  font-family: cursive;
+  padding-top: 2rem;
+  font-weight: bold;
+  width: 50vw;
+  margin: auto;
   display: grid; /* Set up the grid and justify/align to center */
   justify-content: center;
   align-content: center;
   height: 100vh; /* Body is the height of the viewport */
   overflow: hidden; /* Hide anything that goes off the window size */
+  background-color: rebeccapurple;
 }
 
 #poulpe-img-button {
+  margin-left: 20px;
 }
 
 #glass-img-button {
+  margin-bottom: 20px;
 }
 
 #tomb-img-button {
+  margin-right: 20px;
 }
