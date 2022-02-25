@@ -1,3 +1,15 @@
+("use strict");
+
+let squidImg = document.getElementById(`squidImg`);
+// console.log(poulpeImg);
+
+squidImg.addEventListener(`click`, function (event) {
+  console.log("your image has been clicked");
+});
+let glassImg = document.getElementById(`glass-img-button`);
+
+let tombImg = document.getElementById(`tomb-img-button`);
+
 // URLs to JSON data
 const GREAT_OLD_ONES_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/mythology/lovecraft.json`;
 const ARCHSETTINGS_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/archetypes/setting.json`;
@@ -25,7 +37,7 @@ function setup() {
   console.log(document);
 
   // Set up the starting lines
-  setupLines();
+  //setupLines();
   // Listen for clicks on each element and respond by changing them
   addListeners();
 }
@@ -45,32 +57,25 @@ function setup() {
 // dissapear the pictures and
 // display the poem
 
-("use strict");
-
-let poulpeImg = document.getElementById(`squidImg`);
-// console.log(poulpeImg);
-let glassImg = document.getElementById(`glass-img-button`);
-
-let tombImg = document.getElementById(`tomb-img-button`);
-
-function setupLine() {
-  poulpeImg.addEventListener(`click`, function (event) {
-    console.log("sup fuckass poulpy");
-  });
-
-  glassImg.addEventListener(`click`, function (event) {
-    console.log("sup fuckass tombolombo");
-  });
-
-  tombImg.addEventListener(`click`, function (event) {
-    console.log("sup fuckass ave maria");
-  });
-}
+// function setupLine() {
+//   poulpeImg.addEventListener(`click`, function (event) {
+//     console.log("sup fuckass poulpy");
+//   });
+//
+//   glassImg.addEventListener(`click`, function (event) {
+//     console.log("sup fuckass tombolombo");
+//   });
+//
+//   tombImg.addEventListener(`click`, function (event) {
+//     console.log("sup fuckass ave maria");
+//   });
+// }
 
 /**
 Adds event listeners for changing each line of the poem
 */
 function addListeners() {
+  console.log("hello?");
   squidImg.addEventListener(`click`, changeLine);
   glassImg.addEventListener(`click`, changeLine);
   tombImg.addEventListener(`click`, changeLine);
@@ -116,13 +121,15 @@ Sets the text of the element to a randomly chosen haiku line, accounting for
 syllables
 */
 function setNewLine(element) {
-  if (element === line1 || element === line3) {
-    // If the element is line1 or line3, use five syllables
-    console.log("in set new line13!");
-  } else {
-    // If the element is line2 use seven
-    element.innerText = random(haikuLines.sevenSyllables);
-    console.log("in set new line2!");
+  if (element === poulpeImg) {
+    // If the element is poulpe
+    console.log("in poulpe mode!");
+  } else if (element === tombImg) {
+    // If the element is tomb
+    console.log("in tomb mode!");
+  } else if (element === glassImg) {
+    // If the element is stain glass
+    console.log("in stain glass mode!");
   }
 }
 
