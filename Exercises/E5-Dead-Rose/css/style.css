@@ -23,7 +23,19 @@ body {
   background-color: rebeccapurple;
 }
 
-#poulpe-img-button {
+#squidPoemTitleSpace {
+  font-size: 2rem;
+  color: orange;
+}
+#tombPoemTitleSpace {
+  font-size: 2rem;
+  color: orange;
+}
+#glassPoemTitleSpace {
+  font-size: 2rem;
+  color: orange;
+}
+/* #poulpe-img-button {
   margin-left: 20px;
 }
 
@@ -33,4 +45,4 @@ body {
 
 #tomb-img-button {
   margin-right: 20px;
-}
+} */

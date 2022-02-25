@@ -1445,6 +1445,7 @@ function setup() {
   glassRoom = random(rooms);
   glassObject = random(plants);
 
+  squidPoemTitle = `Dead ${tombObject}`;
   squidPoem = `O ${squidGod} thou art ${squidAdj}.
 The invisible worm,
 That ${squidVerb} in the night
@@ -1457,6 +1458,7 @@ Does thy life destroy.`;
 
   console.log(squidPoem);
 
+  tombPoemTitle = `Dead ${tombGod}`;
   tombPoem = `O ${tombGod} thou art ${tombAdj}.
 The invisible worm,
 That ${tombVerb} in the night
@@ -1469,6 +1471,7 @@ Does thy life destroy.`;
 
   console.log(tombPoem);
 
+  glassPoemTitle = `Dead ${glassObject}`;
   glassPoem = `O ${glassGod} thou art ${glassAdj}.
 The invisible worm,
 That ${glassVerb} in the night
@@ -1483,12 +1486,16 @@ Does thy life destroy.`;
 
   let squidImg = document.getElementById(`squidImg`);
   console.log(squidImg);
+  let squidPoemSpace = document.getElementById(`squidPoemSpace`);
 
   let tombImg = document.getElementById(`tombImg`);
   console.log(tombImg);
+  let tombPoemSpace = document.getElementById(`tombPoemSpace`);
 
   let glassImg = document.getElementById(`glassImg`);
   console.log(glassImg); //fill in squid madlibs
+  let glassPoemSpace = document.getElementById(`glassPoemSpace`);
+
   /*
   god: greatOldOnesData.
   adj1: archSettingsData.
@@ -1516,27 +1523,38 @@ Does thy life destroy.`;
 }
 squidImg.addEventListener(`click`, function (event) {
   console.log("your image has been clicked");
-  event.target.innerText = squidPoem;
+  // squidPoemTitleSpace.innerText = squidPoemTitle;
+  // squidPoemSpace.innerText = squidPoem;
+
+  glassPoemTitleSpace.innerText = squidPoemTitle;
+  glassPoemSpace.innerText = squidPoem;
+
   tombImg.innerText = "";
   glassImg.innerText = "";
   //if poulpe is clicked, madlibs get filled here  // load in new poem with appropriate madlibs
   // erase all images and display new poem
 });
-tombImg.addEventListener(`click`, function (event) {
-  console.log("your image has been clicked");
-  event.target.innerText = tombPoem;
-  squidImg.innerText = "";
-  glassImg.innerText = "";
-  //if tomb is clicked, madlibs get filled here
-  // load in new poem with appropriate madlibs
-  // erase all images and display new poem
-});
 glassImg.addEventListener(`click`, function (event) {
   console.log("your image has been clicked");
-  event.target.innerText = glassPoem;
+  glassPoemTitleSpace.innerText = glassPoemTitle;
+  glassPoemSpace.innerText = glassPoem;
   squidImg.innerText = "";
   tombImg.innerText = "";
   //if glass is clicked, madlibs get filled here
   // load in new poem with appropriate madlibs
   // erase all images and display new poem
 }); //
+tombImg.addEventListener(`click`, function (event) {
+  console.log("your image has been clicked");
+  // tombPoemTitleSpace.innerText = tombPoemTitle;
+  // tombPoemSpace.innerText = tombPoem;
+
+  glassPoemTitleSpace.innerText = tombPoemTitle;
+  glassPoemSpace.innerText = tombPoem;
+
+  squidImg.innerText = "";
+  glassImg.innerText = "";
+  //if tomb is clicked, madlibs get filled here
+  // load in new poem with appropriate madlibs
+  // erase all images and display new poem
+});
