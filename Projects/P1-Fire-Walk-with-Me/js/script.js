@@ -105,6 +105,10 @@ let snowSound;
 
 let touchingRingToggle;
 
+let currentVoice;
+//let dontTakeTheRing;
+let dontTakeTheRingVoiceToggle;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -215,6 +219,17 @@ function draw() {
       introMelody.play();
       pop();
       currentSoundCue = undefined;
+      push();
+      textSize(24);
+      fill(230, 220, 220);
+      textAlign(CENTER, CENTER);
+      text(
+        `Fire Walk with Me
+        Click forward`,
+        250,
+        200
+      );
+      pop();
     }
     if (currentVisualCue === "introSkyImg") {
       // turn snow off
@@ -268,6 +283,12 @@ function draw() {
       fadeoutToggle = true;
     }
 
+    // let userName = "jane";
+    if (currentVoice === "dontTakeTheRing") {
+      //RESPONSIVE VOICE
+      dontTakeTheRingVoiceToggle = true;
+    }
+
     if (currentSoundCue === "rideStopsSound") {
       console.log("so come here!");
       push();
@@ -316,6 +337,18 @@ function draw() {
       pop();
       setTimeout(switchStateToSc1, 2000);
     } else {
+    }
+
+    if (dontTakeTheRingVoiceToggle === true) {
+      console.log(`what color is ${currentVoice}`);
+      dontTakeTheRingVoiceToggle = false;
+      responsiveVoice.speak("don't take the ring", "UK English Male", {
+        pitch: 0.9,
+        rate: 5,
+        volume: 1,
+      });
+      currentVoice = undefined;
+      nextLine();
     }
 
     // show dialog
@@ -827,6 +860,11 @@ whereas dialog from interlocutors should arrive from the right side
     //imageCueToggle = true;
     currentVisualCue = lineData.image;
     console.log(`what is currentVisualCue ? ${currentVisualCue}`);
+  }
+  if (lineData.type === "spoken") {
+    //user cannot click to advance anymore
+    currentVoice = lineData.image;
+    console.log(`what is currentVoice ? ${currentVoice}`);
   }
   if (lineData.type === "listen") {
     //user cannot click to advance anymore
