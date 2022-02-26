@@ -45,7 +45,6 @@ let haikuLines = {
 
 // Our three elements on the page that contain each line of the poem
 let line1 = document.getElementById(`line-1`);
-console.log(line1);
 let line2 = document.getElementById(`line-2`);
 let line3 = document.getElementById(`line-3`);
 
