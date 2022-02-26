@@ -1,8 +1,8 @@
 Dead Rose
 
-This program is built off of Pippin's Haiku Generator.
+This program is inspired by Pippin's Haiku Generator.
 
-It should prompt the user for 1 word, which should flavor the generated poem.
+User must click on 1 image, which should flavor the generated poem.
 
 The poems should have a gothic feel.
 
