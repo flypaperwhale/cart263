@@ -6,7 +6,7 @@ User must click on 1 image, which should flavor the generated poem.
 
 The poems should have a gothic feel.
 
-I will try to make the esthetics gothic too (reds, purples, blacks, oranges). Maybe have an image of the user's prompt.
+I will try to make the esthetics gothic too (reds, purples, blacks, oranges).
 
 // URLs to JSON data
 GREAT_OLD_ONES_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/mythology/lovecraft.json`;
