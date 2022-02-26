@@ -1,10 +1,12 @@
-# Template p5 project
+Dead Rose
 
-This is inspired by Pippin's Haiku generator, but going for a different vibe.
-This is a gothic poem generator.
-There are three images to elect to click: a squid, a stained glass, and a tomb
-Each image display a different poem that is a madlib of Dead Rose
-With different madlib entries series for each of the 3 images
+This program is built off of Pippin's Haiku Generator.
+
+It should prompt the user for 1 word, which should flavor the generated poem.
+
+The poems should have a gothic feel.
+
+I will try to make the esthetics gothic too (reds, purples, blacks, oranges). Maybe have an image of the user's prompt.
 
 // URLs to JSON data
 GREAT_OLD_ONES_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/mythology/lovecraft.json`;
