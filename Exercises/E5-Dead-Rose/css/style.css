@@ -1,9 +1,7 @@
 /*********************************************
 
-Here is a description of any special CSS used.
-In this case it's just padding and margin to 0
-and then centring the canvas (and anything else)
-using the CSS Grid.
+in this CSS code I am giving a background color to purple
+I am also making the poem titles bigger and orange
 
 Also hides overflow.
 
@@ -35,14 +33,3 @@ body {
   font-size: 2rem;
   color: orange;
 }
-/* #poulpe-img-button {
-  margin-left: 20px;
-}
-
-#glass-img-button {
-  margin-bottom: 20px;
-}
-
-#tomb-img-button {
-  margin-right: 20px;
-} */

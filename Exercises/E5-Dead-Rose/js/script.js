@@ -1,13 +1,17 @@
-("use strict"); // URLs to JSON data
-// const GREAT_OLD_ONES_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/mythology/lovecraft.json`;
-// const ARCHSETTINGS_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/archetypes/setting.json`;
-// const ARCHCHARACTER_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/archetypes/character.json`;
-// const ARCHARTEFACT_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/archetypes/artifact.json`;
-// const VERBS_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/words/verbs.json`;
-// const CORRIDORS_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/architecture/rooms.json`;
-// const CEPHALOPOD_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/animals/cephalopod_anatomy.json`;
-// const PLANTS_DATA_URL = `https://github.com/dariusk/corpora/blob/master/data/plants/plants.json`;
+// Dead Rose
+
+// A program by François Latreille
+
+// A gothic poem generator
+// User sees three images on the webpage. They can click on one
+// then a randomly filled madlib poem is displayed
+// with the selected image
+// Poem madlibbed is The Sick Rose BY WILLIAM BLAKE
+
+("use strict");
+
 let greatOldOnes = [
+  // God names
   "Abhoth",
   "Ahtu",
   "Atlach-Nacha",
@@ -59,6 +63,7 @@ let greatOldOnes = [
   "Zvilpogghua",
 ];
 let archSettingQualities = [
+  // Setting qualities
   "empty",
   "quiet",
   "lonesome",
@@ -182,6 +187,7 @@ let archSettingQualities = [
   "protected",
 ];
 let archCharacterQualities = [
+  // Character qualities
   "brave",
   "willing",
   "determined",
@@ -938,6 +944,7 @@ let verbs = [
   "zooms",
 ];
 let rooms = [
+  // types of rooms
   "aerary",
   "aircraft cabin",
   "airport lounge",
@@ -1048,6 +1055,7 @@ let rooms = [
   "workshop",
 ];
 let archArtefactQualities = [
+  // artefact qualities
   "educational",
   "wise",
   "enlightening",
@@ -1073,6 +1081,7 @@ let archArtefactQualities = [
   "transitional",
 ];
 let archArtefactNames = [
+  // artefact names
   "map",
   "cloak",
   "seed",
@@ -1083,6 +1092,7 @@ let archArtefactNames = [
   "book",
 ];
 let plants = [
+  // random selection of plants
   "Zedoary",
   "Yellow coneflower",
   "Gray alder",
@@ -1138,6 +1148,7 @@ let plants = [
   "Milk thistle",
 ];
 let cephalopodAnatomy = [
+  // squid anatomy words
   "eyelid",
   "accessory nidamental gland",
   "cephalopod eye",
@@ -1413,19 +1424,11 @@ let cephalopodAnatomy = [
   "iridophore",
   "leucophore",
 ];
-let god, adj1, verb1, room, object;
-// function preload() {
-//   greatOldOnesData = loadJSON(GREAT_OLD_ONES_DATA_URL);
-//   archSettingsData = loadJSON(ARCHSETTINGS_DATA_URL);
-//   archCharacterData = loadJSON(ARCHCHARACTER_DATA_URL);
-//   archArtefactData = loadJSON(ARCHARTEFACT_DATA_URL);
-//   verbsData = loadJSON(VERBS_DATA_URL);
-//   corridorsData = loadJSON(CORRIDORS_DATA_URL);
-//   cephalopodData = loadJSON(CEPHALOPOD_DATA_URL);
-//   plantsData = loadJSON(PLANTS_DATA_URL);
-// }
 
 function setup() {
+  // select the madlib entries and then creates the poems to be called out
+  // when the user clicks on an image
+
   //select squid madlib fills
   squidGod = random(greatOldOnes);
   squidAdj = random(archSettingQualities);
@@ -1445,7 +1448,9 @@ function setup() {
   glassRoom = random(rooms);
   glassObject = random(plants);
 
+  // create squid poem title
   squidPoemTitle = `Dead ${tombObject}`;
+  // create squid poem
   squidPoem = `O ${squidGod} thou art ${squidAdj}.
 The invisible worm,
 That ${squidVerb} in the night
@@ -1455,10 +1460,12 @@ Has found out thy ${squidRoom}
 Of crimson joy:
 And his dark secret ${squidObject}
 Does thy life destroy.`;
-
+  // display squid poem in console
   console.log(squidPoem);
 
+  // create tomb poem title
   tombPoemTitle = `Dead ${tombGod}`;
+  // create tomb poem
   tombPoem = `O ${tombGod} thou art ${tombAdj}.
 The invisible worm,
 That ${tombVerb} in the night
@@ -1468,10 +1475,12 @@ Has found out thy ${tombRoom}
 Of crimson joy:
 And his dark secret ${tombObject}
 Does thy life destroy.`;
-
+  // display tomb poem in console
   console.log(tombPoem);
 
+  // create glass poem title
   glassPoemTitle = `Dead ${glassObject}`;
+  // create glass poem
   glassPoem = `O ${glassGod} thou art ${glassAdj}.
 The invisible worm,
 That ${glassVerb} in the night
@@ -1481,80 +1490,55 @@ Has found out thy ${glassRoom}
 Of crimson joy:
 And his dark secret ${glassObject}
 Does thy life destroy.`;
-
+  // display glass poem in console
   console.log(glassPoem);
 
+  // store images from html into variables to be maniuplated (erase non-selected images)
   let squidImg = document.getElementById(`squidImg`);
-  console.log(squidImg);
-  let squidPoemSpace = document.getElementById(`squidPoemSpace`);
-
   let tombImg = document.getElementById(`tombImg`);
-  console.log(tombImg);
-  let tombPoemSpace = document.getElementById(`tombPoemSpace`);
-
   let glassImg = document.getElementById(`glassImg`);
-  console.log(glassImg); //fill in squid madlibs
+
+  // store image poem spaces to manipulate where to display the poems
+  let squidPoemSpace = document.getElementById(`squidPoemSpace`);
+  let tombPoemSpace = document.getElementById(`tombPoemSpace`);
   let glassPoemSpace = document.getElementById(`glassPoemSpace`);
 
-  /*
-  god: greatOldOnesData.
-  adj1: archSettingsData.
-  verb1: verbsData.
-  corridor: corridorsData.
-  object: cephalopodData.
-  */
-  //fill in tomb madlibs
-
-  /*
-  god: greatOldOnesData.
-  adj1: archSettingsData.
-  verb1: verbsData.
-  corridor: corridorsData.
-  object: cephalopodData.
-  */
-  //fill in glass madlibs
-  /*
-  god: greatOldOnesData.
-  adj1: archSettingsData.
-  verb1: verbsData.
-  corridor: corridorsData.
-  object: cephalopodData.
-  */
+  // store image poem title spaces to manipulate where to display the poems
+  let squidPoemTitleSpace = document.getElementById(`squidPoemTitleSpace`);
+  let tombPoemTitleSpace = document.getElementById(`tombPoemTitleSpace`);
+  let glassPoemTitleSpace = document.getElementById(`glassPoemTitleSpace`);
 }
-squidImg.addEventListener(`click`, function (event) {
-  console.log("your image has been clicked");
-  // squidPoemTitleSpace.innerText = squidPoemTitle;
-  // squidPoemSpace.innerText = squidPoem;
 
+// check for clicking images
+// squid image is clicked
+squidImg.addEventListener(`click`, function (event) {
+  // erase the tomb and glass images
+  tombImg.innerText = "";
+  glassImg.innerText = "";
+  // then add the squid poem and squid poem title into html positions
+  // into glass' positions in this case for legibility
+  // poem and title are preloaded during setup and displayed when image is clicked
   glassPoemTitleSpace.innerText = squidPoemTitle;
   glassPoemSpace.innerText = squidPoem;
-
-  tombImg.innerText = "";
-  glassImg.innerText = "";
-  //if poulpe is clicked, madlibs get filled here  // load in new poem with appropriate madlibs
-  // erase all images and display new poem
 });
+// glass image is clicked
 glassImg.addEventListener(`click`, function (event) {
-  console.log("your image has been clicked");
+  // erase the squid and tomb images
+  squidImg.innerText = "";
+  tombImg.innerText = "";
+  // the ass glass poem and glass poem title into html positions
+  // poem and title are preloaded during setup and displayed when image is clicked
   glassPoemTitleSpace.innerText = glassPoemTitle;
   glassPoemSpace.innerText = glassPoem;
-  squidImg.innerText = "";
-  tombImg.innerText = "";
-  //if glass is clicked, madlibs get filled here
-  // load in new poem with appropriate madlibs
-  // erase all images and display new poem
-}); //
+});
+// tomb image is clicked
 tombImg.addEventListener(`click`, function (event) {
-  console.log("your image has been clicked");
-  // tombPoemTitleSpace.innerText = tombPoemTitle;
-  // tombPoemSpace.innerText = tombPoem;
-
-  glassPoemTitleSpace.innerText = tombPoemTitle;
-  glassPoemSpace.innerText = tombPoem;
-
+  // erase the squid and glass images
   squidImg.innerText = "";
   glassImg.innerText = "";
-  //if tomb is clicked, madlibs get filled here
-  // load in new poem with appropriate madlibs
-  // erase all images and display new poem
+  // then add the tomb poem and tomb poem title into html positions
+  // into glass' positions in this case for legibility
+  // poem and title are preloaded during setup and displayed when image is clicked
+  glassPoemTitleSpace.innerText = tombPoemTitle;
+  glassPoemSpace.innerText = tombPoem;
 });
