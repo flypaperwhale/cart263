@@ -487,7 +487,7 @@
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "No... "
+        "dialog": "... "
       },
       {
         "type": "dialog",
@@ -619,12 +619,6 @@
     "scene5 background": "redRoom",
     "scene5": [
       {
-        "type": "visual cue",
-        "image": "lauraScreams",
-        "character": "narrator",
-        "dialog": "show the sky"
-      },
-      {
         "type": "sound cue",
         "sound": "bobGrowlSound",
         "character": "narrator",
@@ -632,11 +626,16 @@
       },
       {
         "type": "sound cue",
-        "image": "lauraScreamsSound",
+        "sound": "lauraScreamsSound",
         "character": "narrator",
         "dialog": "hold snow before next image"
       },
-
+      {
+        "type": "visual cue",
+        "image": "lauraScreams",
+        "character": "narrator",
+        "dialog": "show the sky"
+      },
       {
         "type": "visual cue",
         "sound": "none",
@@ -645,7 +644,7 @@
       },
       {
         "type": "visual cue",
-        "image": "fadeOut",
+        "image": "endFadeout",
         "character": "narrator",
         "dialog": "show black"
       }

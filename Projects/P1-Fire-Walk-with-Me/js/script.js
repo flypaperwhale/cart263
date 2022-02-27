@@ -122,6 +122,11 @@ let switch5 = 0;
 
 let switchA = 0;
 let switchB = 0;
+let switchC = 0;
+let switchD = 0;
+let switchE = 0;
+let switchF = 0;
+let switchG = 0;
 
 let ringIsClicked = false;
 
@@ -616,6 +621,8 @@ function draw() {
       // annyang.debug();
     }
     if (snowCover2Toggle === true) {
+      mouseToggle = false;
+
       displaySnow(255, 100);
     } else {
     }
@@ -651,6 +658,7 @@ function draw() {
       snowTransition1Toggle = false;
       //snowTransition2Toggle = false;
       roadBGToggle = false;
+      mouseToggle = true;
     }
     if (currentVisualCue === "frontLogLady") {
       // Loglady stands alone
@@ -691,6 +699,10 @@ function draw() {
       currentSoundCue = undefined;
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
+      if (switchC === 0) {
+        setTimeout(nextLine, 500);
+        switchC = 1;
+      }
     }
 
     if (frontLogLadyToggle === true) {
@@ -756,6 +768,7 @@ function draw() {
     }
 
     if (snowCover3Toggle === true) {
+      mouseToggle = false;
       displaySnow(255, 100);
     } else {
     }
@@ -856,7 +869,7 @@ function draw() {
 
     let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
     if (theRingToggle === true && d < ringSize / 2) {
-      console.log("yes, you're in");
+      //console.log("yes, you're in");
       // you are touching ring
       touchingRingToggle = true;
       // change scene to
@@ -876,7 +889,44 @@ function draw() {
       setTimeout(switchStateToSc4, 1000);
     } else if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
+      if (switchD === 0) {
+        setTimeout(nextLine, 500);
+        switchD = 1;
+      }
       //snowTransitionToggle = true;
+    }
+
+    if (currentSoundCue === "bobGrowlSound") {
+      theRingToggle = false;
+      push();
+      bobAttacksSound.playMode("untilDone");
+      bobAttacksSound.play();
+      pop();
+      nextLine();
+      // if (switchE === 0) {
+      //   setTimeout(nextLine, 500);
+      //   switchE = 1;
+      // }
+    } else if (currentSoundCue === "lauraScreamsSound") {
+      theRingToggle = false;
+      push();
+      lauraScreamsSound.playMode("untilDone");
+      lauraScreamsSound.play();
+      pop();
+      currentSoundCue = undefined;
+      if (switchF === 0) {
+        setTimeout(nextLine, 500);
+        switchF = 1;
+      }
+    } else if (currentVisualCue === "lauraScreams") {
+      theRingToggle = false;
+      lauraScreamsToggle = true;
+      if (switchG === 0) {
+        setTimeout(nextLine, 500);
+        switchG = 1;
+      }
+    } else if (currentVisualCue === "endFadeout") {
+      fadeoutToggle = true;
     }
 
     if (bobChatToggle === true) {
@@ -906,6 +956,8 @@ function draw() {
     }
 
     if (snowCover4Toggle === true) {
+      mouseToggle = false;
+
       displaySnow(255, 100);
     } else {
     }
@@ -935,31 +987,14 @@ function draw() {
       //RESPONSIVE VOICE
       bobHasYouVoiceToggle = true;
     }
-
-    // show dialog
-    manipBlockingData();
-  }
-
-  if (state === "redRoom" && currentScene === "scene5") {
-    if (currentSoundCue === "bobGrowlSound") {
+    if (fadeoutToggle === true) {
       push();
-      bobAttacksSound.playMode("untilDone");
-      accentSound.play();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
       pop();
-      currentSoundCue = undefined;
-      nextLine();
-    } else if (currentSoundCue === "lauraScreamsSound") {
-      push();
-      lauraScreamsSound.playMode("untilDone");
-      accentSound.play();
-      pop();
-      currentSoundCue = undefined;
-      nextLine();
-    } else if (currentVisualCue === "lauraScreams") {
-      theRingToggle = false;
-      lauraScreamsToggle = true;
     }
-
+    // show dialog
     manipBlockingData();
   }
 }
@@ -973,6 +1008,7 @@ function switchStateToSc1() {
 function switchStateToSc2() {
   if (state === `parkingLot`) {
     state = `semiconscious`;
+    setTimeout(nextLine, 1000);
     mouseToggle = true;
   }
 }
@@ -980,6 +1016,7 @@ function switchStateToSc3() {
   if (state === `semiconscious`) {
     state = `redRoom`;
     nextLine();
+    mouseToggle = true;
   }
 }
 function switchStateToSc4() {
@@ -990,13 +1027,13 @@ function switchStateToSc4() {
   }
 }
 function switchStateToSc5() {
-  if (state === `redRoom`) {
-    console.log(currentLine);
-    currentLine = 0;
-    console.log(currentLine);
+  console.log(currentScene);
+  console.log(state);
+  if (currentScene === "scene3" && state === `redRoom`) {
+    snowCover4Toggle = false;
+    theRingToggle = false;
     currentScene = "scene5";
-    mouseToggle = true;
-    state = `redRoom`;
+    currentLine = 0;
   }
 }
 
@@ -1151,6 +1188,8 @@ function mousePressed() {
   if (touchingRingToggle === true) {
     //switch to scene 5
     ringIsClicked = true;
+    theRingToggle = false;
+    touchingRingToggle = false;
     //    console.log("so what?");
   }
 }
@@ -1221,15 +1260,16 @@ function keyPressed() {
     state = `introAnimation`;
   }
   if (keyCode === 81) {
-    console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
-      snowTransition1Toggle = ${snowTransition1Toggle}
-      snowTransition2Toggle = ${snowTransition2Toggle}
-      snowTransition3Toggle = ${snowTransition3Toggle}
-      snowTransition0Toggle = ${snowTransition4Toggle}`);
-    console.log(`
-        snowCover1Toggle = ${snowCover1Toggle}
-        snowCover2Toggle = ${snowCover2Toggle}
-        snowCover3Toggle = ${snowCover3Toggle}
-        snowCover4Toggle = ${snowCover4Toggle}`);
+    console.log(currentLine);
+    // console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
+    //   snowTransition1Toggle = ${snowTransition1Toggle}
+    //   snowTransition2Toggle = ${snowTransition2Toggle}
+    //   snowTransition3Toggle = ${snowTransition3Toggle}
+    //   snowTransition0Toggle = ${snowTransition4Toggle}`);
+    // console.log(`
+    //     snowCover1Toggle = ${snowCover1Toggle}
+    //     snowCover2Toggle = ${snowCover2Toggle}
+    //     snowCover3Toggle = ${snowCover3Toggle}
+    //     snowCover4Toggle = ${snowCover4Toggle}`);
   }
 }
