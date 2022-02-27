@@ -106,7 +106,7 @@
       {
         "comment": "this must break the snow sound",
         "type": "listen",
-        "image": "none",
+        "image": "askName",
         "character": "narrator",
         "dialog": "Speak: My name is ________"
       },
@@ -302,7 +302,7 @@
       },
       {
         "type": "listen",
-        "image": "none",
+        "image": "sayAllTheWay",
         "character": "narrator",
         "dialog": "Speak: I'm going to go all the way."
       },
@@ -397,7 +397,7 @@
       },
       {
         "type": "listen",
-        "image": "none",
+        "image": "sayBOBIsReal",
         "character": "narrator",
         "dialog": "Speak: BOB is real!"
       },
@@ -552,7 +552,7 @@
       },
       {
         "type": "listen",
-        "image": "none",
+        "image": "callForHelp",
         "character": "narrator",
         "dialog": "Speak: Help me!"
       },

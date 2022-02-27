@@ -111,6 +111,8 @@ let dontTakeTheRingVoiceToggle;
 
 let bobHasYouVoiceToggle;
 
+let currentListener;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -123,6 +125,25 @@ let currentScene = `scene0`;
 let currentLine = 0;
 // The height of our dialog box
 let dialogHeight = 85;
+//
+// let commands;
+//  {
+//   //intro listen
+//   "my name is *userName": null,
+//   //sc1 listen
+//   "I'm going to go all the way": null,
+//   "I'm going to go all of the way": null,
+//   //sc2 listen
+//   "BOB is real": null,
+//   //sc3 listen
+//   "help!": null,
+//   "help me": null,
+//   "somebody help me": null,
+//   "I need help": null,
+//   "can somebody help me?": null,
+// };
+// annyang.addCommands(commands);
+// annyang.debug();
 
 /**
 Loads the JSON data for our little play
@@ -291,6 +312,17 @@ function draw() {
       dontTakeTheRingVoiceToggle = true;
     }
 
+    if (currentListener === "askName") {
+      //ANNYANG
+      // TURN ON //
+      // commands = {
+      //   //intro listen
+      //   "my name is *userName": listenNextLine,
+      // };
+      // annyang.addCommands(commands);
+      // annyang.debug();
+    }
+
     if (currentSoundCue === "rideStopsSound") {
       console.log("so come here!");
       // push();
@@ -435,6 +467,25 @@ function draw() {
       fadeoutToggle = true;
     }
 
+    if (currentListener === "sayAllTheWay") {
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(100, 50, 350, 50);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK", 350, 50);
+      pop();
+      //ANNYANG
+      // commands = {
+      //   //sc1 listen
+      //   "I'm going to go all the way": listenNextLine,
+      //   "I'm going to go all of the way": listenNextLine,
+      // };
+      // annyang.addCommands(commands);
+      // annyang.debug();
+    }
+
     if (lauraLightToggle === true) {
       image(
         sc1LauraLightsUp,
@@ -551,6 +602,24 @@ function draw() {
       snowCover3Toggle = true; // transparency
     }
 
+    if (currentListener === "sayBOBIsReal") {
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(100, 50, 350, 50);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK", 350, 50);
+      pop();
+      //ANNYANG
+      //   commands = {
+      //     //sc1 listen
+      //     "BOB is real": listenNextLine,
+      //   };
+      //   annyang.addCommands(commands);
+      //   annyang.debug();
+    }
+
     if (frontLogLadyToggle === true) {
       image(
         sc2LogLadyFrontImg,
@@ -657,6 +726,28 @@ function draw() {
       accentSound.play();
       pop();
       currentSoundCue = undefined;
+    }
+
+    if (currentListener === "callForHelp") {
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(100, 50, 350, 50);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK", 350, 50);
+      pop();
+      //ANNYANG
+      // commands = {
+      //   //sc3 listen
+      //   "help!": null,
+      //   "help me": null,
+      //   "somebody help me": null,
+      //   "I need help": null,
+      //   "can somebody help me?": null,
+      // };
+      // annyang.addCommands(commands);
+      // annyang.debug();
     }
 
     let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
@@ -878,12 +969,17 @@ whereas dialog from interlocutors should arrive from the right side
 
     //manipulate current sound right away
     console.log(`what is currentSoundCue ? ${currentSoundCue}`);
-  } else if (lineData.type === "visual cue" || lineData.type === "listen") {
+  } else if (lineData.type === "visual cue") {
     // so visual cue thing
     //imageCueToggle = true;
     currentVisualCue = lineData.image;
     console.log(`what is currentVisualCue ? ${currentVisualCue}`);
   }
+  if (lineData.type === "listen") {
+    currentListener = lineData.image;
+    console.log(`what is currentVLISTENCue ? ${currentListener}`);
+  }
+
   if (lineData.type === "spoken") {
     //user cannot click to advance anymore
     currentVoice = lineData.image;
@@ -924,6 +1020,12 @@ either what they've been told to say
 or something they've been hinted into saying
 they will enter a new scene!
 */
+
+function listenNextLine() {
+  annyang.abort();
+  nextLine();
+}
+
 function nextLine() {
   currentLine++;
   if (currentLine >= data.blocking[currentScene].length) {
