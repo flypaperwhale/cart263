@@ -433,7 +433,7 @@
         "type": "dialog",
         "image": "bobChat",
         "character": "bob",
-        "dialog": "                                                                                                  Hello Laura."
+        "dialog": "                                                                                               Hello Laura."
       },
       {
         "type": "dialog",

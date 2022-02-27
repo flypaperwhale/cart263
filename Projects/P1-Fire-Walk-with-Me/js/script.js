@@ -1,5 +1,5 @@
 /**
-"Monkey Business" / a program based on David Lynch's Fire Walk with Me // 
+"Monkey Business" / a program based on David Lynch's Fire Walk with Me //
 Frankie Latreille
 
 Reimagined scenes of David Lynch's Fire Walk with Me. Laura meets a trucker who wants
@@ -203,7 +203,7 @@ function draw() {
     fill(230, 220, 220);
     textAlign(CENTER, CENTER);
     text(
-      `Fire Walk with Me
+      `Based on Fire Walk with Me
       Press space for simulation`,
       250,
       200
