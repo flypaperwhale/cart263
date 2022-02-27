@@ -619,6 +619,12 @@
     "scene5 background": "redRoom",
     "scene5": [
       {
+        "type": "visual cue",
+        "image": "lauraScreams",
+        "character": "narrator",
+        "dialog": "show the sky"
+      },
+      {
         "type": "sound cue",
         "sound": "bobGrowlSound",
         "character": "narrator",
@@ -630,12 +636,7 @@
         "character": "narrator",
         "dialog": "hold snow before next image"
       },
-      {
-        "type": "visual cue",
-        "image": "lauraScreams",
-        "character": "narrator",
-        "dialog": "show the sky"
-      },
+
       {
         "type": "visual cue",
         "sound": "none",

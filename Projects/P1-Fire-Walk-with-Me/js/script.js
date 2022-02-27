@@ -120,6 +120,9 @@ let switch3 = 0;
 let switch4 = 0;
 let switch5 = 0;
 
+let switchA = 0;
+let switchB = 0;
+
 let ringIsClicked = false;
 
 // states
@@ -301,6 +304,10 @@ function draw() {
       pop();
     } else if (currentVisualCue === "snowCover1") {
       snowCover1Toggle = true;
+      if (switchA === 0) {
+        setTimeout(nextLine, 500);
+        switchA = 1;
+      }
     } else if (currentVisualCue === "thumbUp") {
       // Thumb close up
       lauraIntroToggle = false;
@@ -392,6 +399,7 @@ function draw() {
     }
 
     if (snowCover1Toggle === true) {
+      mouseToggle = false;
       displaySnow(255, 100);
     } else {
     }
@@ -495,11 +503,15 @@ function draw() {
     //}
     if (currentVisualCue === "snowCover2") {
       snowCover2Toggle = true;
+      if (switchB === 0) {
+        setTimeout(nextLine, 500);
+        switchB = 1;
+      }
     } else if (currentSoundCue === "sc1TransitionAccent") {
-      push();
-      sc1TransitionAccent.playMode("untilDone");
-      sc1TransitionAccent.play();
-      pop();
+      // push();
+      // sc1TransitionAccent.playMode("untilDone");
+      // sc1TransitionAccent.play();
+      // pop();
       currentSoundCue = undefined;
     } else if (currentVisualCue === "snowTransition1") {
       snowTransition1Toggle = true;
@@ -802,10 +814,6 @@ function draw() {
       // The ring
       lauraHandsToggle = false;
       theRingToggle = true;
-    } else if (currentVisualCue === "lauraScreams") {
-      // Laura screaming
-      theRingToggle = false;
-      lauraScreamsToggle = true;
     }
 
     if (currentSoundCue === "accentSound") {
@@ -842,7 +850,8 @@ function draw() {
     if (ringIsClicked === true) {
       annyang.abort();
       switchStateToSc5();
-      return;
+      ringIsClicked = false;
+      //return;
     }
 
     let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
@@ -930,6 +939,29 @@ function draw() {
     // show dialog
     manipBlockingData();
   }
+
+  if (state === "redRoom" && currentScene === "scene5") {
+    if (currentSoundCue === "bobGrowlSound") {
+      push();
+      bobAttacksSound.playMode("untilDone");
+      accentSound.play();
+      pop();
+      currentSoundCue = undefined;
+      nextLine();
+    } else if (currentSoundCue === "lauraScreamsSound") {
+      push();
+      lauraScreamsSound.playMode("untilDone");
+      accentSound.play();
+      pop();
+      currentSoundCue = undefined;
+      nextLine();
+    } else if (currentVisualCue === "lauraScreams") {
+      theRingToggle = false;
+      lauraScreamsToggle = true;
+    }
+
+    manipBlockingData();
+  }
 }
 
 function switchStateToSc1() {
@@ -959,6 +991,9 @@ function switchStateToSc4() {
 }
 function switchStateToSc5() {
   if (state === `redRoom`) {
+    console.log(currentLine);
+    currentLine = 0;
+    console.log(currentLine);
     currentScene = "scene5";
     mouseToggle = true;
     state = `redRoom`;
