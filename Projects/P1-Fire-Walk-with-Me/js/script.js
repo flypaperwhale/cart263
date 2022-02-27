@@ -505,26 +505,26 @@ function draw() {
       switch3 = 1;
     }
 
-    if (currentListener === "sayAllTheWay") {
-      mouseToggle = false;
-      push();
-      fill(255, 0, 0);
-      rectMode(CENTER);
-      rect(100, 50, 350, 50);
-      fill(255);
-      textAlign(CENTER, CENTER);
-      text("SPEAK", 350, 50);
-      pop();
-      //ANNYANG
-      annyang.resume();
-      // commands = {
-      //   //sc1 listen
-      //   "I'm going to go all the way": listenNextLine,
-      //   "I'm going to go all of the way": listenNextLine,
-      // };
-      // annyang.addCommands(commands);
-      // annyang.debug();
-    }
+    // if (currentListener === "sayAllTheWay") {
+    //   mouseToggle = false;
+    //   push();
+    //   fill(255, 0, 0);
+    //   rectMode(CENTER);
+    //   rect(canvas.width / 2, 300, canvas.width - 100, 80);
+    //   fill(255);
+    //   textAlign(CENTER, CENTER);
+    //   text("SPEAK", 350, 50);
+    //   pop();
+    //   //ANNYANG
+    //   annyang.resume();
+    //   // commands = {
+    //   //   //sc1 listen
+    //   //   "I'm going to go all the way": listenNextLine,
+    //   //   "I'm going to go all of the way": listenNextLine,
+    //   // };
+    //   // annyang.addCommands(commands);
+    //   // annyang.debug();
+    // }
 
     if (lauraLightToggle === true) {
       image(
@@ -586,6 +586,27 @@ function draw() {
       pop();
       setTimeout(switchStateToSc1, 2000);
     } else {
+    }
+
+    if (currentListener === "sayAllTheWay") {
+      mouseToggle = false;
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(canvas.width / 2, 300, canvas.width - 200, 80);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK:", 100, 300);
+      pop();
+      //ANNYANG
+      annyang.resume();
+      // commands = {
+      //   //sc1 listen
+      //   "I'm going to go all the way": listenNextLine,
+      //   "I'm going to go all of the way": listenNextLine,
+      // };
+      // annyang.addCommands(commands);
+      // annyang.debug();
     }
 
     // show dialog
@@ -652,7 +673,7 @@ function draw() {
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
-      rect(100, 50, 350, 50);
+      rect(100, 50, 500, 400);
       fill(255);
       textAlign(CENTER, CENTER);
       text("SPEAK", 350, 50);
@@ -786,7 +807,7 @@ function draw() {
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
-      rect(100, 50, 350, 50);
+      rect(100, 50, 500, 400);
       fill(255);
       textAlign(CENTER, CENTER);
       text("SPEAK", 350, 50);
@@ -894,6 +915,7 @@ function draw() {
 
 function switchStateToSc1() {
   if (state === `introAnimation`) {
+    fadeoutToggle = false;
     state = `parkingLot`;
   }
 }

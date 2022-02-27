@@ -369,7 +369,7 @@
         "type": "dialog",
         "image": "lauraLookR",
         "character": "laura palmer",
-        "dialog": "Who's here, BOB?"
+        "dialog": "Who's here, is it BOB?"
       },
       {
         "type": "visual cue",
