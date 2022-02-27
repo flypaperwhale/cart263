@@ -113,6 +113,12 @@ let bobHasYouVoiceToggle;
 
 let currentListener;
 
+let switch1 = 0;
+let switch2 = 0;
+let switch3 = 0;
+let switch4 = 0;
+let switch5 = 0;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -129,6 +135,7 @@ let dialogHeight = 85;
 
 let userName;
 
+let mouseToggle = false;
 /**
 Loads the JSON data for our little play
 */
@@ -206,7 +213,7 @@ function setup() {
   };
   console.log(commands);
   annyang.addCommands(commands);
-  annyang.debug();
+  //annyang.debug();
 
   snowTransition0Toggle = true;
   setInterval(snowTransition, 100);
@@ -256,6 +263,7 @@ function draw() {
         200
       );
       pop();
+      mouseToggle = true;
     }
     if (currentVisualCue === "introSkyImg") {
       // turn snow off
@@ -297,17 +305,28 @@ function draw() {
       accentSound.playMode("untilDone");
       accentSound.play();
       pop();
+      if (switch2 === 0) {
+        setTimeout(nextLine, 1000);
+        switch2 = 1;
+      }
       currentSoundCue = undefined;
     } else if (currentVisualCue === "monkeyFace") {
       // prompt player for name and flash monkey
       monkeyFaceToggle = true;
+      //do this once
     } else if (currentVisualCue === "noSnow") {
       monkeyFaceToggle = false;
       snowCover1Toggle = false;
+      mouseToggle = true;
     } else if (currentVisualCue === "fadeout") {
       roadBGToggle = false;
       fadeoutToggle = true;
     }
+
+    // if (currentSoundCue === "accentSound" && switch2 === 0) {
+    //   setTimeout(nextLine, 1000);
+    //   switch2 = 1;
+    // }
 
     // let userName = "jane";
     if (currentVoice === "dontTakeTheRing") {
@@ -316,6 +335,7 @@ function draw() {
     }
 
     if (currentListener === "askName") {
+      mouseToggle = false;
       //ANNYANG
       annyang.start();
       // TURN ON //
@@ -331,7 +351,7 @@ function draw() {
     }
 
     if (currentSoundCue === "rideStopsSound") {
-      console.log("so come here!");
+      //console.log("so come here!");
       // push();
       // rideStopsSound.playMode("untilDone");
       // rideStopsSound.play();
@@ -362,6 +382,12 @@ function draw() {
       displaySnow(255, 100);
     } else {
     }
+
+    if (monkeyFaceToggle === true && switch1 === 0) {
+      setTimeout(nextLine, 1000);
+      switch1 = 1;
+    }
+
     if (monkeyFaceToggle === true) {
       push();
       imageMode(CENTER);
@@ -474,7 +500,13 @@ function draw() {
       fadeoutToggle = true;
     }
 
+    if (currentSoundCue === "sc1TransitionAccent" && switch3 === 0) {
+      setTimeout(nextLine, 1000);
+      switch3 = 1;
+    }
+
     if (currentListener === "sayAllTheWay") {
+      mouseToggle = false;
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
@@ -605,12 +637,18 @@ function draw() {
       redRoomTransitionTheme.playMode("untilDone");
       redRoomTransitionTheme.play();
       pop();
+
+      if (switch4 === 0) {
+        setTimeout(nextLine, 1000);
+        switch4 = 1;
+      }
       currentSoundCue = undefined;
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
     }
 
     if (currentListener === "sayBOBIsReal") {
+      mouseToggle = false;
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
@@ -700,11 +738,17 @@ function draw() {
       snowTransition2Toggle = false;
       //snowTransition2Toggle = false;
       //roadBGToggle = false;
+      mouseToggle = true;
     } else if (currentSoundCue === "bobLaughsSound") {
       push();
       bobLaughsSound.playMode("untilDone");
       bobLaughsSound.play();
       pop();
+
+      if (currentSoundCue === "bobLaughsSound" && switch5 === 0) {
+        setTimeout(nextLine, 2750);
+        switch5 = 1;
+      }
       currentSoundCue = undefined;
     } else if (currentVisualCue === "noLaura") {
       lauraHandsToggle = false;
@@ -738,6 +782,7 @@ function draw() {
     }
 
     if (currentListener === "callForHelp") {
+      mouseToggle = false;
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
@@ -799,11 +844,11 @@ function draw() {
     }
     if (theRingToggle === true) {
       image(sc3RingImg, ringX, ringY, canvas.width - 1100, canvas.height - 700);
-      console.log(
-        `canvasW - 1100 ${canvas.width - 1100} canvasH - 700 ${
-          canvas.height - 700
-        }`
-      );
+      // console.log(
+      //   `canvasW - 1100 ${canvas.width - 1100} canvasH - 700 ${
+      //     canvas.height - 700
+      //   }`
+      // );
     } else {
     }
     if (lauraScreamsToggle === true) {
@@ -855,15 +900,18 @@ function switchStateToSc1() {
 function switchStateToSc2() {
   if (state === `parkingLot`) {
     state = `semiconscious`;
+    mouseToggle = true;
   }
 }
 function switchStateToSc3() {
   if (state === `semiconscious`) {
     state = `redRoom`;
+    nextLine();
   }
 }
 function switchStateToSc4() {
   if (state === `redRoom`) {
+    mouseToggle = true;
     barBgImgToggle = true;
     state = `parkingLot`;
   }
@@ -1012,12 +1060,14 @@ or a NEXT button... have user feel they are responding as Laura...
 */
 
 function mousePressed() {
-  //else {
+  if (mouseToggle === false) {
+    // click does nothing
+  } else if (mouseToggle === true) {
+    nextLine();
+  }
   if (touchingRingToggle === true) {
     //switch to scene 5
     console.log("so what?");
-  } else {
-    nextLine();
   }
 }
 
@@ -1036,12 +1086,14 @@ they will enter a new scene!
 */
 
 function listenNextLine1(userName0) {
+  currentListener = undefined;
   userName = userName0;
   annyang.pause();
   nextLine();
 }
 
 function listenNextLine() {
+  currentListener = undefined;
   annyang.pause();
   nextLine();
 }
