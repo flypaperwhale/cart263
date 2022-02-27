@@ -113,6 +113,7 @@ let bobHasYouVoiceToggle;
 
 let currentListener;
 
+let switch0 = 0;
 let switch1 = 0;
 let switch2 = 0;
 let switch3 = 0;
@@ -334,22 +335,6 @@ function draw() {
       dontTakeTheRingVoiceToggle = true;
     }
 
-    if (currentListener === "askName") {
-      mouseToggle = false;
-      //ANNYANG
-      annyang.start();
-      // TURN ON //
-      // ## display words to speak //
-      // pause click!
-
-      // commands = {
-      //   //intro listen
-      //   "my name is *userName": listenNextLine,
-      // };
-      // annyang.addCommands(commands);
-      // annyang.debug();
-    }
-
     if (currentSoundCue === "rideStopsSound") {
       //console.log("so come here!");
       // push();
@@ -378,6 +363,30 @@ function draw() {
       image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
     } else {
     }
+    if (currentListener === "askName") {
+      mouseToggle = false;
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(canvas.width / 4, 330, canvas.width / 2, 80);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK: My name is _________.", canvas.width / 4, 330);
+      pop();
+      //ANNYANG
+      annyang.start();
+      // TURN ON //
+      // ## display words to speak //
+      // pause click!
+
+      // commands = {
+      //   //intro listen
+      //   "my name is *userName": listenNextLine,
+      // };
+      // annyang.addCommands(commands);
+      // annyang.debug();
+    }
+
     if (snowCover1Toggle === true) {
       displaySnow(255, 100);
     } else {
@@ -593,10 +602,10 @@ function draw() {
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
-      rect(canvas.width / 2, 300, canvas.width - 200, 80);
+      rect(canvas.width / 4, 330, canvas.width / 2, 80);
       fill(255);
       textAlign(CENTER, CENTER);
-      text("SPEAK:", 100, 300);
+      text("SPEAK: I'm going to go all of the way.", canvas.width / 4, 330);
       pop();
       //ANNYANG
       annyang.resume();
@@ -668,26 +677,6 @@ function draw() {
       snowCover3Toggle = true; // transparency
     }
 
-    if (currentListener === "sayBOBIsReal") {
-      mouseToggle = false;
-      push();
-      fill(255, 0, 0);
-      rectMode(CENTER);
-      rect(100, 50, 500, 400);
-      fill(255);
-      textAlign(CENTER, CENTER);
-      text("SPEAK", 350, 50);
-      pop();
-      //ANNYANG
-      annyang.resume();
-      //   commands = {
-      //     //sc1 listen
-      //     "BOB is real": listenNextLine,
-      //   };
-      //   annyang.addCommands(commands);
-      //   annyang.debug();
-    }
-
     if (frontLogLadyToggle === true) {
       image(
         sc2LogLadyFrontImg,
@@ -729,6 +718,27 @@ function draw() {
       image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
     } else {
     }
+
+    if (currentListener === "sayBOBIsReal") {
+      mouseToggle = false;
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(canvas.width / 4, 330, canvas.width / 2, 80);
+      fill(255);
+      textAlign(CENTER, CENTER);
+      text("SPEAK: BOB is real.", canvas.width / 4, 330);
+      pop();
+      //ANNYANG
+      annyang.resume();
+      //   commands = {
+      //     //sc1 listen
+      //     "BOB is real": listenNextLine,
+      //   };
+      //   annyang.addCommands(commands);
+      //   annyang.debug();
+    }
+
     if (snowCover3Toggle === true) {
       displaySnow(255, 100);
     } else {
@@ -807,10 +817,10 @@ function draw() {
       push();
       fill(255, 0, 0);
       rectMode(CENTER);
-      rect(100, 50, 500, 400);
+      rect(canvas.width / 4, 330, canvas.width / 2, 80);
       fill(255);
       textAlign(CENTER, CENTER);
-      text("SPEAK", 350, 50);
+      text("SPEAK: HELP.", canvas.width / 4, 330);
       pop();
       //ANNYANG
       annyang.resume();
