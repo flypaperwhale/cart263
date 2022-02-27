@@ -120,6 +120,8 @@ let switch3 = 0;
 let switch4 = 0;
 let switch5 = 0;
 
+let ringIsClicked = false;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -209,8 +211,10 @@ function setup() {
     "help!": listenNextLine,
     "help me": listenNextLine,
     "somebody help me": listenNextLine,
+    "someone help": listenNextLine,
     "I need help": listenNextLine,
     "can somebody help me?": listenNextLine,
+    "can anybody help me?": listenNextLine,
   };
   console.log(commands);
   annyang.addCommands(commands);
@@ -393,7 +397,7 @@ function draw() {
     }
 
     if (monkeyFaceToggle === true && switch1 === 0) {
-      setTimeout(nextLine, 1000);
+      setTimeout(nextLine, 500);
       switch1 = 1;
     }
 
@@ -579,24 +583,6 @@ function draw() {
       );
     } else {
     }
-    if (snowCover2Toggle === true) {
-      displaySnow(255, 100);
-    } else {
-    }
-    if (snowTransition1Toggle === true) {
-      displaySnow(255, 255);
-    } else {
-    }
-    if (fadeoutToggle === true) {
-      push();
-      rectMode(CENTER);
-      fill(0);
-      rect(width / 2, height / 2, width, height);
-      pop();
-      setTimeout(switchStateToSc1, 2000);
-    } else {
-    }
-
     if (currentListener === "sayAllTheWay") {
       mouseToggle = false;
       push();
@@ -616,6 +602,24 @@ function draw() {
       // };
       // annyang.addCommands(commands);
       // annyang.debug();
+    }
+    if (snowCover2Toggle === true) {
+      displaySnow(255, 100);
+    } else {
+    }
+
+    if (snowTransition1Toggle === true) {
+      displaySnow(255, 255);
+    } else {
+    }
+    if (fadeoutToggle === true) {
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+      setTimeout(switchStateToSc1, 2000);
+    } else {
     }
 
     // show dialog
@@ -835,6 +839,11 @@ function draw() {
       // annyang.addCommands(commands);
       // annyang.debug();
     }
+    if (ringIsClicked === true) {
+      annyang.abort();
+      switchStateToSc5();
+      return;
+    }
 
     let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
     if (theRingToggle === true && d < ringSize / 2) {
@@ -946,6 +955,13 @@ function switchStateToSc4() {
     mouseToggle = true;
     barBgImgToggle = true;
     state = `parkingLot`;
+  }
+}
+function switchStateToSc5() {
+  if (state === `redRoom`) {
+    currentScene = "scene5";
+    mouseToggle = true;
+    state = `redRoom`;
   }
 }
 
@@ -1099,7 +1115,8 @@ function mousePressed() {
   }
   if (touchingRingToggle === true) {
     //switch to scene 5
-    console.log("so what?");
+    ringIsClicked = true;
+    //    console.log("so what?");
   }
 }
 
@@ -1145,6 +1162,9 @@ function nextLine() {
       // currentLine = 0;
       currentScene = "scene4";
     } else if (currentScene === "scene4") {
+      alert("the end");
+      currentScene = undefined;
+    } else if (currentScene === "scene5") {
       alert("the end");
       currentScene = undefined;
     }

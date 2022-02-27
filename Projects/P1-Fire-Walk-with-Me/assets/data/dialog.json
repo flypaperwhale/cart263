@@ -614,6 +614,40 @@
         "character": "narrator",
         "dialog": "transition fade out"
       }
+    ],
+    "scene5 comment1": "Dead ending. BOB gets Laura, Laura screams",
+    "scene5 background": "redRoom",
+    "scene5": [
+      {
+        "type": "sound cue",
+        "sound": "bobGrowlSound",
+        "character": "narrator",
+        "dialog": "gnarrll"
+      },
+      {
+        "type": "sound cue",
+        "image": "lauraScreamsSound",
+        "character": "narrator",
+        "dialog": "hold snow before next image"
+      },
+      {
+        "type": "visual cue",
+        "image": "lauraScreams",
+        "character": "narrator",
+        "dialog": "show the sky"
+      },
+      {
+        "type": "visual cue",
+        "sound": "none",
+        "character": "narrator",
+        "dialog": "a beat"
+      },
+      {
+        "type": "visual cue",
+        "image": "fadeOut",
+        "character": "narrator",
+        "dialog": "show black"
+      }
     ]
   }
 }
