@@ -1,5 +1,5 @@
 /**
-Fire Walk with Me // "Monkey Business"
+"Monkey Business" / a program based on David Lynch's Fire Walk with Me // 
 Frankie Latreille
 
 Reimagined scenes of David Lynch's Fire Walk with Me. Laura meets a trucker who wants
@@ -109,6 +109,8 @@ let currentVoice;
 //let dontTakeTheRing;
 let dontTakeTheRingVoiceToggle;
 
+let bobHasYouVoiceToggle;
+
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom
@@ -140,7 +142,7 @@ function preload() {
   bobLaughsSound = loadSound("assets/sounds/bobLaugh.wav");
   bobAttacksSound = loadSound("assets/sounds/bobattacks.wav");
   lauraScreamsSound = loadSound("assets/sounds/lauraScream.mp3");
-  snowSound = loadSound("assets/sounds/snow.wav");
+  snowSound = loadSound("assets/sounds/snowbit.mp3");
 
   // introduction images
   introLauraImg = loadImage("assets/images/intro-scene/intro-laura.png");
@@ -212,19 +214,19 @@ function draw() {
   if (state === `introAnimation`) {
     // show background image
 
-    if (currentSoundCue === "introMelody") {
+    if (currentSoundCue === "snowSound") {
       //play monkey intro song once
-      // push();
-      // introMelody.playMode("untilDone");
-      // introMelody.play();
-      // pop();
+      push();
+      snowSound.playMode("untilDone");
+      snowSound.play();
+      pop();
       currentSoundCue = undefined;
       push();
       textSize(24);
       fill(230, 220, 220);
       textAlign(CENTER, CENTER);
       text(
-        `Fire Walk with Me
+        `Monkey Business
         Click forward`,
         250,
         200
@@ -255,11 +257,11 @@ function draw() {
       lauraIntroToggle = true;
     } else if (currentSoundCue === "snowSound") {
       //play monkey intro song once
-      // push();
-      // snowSound.duration(1);
-      // snowSound.playMode("untilDone");
-      // snowSound.play();
-      // pop();
+      push();
+      snowSound.duration(1);
+      snowSound.playMode("untilDone");
+      snowSound.play();
+      pop();
     } else if (currentVisualCue === "snowCover1") {
       snowCover1Toggle = true;
     } else if (currentVisualCue === "thumbUp") {
@@ -343,7 +345,7 @@ function draw() {
       console.log(`what color is ${currentVoice}`);
       dontTakeTheRingVoiceToggle = false;
       responsiveVoice.speak(
-        "Don't take the ring Anna. Don't take the ring",
+        "Don't take the ring Laura. Don't take the ring",
         "Hindi Male",
         {
           pitch: 1.1,
@@ -717,6 +719,23 @@ function draw() {
     } else {
     }
     // The angel (?)
+
+    if (bobHasYouVoiceToggle === true) {
+      console.log(`what color is ${currentVoice}`);
+      bobHasYouVoiceToggle = false;
+      responsiveVoice.speak("The thread will be torn", "Hindi Male", {
+        pitch: 1.1,
+        rate: 0.55,
+        volume: 1,
+      });
+      currentVoice = undefined;
+      nextLine();
+    }
+
+    if (currentVoice === "bobHasYou") {
+      //RESPONSIVE VOICE
+      bobHasYouVoiceToggle = true;
+    }
 
     // show dialog
     manipBlockingData();

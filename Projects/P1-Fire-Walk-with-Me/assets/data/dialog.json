@@ -38,7 +38,7 @@
     "scene0": [
       {
         "type": "sound cue",
-        "sound": "introMelody",
+        "sound": "snowSound",
         "character": "narrator",
         "dialog": "game theme"
       },
@@ -111,12 +111,6 @@
         "dialog": "Speak: My name is ________"
       },
       {
-        "type": "spoken",
-        "image": "dontTakeTheRing",
-        "character": "narrator",
-        "dialog": "monkeyface is flashed ResponsiveVoice"
-      },
-      {
         "type": "visual cue",
         "image": "monkeyFace",
         "character": "narrator",
@@ -136,8 +130,9 @@
       },
       {
         "type": "spoken",
+        "image": "dontTakeTheRing",
         "character": "narrator",
-        "dialog": "{name (reversed?)}, don't let Laura put on the ring!"
+        "dialog": "monkeyface is flashed ResponsiveVoice"
       },
       {
         "type": "visual cue",
@@ -350,7 +345,7 @@
         "type": "dialog",
         "image": "frontLogLady",
         "character": "margaret lanterman",
-        "dialog": "He's here."
+        "dialog": "                                                                                                   He's here."
       },
       {
         "type": "dialog",
@@ -368,7 +363,7 @@
         "type": "dialog",
         "image": "logLadyLookL",
         "character": "margaret lanterman",
-        "dialog": "When this kind of fire starts, it is very hard to put out."
+        "dialog": "                                          When this kind of fire starts, it is very hard to put out."
       },
       {
         "type": "dialog",
@@ -386,7 +381,7 @@
         "type": "dialog",
         "image": "sc2CloseUp1",
         "character": "margaret lanterman",
-        "dialog": "Maybe ask for help?"
+        "dialog": "                                                                                            Maybe ask for help?"
       },
       {
         "type": "dialog",
@@ -438,7 +433,7 @@
         "type": "dialog",
         "image": "bobChat",
         "character": "bob",
-        "dialog": "Hello Laura."
+        "dialog": "                                                                                                  Hello Laura."
       },
       {
         "type": "dialog",
@@ -462,19 +457,19 @@
         "type": "dialog",
         "image": "bobChat",
         "character": "bob",
-        "dialog": "I am the one who wants to breathe through your nose,"
+        "dialog": "                                            I am the one who wants to breathe through your nose,"
       },
       {
         "type": "dialog",
         "image": "bobChat",
         "character": "bob",
-        "dialog": "and taste through your mouth."
+        "dialog": "                                                                        and taste through your mouth."
       },
       {
         "type": "dialog",
         "image": "bobRage",
         "character": "bob",
-        "dialog": "Look at how filthy you've become."
+        "dialog": "                                                                    Look at how filthy you've become."
       },
       {
         "type": "dialog",
@@ -486,7 +481,7 @@
         "type": "dialog",
         "image": "lauraHands",
         "character": "bob",
-        "dialog": "Let me show you all we can do."
+        "dialog": "                                                                        Let me show you all we can do."
       },
       {
         "type": "dialog",
@@ -498,7 +493,7 @@
         "type": "dialog",
         "image": "bobRage",
         "character": "bob",
-        "dialog": "I want to kill through you. I want to kill with your hands."
+        "dialog": "                                        I want to kill through you. I want to kill with your hands."
       },
       {
         "type": "sound cue",
@@ -531,16 +526,23 @@
         "dialog": "BOB has vanished."
       },
       {
+        "type": "spoken",
+        "image": "bobHasYou",
+        "character": "narrator",
+        "dialog": "the thread will be torn NAME"
+      },
+      {
         "type": "visual cue",
         "image": "theRing",
         "character": "narrator",
         "dialog": "ring appears."
       },
+
       {
         "type": "dialog",
         "image": "theRing",
         "character": "bob",
-        "dialog": "If you take the ring, you will discover my true identity."
+        "dialog": "                                           If you take the ring, you will discover my true identity."
       },
       {
         "type": "visual cue",
@@ -550,8 +552,9 @@
       },
       {
         "type": "listen",
+        "image": "none",
         "character": "narrator",
-        "dialog": "Help Me!"
+        "dialog": "Speak: Help me!"
       },
       {
         "type": "visual cue",
@@ -567,13 +570,13 @@
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
-        "dialog": "Hey, you were dazed there for a moment."
+        "dialog": "                                                            Hey, you were dazed there for a moment."
       },
       {
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
-        "dialog": "Where? Where are you going?"
+        "dialog": "                                                                      Where? Where are you going?"
       },
       {
         "type": "dialog",
@@ -585,13 +588,13 @@
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
-        "dialog": "What the hell? Are you high or something?"
+        "dialog": "                                                       What the hell? Are you high or something?"
       },
       {
         "type": "dialog",
         "image": "brettSmirk",
         "character": "businessman",
-        "dialog": "...started the party without me."
+        "dialog": "                                                                 ...started the party without me."
       },
       {
         "type": "dialog",
