@@ -126,24 +126,8 @@ let currentLine = 0;
 // The height of our dialog box
 let dialogHeight = 85;
 //
-// let commands;
-//  {
-//   //intro listen
-//   "my name is *userName": null,
-//   //sc1 listen
-//   "I'm going to go all the way": null,
-//   "I'm going to go all of the way": null,
-//   //sc2 listen
-//   "BOB is real": null,
-//   //sc3 listen
-//   "help!": null,
-//   "help me": null,
-//   "somebody help me": null,
-//   "I need help": null,
-//   "can somebody help me?": null,
-// };
-// annyang.addCommands(commands);
-// annyang.debug();
+
+let userName;
 
 /**
 Loads the JSON data for our little play
@@ -204,6 +188,25 @@ Creates the canvas
 */
 function setup() {
   createCanvas(600, 400);
+
+  let commands = {
+    //intro listen
+    "my name is *userName": listenNextLine1,
+    //sc1 listen
+    "I'm going to go all the way": listenNextLine,
+    "I'm going to go all of the way": listenNextLine,
+    //sc2 listen
+    "BOB is real": listenNextLine,
+    //sc3 listen
+    "help!": listenNextLine,
+    "help me": listenNextLine,
+    "somebody help me": listenNextLine,
+    "I need help": listenNextLine,
+    "can somebody help me?": listenNextLine,
+  };
+  console.log(commands);
+  annyang.addCommands(commands);
+  annyang.debug();
 
   snowTransition0Toggle = true;
   setInterval(snowTransition, 100);
@@ -314,7 +317,11 @@ function draw() {
 
     if (currentListener === "askName") {
       //ANNYANG
+      annyang.start();
       // TURN ON //
+      // ## display words to speak //
+      // pause click!
+
       // commands = {
       //   //intro listen
       //   "my name is *userName": listenNextLine,
@@ -477,6 +484,7 @@ function draw() {
       text("SPEAK", 350, 50);
       pop();
       //ANNYANG
+      annyang.resume();
       // commands = {
       //   //sc1 listen
       //   "I'm going to go all the way": listenNextLine,
@@ -612,6 +620,7 @@ function draw() {
       text("SPEAK", 350, 50);
       pop();
       //ANNYANG
+      annyang.resume();
       //   commands = {
       //     //sc1 listen
       //     "BOB is real": listenNextLine,
@@ -738,6 +747,7 @@ function draw() {
       text("SPEAK", 350, 50);
       pop();
       //ANNYANG
+      annyang.resume();
       // commands = {
       //   //sc3 listen
       //   "help!": null,
@@ -814,11 +824,15 @@ function draw() {
     if (bobHasYouVoiceToggle === true) {
       console.log(`what color is ${currentVoice}`);
       bobHasYouVoiceToggle = false;
-      responsiveVoice.speak("The thread will be torn", "Hindi Male", {
-        pitch: 1.1,
-        rate: 0.55,
-        volume: 1,
-      });
+      responsiveVoice.speak(
+        `The thread will be torn ${userName}`,
+        "Hindi Male",
+        {
+          pitch: 1.1,
+          rate: 0.55,
+          volume: 1,
+        }
+      );
       currentVoice = undefined;
       nextLine();
     }
@@ -1021,8 +1035,14 @@ or something they've been hinted into saying
 they will enter a new scene!
 */
 
+function listenNextLine1(userName0) {
+  userName = userName0;
+  annyang.pause();
+  nextLine();
+}
+
 function listenNextLine() {
-  annyang.abort();
+  annyang.pause();
   nextLine();
 }
 
