@@ -114,7 +114,8 @@ let noLauraToggle;
 let noBobToggle;
 let fadeoutToggle;
 let noneToggle;
-let barBgImgToggle = true;
+let barBgImgToggle = true; // starts true, appears when state/setting changed
+// from intro to scene1
 
 // Sounds
 let introMelody;
@@ -290,10 +291,12 @@ listen cue (annyang) - listens for user input
 function draw() {
   background(0);
 
-  // intial display of snow //
+  // intial display of snow
   displaySnow(255, 255);
 
+  // when state is Title
   if (state === `Title`) {
+    // display opening text
     push();
     textSize(24);
     fill(230, 220, 220);
@@ -307,16 +310,12 @@ function draw() {
     pop();
   }
 
+  // when state is introAnimation
   if (state === `introAnimation`) {
-    // show background image
-
+    // intro CUES //
+    // snowSound sound cue
     if (currentSoundCue === "snowSound") {
-      //play monkey intro song once
-      push();
-      snowSound.playMode("untilDone");
-      snowSound.play();
-      pop();
-      currentSoundCue = undefined;
+      // display title text
       push();
       textSize(24);
       fill(230, 220, 220);
@@ -328,103 +327,107 @@ function draw() {
         200
       );
       pop();
-      mouseToggle = true;
-    }
-    if (currentVisualCue === "introSkyImg") {
-      // turn snow off
-      snowTransition0Toggle = false;
-      introSkyToggle = true;
-      // Sky background
-
-      if (currentSoundCue === "highwaySound") {
-        //  play monkey intro song once
-        push();
-        highwaySound.playMode("untilDone");
-        highwaySound.play();
-        pop();
-        currentSoundCue = undefined;
-      }
-    } else if (currentVisualCue === "roadBG") {
-      // Road background
-      lauraIntroToggle = false;
-      roadBGToggle = true;
-    } else if (currentVisualCue === "lauraIntro") {
-      // Laura close up
-      thumbUpToggle = false;
-      lauraIntroToggle = true;
-    } else if (currentSoundCue === "snowSound") {
-      //play monkey intro song once
+      // play snow sound
       push();
-      snowSound.duration(1);
       snowSound.playMode("untilDone");
       snowSound.play();
       pop();
-    } else if (currentVisualCue === "snowCover1") {
+      currentSoundCue = undefined; // play snow sound once
+      mouseToggle = true; // mouse is on!
+    }
+    // Sky background visual cue
+    if (currentVisualCue === "introSkyImg") {
+      snowTransition0Toggle = false; // turn snow off
+      introSkyToggle = true;
+    }
+    // highway sound cue
+    if (currentSoundCue === "highwaySound") {
+      push();
+      highwaySound.playMode("untilDone");
+      highwaySound.play();
+      pop();
+      currentSoundCue = undefined; // play highway sound only once
+    }
+    // road background visual cue
+    if (currentVisualCue === "roadBG") {
+      // Road background
+      lauraIntroToggle = false; // hide laura intro when coming back to road
+      roadBGToggle = true;
+    }
+    // Thumb close up visual cue
+    if (currentVisualCue === "thumbUp") {
+      lauraIntroToggle = false; // hide laura's intro image
+      thumbUpToggle = true;
+    }
+    // lauraIntro visual cue
+    if (currentVisualCue === "lauraIntro") {
+      // Laura close up
+      thumbUpToggle = false; // hide thumb up
+      lauraIntroToggle = true;
+    }
+    // snowCover1 visual cue
+    if (currentVisualCue === "snowCover1") {
       snowCover1Toggle = true;
       if (switchA === 0) {
+        // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
         switchA = 1;
       }
-    } else if (currentVisualCue === "thumbUp") {
-      // Thumb close up
-      lauraIntroToggle = false;
-      thumbUpToggle = true;
-    } else if (currentSoundCue === "accentSound") {
+    }
+    // monkey face visual cue
+    if (currentVisualCue === "monkeyFace") {
+      // flash monkey when prompt player for name
+      monkeyFaceToggle = true;
+    }
+    // intro accent sound cue
+    if (currentSoundCue === "accentSound") {
       push();
       accentSound.playMode("untilDone");
       accentSound.play();
       pop();
       if (switch2 === 0) {
+        // automatically changes line
         setTimeout(nextLine, 1000);
         switch2 = 1;
       }
-      currentSoundCue = undefined;
-    } else if (currentVisualCue === "monkeyFace") {
-      // prompt player for name and flash monkey
-      monkeyFaceToggle = true;
-      //do this once
-    } else if (currentVisualCue === "noSnow") {
-      monkeyFaceToggle = false;
-      snowCover1Toggle = false;
-      mouseToggle = true;
-    } else if (currentVisualCue === "fadeout") {
-      roadBGToggle = false;
+      currentSoundCue = undefined; // plays sound only once
+    }
+    // intro no snow visual cue
+    if (currentVisualCue === "noSnow") {
+      monkeyFaceToggle = false; // turn off monkey face
+      snowCover1Toggle = false; // turn off snow cover 1
+      mouseToggle = true; // mouse back on!
+    }
+    // intro spoken cue RESPONSIVE VOICE
+    if (currentVoice === "dontTakeTheRing") {
+      dontTakeTheRingVoiceToggle = true;
+    }
+    // intro fadeout visual cue
+    if (currentVisualCue === "fadeout") {
+      roadBGToggle = false; // hide road background
       fadeoutToggle = true;
     }
 
-    if (currentVoice === "dontTakeTheRing") {
-      //RESPONSIVE VOICE
-      dontTakeTheRingVoiceToggle = true;
-    }
-
-    if (currentSoundCue === "rideStopsSound") {
-      //console.log("so come here!");
-      // push();
-      // rideStopsSound.playMode("untilDone");
-      // rideStopsSound.play();
-      // pop();
-      // currentSoundCue = undefined;
-    }
-    // overlay redroom and read player name backwards
-
-    // Sky background
+    // TOGGLED blocked cues - in correct layers for accurate display //
+    // Sky background toggle TRUE
     if (introSkyToggle === true) {
       image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 350, 0, 50);
-    } else {
     }
-
+    // road background toggle TRUE
     if (roadBGToggle === true) {
       image(introRoadBgImg, 0, 0, canvas.width - 500, canvas.height - 375);
-    } else {
     }
-    if (lauraIntroToggle === true) {
-      image(introLauraImg, 0, 0, canvas.width - 570, canvas.height - 400);
-    } else {
-    }
+    // thumb img toggle TRUE
     if (thumbUpToggle === true) {
       image(introThumbImg, 0, 0, canvas.width - 500, canvas.height - 375);
-    } else {
     }
+    // laura intro img toggle TRUE
+    if (lauraIntroToggle === true) {
+      image(introLauraImg, 0, 0, canvas.width - 570, canvas.height - 400);
+    }
+
+    // ANNYANG ask user for their name
+    // display ask in white font in red bar seen below snowCover1
     if (currentListener === "askName") {
       mouseToggle = false;
       push();
@@ -437,50 +440,30 @@ function draw() {
       pop();
       //ANNYANG
       annyang.start();
-      // TURN ON //
-      // ## display words to speak //
-      // pause click!
-
-      // commands = {
-      //   //intro listen
-      //   "my name is *userName": listenNextLine,
-      // };
-      // annyang.addCommands(commands);
-      // annyang.debug();
     }
 
+    // snow cover1 toggle TRUE
     if (snowCover1Toggle === true) {
-      mouseToggle = false;
-      displaySnow(255, 100);
-    } else {
+      mouseToggle = false; // mouse is paused
+      displaySnow(255, 100); // have it be transparent
     }
-
-    if (monkeyFaceToggle === true && switch1 === 0) {
-      setTimeout(nextLine, 500);
-      switch1 = 1;
-    }
-
+    // monkey face toggle TRUE
     if (monkeyFaceToggle === true) {
       push();
       imageMode(CENTER);
       tint(255, 195);
       image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
       pop();
-    } else {
     }
-    if (fadeoutToggle === true) {
-      push();
-      rectMode(CENTER);
-      fill(0);
-      rect(width / 2, height / 2, width, height);
-      pop();
-      setTimeout(switchStateToSc1, 2000);
-    } else {
+    // dual monkeyFaceToggle to achieve monkey visibility for a bit longer
+    if (monkeyFaceToggle === true && switch1 === 0) {
+      setTimeout(nextLine, 500); // automatically change lines
+      switch1 = 1;
     }
 
+    // RESPONSIVEVOICE Warning!
     if (dontTakeTheRingVoiceToggle === true) {
-      console.log(`what color is ${currentVoice}`);
-      dontTakeTheRingVoiceToggle = false;
+      dontTakeTheRingVoiceToggle = false; // so this only happens once
       responsiveVoice.speak(
         "Don't take the ring Laura. Don't take the ring",
         "Hindi Male",
@@ -490,11 +473,23 @@ function draw() {
           volume: 1,
         }
       );
-      currentVoice = undefined;
+      currentVoice = undefined; // fail safe?
       nextLine();
     }
 
-    // show dialog
+    // fadeout toggle TRUE
+    if (fadeoutToggle === true) {
+      // display a black rectangle
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+      setTimeout(switchStateToSc1, 2000); // after 2 seconds change setting to parking lot
+    }
+
+    // each frame figure out what the currentLine and its type
+    // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
 
@@ -504,6 +499,9 @@ function draw() {
       // Bar parking background
       image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     }
+
+    // CUES //
+    // car door sound cue
     if (currentSoundCue === "carDoorSound") {
       push();
       carDoorSound.playMode("untilDone");
@@ -511,75 +509,95 @@ function draw() {
       pop();
       currentSoundCue = undefined;
     }
-    // if (visualCueToggle === true) {
+    // noSnow visual toggle
     if (currentVisualCue === "noSnow") {
       // snowTransition0Toggle = false;
-      fadeoutToggle = false;
-      roadBGToggle = false;
+      fadeoutToggle = false; // hide fadeout
+      roadBGToggle = false; // hide road background
     }
+    // laura lights up visual cue
     if (currentVisualCue === "lauraLight") {
-      fadeoutToggle = false;
+      //fadeoutToggle = false; ###
       // Laura lights up
       lauraLightToggle = true;
-    } else if (currentVisualCue === "lauraCig") {
+    }
+    // Laura smoker visual cue
+    if (currentVisualCue === "lauraCig") {
       // Laura smokes
-      lauraLightToggle = false;
+      lauraLightToggle = false; // hide laura lights up
       lauraCigToggle = true;
-    } else if (currentVisualCue === "brettLeer") {
+    }
+    // brett leering visual cue
+    if (currentVisualCue === "brettLeer") {
       // Leering businessman approaches
       brettLeerToggle = true;
-      console.log(brettLeerToggle);
-    } else if (currentVisualCue === "noLaura") {
-      brettLeerToggle = false;
+    }
+    // laura out of the picture visual cue
+    if (currentVisualCue === "noLaura") {
+      brettLeerToggle = false; // hide brett leer
       brettSmirkToggle = true;
-      lauraCigToggle = false;
-    } else if (currentVisualCue === "brettSmirk") {
-      // Businessman smirks
-      brettSnideToggle = false;
-      lauraCigToggle = false;
-      brettLeerToggle = false;
-      brettSmirkToggle = true;
-    } else if (currentSoundCue === "accentSound") {
+      lauraCigToggle = false; // hide laura smokes
+    }
+    //  brett snides visual cue
+    if (currentVisualCue === "brettSnide") {
+      // Businessman sniding (? in another 4th scene?)
+      // snowCover2Toggle = false;  ###
+      brettSmirkToggle = false; // hide brett smirk
+      brettSnideToggle = true;
+    }
+    // scene 1 accent sound cue
+    if (currentSoundCue === "accentSound") {
       push();
       accentSound.playMode("untilDone");
       accentSound.play();
       pop();
       currentSoundCue = undefined;
-    } else if (currentVisualCue === "brettSnide") {
-      // Businessman sniding (? in another 4th scene?)
-      snowCover2Toggle = false;
-      brettSmirkToggle = false;
-      brettSnideToggle = true;
     }
-    //}
+    // brett smirking visual cue
+    if (currentVisualCue === "brettSmirk") {
+      // Businessman smirks
+      brettSnideToggle = false; // hide brett snide
+      //lauraCigToggle = false; // hide laura smokes ##
+      //brettLeerToggle = false; // hide brett leer ##
+      brettSmirkToggle = true;
+    }
+
+    // scene 1 snowCover2 cue
     if (currentVisualCue === "snowCover2") {
       snowCover2Toggle = true;
       if (switchB === 0) {
+        // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
         switchB = 1;
       }
-    } else if (currentSoundCue === "sc1TransitionAccent") {
-      // push();
-      // sc1TransitionAccent.playMode("untilDone");
-      // sc1TransitionAccent.play();
-      // pop();
-      currentSoundCue = undefined;
-    } else if (currentVisualCue === "snowTransition1") {
-      snowTransition1Toggle = true;
-      snowCover3Toggle = true;
-      //snowTransition2Toggle = true;
-      brettSmirkToggle = false;
-      barBgImgToggle = false;
-      setTimeout(switchStateToSc2, 1500);
-    } else if (currentVisualCue === "endFadeout") {
-      // roadBGToggle = false;
-      fadeoutToggle = true;
     }
-
+    // scene 1 snowTransition to scene 2 sound cue+
     if (currentSoundCue === "sc1TransitionAccent" && switch3 === 0) {
       setTimeout(nextLine, 1000);
       switch3 = 1;
     }
+    // // scene1 to scene2 sound cue
+    // if (currentSoundCue === "sc1TransitionAccent") {
+    //   // push();
+    //   // sc1TransitionAccent.playMode("untilDone");
+    //   // sc1TransitionAccent.play();
+    //   // pop();
+    //   currentSoundCue = undefined;
+    // }
+
+    // scene 1 snowTransition1 cue
+    if (currentVisualCue === "snowTransition1") {
+      snowTransition1Toggle = true;
+      snowCover3Toggle = true; // turn on snow cover for semiconscious setting to create overlap
+      brettSmirkToggle = false; // hide brett smirk
+      barBgImgToggle = false; // hide parking background
+      setTimeout(switchStateToSc2, 1500); // change setting to semiconscious aver 1.5 seconds
+    }
+
+    // if (currentVisualCue === "endFadeout") {
+    //   // roadBGToggle = false;
+    //   fadeoutToggle = true;
+    // } #### TO SCENE 4
 
     // if (currentVisualCue === "mouse toggle") {
     //   snowTransition3Toggle = false;
@@ -723,6 +741,7 @@ function draw() {
       pop();
 
       if (switch4 === 0) {
+        // automatically changes line
         setTimeout(nextLine, 1000);
         switch4 = 1;
       }
@@ -730,6 +749,7 @@ function draw() {
     } else if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
       if (switchC === 0) {
+        // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
         switchC = 1;
       }
@@ -914,6 +934,7 @@ function draw() {
     } else if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
       if (switchD === 0) {
+        // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
         switchD = 1;
       }
@@ -935,6 +956,7 @@ function draw() {
       pop();
       currentSoundCue = undefined;
       if (switchF === 0) {
+        // automatically changes line
         setTimeout(nextLine, 500);
         switchF = 1;
       }
@@ -942,6 +964,7 @@ function draw() {
       theRingToggle = false;
       lauraScreamsToggle = true;
       if (switchG === 0) {
+        // automatically changes line
         setTimeout(nextLine, 500);
         switchG = 1;
       }
@@ -1034,6 +1057,7 @@ if (state === "parkingLotReprise") {
     //roadBGToggle = false;
     mouseToggle = true;
     if (switchX === 0) {
+      // automatically changes line because mouse is paused
       nextLine();
       switchX = 1;
     }
@@ -1125,11 +1149,10 @@ function displaySnow(gray, alpha) {
     snowTransition1Toggle === true ||
     snowTransition2Toggle === true ||
     snowTransition3Toggle === true ||
-    snowTransition4Toggle === true ||
+    //snowTransition4Toggle === true ||
     snowCover1Toggle === true ||
     snowCover2Toggle === true ||
-    snowCover3Toggle === true ||
-    snowCover4Toggle === true
+    snowCover3Toggle === true
   ) {
     push();
     imageMode(CENTER);
@@ -1150,7 +1173,7 @@ function displaySnow(gray, alpha) {
     snowTransition1Toggle === false ||
     snowTransition2Toggle === false ||
     snowTransition3Toggle === false ||
-    snowTransition4Toggle === false ||
+    //snowTransition4Toggle === false ||
     snowCover1Toggle === false ||
     snowCover2Toggle === false ||
     snowCover3Toggle === false ||
@@ -1348,8 +1371,7 @@ function keyPressed() {
     console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
       snowTransition1Toggle = ${snowTransition1Toggle}
       snowTransition2Toggle = ${snowTransition2Toggle}
-      snowTransition3Toggle = ${snowTransition3Toggle}
-      snowTransition0Toggle = ${snowTransition4Toggle}`);
+      snowTransition3Toggle = ${snowTransition3Toggle}`);
     console.log(`
         snowCover1Toggle = ${snowCover1Toggle}
         snowCover2Toggle = ${snowCover2Toggle}
