@@ -294,7 +294,7 @@ function draw() {
   // intial display of snow
   displaySnow(255, 255);
 
-  // when state is Title
+  // + // when state is Title // + //
   if (state === `Title`) {
     // display opening text
     push();
@@ -310,7 +310,7 @@ function draw() {
     pop();
   }
 
-  // when state is introAnimation
+  // + // when state is introAnimation // + //
   if (state === `introAnimation`) {
     // intro CUES //
     // snowSound sound cue
@@ -408,7 +408,7 @@ function draw() {
       fadeoutToggle = true;
     }
 
-    // TOGGLED blocked cues - in correct layers for accurate display //
+    // intro TOGGLED blocked cues - in correct layers for accurate display //
     // Sky background toggle TRUE
     if (introSkyToggle === true) {
       image(introSkyImg, 0, 0, canvas.width - 600, canvas.height - 350, 0, 50);
@@ -463,6 +463,8 @@ function draw() {
 
     // RESPONSIVEVOICE Warning!
     if (dontTakeTheRingVoiceToggle === true) {
+      // redroom entryway + transparency ###
+      //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
       dontTakeTheRingVoiceToggle = false; // so this only happens once
       responsiveVoice.speak(
         "Don't take the ring Laura. Don't take the ring",
@@ -493,6 +495,7 @@ function draw() {
     manipBlockingData();
   }
 
+  // + // state is ParkingLot // + //
   if (state === `parkingLot`) {
     // show background image
     if (barBgImgToggle === true) {
@@ -500,7 +503,7 @@ function draw() {
       image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     }
 
-    // CUES //
+    // scene1 CUES //
     // car door sound cue
     if (currentSoundCue === "carDoorSound") {
       push();
@@ -576,15 +579,6 @@ function draw() {
       setTimeout(nextLine, 1000);
       switch3 = 1;
     }
-    // // scene1 to scene2 sound cue
-    // if (currentSoundCue === "sc1TransitionAccent") {
-    //   // push();
-    //   // sc1TransitionAccent.playMode("untilDone");
-    //   // sc1TransitionAccent.play();
-    //   // pop();
-    //   currentSoundCue = undefined;
-    // }
-
     // scene 1 snowTransition1 cue
     if (currentVisualCue === "snowTransition1") {
       snowTransition1Toggle = true;
@@ -594,16 +588,8 @@ function draw() {
       setTimeout(switchStateToSc2, 1500); // change setting to semiconscious aver 1.5 seconds
     }
 
-    // if (currentVisualCue === "endFadeout") {
-    //   // roadBGToggle = false;
-    //   fadeoutToggle = true;
-    // } #### TO SCENE 4
-
-    // if (currentVisualCue === "mouse toggle") {
-    //   snowTransition3Toggle = false;
-    //   mouseToggle = true;
-    // }
-
+    // scene 1 TOGGLED Blocked cues //
+    // laura lighting up toggled TRUE
     if (lauraLightToggle === true) {
       image(
         sc1LauraLightsUp,
@@ -612,12 +598,12 @@ function draw() {
         canvas.width - 1000,
         canvas.height - 500
       );
-    } else {
     }
+    // laura smoking toggled TRUE
     if (lauraCigToggle === true) {
       image(sc1LauraSmokes, 50, 100, canvas.width - 1000, canvas.height - 500);
-    } else {
     }
+    // brett leering toggled TRUE
     if (brettLeerToggle === true) {
       image(
         sc1BusinessmanAcosts,
@@ -626,8 +612,8 @@ function draw() {
         canvas.width - 910,
         canvas.height - 600
       );
-    } else {
     }
+    // brett smirking toggled TRUE
     if (brettSmirkToggle === true) {
       image(
         sc1BusinessmanSmirks,
@@ -636,8 +622,8 @@ function draw() {
         canvas.width - 950,
         canvas.height - 600
       );
-    } else {
     }
+    // brett snides toggled TRUE
     if (brettSnideToggle === true) {
       image(
         sc1BusinessmanSnark,
@@ -646,8 +632,10 @@ function draw() {
         canvas.width - 880,
         canvas.height - 580
       );
-    } else {
     }
+
+    // ANNYANG user must say All the way
+    // display ask in white font in red bar seen below snowCover2
     if (currentListener === "sayAllTheWay") {
       mouseToggle = false;
       push();
@@ -658,95 +646,93 @@ function draw() {
       textAlign(CENTER, CENTER);
       text("SPEAK: I'm going to go all of the way.", canvas.width / 4, 330);
       pop();
-      //ANNYANG
       annyang.resume();
-      // commands = {
-      //   //sc1 listen
-      //   "I'm going to go all the way": listenNextLine,
-      //   "I'm going to go all of the way": listenNextLine,
-      // };
-      // annyang.addCommands(commands);
-      // annyang.debug();
     }
+
+    // snowCover2 Toggled TRUE
     if (snowCover2Toggle === true) {
-      mouseToggle = false;
-
+      mouseToggle = false; // pause mouse
       displaySnow(255, 100);
-    } else {
     }
-
+    // snowTransition1 toggled TRUE
     if (snowTransition1Toggle === true) {
       displaySnow(255, 255);
-    } else {
-    }
-    if (fadeoutToggle === true) {
-      push();
-      rectMode(CENTER);
-      fill(0);
-      rect(width / 2, height / 2, width, height);
-      pop();
-      setTimeout(switchStateToSc1, 2000);
-    } else {
     }
 
-    // show dialog
+    // each frame figure out what the currentLine and its type
+    // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
 
+  // + // state is Semiconscious // + //
   if (state === `semiconscious`) {
     // show background image
-    // Bar parking background
-    //image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     // Semicounscious eerie background
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
+    // scene 2 CUES //
+    // scene 2 noSnow visual cue
     if (currentVisualCue === "noSnow") {
-      snowCover2Toggle = false;
-      snowCover3Toggle = false;
-      snowTransition1Toggle = false;
-      //snowTransition2Toggle = false;
-      roadBGToggle = false;
-      mouseToggle = true;
+      snowCover2Toggle = false; // hide snowCover 2
+      snowCover3Toggle = false; // hide snowCover 3
+      snowTransition1Toggle = false; // hide snowTransition1
+      mouseToggle = true; // turn mouse on!
     }
+    // lon lady frontal img visual cue
     if (currentVisualCue === "frontLogLady") {
       // Loglady stands alone
       frontLogLadyToggle = true;
-    } else if (currentVisualCue === "lauraLookR") {
+    }
+    // laura looks rightwards visual cue
+    if (currentVisualCue === "lauraLookR") {
       // Laura facing right
-      frontLogLadyToggle = false;
+      frontLogLadyToggle = false; // hide frontal log lady img
       lauraLookRToggle = true;
-    } else if (currentVisualCue === "logLadyLookL") {
+    }
+    // log lady looks leftwards visual cue
+    if (currentVisualCue === "logLadyLookL") {
       // Loglady facing left
       logLadyLookLToggle = true;
-    } else if (currentVisualCue === "logXLaura") {
-      lauraLookRToggle = false;
-      logLadyLookLToggle = false;
+    }
+    // log lady touches laura visual cue
+    if (currentVisualCue === "logXLaura") {
+      lauraLookRToggle = false; // hide laura rightwards
+      logLadyLookLToggle = false; // hide log lady leftwards
       logXLauraToggle = true;
       // Loglady touching Laura
-    } else if (currentVisualCue === "sc2CloseUp1") {
+    }
+    // scene 2 close up 1 visual cue
+    if (currentVisualCue === "sc2CloseUp1") {
       sc2CloseUp1Toggle = true;
       // Laura touched closeup 1
-    } else if (currentVisualCue === "sc2CloseUp2") {
+    }
+    // scene 2 close up 2 visual cue
+    if (currentVisualCue === "sc2CloseUp2") {
       sc2CloseUp2Toggle = true;
       // Laura touched closeup 2
-    } else if (currentVisualCue === "snowTransition2") {
+    }
+    // scene 2 snowTransition2 to scene 3 visual cue
+    if (currentVisualCue === "snowTransition2") {
       snowTransition2Toggle = true;
-      snowCover4Toggle = true;
+      snowCover4Toggle = true; // toggle snowCover4 for overlap on scene3
       bobChatToggle = true;
       setTimeout(switchStateToSc3, 1000);
-    } else if (currentSoundCue === "redRoomTransitionTheme") {
+    }
+    // redRoom transition sound cue
+    if (currentSoundCue === "redRoomTransitionTheme") {
       push();
       redRoomTransitionTheme.playMode("untilDone");
       redRoomTransitionTheme.play();
       pop();
-
       if (switch4 === 0) {
         // automatically changes line
         setTimeout(nextLine, 1000);
         switch4 = 1;
       }
       currentSoundCue = undefined;
-    } else if (currentVisualCue === "snowCover3") {
+    }
+    // scene 2 snowCover3 visual cue
+    if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
       if (switchC === 0) {
         // automatically changes line because mouse is paused
@@ -755,6 +741,8 @@ function draw() {
       }
     }
 
+    // scene2 TOGGLED blocked cues //
+    // front log lady img toggled TRUE
     if (frontLogLadyToggle === true) {
       image(
         sc2LogLadyFrontImg,
@@ -764,10 +752,11 @@ function draw() {
         canvas.height - 530
       );
     }
+    // laura rightwards img toggled TRUE
     if (lauraLookRToggle === true) {
       image(sc2LauraImg, 50, 101, canvas.width - 1020, canvas.height - 520);
-    } else {
     }
+    // loglady leftwards img toggled TRUE
     if (logLadyLookLToggle === true) {
       image(
         sc2LogLadySideImg,
@@ -776,8 +765,8 @@ function draw() {
         canvas.width - 1020,
         canvas.height - 520
       );
-    } else {
     }
+    // loglady touches laura img toggled TRUE
     if (logXLauraToggle === true) {
       image(
         sc2LauraXLogLady,
@@ -786,17 +775,18 @@ function draw() {
         canvas.width - 830,
         canvas.height - 520
       );
-    } else {
     }
+    // scene2 close up 1 toggled TRUE
     if (sc2CloseUp1Toggle === true) {
       image(sc2LogLadyTouch1, 0, 0, canvas.width - 600, canvas.height - 400);
-    } else {
     }
+    // scene2 close up 2 toggled TRUE
     if (sc2CloseUp2Toggle) {
       image(sc2LogLadyTouch2, 0, 0, canvas.width - 600, canvas.height - 400);
-    } else {
     }
 
+    // ANNYANG make user say Bob is real
+    // display ask in white font in red bar seen below snowCover3
     if (currentListener === "sayBOBIsReal") {
       mouseToggle = false;
       push();
@@ -809,31 +799,27 @@ function draw() {
       pop();
       //ANNYANG
       annyang.resume();
-      //   commands = {
-      //     //sc1 listen
-      //     "BOB is real": listenNextLine,
-      //   };
-      //   annyang.addCommands(commands);
-      //   annyang.debug();
     }
 
+    // scene 2 snowCover3 toggled TRUE
     if (snowCover3Toggle === true) {
       mouseToggle = false;
       displaySnow(255, 100);
-    } else {
     }
+    // scene 2 snowTransition2 toggled TRUE
     if (snowTransition2Toggle === true) {
       displaySnow(255, 255);
     } else {
     }
-    // show dialog
+
+    // each frame figure out what the currentLine and its type
+    // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
 
+  // when state is redRoom //
   if (state === `redRoom`) {
     // show background image
-    // redroom entryway
-    //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
 
     // redroom background
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 400);
@@ -1097,6 +1083,21 @@ if (state === "parkingLotReprise") {
     );
   } else {
   }
+
+  // if (currentVisualCue === "endFadeout") {
+  //   // roadBGToggle = false;
+  //   fadeoutToggle = true;
+  // } #### TO SCENE 4
+
+  // // scene 1 fadeout toggled TRUE
+  // if (fadeoutToggle === true) {
+  //   push();
+  //   rectMode(CENTER);
+  //   fill(0);
+  //   rect(width / 2, height / 2, width, height);
+  //   pop();
+  //   setTimeout(switchStateToSc1, 2000);
+  // #### SCENE 4 ??
 
   manipBlockingData();
 }
