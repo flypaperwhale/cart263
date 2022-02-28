@@ -803,13 +803,12 @@ function draw() {
 
     // scene 2 snowCover3 toggled TRUE
     if (snowCover3Toggle === true) {
-      mouseToggle = false;
+      mouseToggle = false; // pause mouse
       displaySnow(255, 100);
     }
     // scene 2 snowTransition2 toggled TRUE
     if (snowTransition2Toggle === true) {
       displaySnow(255, 255);
-    } else {
     }
 
     // each frame figure out what the currentLine and its type
@@ -817,54 +816,51 @@ function draw() {
     manipBlockingData();
   }
 
-  // when state is redRoom //
+  // + // when state is redRoom // + //
   if (state === `redRoom`) {
     // show background image
-
     // redroom background
     image(redRoomBgImg, 0, 0, canvas.width - 550, canvas.height - 400);
-
-    // if (currentVisualCue === "noSnow") {
-    //   snowTransition2Toggle = false;
-    //   sc2CloseUp2Toggle = false;
-    // }
-    if (currentVisualCue === "noSnow") {
-      snowCover3Toggle = false;
-      snowCover4Toggle = false;
-      snowTransition2Toggle = false;
-      //snowTransition2Toggle = false;
-      //roadBGToggle = false;
-      mouseToggle = true;
-    } else if (currentSoundCue === "bobLaughsSound") {
+    // scene3 CUEs //
+    // BOB laughs sound cue
+    if (currentSoundCue === "bobLaughsSound") {
       push();
       bobLaughsSound.playMode("untilDone");
-      bobLaughsSound.play();
+      bobLaughsSound.play(); // the laughing sound is called right away
       pop();
-
       if (currentSoundCue === "bobLaughsSound" && switch5 === 0) {
-        setTimeout(nextLine, 2750);
+        setTimeout(nextLine, 2750); // next line function
+        // happens only once after 2.75 seconds
         switch5 = 1;
       }
       currentSoundCue = undefined;
-    } else if (currentVisualCue === "noLaura") {
-      lauraHandsToggle = false;
-    } else if (currentVisualCue === "bobChat") {
-      // Bob chat
-      bobChatToggle = true;
-    } else if (currentVisualCue === "bobRage") {
-      // Bob excited rage
-      bobChatToggle = false;
-      bobRageToggle = true;
-    } else if (currentVisualCue === "lauraHands") {
-      // Laura looks at hand
-      bobRageToggle = false;
-      lauraHandsToggle = true;
-    } else if (currentVisualCue === "theRing") {
-      // The ring
-      lauraHandsToggle = false;
-      theRingToggle = true;
+    }
+    // scene3 no snow visual cue
+    if (currentVisualCue === "noSnow") {
+      snowCover3Toggle = false; // turn off snowCover3
+      snowCover4Toggle = false; // turn off snowCover4
+      snowTransition2Toggle = false; // turn off sc2's snowtransition2 to sc3
+      mouseToggle = true; // turn mouse on
     }
 
+    // BOB neutral talking visual cue
+    if (currentVisualCue === "bobChat") {
+      // Bob chat
+      bobChatToggle = true;
+    }
+    // BOB excited visual cue
+    if (currentVisualCue === "bobRage") {
+      // Bob excited rage
+      bobChatToggle = false; // turn neutral BOB off
+      bobRageToggle = true;
+    }
+    // laura looking at hands visual cue
+    if (currentVisualCue === "lauraHands") {
+      // Laura looks at hand
+      bobRageToggle = false; // hide excited BOB
+      lauraHandsToggle = true;
+    }
+    // scene3 accent sound cue
     if (currentSoundCue === "accentSound") {
       push();
       accentSound.playMode("untilDone");
@@ -872,70 +868,81 @@ function draw() {
       pop();
       currentSoundCue = undefined;
     }
-
-    if (currentListener === "callForHelp") {
-      mouseToggle = false;
-      push();
-      fill(255, 0, 0);
-      rectMode(CENTER);
-      rect(canvas.width / 4, 330, canvas.width / 2, 80);
-      // fill(255);
-      // textAlign(CENTER, CENTER);
-      // text("SPEAK: HELP.", canvas.width / 4, 330);
-      // pop();
-      //ANNYANG
-      annyang.resume();
-      // commands = {
-      //   //sc3 listen
-      //   "help!": null,
-      //   "help me": null,
-      //   "somebody help me": null,
-      //   "I need help": null,
-      //   "can somebody help me?": null,
-      // };
-      // annyang.addCommands(commands);
-      // annyang.debug();
-    }
-    if (ringIsClicked === true) {
-      annyang.pause();
-      switchStateToSc5();
-      ringIsClicked = false;
-      //return;
+    // no Laura visual cue
+    if (currentVisualCue === "noLaura") {
+      lauraHandsToggle = false; // laura hands img is off
     }
 
-    let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between tip of Hermes staff and spirit
+    // the Ring visual cue
+    if (currentVisualCue === "theRing") {
+      // The ring
+      lauraHandsToggle = false;
+      theRingToggle = true;
+    }
+
+    // collision check between mouse and ring img
+    let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between cursor and ring
     if (theRingToggle === true && d < ringSize / 2) {
-      //console.log("yes, you're in");
       // you are touching ring
       touchingRingToggle = true;
-      // change scene to
     } else {
+      // you are not touching ring
       touchingRingToggle = false;
     }
 
-    if (currentVisualCue === "snowTransition3") {
-      snowTransition3Toggle = true;
-      snowCover5Toggle = true;
-      setTimeout(switchStateToSc4, 1000);
-    } else if (currentVisualCue === "snowCover4") {
+    // if user clicks on the ring
+    if (ringIsClicked === true) {
+      annyang.pause(); // stop ANNYANG
+      switchStateToSc5(); // stay in red room go to scene 5
+      ringIsClicked = false; // ring is no more clicked as it disappears
+    }
+
+    // ANNYANG have Laura call for help and go to scene 4
+    if (currentListener === "callForHelp") {
+      mouseToggle = false; // pause mouse
+      // except to click on the ring
+      push();
+      fill(255, 0, 0);
+      rectMode(CENTER);
+      rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
+      //ANNYANG
+      annyang.resume();
+    }
+    // RESPONSIVEVOICE mysterious voice cue
+    if (currentVoice === "bobHasYou") {
+      //RESPONSIVE VOICE
+      bobHasYouVoiceToggle = true;
+    }
+
+    // scene 3 snowCover4 early for overlap and later when listening for help
+    if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
       if (switchD === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
         switchD = 1;
       }
-      //snowTransitionToggle = true;
+    }
+    // scene3 snowTransition3 to scene 4 ###
+    if (currentVisualCue === "snowTransition3") {
+      snowTransition3Toggle = true;
+      snowCover5Toggle = true; // activate scene 4 snowCover5 for overlap animation
+      setTimeout(switchStateToSc4, 1000); // switch setting to parking lot reprise
     }
 
+    // SCENE 5 cues //
+    // BOB growling sound cue
     if (currentSoundCue === "bobGrowlSound") {
-      theRingToggle = false;
+      theRingToggle = false; // mouse is off
       push();
       bobAttacksSound.playMode("untilDone");
       bobAttacksSound.play();
       pop();
       nextLine();
-    } else if (currentSoundCue === "lauraScreamsSound") {
-      theRingToggle = false;
+    }
+    // laura screaming sound cue
+    if (currentSoundCue === "lauraScreamsSound") {
+      theRingToggle = false; // mouse is off
       push();
       lauraScreamsSound.playMode("untilDone");
       lauraScreamsSound.play();
@@ -946,60 +953,40 @@ function draw() {
         setTimeout(nextLine, 500);
         switchF = 1;
       }
-    } else if (currentVisualCue === "lauraScreams") {
-      theRingToggle = false;
+    }
+    // laura screams visual cue
+    if (currentVisualCue === "lauraScreams") {
+      snowCover4Toggle = false; // turn off snowCover4 to end scene 5
+      theRingToggle = false; // turn off ring img
       lauraScreamsToggle = true;
       if (switchG === 0) {
         // automatically changes line
         setTimeout(nextLine, 500);
         switchG = 1;
       }
-    } else if (currentVisualCue === "endFadeout") {
+    }
+    // end scene 5 fadeout visual cue
+    if (currentVisualCue === "endFadeout") {
       fadeoutToggle = true;
     }
 
+    // scene 3 & 5 blocked toggled TRUE //
+    // BOB neutral chat img toggled TRUE
     if (bobChatToggle === true) {
       image(sc3BobImg1, 130, 65, canvas.width - 850, canvas.height - 550);
-    } else {
     }
+    // BOB enraged img toggled TRUE
     if (bobRageToggle === true) {
       image(sc3BobImg2, 297, 65, canvas.width - 900, canvas.height - 550);
-    } else {
     }
+    // laura and hands toggled TRUE
     if (lauraHandsToggle === true) {
       image(sc3LauraHands, 100, 10, canvas.width - 800, canvas.height - 450);
-    } else {
     }
-    if (theRingToggle === true) {
-      image(sc3RingImg, ringX, ringY, canvas.width - 1100, canvas.height - 700);
-      // console.log(
-      //   `canvasW - 1100 ${canvas.width - 1100} canvasH - 700 ${
-      //     canvas.height - 700
-      //   }`
-      // );
-    } else {
-    }
-
-    if (snowCover4Toggle === true) {
-      mouseToggle = false;
-
-      displaySnow(255, 100);
-    } else {
-    }
-    if (snowTransition3Toggle === true) {
-      displaySnow(255, 255);
-    } else {
-    }
-    if (lauraScreamsToggle === true) {
-      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
-    } else {
-    }
-
-    // The angel (?)
-
+    // RESPONSIVE VOICE mysterious voice
     if (bobHasYouVoiceToggle === true) {
       console.log(`what color is ${currentVoice}`);
-      bobHasYouVoiceToggle = false;
+      bobHasYouVoiceToggle = false; // only happens once
       responsiveVoice.speak(
         `The thread will be torn ${userName}`,
         "Hindi Male",
@@ -1012,32 +999,53 @@ function draw() {
       currentVoice = undefined;
       nextLine();
     }
-
-    if (currentVoice === "bobHasYou") {
-      //RESPONSIVE VOICE
-      bobHasYouVoiceToggle = true;
+    // the ring img toggled TRUE
+    if (theRingToggle === true) {
+      image(sc3RingImg, ringX, ringY, canvas.width - 1100, canvas.height - 700);
     }
+    // scene 3 snowCover4 LISTEN for help and listen to the ring
+    if (snowCover4Toggle === true) {
+      mouseToggle = false; // mouse is off
+      displaySnow(255, 100);
+    }
+    // scene 3 snowTransition3 to scene 4 toggled TRUE
+    if (snowTransition3Toggle === true) {
+      displaySnow(255, 255);
+    }
+    // The angel (?)
+
+    //  scene 5 laura screaming img toggled TRUE (while snowCover4 is turned off)
+    if (lauraScreamsToggle === true) {
+      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    }
+    // scene 5 end fadeout toggled TRUE
     if (fadeoutToggle === true) {
       push();
       rectMode(CENTER);
       fill(0);
       rect(width / 2, height / 2, width, height);
       pop();
-      mouseToggle = true;
+      mouseToggle = true; // mouse is on, to click the end
     }
-    // show dialog
+    // each frame figure out what the currentLine and its type
+    // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
 }
 
+// + // when state is parking lot reprise scene4 // + //
 if (state === "parkingLotReprise") {
+  //display bg img
   if (barBgImgToggle === true) {
     // Bar parking background
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
   }
 
+  // scene4 CUES //
+  // scene4 nosnow visual cue
   if (currentVisualCue === "noSnow") {
-    //snowCover4Toggle = false;
+    snowCover4Toggle = false;
+    snowCover5Toggle = false;
     snowTransition3Toggle = false;
     //snowTransition2Toggle = false;
     //roadBGToggle = false;
@@ -1048,21 +1056,29 @@ if (state === "parkingLotReprise") {
       switchX = 1;
     }
   }
-  //snowTransition3Toggle = false;
-
+  // brett snide visual cue
+  if (currentVisualCue === "brettSnide") {
+    // Businessman sniding
+    //snowCover2Toggle = false; // turn off snowCover2 ...
+    brettSmirkToggle = false; // turn off brett smirking
+    brettSnideToggle = true;
+  }
+  // brett smirking img visual cue
   if (currentVisualCue === "brettSmirk") {
     // Businessman smirks
     brettSnideToggle = false;
     lauraCigToggle = false;
     brettLeerToggle = false;
     brettSmirkToggle = true;
-  } else if (currentVisualCue === "brettSnide") {
-    // Businessman sniding (? in another 4th scene?)
-    snowCover2Toggle = false;
-    brettSmirkToggle = false;
-    brettSnideToggle = true;
+  }
+  // end fadeout visual cue
+  if (currentVisualCue === "endFadeout") {
+    // roadBGToggle = false;
+    fadeoutToggle = true;
   }
 
+  // scene4 blocks toggled TRUE
+  // brett smirking visual cue
   if (brettSmirkToggle === true) {
     image(
       sc1BusinessmanSmirks,
@@ -1071,8 +1087,8 @@ if (state === "parkingLotReprise") {
       canvas.width - 950,
       canvas.height - 600
     );
-  } else {
   }
+  // brett snides visual cue
   if (brettSnideToggle === true) {
     image(
       sc1BusinessmanSnark,
@@ -1081,34 +1097,31 @@ if (state === "parkingLotReprise") {
       canvas.width - 880,
       canvas.height - 580
     );
-  } else {
+  }
+  // scene 4 fadeout toggled TRUE
+  if (fadeoutToggle === true) {
+    push();
+    rectMode(CENTER);
+    fill(0);
+    rect(width / 2, height / 2, width, height);
+    pop();
   }
 
-  // if (currentVisualCue === "endFadeout") {
-  //   // roadBGToggle = false;
-  //   fadeoutToggle = true;
-  // } #### TO SCENE 4
-
-  // // scene 1 fadeout toggled TRUE
-  // if (fadeoutToggle === true) {
-  //   push();
-  //   rectMode(CENTER);
-  //   fill(0);
-  //   rect(width / 2, height / 2, width, height);
-  //   pop();
-  //   setTimeout(switchStateToSc1, 2000);
-  // #### SCENE 4 ??
-
+  // each frame figure out what the currentLine and its type
+  // display dialog, images, activate sounds etc...
   manipBlockingData();
 }
 
+// functions to switch settings //
 function switchStateToSc1() {
+  // from intro to scene 1 (parking lot)
   if (state === `introAnimation`) {
     fadeoutToggle = false;
     state = `parkingLot`;
   }
 }
 function switchStateToSc2() {
+  // from scene1 to scene 2 (semiconscious)
   if (state === `parkingLot`) {
     state = `semiconscious`;
     setTimeout(nextLine, 1000);
@@ -1116,6 +1129,7 @@ function switchStateToSc2() {
   }
 }
 function switchStateToSc3() {
+  // from scene 2 to scene 3 (red room)
   if (state === `semiconscious`) {
     state = `redRoom`;
     nextLine();
@@ -1123,6 +1137,7 @@ function switchStateToSc3() {
   }
 }
 function switchStateToSc4() {
+  // from scene 3 to scene 4 (parking lot reprise)
   if (state === `redRoom`) {
     barBgImgToggle = true;
     setTimeout(nextLine, 1000);
@@ -1131,21 +1146,21 @@ function switchStateToSc4() {
   }
 }
 function switchStateToSc5() {
-  console.log(currentScene);
-  console.log(state);
+  // directly from scene 3 to scene 5
   if (currentScene === "scene3" && state === `redRoom`) {
-    snowCover4Toggle = false;
-    theRingToggle = false;
-    currentScene = "scene5";
-    currentLine = 0;
+    snowCover4Toggle = false; // hide snowCover4
+    theRingToggle = false; // hide the ring
+    currentScene = "scene5"; // set scene to scene5
+    currentLine = 0; // reinitialize currentLine
   }
 }
 
 function displaySnow(gray, alpha) {
   // display snow //
-  //console.log(`in displaySnow gray = ${gray} and alpha = ${alpha}`);
+  // the alpha property serves to make snowCover transparent
 
   if (
+    // if either one of the snowCovers or snowTransitions is true
     snowTransition0Toggle === true ||
     snowTransition1Toggle === true ||
     snowTransition2Toggle === true ||
@@ -1157,6 +1172,7 @@ function displaySnow(gray, alpha) {
   ) {
     push();
     imageMode(CENTER);
+    // depending on snowDirection 1,2,3,4 which is randomly selected each second
     if (snowDirection === 1) {
       scale(1, 1);
     } else if (snowDirection === 2) {
@@ -1166,10 +1182,11 @@ function displaySnow(gray, alpha) {
     } else if (snowDirection === 4) {
       scale(-1, -1);
     }
-    tint(gray, alpha);
+    tint(gray, alpha); // transparency
     image(transitionSnowImg, 0, 0, canvas.width, canvas.height);
     pop();
   } else if (
+    // if no snowtransition img toggled on...
     snowTransition0Toggle === false ||
     snowTransition1Toggle === false ||
     snowTransition2Toggle === false ||
@@ -1180,7 +1197,7 @@ function displaySnow(gray, alpha) {
     snowCover3Toggle === false ||
     snowCover4Toggle === false
   ) {
-    //do nothing
+    // ...do nothing
   }
 }
 
