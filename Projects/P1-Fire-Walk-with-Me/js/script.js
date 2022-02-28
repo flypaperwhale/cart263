@@ -8,7 +8,7 @@ warn her, and then continues her descent into Hell
 */
 
 "use strict";
-
+let n = 0;
 // states // ### settings ###
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom, parkingLotReprise
@@ -99,6 +99,9 @@ let lauraCigToggle;
 let brettLeerToggle;
 let brettSmirkToggle;
 let brettSnideToggle;
+let brettSmirkToggle2;
+let brettSnideToggle2;
+let barBgImgToggle2;
 let frontLogLadyToggle;
 let lauraLookRToggle;
 let logLadyLookLToggle;
@@ -111,9 +114,11 @@ let lauraHandsToggle;
 let theRingToggle;
 let lauraScreamsToggle;
 let noSnowToggle;
+let noSnowToggle2;
 let noLauraToggle;
 let noBobToggle;
 let fadeoutToggle;
+let fadeoutToggle2;
 let noneToggle;
 let barBgImgToggle = true; // starts true, appears when state/setting changed
 // from intro to scene1
@@ -179,6 +184,8 @@ let ringIsClicked = false;
 
 // variable to load annyang response to askName
 let userName;
+
+let scene3ListenTextToggle = false;
 
 // To store the loaded data
 let data = undefined;
@@ -517,6 +524,7 @@ function draw() {
 
   // + // state is ParkingLot // + //
   if (state === `parkingLot`) {
+    snowTransition3Toggle = false;
     // show background image
     if (barBgImgToggle === true) {
       // Bar parking background
@@ -905,13 +913,17 @@ function draw() {
 
     // ANNYANG have Laura call for help and go to scene 4
     if (currentListener === "callForHelp") {
+      scene3ListenTextToggle = true;
       snowCover3Toggle = true;
       mouseToggle = false; // pause mouse
       // except to click on the ring
-      push();
-      fill(255, 0, 0);
-      rectMode(CENTER);
-      rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
+      if (scene3ListenTextToggle === true) {
+        push();
+        fill(255, 0, 0);
+        rectMode(CENTER);
+        rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
+      } else {
+      }
       //ANNYANG
       annyang.resume();
     }
@@ -927,6 +939,7 @@ function draw() {
     }
     // scene3 snowTransition3 to scene 4 ###
     if (currentVisualCue === "snowTransition3") {
+      scene3ListenTextToggle = false;
       snowTransition3Toggle = true;
       snowCover5Toggle = true; // activate scene 4 snowCover5 for overlap animation
       setTimeout(switchStateToSc4, 1000); // switch setting to parking lot reprise
@@ -987,6 +1000,7 @@ function draw() {
     }
     // end scene 5 fadeout visual cue
     if (currentVisualCue === "endFadeout") {
+      console.log("do you come here?");
       fadeoutToggle = true;
     }
 
@@ -1052,85 +1066,95 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
-}
-
-// + // when state is parking lot reprise scene4 // + //
-if (state === "parkingLotReprise") {
-  //display bg img
-  if (barBgImgToggle === true) {
-    // Bar parking background
-    image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
-  }
-
-  // scene4 CUES //
-  // scene4 nosnow visual cue
-  if (currentVisualCue === "noSnow") {
-    snowCover4Toggle = false;
-    snowCover5Toggle = false;
-    snowTransition3Toggle = false;
-    //snowTransition2Toggle = false;
-    //roadBGToggle = false;
-    mouseToggle = true;
-    if (switchX === 0) {
-      // automatically changes line because mouse is paused
-      nextLine();
-      switchX = 1;
+  // + // when state is parking lot reprise scene4 // + //
+  if (state === `parkingLotReprise`) {
+    console.log(
+      fadeoutToggle,
+      snowTransition3Toggle,
+      snowCover3Toggle,
+      snowCover4Toggle
+    );
+    //display bg img
+    if (barBgImgToggle2 === true) {
+      // Bar parking background
+      image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     }
-  }
-  // brett snide visual cue
-  if (currentVisualCue === "brettSnide") {
-    // Businessman sniding
-    //snowCover2Toggle = false; // turn off snowCover2 ...
-    brettSmirkToggle = false; // turn off brett smirking
-    brettSnideToggle = true;
-  }
-  // brett smirking img visual cue
-  if (currentVisualCue === "brettSmirk") {
-    // Businessman smirks
-    brettSnideToggle = false;
-    lauraCigToggle = false;
-    brettLeerToggle = false;
-    brettSmirkToggle = true;
-  }
-  // end fadeout visual cue
-  if (currentVisualCue === "endFadeout") {
-    // roadBGToggle = false;
-    fadeoutToggle = true;
-  }
 
-  // scene4 blocks toggled TRUE
-  // brett smirking visual cue
-  if (brettSmirkToggle === true) {
-    image(
-      sc1BusinessmanSmirks,
-      320,
-      115,
-      canvas.width - 950,
-      canvas.height - 600
-    );
-  }
-  // brett snides visual cue
-  if (brettSnideToggle === true) {
-    image(
-      sc1BusinessmanSnark,
-      310,
-      115,
-      canvas.width - 880,
-      canvas.height - 580
-    );
-  }
-  // scene 4 fadeout toggled TRUE
-  if (fadeoutToggle === true) {
-    push();
-    rectMode(CENTER);
-    fill(0);
-    rect(width / 2, height / 2, width, height);
-    pop();
-  }
+    // scene4 CUES //
+    // scene4 nosnow visual cue
+    if (currentVisualCue === "noSnow") {
+      snowCover3Toggle = false;
+      snowCover4Toggle = true;
+      snowTransition3Toggle = false;
+      theRingToggle = false;
 
-  // each frame figure out what the currentLine and its type
-  // display dialog, images, activate sounds etc...
-  manipBlockingData();
+      //snowTransition2Toggle = false;
+      //roadBGToggle = false;
+      mouseToggle = true;
+      if (switchX === 0) {
+        // automatically changes line because mouse is paused
+        nextLine();
+        switchX = 1;
+      }
+    }
+    // snowCover
+    if (snowCover4Toggle === true) {
+      //mouseToggle = false; // mouse is off
+      displaySnow(255, 100);
+    }
+    // brett snide visual cue
+    if (currentVisualCue === "brettSnide") {
+      // Businessman sniding
+      //snowCover2Toggle = false; // turn off snowCover2 ...
+      brettSmirkToggle2 = false; // turn off brett smirking
+      brettSnideToggle2 = true;
+    }
+    // brett smirking img visual cue
+    if (currentVisualCue === "brettSmirk") {
+      // Businessman smirks
+      brettSnideToggle2 = false;
+      brettSmirkToggle2 = true;
+    }
+    // end fadeout visual cue
+    if (currentVisualCue === "endFadeout") {
+      // roadBGToggle = false;
+      fadeoutToggle2 = true;
+    }
+
+    // scene4 blocks toggled TRUE
+    // brett smirking visual cue
+    if (brettSmirkToggle2 === true) {
+      image(
+        sc1BusinessmanSmirks,
+        320,
+        115,
+        canvas.width - 950,
+        canvas.height - 600
+      );
+    }
+    // brett snides visual cue
+    if (brettSnideToggle2 === true) {
+      image(
+        sc1BusinessmanSnark,
+        310,
+        115,
+        canvas.width - 880,
+        canvas.height - 580
+      );
+    }
+    // scene 4 fadeout toggled TRUE
+    if (fadeoutToggle2 === true) {
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+    }
+
+    // each frame figure out what the currentLine and its type
+    // display dialog, images, activate sounds etc...
+    manipBlockingData();
+  }
 }
 
 // functions to switch settings //
@@ -1160,10 +1184,17 @@ function switchStateToSc3() {
 function switchStateToSc4() {
   // from scene 3 to scene 4 (parking lot reprise)
   if (state === `redRoom`) {
-    barBgImgToggle = true;
-    setTimeout(nextLine, 1000);
-    state = `parkingLotReprise`;
     mouseToggle = true;
+    snowTransition3Toggle = false;
+    snowCover3Toggle = false;
+    //snowCover4Toggle = false;
+    barBgImgToggle2 = true;
+    console.log(currentLine);
+    setTimeout(nextLine, 1000);
+    console.log(currentLine);
+    state = `parkingLotReprise`;
+    manipBlockingData();
+    // mouseToggle = true;
   }
 }
 function switchStateToSc5() {
@@ -1349,6 +1380,8 @@ function listenNextLine3() {
 
 // OG next line
 function nextLine() {
+  n++;
+  console.log(n);
   // if (currentScene === "scene4" && currentLine === 0) {
   //   currentLine++;
   // } ### TEST to debug?
@@ -1375,6 +1408,10 @@ function nextLine() {
     }
     currentLine = 0;
   }
+  // } else if (currentScene === "scene3" && currentLine < 23) {
+  //   currentScene = "scene4";
+  //   currentLine = 0;
+  // }
 }
 
 function keyPressed() {
