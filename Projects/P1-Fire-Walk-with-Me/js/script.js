@@ -58,6 +58,7 @@ let snowCover1Toggle;
 let snowCover2Toggle;
 let snowCover3Toggle;
 let snowCover4Toggle;
+let snowCover5Toggle;
 
 let introSkyToggle;
 let roadBGToggle;
@@ -863,15 +864,9 @@ function draw() {
       touchingRingToggle = false;
     }
 
-    if (currentVisualCue === "monkeyFace") {
-      push();
-      imageMode(CENTER);
-      tint(255, 150);
-      //image(monkeyFaceImg, width / 2 + 15, height / 2 - 20, 600, 500);
-      pop();
-    } else if (currentVisualCue === "snowTransition3") {
+    if (currentVisualCue === "snowTransition3") {
       snowTransition3Toggle = true;
-      snowCover2Toggle = true;
+      snowCover5Toggle = true;
       setTimeout(switchStateToSc4, 1000);
     } else if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
@@ -989,7 +984,8 @@ function draw() {
 
 if (state === "parkingLotReprise") {
   if (currentScene === "scene4" && currentLine === 0) {
-    currentLine = 1;
+    snowTransition3Toggle = false;
+    mouseToggle = true;
   }
   if (barBgImgToggle === true) {
     // Bar parking background
@@ -1069,8 +1065,9 @@ function switchStateToSc3() {
 function switchStateToSc4() {
   if (state === `redRoom`) {
     barBgImgToggle = true;
-    setTimeout(listenNextLine3, 1000);
+    setTimeout(nextLine, 1000);
     state = `parkingLotReprise`;
+    mouseToggle = true;
   }
 }
 function switchStateToSc5() {
@@ -1275,6 +1272,9 @@ function listenNextLine3() {
 }
 
 function nextLine() {
+  if (currentScene === "scene4" && currentLine === 0) {
+    currentLine++;
+  }
   currentLine++;
   if (currentLine >= data.blocking[currentScene].length) {
     if (currentScene === "scene0") {
