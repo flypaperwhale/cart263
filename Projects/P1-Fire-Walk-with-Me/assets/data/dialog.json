@@ -136,16 +136,17 @@
       },
       {
         "type": "visual cue",
+        "image": "none",
+        "character": "narrator",
+        "dialog": "redroom entry overlaid beat"
+      },
+      {
+        "type": "visual cue",
         "image": "roadBG",
         "character": "narrator",
         "dialog": "show the road again"
       },
-      {
-        "type": "sound cue",
-        "sound": "rideStopsSound",
-        "character": "narrator",
-        "dialog": "car breaks"
-      },
+
       {
         "type": "dialog",
         "image": "roadBG",

@@ -93,6 +93,7 @@ let roadBGToggle;
 let lauraIntroToggle;
 let thumbUpToggle;
 let monkeyFaceToggle;
+let redRoomEntryImgToggle;
 let lauraLightToggle;
 let lauraCigToggle;
 let brettLeerToggle;
@@ -330,6 +331,7 @@ function draw() {
       // play snow sound
       push();
       snowSound.playMode("untilDone");
+      snowSound.setVolume(0.25);
       snowSound.play();
       pop();
       currentSoundCue = undefined; // play snow sound once
@@ -398,6 +400,9 @@ function draw() {
       snowCover1Toggle = false; // turn off snow cover 1
       mouseToggle = true; // mouse back on!
     }
+    // if (currentVisualCue === "redRoomEntry") {
+    //   redRoomEntryImgToggle = true;
+    // }
     // intro spoken cue RESPONSIVE VOICE
     if (currentVoice === "dontTakeTheRing") {
       dontTakeTheRingVoiceToggle = true;
@@ -463,8 +468,6 @@ function draw() {
 
     // RESPONSIVEVOICE Warning!
     if (dontTakeTheRingVoiceToggle === true) {
-      // redroom entryway + transparency ###
-      //image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 450);
       dontTakeTheRingVoiceToggle = false; // so this only happens once
       responsiveVoice.speak(
         "Don't take the ring Laura. Don't take the ring",
@@ -473,10 +476,27 @@ function draw() {
           pitch: 1.1,
           rate: 0.55,
           volume: 1,
+          onstart: toggleRedRoomEntryOn,
+          onend: toggleRedRoomEntryOff,
         }
       );
       currentVoice = undefined; // fail safe?
       nextLine();
+    }
+
+    function toggleRedRoomEntryOn() {
+      redRoomEntryImgToggle = true;
+    }
+    function toggleRedRoomEntryOff() {
+      redRoomEntryImgToggle = false;
+    }
+
+    // redRoom Entry img toggle TRUE
+    if (redRoomEntryImgToggle === true) {
+      push();
+      tint(255, 100);
+      image(redRoomEntryImg, 0, 0, canvas.width - 600, canvas.height - 400);
+      pop();
     }
 
     // fadeout toggle TRUE
@@ -514,7 +534,6 @@ function draw() {
     }
     // noSnow visual toggle
     if (currentVisualCue === "noSnow") {
-      // snowTransition0Toggle = false;
       fadeoutToggle = false; // hide fadeout
       roadBGToggle = false; // hide road background
     }
@@ -872,7 +891,11 @@ function draw() {
     if (currentVisualCue === "noLaura") {
       lauraHandsToggle = false; // laura hands img is off
     }
-
+    // RESPONSIVEVOICE mysterious voice cue
+    if (currentVoice === "bobHasYou") {
+      //RESPONSIVE VOICE
+      bobHasYouVoiceToggle = true;
+    }
     // the Ring visual cue
     if (currentVisualCue === "theRing") {
       // The ring
@@ -880,25 +903,9 @@ function draw() {
       theRingToggle = true;
     }
 
-    // collision check between mouse and ring img
-    let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between cursor and ring
-    if (theRingToggle === true && d < ringSize / 2) {
-      // you are touching ring
-      touchingRingToggle = true;
-    } else {
-      // you are not touching ring
-      touchingRingToggle = false;
-    }
-
-    // if user clicks on the ring
-    if (ringIsClicked === true) {
-      annyang.pause(); // stop ANNYANG
-      switchStateToSc5(); // stay in red room go to scene 5
-      ringIsClicked = false; // ring is no more clicked as it disappears
-    }
-
     // ANNYANG have Laura call for help and go to scene 4
     if (currentListener === "callForHelp") {
+      snowCover3Toggle = true;
       mouseToggle = false; // pause mouse
       // except to click on the ring
       push();
@@ -907,11 +914,6 @@ function draw() {
       rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
       //ANNYANG
       annyang.resume();
-    }
-    // RESPONSIVEVOICE mysterious voice cue
-    if (currentVoice === "bobHasYou") {
-      //RESPONSIVE VOICE
-      bobHasYouVoiceToggle = true;
     }
 
     // scene 3 snowCover4 early for overlap and later when listening for help
@@ -928,6 +930,24 @@ function draw() {
       snowTransition3Toggle = true;
       snowCover5Toggle = true; // activate scene 4 snowCover5 for overlap animation
       setTimeout(switchStateToSc4, 1000); // switch setting to parking lot reprise
+    }
+
+    // TAKE RING CLICK //
+    // collision check between mouse and ring img
+    let d = dist(mouseX, mouseY, ringX + 45, ringY + 45); // check distance between cursor and ring
+    if (theRingToggle === true && d < ringSize / 2) {
+      // you are touching ring
+      touchingRingToggle = true;
+    } else {
+      // you are not touching ring
+      touchingRingToggle = false;
+    }
+
+    // if user clicks on the ring
+    if (ringIsClicked === true) {
+      annyang.pause(); // stop ANNYANG
+      switchStateToSc5(); // stay in red room go to scene 5
+      ringIsClicked = false; // ring is no more clicked as it disappears
     }
 
     // SCENE 5 cues //
@@ -1027,6 +1047,7 @@ function draw() {
       pop();
       mouseToggle = true; // mouse is on, to click the end
     }
+
     // each frame figure out what the currentLine and its type
     // display dialog, images, activate sounds etc...
     manipBlockingData();
