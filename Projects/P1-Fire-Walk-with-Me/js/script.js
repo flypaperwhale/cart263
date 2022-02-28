@@ -128,11 +128,13 @@ let switchE = 0;
 let switchF = 0;
 let switchG = 0;
 
+let switchX = 0;
+
 let ringIsClicked = false;
 
 // states
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
-// transitionAnimation, semiconscious, redRoom
+// transitionAnimation, semiconscious, redRoom, parkingLotReprise, redRoomReprise
 
 // To store the loaded data
 let data = undefined;
@@ -216,13 +218,13 @@ function setup() {
     //sc2 listen
     "BOB is real": listenNextLine,
     //sc3 listen
-    "help!": listenNextLine,
-    "help me": listenNextLine,
-    "somebody help me": listenNextLine,
-    "someone help": listenNextLine,
-    "I need help": listenNextLine,
-    "can somebody help me?": listenNextLine,
-    "can anybody help me?": listenNextLine,
+    help: listenNextLine3,
+    "help me": listenNextLine3,
+    "somebody help me": listenNextLine3,
+    "someone help": listenNextLine3,
+    "I need help": listenNextLine3,
+    "can somebody help me?": listenNextLine3,
+    "can anybody help me?": listenNextLine3,
   };
   console.log(commands);
   annyang.addCommands(commands);
@@ -535,25 +537,9 @@ function draw() {
       switch3 = 1;
     }
 
-    // if (currentListener === "sayAllTheWay") {
-    //   mouseToggle = false;
-    //   push();
-    //   fill(255, 0, 0);
-    //   rectMode(CENTER);
-    //   rect(canvas.width / 2, 300, canvas.width - 100, 80);
-    //   fill(255);
-    //   textAlign(CENTER, CENTER);
-    //   text("SPEAK", 350, 50);
-    //   pop();
-    //   //ANNYANG
-    //   annyang.resume();
-    //   // commands = {
-    //   //   //sc1 listen
-    //   //   "I'm going to go all the way": listenNextLine,
-    //   //   "I'm going to go all of the way": listenNextLine,
-    //   // };
-    //   // annyang.addCommands(commands);
-    //   // annyang.debug();
+    // if (currentVisualCue === "mouse toggle") {
+    //   snowTransition3Toggle = false;
+    //   mouseToggle = true;
     // }
 
     if (lauraLightToggle === true) {
@@ -843,10 +829,10 @@ function draw() {
       fill(255, 0, 0);
       rectMode(CENTER);
       rect(canvas.width / 4, 330, canvas.width / 2, 80);
-      fill(255);
-      textAlign(CENTER, CENTER);
-      text("SPEAK: HELP.", canvas.width / 4, 330);
-      pop();
+      // fill(255);
+      // textAlign(CENTER, CENTER);
+      // text("SPEAK: HELP.", canvas.width / 4, 330);
+      // pop();
       //ANNYANG
       annyang.resume();
       // commands = {
@@ -861,7 +847,7 @@ function draw() {
       // annyang.debug();
     }
     if (ringIsClicked === true) {
-      annyang.abort();
+      annyang.pause();
       switchStateToSc5();
       ringIsClicked = false;
       //return;
@@ -950,10 +936,6 @@ function draw() {
       // );
     } else {
     }
-    if (lauraScreamsToggle === true) {
-      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
-    } else {
-    }
 
     if (snowCover4Toggle === true) {
       mouseToggle = false;
@@ -965,6 +947,11 @@ function draw() {
       displaySnow(255, 255);
     } else {
     }
+    if (lauraScreamsToggle === true) {
+      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    } else {
+    }
+
     // The angel (?)
 
     if (bobHasYouVoiceToggle === true) {
@@ -993,10 +980,70 @@ function draw() {
       fill(0);
       rect(width / 2, height / 2, width, height);
       pop();
+      mouseToggle = true;
     }
     // show dialog
     manipBlockingData();
   }
+}
+
+if (state === "parkingLotReprise") {
+  if (currentScene === "scene4" && currentLine === 0) {
+    currentLine = 1;
+  }
+  if (barBgImgToggle === true) {
+    // Bar parking background
+    image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
+  }
+
+  if (currentVisualCue === "noSnow") {
+    //snowCover4Toggle = false;
+    snowTransition3Toggle = false;
+    //snowTransition2Toggle = false;
+    //roadBGToggle = false;
+    mouseToggle = true;
+    if (switchX === 0) {
+      nextLine();
+      switchX = 1;
+    }
+  }
+  //snowTransition3Toggle = false;
+
+  if (currentVisualCue === "brettSmirk") {
+    // Businessman smirks
+    brettSnideToggle = false;
+    lauraCigToggle = false;
+    brettLeerToggle = false;
+    brettSmirkToggle = true;
+  } else if (currentVisualCue === "brettSnide") {
+    // Businessman sniding (? in another 4th scene?)
+    snowCover2Toggle = false;
+    brettSmirkToggle = false;
+    brettSnideToggle = true;
+  }
+
+  if (brettSmirkToggle === true) {
+    image(
+      sc1BusinessmanSmirks,
+      320,
+      115,
+      canvas.width - 950,
+      canvas.height - 600
+    );
+  } else {
+  }
+  if (brettSnideToggle === true) {
+    image(
+      sc1BusinessmanSnark,
+      310,
+      115,
+      canvas.width - 880,
+      canvas.height - 580
+    );
+  } else {
+  }
+
+  manipBlockingData();
 }
 
 function switchStateToSc1() {
@@ -1021,9 +1068,9 @@ function switchStateToSc3() {
 }
 function switchStateToSc4() {
   if (state === `redRoom`) {
-    mouseToggle = true;
     barBgImgToggle = true;
-    state = `parkingLot`;
+    setTimeout(listenNextLine3, 1000);
+    state = `parkingLotReprise`;
   }
 }
 function switchStateToSc5() {
@@ -1221,6 +1268,12 @@ function listenNextLine() {
   nextLine();
 }
 
+function listenNextLine3() {
+  mouseToggle = true;
+  annyang.pause();
+  nextLine();
+}
+
 function nextLine() {
   currentLine++;
   if (currentLine >= data.blocking[currentScene].length) {
@@ -1257,19 +1310,23 @@ currentLine = 0;
 */
 function keyPressed() {
   if (keyCode === 32) {
-    state = `introAnimation`;
+    if ((state = `Title`)) state = `introAnimation`;
+  } else {
+    // nothing
   }
   if (keyCode === 81) {
+    console.log(state);
+    console.log(currentScene);
     console.log(currentLine);
-    // console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
-    //   snowTransition1Toggle = ${snowTransition1Toggle}
-    //   snowTransition2Toggle = ${snowTransition2Toggle}
-    //   snowTransition3Toggle = ${snowTransition3Toggle}
-    //   snowTransition0Toggle = ${snowTransition4Toggle}`);
-    // console.log(`
-    //     snowCover1Toggle = ${snowCover1Toggle}
-    //     snowCover2Toggle = ${snowCover2Toggle}
-    //     snowCover3Toggle = ${snowCover3Toggle}
-    //     snowCover4Toggle = ${snowCover4Toggle}`);
+    console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
+      snowTransition1Toggle = ${snowTransition1Toggle}
+      snowTransition2Toggle = ${snowTransition2Toggle}
+      snowTransition3Toggle = ${snowTransition3Toggle}
+      snowTransition0Toggle = ${snowTransition4Toggle}`);
+    console.log(`
+        snowCover1Toggle = ${snowCover1Toggle}
+        snowCover2Toggle = ${snowCover2Toggle}
+        snowCover3Toggle = ${snowCover3Toggle}
+        snowCover4Toggle = ${snowCover4Toggle}`);
   }
 }

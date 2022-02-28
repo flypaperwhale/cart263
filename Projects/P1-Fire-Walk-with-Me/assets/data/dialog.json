@@ -567,6 +567,12 @@
     "scene4 background": "bar parking lot",
     "scene4": [
       {
+        "type": "visual cue",
+        "image": "noSnow",
+        "character": "narrator",
+        "dialog": "snow goes away"
+      },
+      {
         "type": "dialog",
         "image": "brettSnide",
         "character": "businessman",
@@ -635,12 +641,6 @@
         "image": "lauraScreams",
         "character": "narrator",
         "dialog": "show the sky"
-      },
-      {
-        "type": "visual cue",
-        "sound": "none",
-        "character": "narrator",
-        "dialog": "a beat"
       },
       {
         "type": "visual cue",
