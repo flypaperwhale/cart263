@@ -1202,45 +1202,42 @@ function displaySnow(gray, alpha) {
 }
 
 /**
-Uses the dialog and character data to display a dialog box
-colored and labelled by character and with the current line
-displayed in it.
+this function reads the data in the blocked script in dialog.JSON
+there are 5 types of blocks that this function manipulates
+visual CUES
+sound CUES
+listening cues (ANNYANG)
+spoken cues (RESPONSIVE VOICE)
+dialog
+
+based on type, manipulate line differently
 */
 function manipBlockingData() {
-  // ### CHANGE NAME BLOCKING ###
   // Get the current scene and line data object
-  // NOTE: Notice how we can use *variables* to choose
-  // a property in an object like data.dialog! This gives
-  // us a lot of flexibility because we can store the property
-  // name we want in a variable and change it (like the current
-  // scene name!)
   let lineData = data.blocking[currentScene][currentLine];
-  // Get the data for the character who is speaking, note
-  // we're using the same trick of a variable containing the
-  // property name corresponding to our character
+  // Get the data for the character who is speaking, an image or sound cue, etc.
 
-  // based on type, manipulat line differently
+  // DIALOG //
+  /* Laura's dialog should appear from the left (POV)
+whereas dialog from interlocutors should arrive from the right side
+this is solved directly in the JSON file
+*/
   if (lineData.type === "dialog") {
     currentVisualCue = lineData.image;
     let characterData = data.characters[lineData.character];
+    // Uses the dialog and character data to display a dialog box
+    // with the current line displayed in it.
 
-    // DIALOG //
-    /* Laura's dialog should appear from the left (POV)
-whereas dialog from interlocutors should arrive from the right side
-*/
     // Draw the dialog background
     push();
     noStroke();
-    //fill(characterData.backgroundColor);
     fill(230, 220, 220);
     rect(0, height - dialogHeight, width, dialogHeight);
     pop();
-
     // Display the character name
     push();
     textSize(24);
     fill(255, 0, 0);
-    //fill(230, 220, 220);
     textAlign(LEFT, BOTTOM);
     text(
       characterData.name,
@@ -1248,141 +1245,126 @@ whereas dialog from interlocutors should arrive from the right side
       height - dialogHeight
     );
     pop();
-
     // Display the character's line
     push();
     textSize(16);
     fill(0);
     textAlign(LEFT, TOP);
-    // characterData.dialogXposition?
     text(lineData.dialog, 10, height - dialogHeight + 5, width, dialogHeight);
     pop();
-  } else if (lineData.type === "sound cue") {
+  }
+  // SOUND CUE //
+  if (lineData.type === "sound cue") {
     // do sound cue thing
     currentSoundCue = lineData.sound;
-
     //manipulate current sound right away
     console.log(`what is currentSoundCue ? ${currentSoundCue}`);
-  } else if (lineData.type === "visual cue") {
-    // so visual cue thing
-    //imageCueToggle = true;
+  }
+  // VISUAL CUE //
+  if (lineData.type === "visual cue") {
+    // do visual cue thing
     currentVisualCue = lineData.image;
     console.log(`what is currentVisualCue ? ${currentVisualCue}`);
   }
+  // LISTEN CUE //
   if (lineData.type === "listen") {
     currentListener = lineData.image;
     console.log(`what is currentVLISTENCue ? ${currentListener}`);
   }
-
+  // SPOKEN CUE //
   if (lineData.type === "spoken") {
     //user cannot click to advance anymore
     currentVoice = lineData.image;
     console.log(`what is currentVoice ? ${currentVoice}`);
   }
-  if (lineData.type === "listen") {
-    //user cannot click to advance anymore
-  }
 }
 
 /**
-Goes to the next line in the "play"
-*/
-/* may want to have user press the dialog box to move to next piece,
-or a NEXT button... have user feel they are responding as Laura...
+Mouse pressed pushes us to the next line
+unless mouse is paused when a response to annyang is required
 */
 
 function mousePressed() {
   if (mouseToggle === false) {
+    // if mouseToggle is off, mouse is paused
     // click does nothing
   } else if (mouseToggle === true) {
+    // if mouseToggle is on, clicking goes to the next line
     nextLine();
   }
   if (touchingRingToggle === true) {
+    // if mouse is over ring img, clicking pushes us straight to scene5 line0
     //switch to scene 5
-    ringIsClicked = true;
-    theRingToggle = false;
-    touchingRingToggle = false;
-    //    console.log("so what?");
+    ringIsClicked = true; // ringIsClicked activates ###
+    theRingToggle = false; // this only happens once
+    touchingRingToggle = false; // ring disappears and user cannot click it again
   }
 }
 
 /**
-Iterates through the array, returns to 0 at the end, but you
-would probably want to change to the next scene etc.
-*/
-/* I don't want to have the dialog repeat when the data.dialog[currentScene].length
-reaches last object in the array...
-I would rather when the last object in the array is reached
--> for a symbol to prompt the user to speak
-depending on what the user says,
-either what they've been told to say
-or something they've been hinted into saying
-they will enter a new scene!
+nextLineFunctions
+Iterates through the JSON script array, returns to line 0 at the end of a scene
 */
 
+// first listenNextLine captures player's name to use at the end of the game
 function listenNextLine1(userName0) {
   currentListener = undefined;
   userName = userName0;
-  annyang.pause();
+  annyang.pause(); // annyang is off
   nextLine();
 }
-
+// listenNextLine called after user speaks an annyang command
 function listenNextLine() {
   currentListener = undefined;
-  annyang.pause();
+  annyang.pause(); // annyang is off
   nextLine();
 }
-
+// listenNextLine3 called after answering help me
 function listenNextLine3() {
-  mouseToggle = true;
-  annyang.pause();
+  mouseToggle = true; // turns mouse off for transition
+  annyang.pause(); // annyang is off
   nextLine();
 }
 
+// OG next line
 function nextLine() {
-  if (currentScene === "scene4" && currentLine === 0) {
-    currentLine++;
-  }
-  currentLine++;
+  // if (currentScene === "scene4" && currentLine === 0) {
+  //   currentLine++;
+  // } ### TEST to debug?
+  currentLine++; // add 1 to currentLine everytime nextLine is called
   if (currentLine >= data.blocking[currentScene].length) {
+    // if currentLine is last in a scene, next click goes back to 0
+    // at the beginning of the next scene
     if (currentScene === "scene0") {
       currentScene = "scene1";
     } else if (currentScene === "scene1") {
-      // currentLine = 0;
       currentScene = "scene2";
     } else if (currentScene === "scene2") {
-      // currentLine = 0;
       currentScene = "scene3";
     } else if (currentScene === "scene3") {
-      // currentLine = 0;
       currentScene = "scene4";
     } else if (currentScene === "scene4") {
+      // "good" ending
       alert("the end");
-      currentScene = undefined;
+      currentScene = undefined; // it's over, no more scenes
     } else if (currentScene === "scene5") {
-      alert("the end");
+      // "bad" ending
+      alert("the end"); // it's over, no more scenes
       currentScene = undefined;
     }
     currentLine = 0;
   }
 }
 
-/**
-Switch to scene two on a keypress, just to show the very
-beginnings of multiple scenes.
-*/
-/* ##### Scenes are going to change after the user speaks a response (annyang)
-when the last dialog piece has been said...
-currentScene = `scene2`;
-currentLine = 0;
-*/
 function keyPressed() {
   if (keyCode === 32) {
+    // press space at the opening screen to go to title and toggle mouse on to click from scene to scene
     if ((state = `Title`)) state = `introAnimation`;
   } else {
     // nothing
   }
   if (keyCode === 81) {
+    // debug button Q
     console.log(state);
     console.log(currentScene);
     console.log(currentLine);
