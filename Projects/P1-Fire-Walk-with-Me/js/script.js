@@ -2,16 +2,65 @@
 "Monkey Business" / a program based on David Lynch's Fire Walk with Me //
 Frankie Latreille
 
-Reimagined scenes of David Lynch's Fire Walk with Me. Laura meets a trucker who wants
-to pay her for sex work, she is sent into her subconscious where a woman tries to warn
-her, and then continues her decent into Hell
+Reimagined scenes of David Lynch's Fire Walk with Me. Laura meets a man on a business trip
+who wants to pay her for sex work, she is sent into her subconscious where a woman tries to
+warn her, and then continues her descent into Hell
 */
 
 "use strict";
 
+// states // ### settings ###
+let state = `Title`; // states are: Title, introAnimation, parkingLot,
+// transitionAnimation, semiconscious, redRoom, parkingLotReprise
+
+// The current scene
+let currentScene = `scene0`;
+// The current line in the current scene (going through an array of blocking, so starts at 0)
+let currentLine = 0;
+// The height of our dialog box
+let dialogHeight = 85;
+
+// visual cue variables //
+let currentVisualCue;
+// sound cue variables //
+let currentSoundCue;
+// current Voice Cues for ResponsiveVoice //
+let currentVoice;
+let dontTakeTheRingVoiceToggle;
+let bobHasYouVoiceToggle;
+// current Listener for annyang events //
+let currentListener;
+
+// snowTransition visual cues //
+// 0- start of program
+let snowTransition0Toggle;
+// Transition 1- between sc1 and sc2
+let snowTransition1Toggle;
+// Transition 2- between sc2 and sc3
+let snowTransition2Toggle;
+// Transition 3- between sc3 and sc4
+let snowTransition3Toggle;
+// Transition 4- between sc3 and sc2
+//let snowTransition4Toggle; // ###
+
+// snow Cover visual cues //
+// cover 1- during intro Listen askName
+let snowCover1Toggle;
+// cover 2- during sc1 for Listen sayAllTheWay + sc1/sc2 transition
+let snowCover2Toggle;
+// cover 3- sc1 transition/open sc2 + for Listen sayBOBIsReal
+let snowCover3Toggle;
+// cover 4- sc2 transition/open sc3 + for Listen callForHelp
+let snowCover4Toggle;
+// cover 5- sc3 transition/open sc4 #####
+let snowCover5Toggle;
+
+// variables to animate snow Img
+let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
+let snowDirection = 1;
+
 // scene intro images
 let introLauraImg, introRoadBgImg, introThumbImg, introSkyImg;
-
 // scene 1 images
 let barBgImg,
   sc1LauraLightsUp,
@@ -28,7 +77,6 @@ let semiconsciousBgImg,
   sc2LauraXLogLady,
   sc2LogLadyTouch1,
   sc2LogLadyTouch2;
-
 // scene 3 images
 let redRoomBgImg,
   sc3BobImg1,
@@ -36,30 +84,10 @@ let redRoomBgImg,
   sc3LauraHands,
   sc3LauraScreams,
   sc3RingImg;
-
-let ringX = 410;
-let ringY = 50;
-let ringSize = 100;
-
 // other images
 let monkeyFaceImg, redRoomEntryImg, transitionSnowImg;
 
-let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
-let snowDirection = 1;
-
-let currentVisualCue;
-let snowTransition0Toggle;
-let snowTransition1Toggle;
-let snowTransition2Toggle;
-let snowTransition3Toggle;
-let snowTransition4Toggle;
-
-let snowCover1Toggle;
-let snowCover2Toggle;
-let snowCover3Toggle;
-let snowCover4Toggle;
-let snowCover5Toggle;
-
+// Image toggles //
 let introSkyToggle;
 let roadBGToggle;
 let lauraIntroToggle;
@@ -88,8 +116,7 @@ let fadeoutToggle;
 let noneToggle;
 let barBgImgToggle = true;
 
-let currentSoundCue;
-
+// Sounds
 let introMelody;
 let highwaySound;
 let rideStopsSound;
@@ -100,58 +127,63 @@ let weirdAccent;
 let redRoomTransitionTheme;
 let bobLaughsSound;
 let bobAttacksSound;
-
 let lauraScreamsSound;
 let snowSound;
 
-let touchingRingToggle;
+// if true, mouse can be clicked. if false, mouse is paused
+let mouseToggle = false;
 
-let currentVoice;
-//let dontTakeTheRing;
-let dontTakeTheRingVoiceToggle;
-
-let bobHasYouVoiceToggle;
-
-let currentListener;
-
+// Switches //
+// switch0-
 let switch0 = 0;
+// switch1- intro monkey face
 let switch1 = 0;
+// switch2- intro accent sound
 let switch2 = 0;
+// switch3- transition from sc1 to sc2
 let switch3 = 0;
+// switch4- transition from sc2 to sc3
 let switch4 = 0;
+// switch5- sc2/sc3 bob laughs
 let switch5 = 0;
-
+// switch6- intro snowCover1
 let switchA = 0;
+// switch7- sc1 snowCover2
 let switchB = 0;
+// switch8- sc2 snowCover3
 let switchC = 0;
+// switch9- sc3 snowCover4
 let switchD = 0;
-let switchE = 0;
+
+// // switch10-
+// let switchE = 0; ###
+
+// switch11- sc5 Laura screams image
 let switchF = 0;
+// switch12- sc5 Laura screams sound
 let switchG = 0;
 
+// switch13- sc4 no snow
 let switchX = 0;
 
+// ring properties so that image can be clicked
+let ringX = 410;
+let ringY = 50;
+let ringSize = 100;
+
+// toggle for if ring is touched or not
+let touchingRingToggle;
 let ringIsClicked = false;
 
-// states
-let state = `Title`; // states are: Title, introAnimation, parkingLot,
-// transitionAnimation, semiconscious, redRoom, parkingLotReprise, redRoomReprise
+// variable to load annyang response to askName
+let userName;
 
 // To store the loaded data
 let data = undefined;
-// The current scene (there's only one in the data, but this would be how you display different scenes)
-let currentScene = `scene0`;
-// The current line in the current scene (going through an array of dialog, so starts at 0)
-let currentLine = 0;
-// The height of our dialog box
-let dialogHeight = 85;
-//
 
-let userName;
-
-let mouseToggle = false;
 /**
-Loads the JSON data for our little play
+Loads the JSON data to use the blocking to manipulate audio visuals
+load sounds and images
 */
 function preload() {
   data = loadJSON(`assets/data/dialog.json`);
@@ -169,7 +201,6 @@ function preload() {
   bobAttacksSound = loadSound("assets/sounds/bobattacks.wav");
   lauraScreamsSound = loadSound("assets/sounds/lauraScream.mp3");
   snowSound = loadSound("assets/sounds/snowbit.mp3");
-
   // introduction images
   introLauraImg = loadImage("assets/images/intro-scene/intro-laura.png");
   introRoadBgImg = loadImage("assets/images/intro-scene/intro-road.png");
@@ -205,7 +236,7 @@ function preload() {
 }
 
 /**
-Creates the canvas
+Creates the canvas, sets commands for annyang, intervals set for tv snow animation
 */
 function setup() {
   createCanvas(600, 400);
@@ -227,21 +258,39 @@ function setup() {
     "can somebody help me?": listenNextLine3,
     "can anybody help me?": listenNextLine3,
   };
-  console.log(commands);
+  //console.log(commands);
   annyang.addCommands(commands);
   //annyang.debug();
 
+  // toggle snow transition0 true for starting visuals
   snowTransition0Toggle = true;
-  setInterval(snowTransition, 100);
+  // snowDirection changes every second
+  setInterval(snowTransitionAnimate, 100);
+}
+
+// this function selects random directions for the snow img which animates it
+function snowTransitionAnimate() {
+  let currentSnowDirection = snowDirection;
+  snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  if (currentSnowDirection === snowDirection) {
+    snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+  }
 }
 
 /**
-Displays the current line
+Draw displays the current line in the blockingData
+depending on what "type" the block line is different effects
+
+dialog - changes dialog, is displayed at the bottom of screen
+visual cue - changes images
+sound cue - plays a sound
+spoken cue (responsivevoice) - speaks a line of dialog
+listen cue (annyang) - listens for user input
 */
 function draw() {
   background(0);
-  //console.log(snowTransitionToggle);
 
+  // intial display of snow //
   displaySnow(255, 255);
 
   if (state === `Title`) {
@@ -343,12 +392,6 @@ function draw() {
       fadeoutToggle = true;
     }
 
-    // if (currentSoundCue === "accentSound" && switch2 === 0) {
-    //   setTimeout(nextLine, 1000);
-    //   switch2 = 1;
-    // }
-
-    // let userName = "jane";
     if (currentVoice === "dontTakeTheRing") {
       //RESPONSIVE VOICE
       dontTakeTheRingVoiceToggle = true;
@@ -884,10 +927,6 @@ function draw() {
       bobAttacksSound.play();
       pop();
       nextLine();
-      // if (switchE === 0) {
-      //   setTimeout(nextLine, 500);
-      //   switchE = 1;
-      // }
     } else if (currentSoundCue === "lauraScreamsSound") {
       theRingToggle = false;
       push();
@@ -983,10 +1022,6 @@ function draw() {
 }
 
 if (state === "parkingLotReprise") {
-  if (currentScene === "scene4" && currentLine === 0) {
-    snowTransition3Toggle = false;
-    mouseToggle = true;
-  }
   if (barBgImgToggle === true) {
     // Bar parking background
     image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
@@ -1122,14 +1157,6 @@ function displaySnow(gray, alpha) {
     snowCover4Toggle === false
   ) {
     //do nothing
-  }
-}
-
-function snowTransition() {
-  let currentSnowDirection = snowDirection;
-  snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
-  if (currentSnowDirection === snowDirection) {
-    snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
   }
 }
 
