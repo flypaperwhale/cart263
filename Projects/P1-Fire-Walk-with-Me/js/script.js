@@ -54,6 +54,7 @@ let snowCover3Toggle;
 let snowCover4Toggle;
 // cover 5- sc3 transition/open sc4 #####
 let snowCover5Toggle;
+// cover 6- sc4 overlap
 let snowCover6Toggle;
 
 // variables to animate snow Img
@@ -143,41 +144,39 @@ let lauraRunningSound;
 let mouseToggle = false;
 
 // Switches //
-// switch0-
-let switch0 = 0;
-// switch1- intro monkey face
-let switch1 = 0;
-// switch2- intro accent sound
-let switch2 = 0;
-// switch3- transition from sc1 to sc2
-let switch3 = 0;
-// switch4- transition from sc2 to sc3
-let switch4 = 0;
-// switch5- sc2/sc3 bob laughs
-let switch5 = 0;
 // switch6- intro snowCover1
-let switchA = 0;
+let switch1 = 0;
+// switch0-
+let switch2 = 0;
+// switch2- intro accent sound
+let switch3 = 0;
+// switch1- intro monkey face
+let switch4 = 0;
 // switch7- sc1 snowCover2
-let switchB = 0;
+let switch5 = 0;
+// switch3- transition from sc1 to sc2
+let switch6 = 0;
+// switch4- transition from sc2 to sc3
+let switch7 = 0;
 // switch8- sc2 snowCover3
-let switchC = 0;
+let switch8 = 0;
+// switch5- sc2/sc3 bob laughs
+let switch9 = 0;
 // switch9- sc3 snowCover4
-let switchD = 0;
-
-// // switch10-
-// let switchE = 0; ###
-
+let switch10 = 0;
 // switch11- sc5 Laura screams image
-let switchF = 0;
+let switch11 = 0;
 // switch12- sc5 Laura screams sound
-let switchG = 0;
-
+let switch12 = 0;
 // switch13- sc4 no snow
-let switchX = 0;
+let switch13 = 0;
+// switch #
+let switch14 = 0;
 // switch14- sc4 snow cover
-let switchY = 0;
+let switch15 = 0;
+// // switch10- ##
+// let switchE = 0; ###
 let switchZ = 0;
-let switchV = 0;
 
 // ring properties so that image can be clicked
 let ringX = 410;
@@ -188,9 +187,10 @@ let ringSize = 100;
 let touchingRingToggle;
 let ringIsClicked = false;
 
-// variable to load annyang response to askName
+// variable to save annyang response to askName
 let userName;
 
+// red box when annyang is on
 let scene3ListenTextToggle = false;
 
 // To store the loaded data
@@ -386,10 +386,10 @@ function draw() {
     // snowCover1 visual cue
     if (currentVisualCue === "snowCover1") {
       snowCover1Toggle = true;
-      if (switchA === 0) {
+      if (switch1 === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
-        switchA = 1;
+        switch1 = 1;
       }
     }
     // monkey face visual cue
@@ -403,10 +403,10 @@ function draw() {
       accentSound.playMode("untilDone");
       accentSound.play();
       pop();
-      if (switch2 === 0) {
+      if (switch3 === 0) {
         // automatically changes line
         setTimeout(nextLine, 1000);
-        switch2 = 1;
+        switch3 = 1;
       }
       currentSoundCue = undefined; // plays sound only once
     }
@@ -477,9 +477,9 @@ function draw() {
       pop();
     }
     // dual monkeyFaceToggle to achieve monkey visibility for a bit longer
-    if (monkeyFaceToggle === true && switch1 === 0) {
+    if (monkeyFaceToggle === true && switch4 === 0) {
       setTimeout(nextLine, 500); // automatically change lines
-      switch1 = 1;
+      switch4 = 1;
     }
 
     // RESPONSIVEVOICE Warning!
@@ -603,10 +603,10 @@ function draw() {
     // scene 1 snowCover2 cue
     if (currentVisualCue === "snowCover2") {
       snowCover2Toggle = true;
-      if (switchB === 0) {
+      if (switch5 === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
-        switchB = 1;
+        switch5 = 1;
       }
     }
     // scene 1 snowTransition1 cue
@@ -709,14 +709,14 @@ function draw() {
       snowTransition1Toggle = false; // hide snowTransition1
       mouseToggle = true; // turn mouse on!
     }
-    if (currentSoundCue === "sc1TransitionAccent" && switch3 === 0) {
+    if (currentSoundCue === "sc1TransitionAccent" && switch6 === 0) {
       push();
       weirdAccent.rate(0.5);
       weirdAccent.playMode("untilDone");
       weirdAccent.play();
       pop();
       setTimeout(nextLine, 1000);
-      switch3 = 1;
+      switch6 = 1;
     }
     // lon lady frontal img visual cue
     if (currentVisualCue === "frontLogLady") {
@@ -764,20 +764,20 @@ function draw() {
       redRoomTransitionTheme.playMode("untilDone");
       redRoomTransitionTheme.play();
       pop();
-      if (switch4 === 0) {
+      if (switch7 === 0) {
         // automatically changes line
         setTimeout(nextLine, 1000);
-        switch4 = 1;
+        switch7 = 1;
       }
       currentSoundCue = undefined;
     }
     // scene 2 snowCover3 visual cue
     if (currentVisualCue === "snowCover3") {
       snowCover3Toggle = true; // transparency
-      if (switchC === 0) {
+      if (switch8 === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
-        switchC = 1;
+        switch8 = 1;
       }
     }
 
@@ -868,10 +868,10 @@ function draw() {
       bobLaughsSound.playMode("untilDone");
       bobLaughsSound.play(); // the laughing sound is called right away
       pop();
-      if (currentSoundCue === "bobLaughsSound" && switch5 === 0) {
+      if (currentSoundCue === "bobLaughsSound" && switch9 === 0) {
         setTimeout(nextLine, 2550); // next line function
         // happens only once after 2.75 seconds
-        switch5 = 1;
+        switch9 = 1;
       }
       currentSoundCue = undefined;
     }
@@ -927,10 +927,10 @@ function draw() {
     // scene 3 snowCover4 early for overlap and later when listening for help
     if (currentVisualCue === "snowCover5") {
       snowCover5Toggle = true;
-      if (switchD === 0) {
+      if (switch10 === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
-        switchD = 1;
+        switch10 = 1;
       }
     }
 
@@ -1004,10 +1004,10 @@ function draw() {
       lauraScreamsSound.play();
       pop();
       currentSoundCue = undefined;
-      if (switchF === 0) {
+      if (switch11 === 0) {
         // automatically changes line
         setTimeout(nextLine, 500);
-        switchF = 1;
+        switch11 = 1;
       }
     }
     // laura screams visual cue
@@ -1017,10 +1017,10 @@ function draw() {
       snowCover5Toggle = false;
       snowCover6Toggle = false;
       lauraScreamsToggle = true;
-      if (switchG === 0) {
+      if (switch12 === 0) {
         // automatically changes line
         setTimeout(nextLine, 500);
-        switchG = 1;
+        switch12 = 1;
       }
     }
     // end scene 5 fadeout visual cue
@@ -1120,7 +1120,7 @@ function draw() {
       //   // automatically changes line because mouse is paused
       //   setTimeout(nextLine, 500);
       //   switchZ = 1;
-      // }
+      // } // I keep this for failsafe
     }
     // scene4 nosnow visual cue
     if (currentVisualCue === "noSnow2") {
@@ -1132,10 +1132,10 @@ function draw() {
       //snowTransition2Toggle = false;
       //roadBGToggle = false;
       mouseToggle = true;
-      if (switchX === 0) {
+      if (switch13 === 0) {
         // automatically changes line because mouse is paused
         nextLine();
-        switchX = 1;
+        switch13 = 1;
       }
     }
 
@@ -1152,10 +1152,10 @@ function draw() {
       lauraRunningSound.playMode("untilDone");
       lauraRunningSound.play();
       pop();
-      if (switchV === 0) {
+      if (switch14 === 0) {
         // automatically changes line because mouse is paused
         nextLine();
-        switchV = 1;
+        switch14 = 1;
       }
       currentSoundCue = undefined; // play highway sound only once
     }
@@ -1211,10 +1211,10 @@ function draw() {
     if (snowCover6Toggle === true) {
       //mouseToggle = false; // mouse is off
       displaySnow(255, 100);
-      if (switchY === 0) {
+      if (switch15 === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
-        switchY = 1;
+        switch15 = 1;
       }
     }
     // each frame figure out what the currentLine and its type
