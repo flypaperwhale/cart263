@@ -1,6 +1,6 @@
 # Images folder
 
-Most images taken from snapshots of Fire Walk with Me by David Lynch and manipulated
+Most images taken from snapshots of Fire Walk with Me by David Lynch and manipulated thanks to gimp
 
 Monkey face https://www.researchgate.net/figure/Facial-expressions-of-dominance-in-the-rhesus-macaque-The-image-on-the-left-shows-a_fig1_327438929
 
