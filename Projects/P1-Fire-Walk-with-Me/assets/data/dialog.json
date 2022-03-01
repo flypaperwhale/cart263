@@ -245,7 +245,7 @@
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "Wouldn't you like to take me around the world?"
+        "dialog": "Do you want to take me around the world?"
       },
       {
         "type": "dialog",
@@ -470,7 +470,7 @@
         "type": "dialog",
         "image": "bobRage",
         "character": "bob",
-        "dialog": "                                                                    Look at how filthy you've become."
+        "dialog": "                                                                 You've been getting your hands dirty."
       },
       {
         "type": "dialog",

@@ -976,6 +976,8 @@ function draw() {
     if (currentSoundCue === "bobGrowlSound") {
       theRingToggle = false; // mouse is off
       scene3ListenTextToggle = false;
+      snowCover5Toggle = false;
+      snowCover6Toggle = false;
       push();
       bobAttacksSound.playMode("untilDone");
       bobAttacksSound.play();
@@ -985,6 +987,8 @@ function draw() {
     // laura screaming sound cue
     if (currentSoundCue === "lauraScreamsSound") {
       theRingToggle = false; // mouse is off
+      snowCover5Toggle = false;
+      snowCover6Toggle = false;
       push();
       lauraScreamsSound.playMode("untilDone");
       lauraScreamsSound.play();
@@ -1000,6 +1004,8 @@ function draw() {
     if (currentVisualCue === "lauraScreams") {
       snowCover4Toggle = false; // turn off snowCover4 to end scene 5
       theRingToggle = false; // turn off ring img
+      snowCover5Toggle = false;
+      snowCover6Toggle = false;
       lauraScreamsToggle = true;
       if (switchG === 0) {
         // automatically changes line
@@ -1010,6 +1016,8 @@ function draw() {
     // end scene 5 fadeout visual cue
     if (currentVisualCue === "endFadeout") {
       console.log("do you come here?");
+      snowCover5Toggle = false;
+      snowCover6Toggle = false;
       fadeoutToggle = true;
     }
 
