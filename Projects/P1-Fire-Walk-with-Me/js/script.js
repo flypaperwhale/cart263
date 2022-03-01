@@ -927,8 +927,8 @@ function draw() {
     // ANNYANG have Laura call for help and go to scene 4
     if (currentListener === "callForHelp") {
       scene3ListenTextToggle = true;
-      snowCover5Toggle = true;
-      console.log(snowCover4Toggle);
+      //snowCover5Toggle = true;
+      console.log(snowCover5Toggle);
       mouseToggle = false; // pause mouse
       // except to click on the ring
       if (scene3ListenTextToggle === true) {
@@ -941,6 +941,7 @@ function draw() {
       }
       //ANNYANG
       annyang.resume();
+      currentListener = undefined;
     }
 
     // scene3 snowTransition3 to scene 4 ###
@@ -974,6 +975,7 @@ function draw() {
     // BOB growling sound cue
     if (currentSoundCue === "bobGrowlSound") {
       theRingToggle = false; // mouse is off
+      scene3ListenTextToggle = false;
       push();
       bobAttacksSound.playMode("untilDone");
       bobAttacksSound.play();
@@ -1043,6 +1045,22 @@ function draw() {
     if (theRingToggle === true) {
       image(sc3RingImg, ringX, ringY, canvas.width - 1100, canvas.height - 700);
     }
+
+    // The angel (?)
+
+    //  scene 5 laura screaming img toggled TRUE (while snowCover4 is turned off)
+    if (lauraScreamsToggle === true) {
+      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
+    }
+    // scene 5 end fadeout toggled TRUE
+    if (fadeoutToggle === true) {
+      push();
+      rectMode(CENTER);
+      fill(0);
+      rect(width / 2, height / 2, width, height);
+      pop();
+      mouseToggle = true; // mouse is on, to click the end
+    }
     // scene 3 snowCover4 LISTEN for help and listen to the ring
     if (snowCover4Toggle === true) {
       console.log("cover 4 why you dont come in here?");
@@ -1059,22 +1077,6 @@ function draw() {
     if (snowTransition3Toggle === true) {
       displaySnow(255, 255);
     }
-    // The angel (?)
-
-    //  scene 5 laura screaming img toggled TRUE (while snowCover4 is turned off)
-    if (lauraScreamsToggle === true) {
-      image(sc3LauraScreams, 20, -20, canvas.width - 600, canvas.height - 400);
-    }
-    // scene 5 end fadeout toggled TRUE
-    if (fadeoutToggle === true) {
-      push();
-      rectMode(CENTER);
-      fill(0);
-      rect(width / 2, height / 2, width, height);
-      pop();
-      mouseToggle = true; // mouse is on, to click the end
-    }
-
     // each frame figure out what the currentLine and its type
     // display dialog, images, activate sounds etc...
     manipBlockingData();
@@ -1107,8 +1109,8 @@ function draw() {
     }
     // scene4 nosnow visual cue
     if (currentVisualCue === "noSnow2") {
-      snowCover4Toggle = false;
       snowCover5Toggle = false;
+      snowCover6Toggle = false;
       snowTransition3Toggle = false;
       theRingToggle = false;
 
@@ -1245,7 +1247,6 @@ function switchStateToSc5() {
 function displaySnow(gray, alpha) {
   // display snow //
   // the alpha property serves to make snowCover transparent
-
   if (
     // if either one of the snowCovers or snowTransitions is true
     snowTransition0Toggle === true ||
@@ -1255,7 +1256,10 @@ function displaySnow(gray, alpha) {
     //snowTransition4Toggle === true ||
     snowCover1Toggle === true ||
     snowCover2Toggle === true ||
-    snowCover3Toggle === true
+    snowCover3Toggle === true ||
+    snowCover4Toggle === true ||
+    snowCover5Toggle === true ||
+    snowCover6Toggle === true
   ) {
     push();
     imageMode(CENTER);
