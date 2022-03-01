@@ -569,19 +569,25 @@
     "scene4": [
       {
         "type": "visual cue",
-        "image": "noSnow",
+        "image": "snowCover5",
+        "character": "narrator",
+        "dialog": "beat of snow"
+      },
+      {
+        "type": "visual cue",
+        "image": "noSnow2",
         "character": "narrator",
         "dialog": "snow goes away"
       },
       {
         "type": "dialog",
-        "image": "brettSnide",
+        "image": "brettSnide2",
         "character": "businessman",
         "dialog": "                                                            Hey, you were dazed there for a moment."
       },
       {
         "type": "dialog",
-        "image": "brettSnide",
+        "image": "brettSnide2",
         "character": "businessman",
         "dialog": "                                                                      Where? Where are you going?"
       },
@@ -593,31 +599,31 @@
       },
       {
         "type": "dialog",
-        "image": "brettSnide",
+        "image": "brettSnide2",
         "character": "businessman",
         "dialog": "                                                       What the hell? Are you high or something?"
       },
       {
         "type": "dialog",
-        "image": "brettSmirk",
+        "image": "brettSmirk2",
         "character": "businessman",
         "dialog": "                                                                 ...started the party without me."
       },
       {
         "type": "dialog",
-        "image": "brettSmirk",
+        "image": "brettSmirk2",
         "character": "laura palmer",
         "dialog": "You know, you can fuck off."
       },
       {
         "type": "visual cue",
-        "image": "brettSnide",
+        "image": "brettSnide2",
         "character": "narrator",
         "dialog": "transition fade out"
       },
       {
         "type": "visual cue",
-        "image": "endFadeout",
+        "image": "endFadeout2",
         "character": "narrator",
         "dialog": "transition fade out"
       }

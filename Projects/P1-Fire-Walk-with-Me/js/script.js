@@ -172,6 +172,9 @@ let switchG = 0;
 
 // switch13- sc4 no snow
 let switchX = 0;
+// switch14- sc4 snow cover
+let switchY = 0;
+let switchZ = 0;
 
 // ring properties so that image can be clicked
 let ringX = 410;
@@ -570,8 +573,7 @@ function draw() {
     }
     //  brett snides visual cue
     if (currentVisualCue === "brettSnide") {
-      // Businessman sniding (? in another 4th scene?)
-      // snowCover2Toggle = false;  ###
+      // Businessman sniding
       brettSmirkToggle = false; // hide brett smirk
       brettSnideToggle = true;
     }
@@ -856,7 +858,7 @@ function draw() {
       bobLaughsSound.play(); // the laughing sound is called right away
       pop();
       if (currentSoundCue === "bobLaughsSound" && switch5 === 0) {
-        setTimeout(nextLine, 2750); // next line function
+        setTimeout(nextLine, 2550); // next line function
         // happens only once after 2.75 seconds
         switch5 = 1;
       }
@@ -911,23 +913,6 @@ function draw() {
       theRingToggle = true;
     }
 
-    // ANNYANG have Laura call for help and go to scene 4
-    if (currentListener === "callForHelp") {
-      scene3ListenTextToggle = true;
-      snowCover3Toggle = true;
-      mouseToggle = false; // pause mouse
-      // except to click on the ring
-      if (scene3ListenTextToggle === true) {
-        push();
-        fill(255, 0, 0);
-        rectMode(CENTER);
-        rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
-      } else {
-      }
-      //ANNYANG
-      annyang.resume();
-    }
-
     // scene 3 snowCover4 early for overlap and later when listening for help
     if (currentVisualCue === "snowCover4") {
       snowCover4Toggle = true;
@@ -937,10 +922,30 @@ function draw() {
         switchD = 1;
       }
     }
+
+    // ANNYANG have Laura call for help and go to scene 4
+    if (currentListener === "callForHelp") {
+      scene3ListenTextToggle = true;
+      snowCover4Toggle = true;
+      mouseToggle = false; // pause mouse
+      // except to click on the ring
+      if (scene3ListenTextToggle === true) {
+        push();
+        fill(255, 0, 0);
+        rectMode(CENTER);
+        rect(canvas.width / 4, 330, canvas.width / 2, 80); // display the red bar, with no words on it
+        pop();
+      } else {
+      }
+      //ANNYANG
+      annyang.resume();
+    }
+
     // scene3 snowTransition3 to scene 4 ###
     if (currentVisualCue === "snowTransition3") {
       scene3ListenTextToggle = false;
       snowTransition3Toggle = true;
+      snowCover4Toggle = true;
       snowCover5Toggle = true; // activate scene 4 snowCover5 for overlap animation
       setTimeout(switchStateToSc4, 1000); // switch setting to parking lot reprise
     }
@@ -1066,13 +1071,14 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
+
   // + // when state is parking lot reprise scene4 // + //
   if (state === `parkingLotReprise`) {
     console.log(
       fadeoutToggle,
       snowTransition3Toggle,
-      snowCover3Toggle,
-      snowCover4Toggle
+      snowCover4Toggle,
+      snowCover5Toggle
     );
     //display bg img
     if (barBgImgToggle2 === true) {
@@ -1081,10 +1087,20 @@ function draw() {
     }
 
     // scene4 CUES //
+
+    // scene 4 snowCover5 visual cue
+    if (currentVisualCue === "snowCover5") {
+      // snowCover5Toggle = true; // transparency
+      // if (switchZ === 0) {
+      //   // automatically changes line because mouse is paused
+      //   setTimeout(nextLine, 500);
+      //   switchZ = 1;
+      // }
+    }
     // scene4 nosnow visual cue
-    if (currentVisualCue === "noSnow") {
-      snowCover3Toggle = false;
-      snowCover4Toggle = true;
+    if (currentVisualCue === "noSnow2") {
+      snowCover4Toggle = false;
+      snowCover5Toggle = false;
       snowTransition3Toggle = false;
       theRingToggle = false;
 
@@ -1097,26 +1113,26 @@ function draw() {
         switchX = 1;
       }
     }
-    // snowCover
-    if (snowCover4Toggle === true) {
-      //mouseToggle = false; // mouse is off
-      displaySnow(255, 100);
-    }
-    // brett snide visual cue
-    if (currentVisualCue === "brettSnide") {
+    //brett snide visual cue
+    if (currentVisualCue === "brettSnide2") {
       // Businessman sniding
-      //snowCover2Toggle = false; // turn off snowCover2 ...
+      snowCover5Toggle = false;
       brettSmirkToggle2 = false; // turn off brett smirking
       brettSnideToggle2 = true;
     }
     // brett smirking img visual cue
-    if (currentVisualCue === "brettSmirk") {
+    if (currentVisualCue === "brettSmirk2") {
       // Businessman smirks
       brettSnideToggle2 = false;
       brettSmirkToggle2 = true;
     }
+    // scene 4 snowCover5 for overlap
+    if (snowCover5Toggle === true) {
+      mouseToggle = false; // mouse is off
+      displaySnow(255, 100);
+    }
     // end fadeout visual cue
-    if (currentVisualCue === "endFadeout") {
+    if (currentVisualCue === "endFadeout2") {
       // roadBGToggle = false;
       fadeoutToggle2 = true;
     }
@@ -1142,6 +1158,7 @@ function draw() {
         canvas.height - 580
       );
     }
+
     // scene 4 fadeout toggled TRUE
     if (fadeoutToggle2 === true) {
       push();
@@ -1151,6 +1168,16 @@ function draw() {
       pop();
     }
 
+    // snowCover
+    if (snowCover5Toggle === true) {
+      //mouseToggle = false; // mouse is off
+      displaySnow(255, 100);
+      if (switchY === 0) {
+        // automatically changes line because mouse is paused
+        setTimeout(nextLine, 500);
+        switchY = 1;
+      }
+    }
     // each frame figure out what the currentLine and its type
     // display dialog, images, activate sounds etc...
     manipBlockingData();
