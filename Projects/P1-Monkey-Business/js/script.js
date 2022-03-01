@@ -265,6 +265,7 @@ function setup() {
     help: listenNextLine3,
     "help me": listenNextLine3,
     "somebody help me": listenNextLine3,
+    "somebody help": listenNextLine3,
     "someone help": listenNextLine3,
     "I need help": listenNextLine3,
     "can somebody help me?": listenNextLine3,
