@@ -9,7 +9,7 @@ warn her, and then continues her descent into Hell
 
 "use strict";
 let n = 0;
-// states // ### settings ###
+// states-settings //
 let state = `Title`; // states are: Title, introAnimation, parkingLot,
 // transitionAnimation, semiconscious, redRoom, parkingLotReprise
 
@@ -41,7 +41,6 @@ let snowTransition2Toggle;
 // Transition 3- between sc3 and sc4
 let snowTransition3Toggle;
 // Transition 4- between sc3 and sc2
-//let snowTransition4Toggle; // ###
 
 // snow Cover visual cues //
 // cover 1- during intro Listen askName
@@ -52,7 +51,7 @@ let snowCover2Toggle;
 let snowCover3Toggle;
 // cover 4- sc2 transition/open sc3 + for Listen callForHelp
 let snowCover4Toggle;
-// cover 5- sc3 transition/open sc4 #####
+// cover 5- sc3 transition
 let snowCover5Toggle;
 // cover 6- sc4 overlap
 let snowCover6Toggle;
@@ -174,9 +173,6 @@ let switch13 = 0;
 let switch14 = 0;
 // switch14- sc4 snow cover
 let switch15 = 0;
-// // switch10- ##
-// let switchE = 0; ###
-let switchZ = 0;
 
 // ring properties so that image can be clicked
 let ringX = 410;
@@ -575,7 +571,6 @@ function parkingLotState() {
     }
     // laura lights up visual cue
     if (currentVisualCue === "lauraLight") {
-      //fadeoutToggle = false; ###
       // Laura lights up
       lauraLightToggle = true;
     }
@@ -614,8 +609,6 @@ function parkingLotState() {
     if (currentVisualCue === "brettSmirk") {
       // Businessman smirks
       brettSnideToggle = false; // hide brett snide
-      //lauraCigToggle = false; // hide laura smokes ##
-      //brettLeerToggle = false; // hide brett leer ##
       brettSmirkToggle = true;
     }
 
@@ -960,8 +953,6 @@ function redRoomState() {
     // ANNYANG have Laura call for help and go to scene 4
     if (currentListener === "callForHelp") {
       scene3ListenTextToggle = true;
-      //snowCover5Toggle = true;
-      console.log(snowCover5Toggle);
       mouseToggle = false; // pause mouse
       // except to click on the ring
       if (scene3ListenTextToggle === true) {
@@ -977,7 +968,7 @@ function redRoomState() {
       currentListener = undefined;
     }
 
-    // scene3 snowTransition3 to scene 4 ###
+    // scene3 snowTransition3 to scene 4
     if (currentVisualCue === "snowTransition3") {
       scene3ListenTextToggle = false;
       snowTransition3Toggle = true;
@@ -1411,7 +1402,7 @@ function mousePressed() {
   if (touchingRingToggle === true) {
     // if mouse is over ring img, clicking pushes us straight to scene5 line0
     //switch to scene 5
-    ringIsClicked = true; // ringIsClicked activates ###
+    ringIsClicked = true; // ringIsClicked activates switch to scene 5
     theRingToggle = false; // this only happens once
     touchingRingToggle = false; // ring disappears and user cannot click it again
   }
