@@ -54,6 +54,7 @@ let snowCover3Toggle;
 let snowCover4Toggle;
 // cover 5- sc3 transition/open sc4 #####
 let snowCover5Toggle;
+let snowCover6Toggle;
 
 // variables to animate snow Img
 let snowDirectionsArray = [1, 2, 3, 4]; // up, down, left, right
@@ -914,8 +915,8 @@ function draw() {
     }
 
     // scene 3 snowCover4 early for overlap and later when listening for help
-    if (currentVisualCue === "snowCover4") {
-      snowCover4Toggle = true;
+    if (currentVisualCue === "snowCover5") {
+      snowCover5Toggle = true;
       if (switchD === 0) {
         // automatically changes line because mouse is paused
         setTimeout(nextLine, 500);
@@ -926,7 +927,8 @@ function draw() {
     // ANNYANG have Laura call for help and go to scene 4
     if (currentListener === "callForHelp") {
       scene3ListenTextToggle = true;
-      snowCover4Toggle = true;
+      snowCover5Toggle = true;
+      console.log(snowCover4Toggle);
       mouseToggle = false; // pause mouse
       // except to click on the ring
       if (scene3ListenTextToggle === true) {
@@ -945,8 +947,8 @@ function draw() {
     if (currentVisualCue === "snowTransition3") {
       scene3ListenTextToggle = false;
       snowTransition3Toggle = true;
-      snowCover4Toggle = true;
-      snowCover5Toggle = true; // activate scene 4 snowCover5 for overlap animation
+      snowCover5Toggle = true;
+      snowCover6Toggle = true; // activate scene 4 snowCover5 for overlap animation
       setTimeout(switchStateToSc4, 1000); // switch setting to parking lot reprise
     }
 
@@ -1024,7 +1026,6 @@ function draw() {
     }
     // RESPONSIVE VOICE mysterious voice
     if (bobHasYouVoiceToggle === true) {
-      console.log(`what color is ${currentVoice}`);
       bobHasYouVoiceToggle = false; // only happens once
       responsiveVoice.speak(
         `The thread will be torn ${userName}`,
@@ -1044,6 +1045,13 @@ function draw() {
     }
     // scene 3 snowCover4 LISTEN for help and listen to the ring
     if (snowCover4Toggle === true) {
+      console.log("cover 4 why you dont come in here?");
+      mouseToggle = false; // mouse is off
+      displaySnow(255, 100);
+    }
+    // scene 3 snowCover4 LISTEN for help and listen to the ring
+    if (snowCover5Toggle === true) {
+      console.log("cover 5 why you dont come in here?");
       mouseToggle = false; // mouse is off
       displaySnow(255, 100);
     }
@@ -1089,7 +1097,7 @@ function draw() {
     // scene4 CUES //
 
     // scene 4 snowCover5 visual cue
-    if (currentVisualCue === "snowCover5") {
+    if (currentVisualCue === "snowCover6") {
       // snowCover5Toggle = true; // transparency
       // if (switchZ === 0) {
       //   // automatically changes line because mouse is paused
@@ -1169,7 +1177,7 @@ function draw() {
     }
 
     // snowCover
-    if (snowCover5Toggle === true) {
+    if (snowCover6Toggle === true) {
       //mouseToggle = false; // mouse is off
       displaySnow(255, 100);
       if (switchY === 0) {
