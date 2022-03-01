@@ -325,6 +325,7 @@ function draw() {
   parkingLotRepriseState();
 }
 
+// + // when state is Title // + //
 function titleState() {
   if (state === `Title`) {
     // display opening text
@@ -342,6 +343,7 @@ function titleState() {
   }
 }
 
+// + // when state is introAnimation // + //
 function introAnimationState() {
   if (state === `introAnimation`) {
     // intro CUES //
@@ -547,6 +549,7 @@ function introAnimationState() {
   }
 }
 
+// + // state is ParkingLot // + //
 function parkingLotState() {
   if (state === `parkingLot`) {
     snowTransition3Toggle = false;
@@ -711,6 +714,7 @@ function parkingLotState() {
   }
 }
 
+// + // state is Semiconscious // + //
 function semiconsciousState() {
   if (state === `semiconscious`) {
     // show background image
@@ -873,6 +877,8 @@ function semiconsciousState() {
     manipBlockingData();
   }
 }
+
+// + // when state is redRoom // + //
 function redRoomState() {
   if (state === `redRoom`) {
     // show background image
@@ -1115,6 +1121,7 @@ function redRoomState() {
   }
 }
 
+// + // when state is parking lot reprise scene4 // + //
 function parkingLotRepriseState() {
   if (state === `parkingLotReprise`) {
     //display bg img
