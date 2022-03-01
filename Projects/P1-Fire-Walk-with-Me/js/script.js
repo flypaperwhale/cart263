@@ -137,6 +137,7 @@ let bobLaughsSound;
 let bobAttacksSound;
 let lauraScreamsSound;
 let snowSound;
+let lauraRunningSound;
 
 // if true, mouse can be clicked. if false, mouse is paused
 let mouseToggle = false;
@@ -176,6 +177,7 @@ let switchX = 0;
 // switch14- sc4 snow cover
 let switchY = 0;
 let switchZ = 0;
+let switchV = 0;
 
 // ring properties so that image can be clicked
 let ringX = 410;
@@ -214,6 +216,7 @@ function preload() {
   bobAttacksSound = loadSound("assets/sounds/bobattacks.wav");
   lauraScreamsSound = loadSound("assets/sounds/lauraScream.mp3");
   snowSound = loadSound("assets/sounds/snowbit.mp3");
+  lauraRunningSound = loadSound("assets/sounds/laurarunning.mp3");
   // introduction images
   introLauraImg = loadImage("assets/images/intro-scene/intro-laura.png");
   introRoadBgImg = loadImage("assets/images/intro-scene/intro-road.png");
@@ -287,6 +290,8 @@ function snowTransitionAnimate() {
   snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
   if (currentSnowDirection === snowDirection) {
     snowDirection = random(snowDirectionsArray); // have snow change direction randomly for visual effect
+
+    responsiveVoice.setDefaultRate(0.88);
   }
 }
 
@@ -604,11 +609,6 @@ function draw() {
         switchB = 1;
       }
     }
-    // scene 1 snowTransition to scene 2 sound cue+
-    if (currentSoundCue === "sc1TransitionAccent" && switch3 === 0) {
-      setTimeout(nextLine, 1000);
-      switch3 = 1;
-    }
     // scene 1 snowTransition1 cue
     if (currentVisualCue === "snowTransition1") {
       snowTransition1Toggle = true;
@@ -701,12 +701,22 @@ function draw() {
     image(semiconsciousBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
 
     // scene 2 CUES //
+    // scene 1 snowTransition to scene 2 sound cue+
     // scene 2 noSnow visual cue
     if (currentVisualCue === "noSnow") {
       snowCover2Toggle = false; // hide snowCover 2
       snowCover3Toggle = false; // hide snowCover 3
       snowTransition1Toggle = false; // hide snowTransition1
       mouseToggle = true; // turn mouse on!
+    }
+    if (currentSoundCue === "sc1TransitionAccent" && switch3 === 0) {
+      push();
+      weirdAccent.rate(0.5);
+      weirdAccent.playMode("untilDone");
+      weirdAccent.play();
+      pop();
+      setTimeout(nextLine, 1000);
+      switch3 = 1;
     }
     // lon lady frontal img visual cue
     if (currentVisualCue === "frontLogLady") {
@@ -1015,7 +1025,6 @@ function draw() {
     }
     // end scene 5 fadeout visual cue
     if (currentVisualCue === "endFadeout") {
-      console.log("do you come here?");
       snowCover5Toggle = false;
       snowCover6Toggle = false;
       fadeoutToggle = true;
@@ -1071,13 +1080,11 @@ function draw() {
     }
     // scene 3 snowCover4 LISTEN for help and listen to the ring
     if (snowCover4Toggle === true) {
-      console.log("cover 4 why you dont come in here?");
       mouseToggle = false; // mouse is off
       displaySnow(255, 100);
     }
     // scene 3 snowCover4 LISTEN for help and listen to the ring
     if (snowCover5Toggle === true) {
-      console.log("cover 5 why you dont come in here?");
       mouseToggle = false; // mouse is off
       displaySnow(255, 100);
     }
@@ -1131,12 +1138,26 @@ function draw() {
         switchX = 1;
       }
     }
+
     //brett snide visual cue
     if (currentVisualCue === "brettSnide2") {
       // Businessman sniding
       snowCover5Toggle = false;
       brettSmirkToggle2 = false; // turn off brett smirking
       brettSnideToggle2 = true;
+    }
+    // highway sound cue
+    if (currentSoundCue === "lauraRunning") {
+      push();
+      lauraRunningSound.playMode("untilDone");
+      lauraRunningSound.play();
+      pop();
+      if (switchV === 0) {
+        // automatically changes line because mouse is paused
+        nextLine();
+        switchV = 1;
+      }
+      currentSoundCue = undefined; // play highway sound only once
     }
     // brett smirking img visual cue
     if (currentVisualCue === "brettSmirk2") {

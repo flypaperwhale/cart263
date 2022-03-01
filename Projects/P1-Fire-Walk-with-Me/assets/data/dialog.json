@@ -308,12 +308,6 @@
         "dialog": "Speak: I'm going to go all the way."
       },
       {
-        "type": "sound cue",
-        "sound": "sc1TransitionAccent",
-        "character": "narrator",
-        "dialog": "laura steps out of ride"
-      },
-      {
         "type": "visual cue",
         "image": "snowTransition1",
         "character": "narrator",
@@ -331,11 +325,18 @@
         "dialog": "snow goes away"
       },
       {
+        "type": "sound cue",
+        "sound": "sc1TransitionAccent",
+        "character": "narrator",
+        "dialog": "laura steps out of ride"
+      },
+      {
         "type": "visual cue",
         "image": "frontLogLady",
         "character": "narrator",
         "dialog": "log lady stands there"
       },
+
       {
         "type": "dialog",
         "image": "none",
@@ -358,7 +359,7 @@
         "type": "dialog",
         "image": "logLadyLookL",
         "character": "margaret lanterman",
-        "dialog": "My dear... The tender bows of innocence burn, and when the wind raises all goodness is in jeopardy."
+        "dialog": "My dear... The tender bows of innocence burn, and when the wind raises, all goodness is in jeopardy."
       },
       {
         "type": "dialog",
@@ -476,7 +477,7 @@
         "type": "dialog",
         "image": "lauraHands",
         "character": "laura palmer",
-        "dialog": "No..."
+        "dialog": "..."
       },
       {
         "type": "dialog",
@@ -488,7 +489,7 @@
         "type": "dialog",
         "image": "none",
         "character": "laura palmer",
-        "dialog": "... "
+        "dialog": "No... "
       },
       {
         "type": "dialog",
@@ -586,6 +587,12 @@
         "dialog": "                                                            Hey, you were dazed there for a moment."
       },
       {
+        "type": "sound cue",
+        "sound": "lauraRunning",
+        "character": "narrator",
+        "dialog": "laura runs off"
+      },
+      {
         "type": "dialog",
         "image": "brettSnide2",
         "character": "businessman",
@@ -613,7 +620,7 @@
         "type": "dialog",
         "image": "brettSmirk2",
         "character": "laura palmer",
-        "dialog": "You know, you can fuck off."
+        "dialog": "You know, you can go fuck yourself."
       },
       {
         "type": "visual cue",
