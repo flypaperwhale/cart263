@@ -1,5 +1,16 @@
-# Template p5 project
+# Monkey Business based on Fire Walk with Me
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This project is an artistic rendition of Twin Peaks Fire Walk with Me
+It is my attempt at deciphering David Lynch's dream
+And making a dream of my own
 
-Thank you to Pix-brix for their image pixelator
+We follow Laura in her psychedelic-psychic trip where the dark entity BOB
+is trying to get at her.
+
+The program uses a json dataset to block different cues and follow a the script,
+displaying the dialog in sequence, and activating sounds and images
+
+the user is also made to view the game from Laura's perspective
+they are called through the use of annyang to engage with Laura's reality
+
+Pay attention to messages and warnings.
