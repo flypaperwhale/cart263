@@ -1365,24 +1365,24 @@ this is solved directly in the JSON file
     // do sound cue thing
     currentSoundCue = lineData.sound;
     //manipulate current sound right away
-    console.log(`what is currentSoundCue ? ${currentSoundCue}`);
+    //console.log(`what is currentSoundCue ? ${currentSoundCue}`);
   }
   // VISUAL CUE //
   if (lineData.type === "visual cue") {
     // do visual cue thing
     currentVisualCue = lineData.image;
-    console.log(`what is currentVisualCue ? ${currentVisualCue}`);
+    //console.log(`what is currentVisualCue ? ${currentVisualCue}`);
   }
   // LISTEN CUE //
   if (lineData.type === "listen") {
     currentListener = lineData.image;
-    console.log(`what is currentVLISTENCue ? ${currentListener}`);
+    //console.log(`what is currentListenCue ? ${currentListener}`);
   }
   // SPOKEN CUE //
   if (lineData.type === "spoken") {
     //user cannot click to advance anymore
     currentVoice = lineData.image;
-    console.log(`what is currentVoice ? ${currentVoice}`);
+    //console.log(`what is currentVoice ? ${currentVoice}`);
   }
 }
 
