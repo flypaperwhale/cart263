@@ -312,6 +312,20 @@ function draw() {
   displaySnow(255, 255);
 
   // + // when state is Title // + //
+  titleState();
+  // + // when state is introAnimation // + //
+  introAnimationState();
+  // + // state is ParkingLot // + //
+  parkingLotState();
+  // + // state is Semiconscious // + //
+  semiconsciousState();
+  // + // when state is redRoom // + //
+  redRoomState();
+  // + // when state is parking lot reprise scene4 // + //
+  parkingLotRepriseState();
+}
+
+function titleState() {
   if (state === `Title`) {
     // display opening text
     push();
@@ -326,8 +340,9 @@ function draw() {
     );
     pop();
   }
+}
 
-  // + // when state is introAnimation // + //
+function introAnimationState() {
   if (state === `introAnimation`) {
     // intro CUES //
     // snowSound sound cue
@@ -530,8 +545,9 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
+}
 
-  // + // state is ParkingLot // + //
+function parkingLotState() {
   if (state === `parkingLot`) {
     snowTransition3Toggle = false;
     // show background image
@@ -693,8 +709,9 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
+}
 
-  // + // state is Semiconscious // + //
+function semiconsciousState() {
   if (state === `semiconscious`) {
     // show background image
     // Semicounscious eerie background
@@ -855,8 +872,8 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
-
-  // + // when state is redRoom // + //
+}
+function redRoomState() {
   if (state === `redRoom`) {
     // show background image
     // redroom background
@@ -1096,41 +1113,22 @@ function draw() {
     // display dialog, images, activate sounds etc...
     manipBlockingData();
   }
+}
 
-  // + // when state is parking lot reprise scene4 // + //
+function parkingLotRepriseState() {
   if (state === `parkingLotReprise`) {
-    console.log(
-      fadeoutToggle,
-      snowTransition3Toggle,
-      snowCover4Toggle,
-      snowCover5Toggle
-    );
     //display bg img
     if (barBgImgToggle2 === true) {
       // Bar parking background
       image(barBgImg, 0, 0, canvas.width - 600, canvas.height - 400);
     }
-
     // scene4 CUES //
-
-    // scene 4 snowCover5 visual cue
-    if (currentVisualCue === "snowCover6") {
-      // snowCover5Toggle = true; // transparency
-      // if (switchZ === 0) {
-      //   // automatically changes line because mouse is paused
-      //   setTimeout(nextLine, 500);
-      //   switchZ = 1;
-      // } // I keep this for failsafe
-    }
     // scene4 nosnow visual cue
     if (currentVisualCue === "noSnow2") {
       snowCover5Toggle = false;
       snowCover6Toggle = false;
       snowTransition3Toggle = false;
       theRingToggle = false;
-
-      //snowTransition2Toggle = false;
-      //roadBGToggle = false;
       mouseToggle = true;
       if (switch13 === 0) {
         // automatically changes line because mouse is paused
@@ -1138,7 +1136,6 @@ function draw() {
         switch13 = 1;
       }
     }
-
     //brett snide visual cue
     if (currentVisualCue === "brettSnide2") {
       // Businessman sniding
@@ -1172,11 +1169,10 @@ function draw() {
     }
     // end fadeout visual cue
     if (currentVisualCue === "endFadeout2") {
-      // roadBGToggle = false;
       fadeoutToggle2 = true;
     }
 
-    // scene4 blocks toggled TRUE
+    // scene4 blocks toggled TRUE //
     // brett smirking visual cue
     if (brettSmirkToggle2 === true) {
       image(
@@ -1197,7 +1193,6 @@ function draw() {
         canvas.height - 580
       );
     }
-
     // scene 4 fadeout toggled TRUE
     if (fadeoutToggle2 === true) {
       push();
@@ -1206,10 +1201,8 @@ function draw() {
       rect(width / 2, height / 2, width, height);
       pop();
     }
-
     // snowCover
     if (snowCover6Toggle === true) {
-      //mouseToggle = false; // mouse is off
       displaySnow(255, 100);
       if (switch15 === 0) {
         // automatically changes line because mouse is paused
@@ -1253,18 +1246,14 @@ function switchStateToSc4() {
     mouseToggle = true;
     snowTransition3Toggle = false;
     snowCover3Toggle = false;
-    //snowCover4Toggle = false;
     barBgImgToggle2 = true;
-    console.log(currentLine);
     setTimeout(nextLine, 1000);
-    console.log(currentLine);
     state = `parkingLotReprise`;
     manipBlockingData();
-    // mouseToggle = true;
   }
 }
 function switchStateToSc5() {
-  // directly from scene 3 to scene 5
+  // directly from scene 3 to scene 5 when the ring is clicked
   if (currentScene === "scene3" && state === `redRoom`) {
     snowCover4Toggle = false; // hide snowCover4
     theRingToggle = false; // hide the ring
@@ -1450,9 +1439,6 @@ function listenNextLine3() {
 function nextLine() {
   n++;
   console.log(n);
-  // if (currentScene === "scene4" && currentLine === 0) {
-  //   currentLine++;
-  // } ### TEST to debug?
   currentLine++; // add 1 to currentLine everytime nextLine is called
   if (currentLine >= data.blocking[currentScene].length) {
     // if currentLine is last in a scene, next click goes back to 0
@@ -1476,10 +1462,6 @@ function nextLine() {
     }
     currentLine = 0;
   }
-  // } else if (currentScene === "scene3" && currentLine < 23) {
-  //   currentScene = "scene4";
-  //   currentLine = 0;
-  // }
 }
 
 function keyPressed() {
@@ -1489,19 +1471,18 @@ function keyPressed() {
   } else {
     // nothing
   }
-  if (keyCode === 81) {
-    // debug button Q
-    console.log(state);
-    console.log(currentScene);
-    console.log(currentLine);
-    console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
-      snowTransition1Toggle = ${snowTransition1Toggle}
-      snowTransition2Toggle = ${snowTransition2Toggle}
-      snowTransition3Toggle = ${snowTransition3Toggle}`);
-    console.log(`
-        snowCover1Toggle = ${snowCover1Toggle}
-        snowCover2Toggle = ${snowCover2Toggle}
-        snowCover3Toggle = ${snowCover3Toggle}
-        snowCover4Toggle = ${snowCover4Toggle}`);
-  }
+  // if (keyCode === 81) {
+  //   // debug button Q
+  //   console.log(state);
+  //   console.log(currentScene);
+  //   console.log(currentLine);
+  //   console.log(`in displaySnow snowTransition0Toggle = ${snowTransition0Toggle}
+  //     snowTransition1Toggle = ${snowTransition1Toggle}
+  //     snowTransition2Toggle = ${snowTransition2Toggle}
+  //     snowTransition3Toggle = ${snowTransition3Toggle}`);
+  //   console.log(`
+  //       snowCover1Toggle = ${snowCover1Toggle}
+  //       snowCover2Toggle = ${snowCover2Toggle}
+  //       snowCover3Toggle = ${snowCover3Toggle}
+  //       snowCover4Toggle = ${snowCover4Toggle}`);
 }
