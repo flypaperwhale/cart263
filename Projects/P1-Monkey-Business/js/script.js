@@ -143,25 +143,25 @@ let lauraRunningSound;
 let mouseToggle = false;
 
 // Switches //
-// switch6- intro snowCover1
+// switch1- intro snowCover1
 let switch1 = 0;
-// switch0-
+// switch2-
 let switch2 = 0;
-// switch2- intro accent sound
+// switch3- intro accent sound
 let switch3 = 0;
-// switch1- intro monkey face
+// switch4- intro monkey face
 let switch4 = 0;
-// switch7- sc1 snowCover2
+// switch5- sc1 snowCover2
 let switch5 = 0;
-// switch3- transition from sc1 to sc2
+// switch6- transition from sc1 to sc2
 let switch6 = 0;
-// switch4- transition from sc2 to sc3
+// switch7- transition from sc2 to sc3
 let switch7 = 0;
 // switch8- sc2 snowCover3
 let switch8 = 0;
-// switch5- sc2/sc3 bob laughs
+// switch9- sc2/sc3 bob laughs
 let switch9 = 0;
-// switch9- sc3 snowCover4
+// switch10- sc3 snowCover4
 let switch10 = 0;
 // switch11- sc5 Laura screams image
 let switch11 = 0;
@@ -169,9 +169,9 @@ let switch11 = 0;
 let switch12 = 0;
 // switch13- sc4 no snow
 let switch13 = 0;
-// switch #
+// switch 14
 let switch14 = 0;
-// switch14- sc4 snow cover
+// switch15- sc4 snow cover
 let switch15 = 0;
 
 // ring properties so that image can be clicked
