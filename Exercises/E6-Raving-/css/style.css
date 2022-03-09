@@ -4,6 +4,7 @@ Raving Redactionist CSS.
 
 /* Just some general syling of the page for aesthetics. Personal choice. */
 body {
+  color: gold;
   font-family: Courier, monospace;
   width: 800px;
   margin-left: 100px;
@@ -20,5 +21,5 @@ body {
 .revealed {
   background-color: transparent; /* No background */
   text-decoration: underline; /* underlined! */
-  color: red; /* Emergency! */
+  color: turquoise; /* Emergency! */
 }
