@@ -6,12 +6,7 @@ based on Pippin Barr's Raving Redactionist
 A pillar of symbols to be clicked and "decyphered"
 */
 
-"use strict";
-
-// The chance a span will be revealed per update
-const REVEAL_PROBABILITY = 0; //## display glyph
-// How often to update the spans (potentially revealing them)
-const UPDATE_FREQUENCY = 500; //### no need
+("use strict");
 
 // A place to store the jQuery selection of all secrets
 let $secrets;
@@ -19,55 +14,26 @@ let $secrets;
 setup();
 
 /**
-Sets the click handler and starts the time loop
+Sets the click handler
 */
 function setup() {
-  // Save the selection of all secrets (since we do stuff to them multiple times)
+  // Save the selection of all secret glyphs
   $secrets = $(`.secret`);
   // Set a click handler on the secrets (so we know when they`re clicked)
-  $secrets.on(`click`, redact); //## redact = decypher
-  // Set an interval of 500 milliseconds to attempt the revelation of secrets
-  //setInterval(revelation, UPDATE_FREQUENCY); //
+  $secrets.on(`click`, decypher);
 }
 
 /**
-When a secret is clicked we remove its revealed class and add the redacted class
+When a secret is clicked we remove its revealed class and add the decyphered class
 thus blacking it out
 */
-function redact() {
+function decypher() {
   $(this).removeClass(`revealed`);
-  $(this).addClass(`redacted`);
+  $(this).addClass(`decyphered`);
   setTimeout(reveal, 2000);
 }
 
-// if ( {
-//   console.log("wtf");
-//   setTimeout(reveal, 2000);
-// }
-
 function reveal() {
-  console.log("so...");
-  $(`.redacted`).removeClass(`redacted`);
-  $(`.redacted`).addClass(`revealed`);
+  $(`.decyphered`).removeClass(`decyphered`);
+  $(`.decyphered`).addClass(`revealed`);
 }
-/**
-Update is called every 500 milliseconds and it updates all the secrets on the page
-using jQuery`s each() function which calls the specified function on _each_ of the
-elements in the selection
-*/
-// function revelation() {
-//   $secrets.each(attemptReveal);
-// }
-
-/**
-With random chance it unblanks the current secret by removing the
-redacted class and adding the revealed class. Because this function is called
-by each(), "this" refers to the current element that each has selected.
-*/
-// function attemptReveal() {
-//   let r = Math.random();
-//   if (r < REVEAL_PROBABILITY) {
-//     $(this).removeClass(`redacted`);
-//     $(this).addClass(`revealed`);
-//   }
-// }

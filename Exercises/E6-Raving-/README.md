@@ -1,3 +1,7 @@
-# Template p5 project
+# E6 raving decypher
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This program is a simplified version of Pippin's raving redactionist.
+The intention was to have the translation of the different glyphs appear when clicked,
+but I haven't managed to do it.
+Instead the clicked glyphs are highlighted and then the highlight disappears.
+Aesthetics look ancient Egyptian.
