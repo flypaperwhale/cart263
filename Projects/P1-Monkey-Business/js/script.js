@@ -200,10 +200,10 @@ function preload() {
   data = loadJSON(`assets/data/dialog.json`);
 
   // load sounds
-  introMelody = loadSound("assets/sounds/indianflute.mp3");
+  //introMelody = loadSound("assets/sounds/indianflute.mp3");
   sc1TransitionAccent = loadSound("assets/sounds/boom-intro.mp3");
   highwaySound = loadSound("assets/sounds/bythehighway.wav");
-  rideStopsSound = loadSound("assets/sounds/hitchcarstops2.mp3");
+  //rideStopsSound = loadSound("assets/sounds/hitchcarstops2.mp3");
   carDoorSound = loadSound("assets/sounds/stepoutcar2.mp3");
   accentSound = loadSound("assets/sounds/monkey-business-accent.mp3");
   weirdAccent = loadSound("assets/sounds/weirdaccent.wav");
