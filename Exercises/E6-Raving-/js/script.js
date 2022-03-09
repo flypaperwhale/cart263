@@ -27,7 +27,7 @@ function setup() {
   // Set a click handler on the secrets (so we know when they`re clicked)
   $secrets.on(`click`, redact); //## redact = decypher
   // Set an interval of 500 milliseconds to attempt the revelation of secrets
-  setInterval(revelation, UPDATE_FREQUENCY); //
+  //setInterval(revelation, UPDATE_FREQUENCY); //
 }
 
 /**
@@ -37,8 +37,19 @@ thus blacking it out
 function redact() {
   $(this).removeClass(`revealed`);
   $(this).addClass(`redacted`);
+  setTimeout(reveal, 2000);
 }
 
+// if ( {
+//   console.log("wtf");
+//   setTimeout(reveal, 2000);
+// }
+
+function reveal() {
+  console.log("so...");
+  $(`.redacted`).removeClass(`redacted`);
+  $(`.redacted`).addClass(`revealed`);
+}
 /**
 Update is called every 500 milliseconds and it updates all the secrets on the page
 using jQuery`s each() function which calls the specified function on _each_ of the
