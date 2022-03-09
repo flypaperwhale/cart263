@@ -1,17 +1,17 @@
 /**
-Raving Redactionist
-Pippin Barr
-You are redacting a document, but it keeps becoming unredacted!
-Click the secret information to hide it, don`t let all the
-secrets become revealed!
+Raving Decypher
+Frankie Latreille
+based on Pippin Barr's Raving Redactionist
+
+A pillar of symbols to be clicked and "decyphered"
 */
 
 "use strict";
 
 // The chance a span will be revealed per update
-const REVEAL_PROBABILITY = 1;
+const REVEAL_PROBABILITY = 0; //## display glyph
 // How often to update the spans (potentially revealing them)
-const UPDATE_FREQUENCY = 500;
+const UPDATE_FREQUENCY = 500; //### no need
 
 // A place to store the jQuery selection of all secrets
 let $secrets;
@@ -25,9 +25,9 @@ function setup() {
   // Save the selection of all secrets (since we do stuff to them multiple times)
   $secrets = $(`.secret`);
   // Set a click handler on the secrets (so we know when they`re clicked)
-  $secrets.on(`click`, redact);
+  $secrets.on(`click`, redact); //## redact = decypher
   // Set an interval of 500 milliseconds to attempt the revelation of secrets
-  setInterval(revelation, UPDATE_FREQUENCY);
+  setInterval(revelation, UPDATE_FREQUENCY); //
 }
 
 /**
@@ -44,19 +44,19 @@ Update is called every 500 milliseconds and it updates all the secrets on the pa
 using jQuery`s each() function which calls the specified function on _each_ of the
 elements in the selection
 */
-function revelation() {
-  $secrets.each(attemptReveal);
-}
+// function revelation() {
+//   $secrets.each(attemptReveal);
+// }
 
 /**
 With random chance it unblanks the current secret by removing the
 redacted class and adding the revealed class. Because this function is called
 by each(), "this" refers to the current element that each has selected.
 */
-function attemptReveal() {
-  let r = Math.random();
-  if (r < REVEAL_PROBABILITY) {
-    $(this).removeClass(`redacted`);
-    $(this).addClass(`revealed`);
-  }
-}
+// function attemptReveal() {
+//   let r = Math.random();
+//   if (r < REVEAL_PROBABILITY) {
+//     $(this).removeClass(`redacted`);
+//     $(this).addClass(`revealed`);
+//   }
+// }

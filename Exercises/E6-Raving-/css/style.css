@@ -5,6 +5,7 @@ Raving Redactionist CSS.
 /* Just some general syling of the page for aesthetics. Personal choice. */
 body {
   color: gold;
+  text-align: center;
   font-family: Courier, monospace;
   width: 800px;
   margin-left: 100px;
