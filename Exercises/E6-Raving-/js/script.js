@@ -30,7 +30,7 @@ thus blacking it out
 function decypher() {
   $(this).removeClass(`revealed`);
   $(this).addClass(`decyphered`);
-  setTimeout(reveal, 2000);
+  setTimeout(reveal, 1500);
 }
 
 function reveal() {
