@@ -14,7 +14,7 @@ body {
 
 /* Redacted elements need to be blanked out */
 .redacted {
-  background-color: gold; /* Black background */
+  background-color: navy; /* Black background */
   user-select: none; /* User can't select the redacted text to see it */
 }
 

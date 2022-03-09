@@ -9,7 +9,7 @@ secrets become revealed!
 "use strict";
 
 // The chance a span will be revealed per update
-const REVEAL_PROBABILITY = 0.1;
+const REVEAL_PROBABILITY = 1;
 // How often to update the spans (potentially revealing them)
 const UPDATE_FREQUENCY = 500;
 
