@@ -25,19 +25,21 @@ function setup() {
 
 /**
 When a secret is clicked we remove its unknown class and add the decyphered class
-thus blacking it out
+thus highlighting and displaying the translation
 */
-function decypher(event) {
-  $(event.target).removeClass(`unknown`);
-  $(event.target).addClass(`decyphered`);
-  let translation = $(event.target).attr(`translation`);
-  $(event.target).text(translation);
-  setTimeout(revert, 1500, $(event.target));
-}
 
+// when glyphs are clicked, decypher
+function decypher(event) {
+  $(event.target).removeClass(`unknown`); // remove unknown css
+  $(event.target).addClass(`decyphered`); // change css to highlighted translation
+  let translation = $(event.target).attr(`translation`); // store target translation
+  $(event.target).text(translation); // display target translation
+  setTimeout(revert, 1500, $(event.target)); // display for 1.5 seconds then revert
+}
+// when translations revert after setTimeout
 function revert(target) {
-  $(target).removeClass(`decyphered`);
-  $(target).addClass(`unknown`);
-  let hieroglyphic = $(target).attr(`hieroglyphic`);
-  $(target).text(hieroglyphic);
+  $(target).removeClass(`decyphered`); // remove decyphered css
+  $(target).addClass(`unknown`); // change css back to unknown
+  let hieroglyphic = $(target).attr(`hieroglyphic`); // store target hieroglyphs
+  $(target).text(hieroglyphic); // display target hierpglyphs
 }

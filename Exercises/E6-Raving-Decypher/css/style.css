@@ -13,15 +13,13 @@ body {
   background-color: royalblue;
 }
 
-/* Redacted elements need to be blanked out */
+/* decyphered elements are highlighted, translation shown temporarily */
 .decyphered {
-  background-color: navy; /* Black background */
-  user-select: none; /* User can't select the redacted text to see it */
+  background-color: navy; /* dark background */
 }
 
-/* Revealed elements need to be highlighted because it's a disaster! */
+/* unknown items are turquoise */
 .unknown {
   background-color: transparent; /* No background */
-  text-decoration: underline; /* underlined! */
-  color: turquoise; /* Emergency! */
+  color: turquoise; /* Mystery */
 }
