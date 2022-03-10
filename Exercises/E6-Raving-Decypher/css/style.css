@@ -20,7 +20,7 @@ body {
 }
 
 /* Revealed elements need to be highlighted because it's a disaster! */
-.revealed {
+.unknown {
   background-color: transparent; /* No background */
   text-decoration: underline; /* underlined! */
   color: turquoise; /* Emergency! */

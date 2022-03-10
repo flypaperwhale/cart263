@@ -24,20 +24,20 @@ function setup() {
 }
 
 /**
-When a secret is clicked we remove its revealed class and add the decyphered class
+When a secret is clicked we remove its unknown class and add the decyphered class
 thus blacking it out
 */
-function decypher() {
-  let translation = $(this).attr(`translation`);
-  $(this).text(translation);
-  $(this).removeClass(`revealed`);
-  $(this).addClass(`decyphered`);
-  setTimeout(revert, 1500);
+function decypher(event) {
+  $(event.target).removeClass(`unknown`);
+  $(event.target).addClass(`decyphered`);
+  let translation = $(event.target).attr(`translation`);
+  $(event.target).text(translation);
+  setTimeout(revert, 1500, $(event.target));
 }
 
-function revert() {
-  let hieroglyphic = $(this).attr(`hieroglyphic`);
-  $(this).text(hieroglyphic);
-  $(`.decyphered`).removeClass(`decyphered`);
-  $(`.decyphered`).addClass(`revealed`);
+function revert(target) {
+  $(target).removeClass(`decyphered`);
+  $(target).addClass(`unknown`);
+  let hieroglyphic = $(target).attr(`hieroglyphic`);
+  $(target).text(hieroglyphic);
 }
