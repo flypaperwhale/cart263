@@ -1,0 +1,27 @@
+/*********************************************
+Raving Redactionist CSS.
+**********************************************/
+
+/* Just some general syling of the page for aesthetics. Personal choice. */
+body {
+  color: gold;
+  text-align: center;
+  font-family: Courier, monospace;
+  width: 800px;
+  margin-left: 100px;
+  margin-top: 100px;
+  background-color: royalblue;
+}
+
+/* Redacted elements need to be blanked out */
+.decyphered {
+  background-color: navy; /* Black background */
+  user-select: none; /* User can't select the redacted text to see it */
+}
+
+/* Revealed elements need to be highlighted because it's a disaster! */
+.revealed {
+  background-color: transparent; /* No background */
+  text-decoration: underline; /* underlined! */
+  color: turquoise; /* Emergency! */
+}
