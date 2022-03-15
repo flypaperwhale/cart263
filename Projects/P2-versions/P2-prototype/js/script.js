@@ -46,6 +46,8 @@ Description of draw()
 */
 function draw() {
   noStroke();
+
+  // BACKGROUND //
   background(`skyblue`);
   // draw grass
   push();
@@ -53,4 +55,11 @@ function draw() {
   rectMode(CENTER);
   rect(250, 450, width, height / 1.5);
   pop();
+
+  // display the tree!
+  push();
+  imageMode(CENTER);
+  image(peachTreeImage, 350, 275, 200, 200); // hard numbers
+  pop();
+  // END OF BACKGROUND //
 }
