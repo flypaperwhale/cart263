@@ -23,6 +23,12 @@ TO DO:
 
 let peachImage, peachTreeImage;
 
+let gridMap = [];
+let rows = 15;
+let columns = 15;
+
+let unit;
+
 ("use strict");
 
 /**
@@ -38,7 +44,16 @@ function preload() {
 Description of setup
 */
 function setup() {
-  createCanvas(500, 600);
+  createCanvas(500, 500);
+
+  for (let r = 0; r < rows; r++) {
+    gridMap.push([]);
+    for (let c = 0; c < columns; c++) {
+      gridMap[r][c] = ` `;
+    }
+  }
+  //
+  unit = height / gridMap.length;
 }
 
 /**
@@ -53,13 +68,33 @@ function draw() {
   push();
   fill(`green`);
   rectMode(CENTER);
-  rect(250, 450, width, height / 1.5);
+  rect(250, 432, width, height / 1.5);
   pop();
 
   // display the tree!
   push();
   imageMode(CENTER);
-  image(peachTreeImage, 350, 275, 200, 200); // hard numbers
+  image(peachTreeImage, 355, 270, 200, 200); // hard numbers
   pop();
+
+  // display grid
+  displayGrid();
+
   // END OF BACKGROUND //
+}
+
+function displayGrid() {
+  for (let y = 0; y < gridMap.length; y++) {
+    let row = gridMap[y];
+    for (let x = 0; x < gridMap[y].length; x++) {
+      push();
+      noFill();
+      stroke(0);
+      rect(x * unit, y * unit, unit, unit);
+      pop();
+      let cell = gridMap[y][x];
+      // if (cell === `F`) {
+      //   drawFirTree(x, y);
+    }
+  }
 }
