@@ -29,17 +29,18 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `P`, ` `],
+  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`],
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `],
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
 ];
 
 let peachImage, peachTreeImage;
+let currentPlayerIndex;
 
 //let gridMap = [];
 let rows = 15;
@@ -63,6 +64,22 @@ Description of setup
 */
 function setup() {
   createCanvas(500, 500);
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      if (gridMap[r][c] === `Pl`) {
+        // save player's current position
+        currentPlayerIndex = {
+          playerRow: r,
+          playerCollumn: c,
+        };
+        console.log("do you come back out of here?");
+
+        //  }${r},${c}`;
+      }
+      //gridMap[r][c] = ` `;
+    }
+  }
 
   // for (let r = 0; r < rows; r++) {
   //   gridMap.push([]);
@@ -111,8 +128,13 @@ function displayGrid() {
       rect(x * unit, y * unit, unit, unit);
       pop();
       let cell = gridMap[y][x];
-      if (cell === `P`) {
+      if (cell === `Pl`) {
+        // Pl for Player
         drawPlayer(x, y);
+      }
+      if (cell === `S`) {
+        // S for Solid
+        playerBarrier();
       }
     }
   }
@@ -125,4 +147,27 @@ function drawPlayer(x, y) {
   ellipseMode(CORNER);
   ellipse(x * unit, y * unit, unit);
   pop();
+}
+
+function playerBarrier(x, y) {
+  // block player from moving onto
+}
+
+function controlPlayer(currentPressedKey) {
+  // if (currentPressedKey === ``){
+  //
+  // }
+}
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    console.log("wait a minute?");
+
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn
+    ] = ` `;
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn - 1
+    ] = `Pl`;
+  }
 }
