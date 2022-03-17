@@ -165,7 +165,10 @@ function keyPressed() {
     if (
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn - 1
-      ] === `S`
+      ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
+      ] === undefined
     ) {
       // do nothing
     } else {
@@ -183,7 +186,10 @@ function keyPressed() {
     if (
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn + 1
-      ] === `S`
+      ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] === undefined
     ) {
       // do nothing
     } else {
@@ -201,7 +207,10 @@ function keyPressed() {
     if (
       gridMap[currentPlayerIndex.playerRow - 1][
         currentPlayerIndex.playerCollumn
-      ] === `S`
+      ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
+      ] === undefined
     ) {
       // do nothing
     } else {
@@ -219,7 +228,10 @@ function keyPressed() {
     if (
       gridMap[currentPlayerIndex.playerRow + 1][
         currentPlayerIndex.playerCollumn
-      ] === `S`
+      ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] === undefined
     ) {
       // do nothing
     } else {
