@@ -162,27 +162,58 @@ function controlPlayer(currentPressedKey) {
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
     console.log("wait a minute?");
-
     gridMap[currentPlayerIndex.playerRow][
       currentPlayerIndex.playerCollumn
     ] = ` `;
     gridMap[currentPlayerIndex.playerRow][
       currentPlayerIndex.playerCollumn - 1
     ] = `Pl`;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < columns; c++) {
-        if (gridMap[r][c] === `Pl`) {
-          // save player's current position
-          currentPlayerIndex = {
-            playerRow: r,
-            playerCollumn: c,
-          };
-          console.log("do you come back out of here?");
+  }
+  if (keyCode === RIGHT_ARROW) {
+    console.log("wait a minute?");
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn
+    ] = ` `;
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn + 1
+    ] = `Pl`;
+  }
+  if (keyCode === UP_ARROW) {
+    console.log("wait a minute?");
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn
+    ] = ` `;
+    gridMap[currentPlayerIndex.playerRow - 1][
+      currentPlayerIndex.playerCollumn
+    ] = `Pl`;
+  }
+  if (keyCode === DOWN_ARROW) {
+    console.log("wait a minute?");
+    gridMap[currentPlayerIndex.playerRow][
+      currentPlayerIndex.playerCollumn
+    ] = ` `;
+    gridMap[currentPlayerIndex.playerRow + 1][
+      currentPlayerIndex.playerCollumn
+    ] = `Pl`;
+  }
 
-          //  }${r},${c}`;
-        }
-        //gridMap[r][c] = ` `;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+      if (gridMap[r][c] === `Pl`) {
+        // save player's current position
+        currentPlayerIndex = {
+          playerRow: r,
+          playerCollumn: c,
+        };
+        console.log("do you come back out of here?");
+
+        //  }${r},${c}`;
       }
+      //gridMap[r][c] = ` `;
     }
   }
+}
+
+function mouseClicked() {
+  console.log(gridMap);
 }
