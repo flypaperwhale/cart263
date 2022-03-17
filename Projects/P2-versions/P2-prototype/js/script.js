@@ -35,7 +35,7 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
+  [` `, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
 ];
 
@@ -130,7 +130,15 @@ function displayGrid() {
       let cell = gridMap[y][x];
       if (cell === `Pl`) {
         // Pl for Player
-        drawPlayer(x, y);
+        drawPlayer(x, y, `lime`);
+      }
+      if (cell === `Pe`) {
+        // Pe for Peach
+        // display peach image
+      }
+      if (cell === `NPC`) {
+        // NPC
+        drawPlayer(x, y, `yellow`);
       }
       if (cell === `S`) {
         // S for Solid
@@ -140,10 +148,10 @@ function displayGrid() {
   }
 }
 
-function drawPlayer(x, y) {
+function drawPlayer(x, y, color) {
   push();
   noStroke();
-  fill(100, 200, 100);
+  fill(color);
   ellipseMode(CORNER);
   ellipse(x * unit, y * unit, unit);
   pop();
@@ -168,6 +176,9 @@ function keyPressed() {
       ] === `S` ||
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn - 1
+      ] === `NPC` ||
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
       ] === undefined
     ) {
       // do nothing
@@ -187,6 +198,9 @@ function keyPressed() {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn + 1
       ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] === `NPC` ||
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn + 1
       ] === undefined
@@ -210,6 +224,9 @@ function keyPressed() {
       ] === `S` ||
       gridMap[currentPlayerIndex.playerRow - 1][
         currentPlayerIndex.playerCollumn
+      ] === `NPC` ||
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
       ] === undefined
     ) {
       // do nothing
@@ -229,6 +246,9 @@ function keyPressed() {
       gridMap[currentPlayerIndex.playerRow + 1][
         currentPlayerIndex.playerCollumn
       ] === `S` ||
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] === `NPC` ||
       gridMap[currentPlayerIndex.playerRow + 1][
         currentPlayerIndex.playerCollumn
       ] === undefined
