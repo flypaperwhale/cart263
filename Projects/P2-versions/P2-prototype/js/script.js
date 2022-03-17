@@ -169,5 +169,20 @@ function keyPressed() {
     gridMap[currentPlayerIndex.playerRow][
       currentPlayerIndex.playerCollumn - 1
     ] = `Pl`;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < columns; c++) {
+        if (gridMap[r][c] === `Pl`) {
+          // save player's current position
+          currentPlayerIndex = {
+            playerRow: r,
+            playerCollumn: c,
+          };
+          console.log("do you come back out of here?");
+
+          //  }${r},${c}`;
+        }
+        //gridMap[r][c] = ` `;
+      }
+    }
   }
 }
