@@ -134,7 +134,7 @@ function displayGrid() {
       }
       if (cell === `Pe`) {
         // Pe for Peach
-        // display peach image
+        drawPeach(x, y);
       }
       if (cell === `NPC`) {
         // NPC
@@ -146,6 +146,14 @@ function displayGrid() {
       }
     }
   }
+}
+
+function drawPeach(x, y) {
+  push();
+  imageMode(LEFT);
+  image(peachImage, x * unit, y * unit, 34, 28); // hard numbers
+  pop();
+  // display peach image
 }
 
 function drawPlayer(x, y, color) {
@@ -182,6 +190,12 @@ function keyPressed() {
       ] === undefined
     ) {
       // do nothing
+    } else if (
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
+      ] === `Pe`
+    ) {
+      // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
@@ -206,6 +220,12 @@ function keyPressed() {
       ] === undefined
     ) {
       // do nothing
+    } else if (
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] === `Pe`
+    ) {
+      // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
@@ -230,6 +250,12 @@ function keyPressed() {
       ] === undefined
     ) {
       // do nothing
+    } else if (
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
+      ] === `Pe`
+    ) {
+      // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
@@ -254,6 +280,12 @@ function keyPressed() {
       ] === undefined
     ) {
       // do nothing
+    } else if (
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] === `Pe`
+    ) {
+      // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
