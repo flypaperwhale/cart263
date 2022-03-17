@@ -162,39 +162,74 @@ function controlPlayer(currentPressedKey) {
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
     console.log("wait a minute?");
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn
-    ] = ` `;
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn - 1
-    ] = `Pl`;
+    if (
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
+      ] === `S`
+    ) {
+      // do nothing
+    } else {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
+      ] = `Pl`;
+    }
   }
+
   if (keyCode === RIGHT_ARROW) {
     console.log("wait a minute?");
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn
-    ] = ` `;
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn + 1
-    ] = `Pl`;
+    if (
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] === `S`
+    ) {
+      // do nothing
+    } else {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] = `Pl`;
+    }
   }
+
   if (keyCode === UP_ARROW) {
     console.log("wait a minute?");
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn
-    ] = ` `;
-    gridMap[currentPlayerIndex.playerRow - 1][
-      currentPlayerIndex.playerCollumn
-    ] = `Pl`;
+    if (
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
+      ] === `S`
+    ) {
+      // do nothing
+    } else {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
+      ] = `Pl`;
+    }
   }
+
   if (keyCode === DOWN_ARROW) {
     console.log("wait a minute?");
-    gridMap[currentPlayerIndex.playerRow][
-      currentPlayerIndex.playerCollumn
-    ] = ` `;
-    gridMap[currentPlayerIndex.playerRow + 1][
-      currentPlayerIndex.playerCollumn
-    ] = `Pl`;
+    if (
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] === `S`
+    ) {
+      // do nothing
+    } else {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] = `Pl`;
+    }
   }
 
   for (let r = 0; r < rows; r++) {
