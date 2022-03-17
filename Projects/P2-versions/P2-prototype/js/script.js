@@ -39,6 +39,10 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
 ];
 
+let player = {
+  inventory: [{ itemName: "empty", itemQty: 1 }],
+};
+
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
 
@@ -195,7 +199,14 @@ function keyPressed() {
         currentPlayerIndex.playerCollumn - 1
       ] === `Pe`
     ) {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn - 1
+      ] = `Pl`;
       // pick up peach, add to inventory ###
+      player.inventory.push({ itemName: "peach", itemQty: 1 });
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
@@ -315,4 +326,5 @@ function keyPressed() {
 
 function mouseClicked() {
   console.log(gridMap);
+  console.log(player.inventory);
 }
