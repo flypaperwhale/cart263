@@ -71,13 +71,20 @@ let columns = 15;
 let unit;
 
 let peachFallAreas = [
+  { row: 9, collumn: 8 },
   { row: 9, collumn: 9 },
-  { row: 9, collumn: 10 },
   { row: 9, collumn: 11 },
+  { row: 9, collumn: 12 },
+  { row: 10, collumn: 8 },
+  { row: 10, collumn: 9 },
   { row: 10, collumn: 11 },
+  { row: 10, collumn: 12 },
+  { row: 11, collumn: 8 },
   { row: 11, collumn: 9 },
   { row: 11, collumn: 10 },
   { row: 11, collumn: 11 },
+  { row: 11, collumn: 12 },
+  { row: 12, collumn: 9 },
   { row: 12, collumn: 10 },
   { row: 12, collumn: 11 },
 ];
@@ -362,7 +369,7 @@ function keyPressed() {
       ] = `Pl`;
       // pick up peach, add to inventory ###
       player.inventory.push({ itemName: "peach", itemQty: 1 });
-      let treeDropTime = random(1500, 3500);
+      let treeDropTime = random(15000, 35000);
       console.log(dropPeach, treeDropTime);
       setTimeout(dropPeach, treeDropTime);
       // pick up peach, add to inventory ###
