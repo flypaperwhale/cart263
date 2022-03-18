@@ -181,7 +181,7 @@ function displayGrid() {
 function drawPeach(x, y) {
   push();
   imageMode(LEFT);
-  image(peachImage, x * unit, y * unit, 34, 28); // hard numbers
+  image(peachImage, x * unit, y * unit, 34, 35); // hard numbers
   pop();
   // display peach image
 }
@@ -418,6 +418,6 @@ function dropPeach() {
 // ### remember for inventory, use an array that player can press numbers to select items
 
 function mouseClicked() {
-  console.log(gridMap);
+  //console.log(gridMap);
   console.log(player.inventory);
 }
