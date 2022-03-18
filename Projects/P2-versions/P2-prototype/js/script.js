@@ -236,6 +236,14 @@ function keyPressed() {
         currentPlayerIndex.playerCollumn + 1
       ] === `Pe`
     ) {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn + 1
+      ] = `Pl`;
+      // pick up peach, add to inventory ###
+      player.inventory.push({ itemName: "peach", itemQty: 1 });
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
@@ -266,6 +274,14 @@ function keyPressed() {
         currentPlayerIndex.playerCollumn
       ] === `Pe`
     ) {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow - 1][
+        currentPlayerIndex.playerCollumn
+      ] = `Pl`;
+      // pick up peach, add to inventory ###
+      player.inventory.push({ itemName: "peach", itemQty: 1 });
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
@@ -296,6 +312,14 @@ function keyPressed() {
         currentPlayerIndex.playerCollumn
       ] === `Pe`
     ) {
+      gridMap[currentPlayerIndex.playerRow][
+        currentPlayerIndex.playerCollumn
+      ] = ` `;
+      gridMap[currentPlayerIndex.playerRow + 1][
+        currentPlayerIndex.playerCollumn
+      ] = `Pl`;
+      // pick up peach, add to inventory ###
+      player.inventory.push({ itemName: "peach", itemQty: 1 });
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
