@@ -39,20 +39,6 @@ let gridMap = [
   [` `, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
 ];
-/*
-//peach fall areas
-gridMap[8][10]
-gridMap[8][11]
-gridMap[9][9]
-gridMap[9][10]
-gridMap[9][11]
-gridMap[10][11]
-gridMap[11][9]
-gridMap[11][10]
-gridMap[11][11]
-gridMap[12][10]
-gridMap[12][11]
-*/
 
 // gridMap[R][C]
 //gridMap[currentPlayerIndex.playerRow][currentPlayerIndex.playerCollumn]
@@ -168,8 +154,8 @@ function displayGrid() {
     for (let x = 0; x < gridMap[y].length; x++) {
       push();
       noFill();
-      stroke(0);
-      rect(x * unit, y * unit, unit, unit);
+      //stroke(0);
+      //rect(x * unit, y * unit, unit, unit);
       pop();
       let cell = gridMap[y][x];
       if (cell === `Pl`) {
