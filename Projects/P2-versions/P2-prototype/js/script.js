@@ -150,7 +150,7 @@ function draw() {
 
 function displayGrid() {
   for (let y = 0; y < gridMap.length; y++) {
-    let row = gridMap[y];
+    //let row = gridMap[y];
     for (let x = 0; x < gridMap[y].length; x++) {
       push();
       noFill();
@@ -207,7 +207,7 @@ function controlPlayer(currentPressedKey) {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-    console.log("wait a minute?");
+    //console.log("wait a minute?");
     if (
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn - 1
@@ -247,7 +247,7 @@ function keyPressed() {
   }
 
   if (keyCode === RIGHT_ARROW) {
-    console.log("wait a minute?");
+    //console.log("wait a minute?");
     if (
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn + 1
@@ -288,7 +288,7 @@ function keyPressed() {
   }
 
   if (keyCode === UP_ARROW) {
-    console.log("wait a minute?");
+    //console.log("wait a minute?");
     if (
       gridMap[currentPlayerIndex.playerRow - 1][
         currentPlayerIndex.playerCollumn
@@ -329,7 +329,7 @@ function keyPressed() {
   }
 
   if (keyCode === DOWN_ARROW) {
-    console.log("wait a minute?");
+    //console.log("wait a minute?");
     if (
       gridMap[currentPlayerIndex.playerRow + 1][
         currentPlayerIndex.playerCollumn
@@ -368,7 +368,28 @@ function keyPressed() {
       ] = `Pl`;
     }
   }
-
+  if (keyCode === 32) {
+    //console.log("yum");
+    // if player is adjacent to NPC, dialog box, or give item
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < columns; c++) {
+        //console.log(`${gridMap[r][c]}`);
+        if (
+          (gridMap[r][c] === `NPC` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r][c] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `NPC` && gridMap[r + 1][c + 1] === `Pl`)
+        ) {
+          console.log("NPC DIALOG");
+        }
+      }
+    }
+  }
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       if (gridMap[r][c] === `Pl`) {
@@ -377,11 +398,8 @@ function keyPressed() {
           playerRow: r,
           playerCollumn: c,
         };
-        console.log("do you come back out of here?");
-
-        //  }${r},${c}`;
+        //console.log("do you come back out of here?");
       }
-      //gridMap[r][c] = ` `;
     }
   }
 }
@@ -396,6 +414,8 @@ function dropPeach() {
     gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
   }
 }
+
+// ### remember for inventory, use an array that player can press numbers to select items
 
 function mouseClicked() {
   console.log(gridMap);
