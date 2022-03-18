@@ -22,22 +22,40 @@ TO DO:
 */
 
 let gridMap = [
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `],
-  [` `, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `],
+  //[`0`,`1`,`2`,`3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`,`12`,`13`,`14`]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [1]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [2]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [3]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [4]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [5]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [6]
+  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [7]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [8]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [9]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [10]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `], // [11]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `], // [12]
+  [` `, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
 ];
+/*
+//peach fall areas
+gridMap[8][10]
+gridMap[8][11]
+gridMap[9][9]
+gridMap[9][10]
+gridMap[9][11]
+gridMap[10][11]
+gridMap[11][9]
+gridMap[11][10]
+gridMap[11][11]
+gridMap[12][10]
+gridMap[12][11]
+*/
+
+// gridMap[R][C]
+//gridMap[currentPlayerIndex.playerRow][currentPlayerIndex.playerCollumn]
 
 let player = {
   inventory: [{ itemName: "empty", itemQty: 1 }],
@@ -51,6 +69,21 @@ let rows = 15;
 let columns = 15;
 
 let unit;
+
+let peachFallAreas = [
+  { row: 9, collumn: 9 },
+  { row: 9, collumn: 10 },
+  { row: 9, collumn: 11 },
+  { row: 10, collumn: 11 },
+  { row: 11, collumn: 9 },
+  { row: 11, collumn: 10 },
+  { row: 11, collumn: 11 },
+  { row: 12, collumn: 10 },
+  { row: 12, collumn: 11 },
+];
+
+let fallenPeachRow;
+let fallenPeachCollumn;
 
 ("use strict");
 
@@ -207,6 +240,9 @@ function keyPressed() {
       ] = `Pl`;
       // pick up peach, add to inventory ###
       player.inventory.push({ itemName: "peach", itemQty: 1 });
+      let treeDropTime = random(1500, 3500);
+      console.log(dropPeach, treeDropTime);
+      setTimeout(dropPeach, treeDropTime);
     } else {
       gridMap[currentPlayerIndex.playerRow][
         currentPlayerIndex.playerCollumn
@@ -244,6 +280,9 @@ function keyPressed() {
       ] = `Pl`;
       // pick up peach, add to inventory ###
       player.inventory.push({ itemName: "peach", itemQty: 1 });
+      let treeDropTime = random(1500, 3500);
+      console.log(dropPeach, treeDropTime);
+      setTimeout(dropPeach, treeDropTime);
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
@@ -282,6 +321,9 @@ function keyPressed() {
       ] = `Pl`;
       // pick up peach, add to inventory ###
       player.inventory.push({ itemName: "peach", itemQty: 1 });
+      let treeDropTime = random(1500, 3500);
+      console.log(dropPeach, treeDropTime);
+      setTimeout(dropPeach, treeDropTime);
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
@@ -320,6 +362,9 @@ function keyPressed() {
       ] = `Pl`;
       // pick up peach, add to inventory ###
       player.inventory.push({ itemName: "peach", itemQty: 1 });
+      let treeDropTime = random(1500, 3500);
+      console.log(dropPeach, treeDropTime);
+      setTimeout(dropPeach, treeDropTime);
       // pick up peach, add to inventory ###
     } else {
       gridMap[currentPlayerIndex.playerRow][
@@ -346,6 +391,13 @@ function keyPressed() {
       //gridMap[r][c] = ` `;
     }
   }
+}
+
+function dropPeach() {
+  // randomly select a place near the tree to drop a peach
+  console.log("do you come here?");
+  let fallenPeachIndex = random(peachFallAreas);
+  gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
 }
 
 function mouseClicked() {
