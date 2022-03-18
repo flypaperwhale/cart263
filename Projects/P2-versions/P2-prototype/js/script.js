@@ -56,6 +56,8 @@ let columns = 15;
 
 let unit;
 
+let stopTextBubble = true;
+
 let peachFallAreas = [
   { row: 9, collumn: 8 },
   { row: 9, collumn: 9 },
@@ -141,6 +143,8 @@ function draw() {
   imageMode(CENTER);
   image(peachTreeImage, 355, 270, 200, 200); // hard numbers
   pop();
+
+  displayText();
 
   // display grid
   displayGrid();
@@ -386,10 +390,16 @@ function keyPressed() {
           (gridMap[r][c] === `NPC` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
           console.log("NPC DIALOG");
+          if (stopTextBubble === true) {
+            stopTextBubble = false;
+          } else if (stopTextBubble === false) {
+            stopTextBubble = true;
+          }
         }
       }
     }
   }
+
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       if (gridMap[r][c] === `Pl`) {
@@ -404,12 +414,33 @@ function keyPressed() {
   }
 }
 
+function displayText() {
+  console.log(stopTextBubble);
+  if (stopTextBubble === false) {
+    //console.log("well???");
+    push();
+    fill(255);
+    rectMode(CENTER);
+    rect(250, 250, 320, 75);
+    pop();
+    push();
+    //textAlign(CENTER);
+    fill(0);
+    textAlign(CENTER, CENTER);
+    text(`How fantastic to meet you!`, 250, 250);
+    pop();
+  } else if (stopTextBubble === true) {
+    // do nothing
+  }
+}
+
 function dropPeach() {
   // randomly select a place near the tree to drop a peach
-  console.log("do you come here?");
+  //console.log("do you come here?");
   let fallenPeachIndex = random(peachFallAreas);
   if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
     fallenPeachIndex = random(peachFallAreas);
+    dropPeach();
   } else {
     gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
   }
