@@ -404,7 +404,11 @@ function dropPeach() {
   // randomly select a place near the tree to drop a peach
   console.log("do you come here?");
   let fallenPeachIndex = random(peachFallAreas);
-  gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
+  if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
+    fallenPeachIndex = random(peachFallAreas);
+  } else {
+    gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
+  }
 }
 
 function mouseClicked() {
