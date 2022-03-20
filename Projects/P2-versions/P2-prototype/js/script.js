@@ -50,6 +50,7 @@ let player = {
 let playerPaused = false;
 let showInventory = false;
 let selectItem = { itemName: "empty", qty: 0 };
+let itemDisplay = false;
 
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
@@ -178,6 +179,13 @@ function displayGrid() {
       if (cell === `Pl`) {
         // Pl for Player
         drawPlayer(x, y, `lime`);
+        if (itemDisplay === true) {
+          if (selectItem.itemName === "empty") {
+            //display nothing
+          } else {
+            drawSmolPeach(x, y);
+          }
+        }
       }
       if (cell === `Pe`) {
         // Pe for Peach
@@ -199,6 +207,14 @@ function drawPeach(x, y) {
   push();
   imageMode(LEFT);
   image(peachImage, x * unit, y * unit, 34, 35); // hard numbers
+  pop();
+  // display peach image
+}
+
+function drawSmolPeach(x, y) {
+  push();
+  imageMode(CENTER);
+  image(peachImage, x * unit + 15, y * unit, 25, 26); // hard numbers
   pop();
   // display peach image
 }
@@ -388,6 +404,15 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
       }
+    }
+  }
+  if (keyCode === RETURN) {
+    // display item over avatar
+    if (itemDisplay === true) {
+      itemDisplay = false;
+    } else if (itemDisplay === false) {
+      // do nothing
+      itemDisplay = true;
     }
   }
 
