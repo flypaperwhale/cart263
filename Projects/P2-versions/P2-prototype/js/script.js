@@ -243,6 +243,15 @@ function keyPressed() {
     // do not move
     // do not enter inventory
   } else if (playerPaused === false) {
+    if (keyCode === RETURN) {
+      // display item over avatar
+      if (itemDisplay === true) {
+        itemDisplay = false;
+      } else if (itemDisplay === false) {
+        // do nothing
+        itemDisplay = true;
+      }
+    }
     if (keyCode === LEFT_ARROW) {
       //console.log("wait a minute?");
       if (
@@ -404,15 +413,6 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
       }
-    }
-  }
-  if (keyCode === RETURN) {
-    // display item over avatar
-    if (itemDisplay === true) {
-      itemDisplay = false;
-    } else if (itemDisplay === false) {
-      // do nothing
-      itemDisplay = true;
     }
   }
 
