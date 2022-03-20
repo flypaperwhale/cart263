@@ -48,6 +48,8 @@ let player = {
 };
 
 let playerPaused = false;
+let showInventory = false;
+let selectItem = { itemName: "empty", qty: 0 };
 
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
@@ -145,13 +147,22 @@ function draw() {
   imageMode(CENTER);
   image(peachTreeImage, 355, 270, 200, 200); // hard numbers
   pop();
-
+  // END OF BACKGROUND //
   displayText();
 
   // display grid
   displayGrid();
 
-  // END OF BACKGROUND //
+  if (showInventory === 1) {
+    // if show inventory variable is 1
+    displayInventory(); // the contents of player inventory is displayed
+    if (this.player.inventory[0].name === `Eagle Constellation`) {
+      // if the item in the INVENTORY
+      // is the Eagle Constellation (last item)
+      this.player.paused(); // player is paused
+      this.animationState = `SurpriseEnd`; // the animation state is changed to the ending animation state
+    }
+  }
 }
 
 function displayGrid() {
@@ -213,6 +224,8 @@ function controlPlayer(currentPressedKey) {
 
 function keyPressed() {
   if (playerPaused === true) {
+    // do not move
+    // do not enter inventory
   } else if (playerPaused === false) {
     if (keyCode === LEFT_ARROW) {
       //console.log("wait a minute?");
@@ -411,6 +424,84 @@ function keyPressed() {
     }
   }
 
+  if (keyCode === 48) {
+    // 0
+    // empty box, player can talk to npc without giving item
+    selectItem = player.inventory[0];
+  }
+  if (keyCode === 49) {
+    // 1
+    if (player.inventory[1] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[1];
+    }
+  }
+  if (keyCode === 50) {
+    // 2
+    if (player.inventory[2] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[2];
+    }
+  }
+  if (keyCode === 51) {
+    // 3
+    if (player.inventory[3] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[3];
+    }
+  }
+  if (keyCode === 52) {
+    // 4
+    if (player.inventory[4] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[4];
+    }
+  }
+  if (keyCode === 53) {
+    // 5
+    if (player.inventory[5] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[5];
+    }
+  }
+  if (keyCode === 54) {
+    // 6
+    if (player.inventory[6] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[6];
+    }
+  }
+  if (keyCode === 55) {
+    // 7
+    if (player.inventory[7] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[7];
+    }
+  }
+  if (keyCode === 56) {
+    // 8
+    if (player.inventory[8] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[8];
+    }
+  }
+  if (keyCode === 57) {
+    // 9
+    if (player.inventory[9] === undefined) {
+      selectItem = player.inventory[0];
+    } else {
+      selectItem = player.inventory[9];
+    }
+  }
+
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       if (gridMap[r][c] === `Pl`) {
@@ -462,4 +553,5 @@ function dropPeach() {
 function mouseClicked() {
   //console.log(gridMap);
   console.log(player.inventory);
+  console.log(selectItem.itemName);
 }
