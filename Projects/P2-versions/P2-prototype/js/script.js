@@ -47,6 +47,8 @@ let player = {
   inventory: [{ itemName: "empty", itemQty: 1 }],
 };
 
+let playerPaused = false;
+
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
 
@@ -210,168 +212,172 @@ function controlPlayer(currentPressedKey) {
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    //console.log("wait a minute?");
-    if (
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] === `S` ||
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] === `NPC` ||
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] === undefined
-    ) {
-      // do nothing
-    } else if (
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] === `Pe`
-    ) {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] = `Pl`;
-      // pick up peach, add to inventory ###
-      player.inventory.push({ itemName: "peach", itemQty: 1 });
-      let treeDropTime = random(1500, 3500);
-      console.log(dropPeach, treeDropTime);
-      setTimeout(dropPeach, treeDropTime);
-    } else {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn - 1
-      ] = `Pl`;
+  if (playerPaused === true) {
+  } else if (playerPaused === false) {
+    if (keyCode === LEFT_ARROW) {
+      //console.log("wait a minute?");
+      if (
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `S` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `NPC` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === undefined
+      ) {
+        // do nothing
+      } else if (
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Pe`
+      ) {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] = `Pl`;
+        // pick up peach, add to inventory ###
+        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        let treeDropTime = random(1500, 3500);
+        console.log(dropPeach, treeDropTime);
+        setTimeout(dropPeach, treeDropTime);
+      } else {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] = `Pl`;
+      }
+    }
+
+    if (keyCode === RIGHT_ARROW) {
+      //console.log("wait a minute?");
+      if (
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === `S` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === `NPC` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === undefined
+      ) {
+        // do nothing
+      } else if (
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === `Pe`
+      ) {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] = `Pl`;
+        // pick up peach, add to inventory ###
+        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        let treeDropTime = random(1500, 3500);
+        console.log(dropPeach, treeDropTime);
+        setTimeout(dropPeach, treeDropTime);
+        // pick up peach, add to inventory ###
+      } else {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] = `Pl`;
+      }
+    }
+
+    if (keyCode === UP_ARROW) {
+      //console.log("wait a minute?");
+      if (
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] === `S` ||
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] === `NPC` ||
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] === undefined
+      ) {
+        // do nothing
+      } else if (
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] === `Pe`
+      ) {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] = `Pl`;
+        // pick up peach, add to inventory ###
+        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        let treeDropTime = random(1500, 3500);
+        console.log(dropPeach, treeDropTime);
+        setTimeout(dropPeach, treeDropTime);
+        // pick up peach, add to inventory ###
+      } else {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] = `Pl`;
+      }
+    }
+
+    if (keyCode === DOWN_ARROW) {
+      //console.log("wait a minute?");
+      if (
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] === `S` ||
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] === `NPC` ||
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] === undefined
+      ) {
+        // do nothing
+      } else if (
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] === `Pe`
+      ) {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] = `Pl`;
+        // pick up peach, add to inventory ###
+        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        let treeDropTime = random(15000, 35000);
+        console.log(dropPeach, treeDropTime);
+        setTimeout(dropPeach, treeDropTime);
+        // pick up peach, add to inventory ###
+      } else {
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `;
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] = `Pl`;
+      }
     }
   }
 
-  if (keyCode === RIGHT_ARROW) {
-    //console.log("wait a minute?");
-    if (
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] === `S` ||
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] === `NPC` ||
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] === undefined
-    ) {
-      // do nothing
-    } else if (
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] === `Pe`
-    ) {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] = `Pl`;
-      // pick up peach, add to inventory ###
-      player.inventory.push({ itemName: "peach", itemQty: 1 });
-      let treeDropTime = random(1500, 3500);
-      console.log(dropPeach, treeDropTime);
-      setTimeout(dropPeach, treeDropTime);
-      // pick up peach, add to inventory ###
-    } else {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn + 1
-      ] = `Pl`;
-    }
-  }
-
-  if (keyCode === UP_ARROW) {
-    //console.log("wait a minute?");
-    if (
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] === `S` ||
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] === `NPC` ||
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] === undefined
-    ) {
-      // do nothing
-    } else if (
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] === `Pe`
-    ) {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] = `Pl`;
-      // pick up peach, add to inventory ###
-      player.inventory.push({ itemName: "peach", itemQty: 1 });
-      let treeDropTime = random(1500, 3500);
-      console.log(dropPeach, treeDropTime);
-      setTimeout(dropPeach, treeDropTime);
-      // pick up peach, add to inventory ###
-    } else {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow - 1][
-        currentPlayerIndex.playerCollumn
-      ] = `Pl`;
-    }
-  }
-
-  if (keyCode === DOWN_ARROW) {
-    //console.log("wait a minute?");
-    if (
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] === `S` ||
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] === `NPC` ||
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] === undefined
-    ) {
-      // do nothing
-    } else if (
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] === `Pe`
-    ) {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] = `Pl`;
-      // pick up peach, add to inventory ###
-      player.inventory.push({ itemName: "peach", itemQty: 1 });
-      let treeDropTime = random(15000, 35000);
-      console.log(dropPeach, treeDropTime);
-      setTimeout(dropPeach, treeDropTime);
-      // pick up peach, add to inventory ###
-    } else {
-      gridMap[currentPlayerIndex.playerRow][
-        currentPlayerIndex.playerCollumn
-      ] = ` `;
-      gridMap[currentPlayerIndex.playerRow + 1][
-        currentPlayerIndex.playerCollumn
-      ] = `Pl`;
-    }
-  }
   if (keyCode === 32) {
     //console.log("yum");
     // if player is adjacent to NPC, dialog box, or give item
@@ -391,9 +397,14 @@ function keyPressed() {
         ) {
           console.log("NPC DIALOG");
           if (stopTextBubble === true) {
+            // when space is pressed beside npc, text bubble is displayed
+            // player is paused
+            playerPaused = true;
+            // if player item is out, player gives npc item ###
             stopTextBubble = false;
           } else if (stopTextBubble === false) {
             stopTextBubble = true;
+            playerPaused = false;
           }
         }
       }
