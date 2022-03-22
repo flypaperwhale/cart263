@@ -29,15 +29,31 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [3]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [4]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [5]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [6]
+  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [6]
   [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [7]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [8]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [9]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [10]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `], // [11]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `], // [12]
-  [` `, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
+  [
+    ` `,
+    `NPC`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Pl`,
+    ` `,
+  ], // [12]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
+  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [14]
 ];
 
 // gridMap[R][C]
@@ -154,16 +170,8 @@ function draw() {
   // display grid
   displayGrid();
 
-  if (showInventory === 1) {
-    // if show inventory variable is 1
-    displayInventory(); // the contents of player inventory is displayed
-    if (this.player.inventory[0].name === `Eagle Constellation`) {
-      // if the item in the INVENTORY
-      // is the Eagle Constellation (last item)
-      this.player.paused(); // player is paused
-      this.animationState = `SurpriseEnd`; // the animation state is changed to the ending animation state
-    }
-  }
+  // display INVENTORY
+  displayInventory();
 }
 
 function displayGrid() {
@@ -172,8 +180,8 @@ function displayGrid() {
     for (let x = 0; x < gridMap[y].length; x++) {
       push();
       noFill();
-      //stroke(0);
-      //rect(x * unit, y * unit, unit, unit);
+      stroke(0);
+      rect(x * unit, y * unit, unit, unit);
       pop();
       let cell = gridMap[y][x];
       if (cell === `Pl`) {
@@ -203,6 +211,10 @@ function displayGrid() {
   }
 }
 
+function displaySelectItem() {
+  //
+}
+
 function drawPeach(x, y) {
   push();
   imageMode(LEFT);
@@ -225,6 +237,33 @@ function drawPlayer(x, y, color) {
   fill(color);
   ellipseMode(CORNER);
   ellipse(x * unit, y * unit, unit);
+  pop();
+}
+
+function displayInventory() {
+  push();
+  fill(220, 200, 100);
+  rectMode(CENTER);
+  rect(250, 475, 400, 40);
+  fill(0);
+  textAlign(LEFT);
+  text(
+    "0          1          2          3          4          5          6          7          8          9",
+    80,
+    465
+  );
+  noFill();
+  stroke(0);
+  rect(70, 475, 40, 40);
+  rect(110, 475, 40, 40);
+  rect(150, 475, 40, 40);
+  rect(190, 475, 40, 40);
+  rect(230, 475, 40, 40);
+  rect(270, 475, 40, 40);
+  rect(310, 475, 40, 40);
+  rect(350, 475, 40, 40);
+  rect(390, 475, 40, 40);
+  rect(430, 475, 40, 40);
   pop();
 }
 
