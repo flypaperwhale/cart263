@@ -70,6 +70,7 @@ let selectItemNumber = 0;
 let itemDisplay = false;
 let itemToDisplay;
 
+let npcText = `How fantastic to meet you!`;
 let npcPeachEvent = 0;
 
 let peachImage, peachTreeImage;
@@ -177,10 +178,10 @@ function draw() {
   displayInventory();
   // items
 
-  if (npcPeachEvent === 5) {
-    alert("You gave NPC 5 peaches!");
-    npcPeachEvent = 0;
-  }
+  // if (npcPeachEvent === 5) {
+  //   alert("You gave NPC 5 peaches!");
+  //   npcPeachEvent = 0;
+  // }
 }
 
 function displayGrid() {
@@ -623,6 +624,10 @@ function keyPressed() {
               player.inventory.splice(selectItemNumber, 1);
               selectItem = player.inventory[0];
               npcPeachEvent++;
+              npcText = "Thanks for that peach, can you bring me 5 total?";
+              if (npcPeachEvent === 5) {
+                npcText = "You are the bomb! I love you!";
+              }
             }
           } else if (stopTextBubble === false) {
             stopTextBubble = true;
@@ -742,13 +747,13 @@ function displayText() {
     push();
     fill(255);
     rectMode(CENTER);
-    rect(250, 250, 320, 75);
+    rect(250, 100, 320, 75);
     pop();
     push();
     //textAlign(CENTER);
     fill(0);
     textAlign(CENTER, CENTER);
-    text(`How fantastic to meet you!`, 250, 250);
+    text(npcText, 250, 100);
     pop();
   } else if (stopTextBubble === true) {
     // do nothing
