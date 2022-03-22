@@ -246,24 +246,103 @@ function displayInventory() {
   rect(430, 475, 40, 40);
   pop();
 
-  // #####
-  // for (let i = 0; i < player.inventory.length; i++) {
-  //   if (i === 0) {
-  //     //display nothing
-  //     console.log("yes that's right, nothing");
-  //   } else {
-  //     console.log("this is gonna bug");
-  //     // find what object is in array
-  //     // display item image in inventory
-  //     itemToDisplay = player.inventory[i].itemImageName;
-  //     console.log(itemToDisplay);
-  //     push();
-  //     imageMode(CENTER);
-  //     console.log(i);
-  //     image(itemToDisplay, 40 * i, 475, 34, 35);
-  //     pop();
-  //   }
-  // }
+  //  #####
+  for (let i = 0; i < player.inventory.length; i++) {
+    if (i === 0) {
+      //display nothing
+      console.log("yes that's right, nothing");
+    } else if (i === 1) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 110, 475, 34, 35);
+      pop();
+    } else if (i === 2) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 150, 475, 34, 35);
+      pop();
+    } else if (i === 3) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 190, 475, 34, 35);
+      pop();
+    } else if (i === 4) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 230, 475, 34, 35);
+      pop();
+    } else if (i === 5) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 270, 475, 34, 35);
+      pop();
+    } else if (i === 6) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 310, 475, 34, 35);
+      pop();
+    } else if (i === 7) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 350, 475, 34, 35);
+      pop();
+    } else if (i === 8) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 390, 475, 34, 35);
+      pop();
+    } else if (i === 9) {
+      itemToDisplay = player.inventory[i].itemImageName;
+
+      push();
+      imageMode(CENTER);
+      //console.log(i);
+      //image(peachImage, 40, 475);
+
+      image(itemToDisplay, 430, 475, 34, 35);
+      pop();
+    }
+  }
 }
 
 function drawPeach(x, y) {
@@ -340,12 +419,16 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`;
-        // pick up peach, add to inventory ###
-        player.inventory.push({
-          itemName: "peach",
-          itemQty: 1,
-          itemImageName: "peachImage",
-        });
+        if (player.inventory.length === 10) {
+          alert("can't pick up");
+        } else {
+          // pick up peach, add to inventory ###
+          player.inventory.push({
+            itemName: "peach",
+            itemQty: 1,
+            itemImageName: peachImage,
+          });
+        }
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
@@ -384,12 +467,21 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] = `Pl`;
-        // pick up peach, add to inventory ###
-        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        if (player.inventory.length === 10) {
+          alert("can't pick up");
+        } else {
+          // pick up peach, add to inventory ###
+          player.inventory.push({
+            itemName: "peach",
+            itemQty: 1,
+            itemImageName: peachImage,
+          });
+
+          // pick up peach, add to inventory ###
+        }
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
-        // pick up peach, add to inventory ###
       } else {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -425,12 +517,21 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
-        // pick up peach, add to inventory ###
-        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        if (player.inventory.length === 10) {
+          alert("can't pick up");
+        } else {
+          // pick up peach, add to inventory ###
+          player.inventory.push({
+            itemName: "peach",
+            itemQty: 1,
+            itemImageName: peachImage,
+          });
+
+          // pick up peach, add to inventory ###
+        }
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
-        // pick up peach, add to inventory ###
       } else {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -466,12 +567,21 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
-        // pick up peach, add to inventory ###
-        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        if (player.inventory.length === 10) {
+          alert("can't pick up");
+        } else {
+          // pick up peach, add to inventory ###
+          player.inventory.push({
+            itemName: "peach",
+            itemQty: 1,
+            itemImageName: peachImage,
+          });
+
+          // pick up peach, add to inventory ###
+        }
         let treeDropTime = random(15000, 35000);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
-        // pick up peach, add to inventory ###
       } else {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -510,7 +620,7 @@ function keyPressed() {
 
             // npc verifies what player is giving
             if (selectItem.itemName === "peach") {
-              player.inventory[selectItemNumber].splice;
+              player.inventory[selectItemNumber].splice();
               npcPeachEvent++;
             }
           } else if (stopTextBubble === false) {
