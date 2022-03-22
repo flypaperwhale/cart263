@@ -619,8 +619,9 @@ function keyPressed() {
             stopTextBubble = false;
 
             // npc verifies what player is giving
-            if (selectItem.itemName === "peach") {
+            if (selectItem.itemName === "peach" && itemDisplay === true) {
               player.inventory.splice(selectItemNumber, 1);
+              selectItem = player.inventory[0];
               npcPeachEvent++;
             }
           } else if (stopTextBubble === false) {
@@ -770,6 +771,7 @@ function dropPeach() {
 
 function mouseClicked() {
   //console.log(gridMap);
+  console.log(npcPeachEvent);
   console.log(player.inventory);
   console.log(selectItem.itemName);
 }
