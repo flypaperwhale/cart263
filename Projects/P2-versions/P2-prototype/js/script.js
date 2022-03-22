@@ -420,7 +420,7 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`;
         if (player.inventory.length === 10) {
-          alert("can't pick up");
+          alert("inventory is full, item not picked up");
         } else {
           // pick up peach, add to inventory ###
           player.inventory.push({
@@ -468,7 +468,7 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn + 1
         ] = `Pl`;
         if (player.inventory.length === 10) {
-          alert("can't pick up");
+          alert("inventory is full, item not picked up");
         } else {
           // pick up peach, add to inventory ###
           player.inventory.push({
@@ -518,7 +518,7 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
         if (player.inventory.length === 10) {
-          alert("can't pick up");
+          alert("inventory is full, item not picked up");
         } else {
           // pick up peach, add to inventory ###
           player.inventory.push({
@@ -568,7 +568,7 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] = `Pl`;
         if (player.inventory.length === 10) {
-          alert("can't pick up");
+          alert("inventory is full, item not picked up");
         } else {
           // pick up peach, add to inventory ###
           player.inventory.push({
@@ -620,7 +620,7 @@ function keyPressed() {
 
             // npc verifies what player is giving
             if (selectItem.itemName === "peach") {
-              player.inventory[selectItemNumber].splice();
+              player.inventory.splice(selectItemNumber, 1);
               npcPeachEvent++;
             }
           } else if (stopTextBubble === false) {
