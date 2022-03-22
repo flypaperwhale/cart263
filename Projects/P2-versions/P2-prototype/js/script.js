@@ -60,13 +60,17 @@ let gridMap = [
 //gridMap[currentPlayerIndex.playerRow][currentPlayerIndex.playerCollumn]
 
 let player = {
-  inventory: [{ itemName: "empty", itemQty: 1 }],
+  inventory: [{ itemName: "empty", itemQty: 0, itemImageName: "no image" }],
 };
 
 let playerPaused = false;
 let showInventory = false;
-let selectItem = { itemName: "empty", qty: 0 };
+let selectItem = { itemName: "empty", itemQty: 0, itemImageName: "no image" };
+let selectItemNumber = 0;
 let itemDisplay = false;
+let itemToDisplay;
+
+let npcPeachEvent = 0;
 
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
@@ -169,9 +173,14 @@ function draw() {
 
   // display grid
   displayGrid();
-
   // display INVENTORY
   displayInventory();
+  // items
+
+  if (npcPeachEvent === 5) {
+    alert("You gave NPC 5 peaches!");
+    npcPeachEvent = 0;
+  }
 }
 
 function displayGrid() {
@@ -211,35 +220,6 @@ function displayGrid() {
   }
 }
 
-function displaySelectItem() {
-  //
-}
-
-function drawPeach(x, y) {
-  push();
-  imageMode(LEFT);
-  image(peachImage, x * unit, y * unit, 34, 35); // hard numbers
-  pop();
-  // display peach image
-}
-
-function drawSmolPeach(x, y) {
-  push();
-  imageMode(CENTER);
-  image(peachImage, x * unit + 15, y * unit, 25, 26); // hard numbers
-  pop();
-  // display peach image
-}
-
-function drawPlayer(x, y, color) {
-  push();
-  noStroke();
-  fill(color);
-  ellipseMode(CORNER);
-  ellipse(x * unit, y * unit, unit);
-  pop();
-}
-
 function displayInventory() {
   push();
   fill(220, 200, 100);
@@ -264,6 +244,50 @@ function displayInventory() {
   rect(350, 475, 40, 40);
   rect(390, 475, 40, 40);
   rect(430, 475, 40, 40);
+  pop();
+
+  // #####
+  // for (let i = 0; i < player.inventory.length; i++) {
+  //   if (i === 0) {
+  //     //display nothing
+  //     console.log("yes that's right, nothing");
+  //   } else {
+  //     console.log("this is gonna bug");
+  //     // find what object is in array
+  //     // display item image in inventory
+  //     itemToDisplay = player.inventory[i].itemImageName;
+  //     console.log(itemToDisplay);
+  //     push();
+  //     imageMode(CENTER);
+  //     console.log(i);
+  //     image(itemToDisplay, 40 * i, 475, 34, 35);
+  //     pop();
+  //   }
+  // }
+}
+
+function drawPeach(x, y) {
+  push();
+  imageMode(LEFT);
+  image(peachImage, x * unit, y * unit, 34, 35); // hard numbers
+  pop();
+  // display peach image
+}
+
+function drawSmolPeach(x, y) {
+  push();
+  imageMode(CENTER);
+  image(peachImage, x * unit + 15, y * unit, 25, 26); // hard numbers
+  pop();
+  // display peach image
+}
+
+function drawPlayer(x, y, color) {
+  push();
+  noStroke();
+  fill(color);
+  ellipseMode(CORNER);
+  ellipse(x * unit, y * unit, unit);
   pop();
 }
 
@@ -317,7 +341,11 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`;
         // pick up peach, add to inventory ###
-        player.inventory.push({ itemName: "peach", itemQty: 1 });
+        player.inventory.push({
+          itemName: "peach",
+          itemQty: 1,
+          itemImageName: "peachImage",
+        });
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
@@ -479,6 +507,12 @@ function keyPressed() {
             playerPaused = true;
             // if player item is out, player gives npc item ###
             stopTextBubble = false;
+
+            // npc verifies what player is giving
+            if (selectItem.itemName === "peach") {
+              player.inventory[selectItemNumber].splice;
+              npcPeachEvent++;
+            }
           } else if (stopTextBubble === false) {
             stopTextBubble = true;
             playerPaused = false;
@@ -491,10 +525,12 @@ function keyPressed() {
   if (keyCode === 48) {
     // 0
     // empty box, player can talk to npc without giving item
+    selectItemNumber = 0;
     selectItem = player.inventory[0];
   }
   if (keyCode === 49) {
     // 1
+    selectItemNumber = 1;
     if (player.inventory[1] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -503,6 +539,7 @@ function keyPressed() {
   }
   if (keyCode === 50) {
     // 2
+    selectItemNumber = 2;
     if (player.inventory[2] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -511,6 +548,7 @@ function keyPressed() {
   }
   if (keyCode === 51) {
     // 3
+    selectItemNumber = 3;
     if (player.inventory[3] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -519,6 +557,7 @@ function keyPressed() {
   }
   if (keyCode === 52) {
     // 4
+    selectItemNumber = 4;
     if (player.inventory[4] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -527,6 +566,7 @@ function keyPressed() {
   }
   if (keyCode === 53) {
     // 5
+    selectItemNumber = 5;
     if (player.inventory[5] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -535,6 +575,7 @@ function keyPressed() {
   }
   if (keyCode === 54) {
     // 6
+    selectItemNumber = 6;
     if (player.inventory[6] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -543,6 +584,7 @@ function keyPressed() {
   }
   if (keyCode === 55) {
     // 7
+    selectItemNumber = 7;
     if (player.inventory[7] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -551,6 +593,7 @@ function keyPressed() {
   }
   if (keyCode === 56) {
     // 8
+    selectItemNumber = 8;
     if (player.inventory[8] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -559,6 +602,7 @@ function keyPressed() {
   }
   if (keyCode === 57) {
     // 9
+    selectItemNumber = 9;
     if (player.inventory[9] === undefined) {
       selectItem = player.inventory[0];
     } else {
@@ -581,7 +625,7 @@ function keyPressed() {
 }
 
 function displayText() {
-  console.log(stopTextBubble);
+  //console.log(stopTextBubble);
   if (stopTextBubble === false) {
     //console.log("well???");
     push();
