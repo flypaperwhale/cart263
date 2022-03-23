@@ -118,6 +118,7 @@ function preload() {
   // image assets
   peachImage = loadImage(`assets/images/peach.png`);
   peachTreeImage = loadImage(`assets/images/peachtree.png`);
+  sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
 }
 
 /**
