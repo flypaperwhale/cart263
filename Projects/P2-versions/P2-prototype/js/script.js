@@ -72,6 +72,9 @@ let itemToDisplay;
 
 let npcText = `How fantastic to meet you!`;
 let npcPeachEvent = 0;
+let npcPeachEventOngoing = true;
+let npcFriendEvent = 0;
+let npcFriendEventOngoing = false;
 
 let peachImage, peachTreeImage;
 let currentPlayerIndex;
@@ -191,7 +194,7 @@ function displayGrid() {
       push();
       noFill();
       stroke(0);
-      rect(x * unit, y * unit, unit, unit);
+      //rect(x * unit, y * unit, unit, unit);
       pop();
       let cell = gridMap[y][x];
       if (cell === `Pl`) {
@@ -619,14 +622,34 @@ function keyPressed() {
             // if player item is out, player gives npc item ###
             stopTextBubble = false;
 
+            if (npcFriendEvent === 1) {
+              npcFriendEvent++;
+              if (npcFriendEvent === 2) {
+                npcText = "Hey, buddy! How's it going?";
+              }
+            }
+
             // npc verifies what player is giving
             if (selectItem.itemName === "peach" && itemDisplay === true) {
               player.inventory.splice(selectItemNumber, 1);
               selectItem = player.inventory[0];
-              npcPeachEvent++;
-              npcText = "Thanks for that peach, can you bring me 5 total?";
-              if (npcPeachEvent === 5) {
-                npcText = "You are the bomb! I love you!";
+              if (npcPeachEventOngoing === true) {
+                npcPeachEvent++;
+                npcText = "Thanks for that peach, can you bring me 5 total?";
+                if (npcPeachEvent === 5) {
+                  npcText = "You are the bomb! I love you!";
+                  npcPeachEventOngoing = false;
+                }
+              } else {
+                npcText = "Another peach! You shouldn't have.";
+                npcFriendEventOngoing = true;
+              }
+              if (npcFriendEventOngoing === true) {
+                npcFriendEvent++;
+                if (npcFriendEvent >= 3) {
+                  npcText = "Thanks, I know you've got me covered";
+                  return;
+                }
               }
             }
           } else if (stopTextBubble === false) {
