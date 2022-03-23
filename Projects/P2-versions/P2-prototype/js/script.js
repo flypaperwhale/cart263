@@ -7,6 +7,8 @@ An peach collecting simulation, where player can give NPC peaches, and the NPC b
 The friendly NPC changes its dialog, (and gives player a piece of pie).
 */
 
+("use strict");
+
 // the playable area of the canvas is seperated in a 15 by 15 cell grid
 // keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
 let gridMap = [
@@ -30,7 +32,7 @@ let gridMap = [
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 15;
 let columns = 15;
-let gridCell;
+let gridUnit;
 
 // create player object with inventory array inside
 let player = {
@@ -38,14 +40,16 @@ let player = {
   inventory: [{ itemName: "empty", itemQty: 0, itemImageName: "no image" }],
 };
 
+let currentPlayerIndex; // indexed grid cell where Player currently is
 let playerPaused = false; // status whether player is paused or not, starts unpaused
 
 // initializes selectItem to empty
 let selectItem = { itemName: "empty", itemQty: 0, itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
-
 let selectItemHeldOut = false; // status whether select item is held out or not, starts item "empty" hidden
-let itemToDisplay; // item that will be displayed, in each box from the inventory
+
+let invItemToDisplay; // item that will be displayed, in each box from the inventory
+let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
 let npcText = `How fantastic to meet you!`; // npc's first utterance
 let npcPeachEvent = 0; // peach event npc state handler, starts at zero and increases with every gifted peach
@@ -56,11 +60,7 @@ let npcFriendEventOngoing = false; // this maintains the friend event npc state,
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
 
-let currentPlayerIndex; // indexed grid cell where Player currently is
-
-let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
-
-// array of gridcells where peaches can appear when one is picked up by player
+// array of gridUnits where peaches can appear when one is picked up by player
 let peachFallAreas = [
   { row: 9, collumn: 8 },
   { row: 9, collumn: 9 },
@@ -80,10 +80,8 @@ let peachFallAreas = [
   { row: 12, collumn: 11 },
 ];
 
-("use strict");
-
 /**
-Description of preload
+preload peach, peach tree, sliceOPie png files
 */
 function preload() {
   // image assets
@@ -93,43 +91,35 @@ function preload() {
 }
 
 /**
-Description of setup
+setup is used to save the player's initial position in currentPlayerIndex and calculate the gridUnit
+both variables are needed to permit the player to move around the grid
 */
 function setup() {
   createCanvas(500, 500);
-
+  // move throughout the gridMap, save the player's initial position in currentPlayerIndex
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       if (gridMap[r][c] === `Pl`) {
-        // save player's current position
+        // save player's current position in an object so an index can be appropriately called up and manipulated in the grid
         currentPlayerIndex = {
           playerRow: r,
           playerCollumn: c,
         };
-        console.log("do you come back out of here?");
-
-        //  }${r},${c}`;
       }
-      //gridMap[r][c] = ` `;
     }
   }
-
-  // for (let r = 0; r < rows; r++) {
-  //   gridMap.push([]);
-  //   for (let c = 0; c < columns; c++) {
-  //     gridMap[r][c] = ` `;
-  //   }
-  // }
-  //
-  gridCell = height / gridMap.length;
+  // calculate the size of the gridUnit by dividing canvas height by gridMap array length i.e., number of rows
+  gridUnit = height / gridMap.length;
 }
 
 /**
-Description of draw()
+draw the background with a blue sky, green grass, and a peach tree
+then display text (whenever textBox is not stopped),
+display the grid (this displays everything that is on the grid, npcs, items, and the player),
+and display inventory, which displays the ui boxes where item pngs appear when items are picked up off the grid
 */
 function draw() {
   noStroke();
-
   // BACKGROUND //
   background(`skyblue`);
   // draw grass
@@ -138,7 +128,6 @@ function draw() {
   rectMode(CENTER);
   rect(250, 432, width, height / 1.5);
   pop();
-
   // display the tree!
   push();
   imageMode(CENTER);
@@ -146,36 +135,63 @@ function draw() {
   pop();
   // END OF BACKGROUND //
   displayText();
-
-  // display grid
   displayGrid();
-  // display INVENTORY
   displayInventory();
-  // items
+}
 
-  // if (npcPeachEvent === 5) {
-  //   alert("You gave NPC 5 peaches!");
-  //   npcPeachEvent = 0;
-  // }
+function displayText() {
+  if (stopTextBubble === false) {
+    // when text bubble is not stopped
+    // white text bubble box
+    push();
+    fill(255);
+    rectMode(CENTER);
+    rect(250, 100, 320, 75);
+    pop();
+    //
+    push();
+    // npc name
+    stroke(0);
+    fill(`yellow`);
+    textAlign(CENTER, CENTER);
+    textSize(15);
+    text("NPC", 120, 75);
+    // npc text
+    noStroke();
+    fill(0);
+    textSize(12);
+    text(npcText, 250, 100);
+    pop();
+  } else if (stopTextBubble === true) {
+    // do nothing
+  }
 }
 
 function displayGrid() {
+  // go through the girdMap
   for (let y = 0; y < gridMap.length; y++) {
-    //let row = gridMap[y];
+    // rows
     for (let x = 0; x < gridMap[y].length; x++) {
+      // collumns
+
+      /* Comment out if you want to see the grid //
       push();
       noFill();
       stroke(0);
-      //rect(x * gridCell, y * gridCell, gridCell, gridCell);
-      pop();
-      let cell = gridMap[y][x];
+      rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
+      pop(); */
+
+      let cell = gridMap[y][x]; // cell = index
+      // check each cell for a key
       if (cell === `Pl`) {
         // Pl for Player
-        drawPlayer(x, y, `lime`);
+        drawCharacter(x, y, `lime`);
         if (selectItemHeldOut === true) {
           if (selectItem.itemName === "empty") {
+            // if item selected by player is the empty box
             //display nothing
           } else {
+            // ### if peach smolpeach, if pie smolpie  drawSmolItem
             drawSmolPeach(x, y);
           }
         }
@@ -186,7 +202,7 @@ function displayGrid() {
       }
       if (cell === `NPC`) {
         // NPC
-        drawPlayer(x, y, `yellow`);
+        drawCharacter(x, y, `yellow`);
       }
       if (cell === `S`) {
         // S for Solid
@@ -197,10 +213,13 @@ function displayGrid() {
 }
 
 function displayInventory() {
+  // displays UI 10 inventory boxes at the bottom of canvas
+  // long rectangle at the bottom of canvas
   push();
-  fill(220, 200, 100);
+  fill(220, 200, 100); // beige
   rectMode(CENTER);
   rect(250, 475, 400, 40);
+  // digits, 0 is always empty
   fill(0);
   textAlign(LEFT);
   text(
@@ -208,6 +227,7 @@ function displayInventory() {
     80,
     465
   );
+  // the 10 boxes
   noFill();
   stroke(0);
   rect(70, 475, 40, 40);
@@ -222,100 +242,73 @@ function displayInventory() {
   rect(430, 475, 40, 40);
   pop();
 
-  //  #####
+  // go through the player's inventory array and display each item in the array in the corresponding UI inventory box
   for (let i = 0; i < player.inventory.length; i++) {
     if (i === 0) {
+      // in box 0
       //display nothing
-      console.log("yes that's right, nothing");
     } else if (i === 1) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 1
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 110, 475, 34, 35);
+      image(invItemToDisplay, 110, 475, 34, 35); // display image of item at index 1 in inventory
       pop();
     } else if (i === 2) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 2
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 150, 475, 34, 35);
+      image(invItemToDisplay, 150, 475, 34, 35); // display image of item at index 2 in inventory
       pop();
     } else if (i === 3) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 3
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 190, 475, 34, 35);
+      image(invItemToDisplay, 190, 475, 34, 35); // display image of item at index 3 in inventory
       pop();
     } else if (i === 4) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 4
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 230, 475, 34, 35);
+      image(invItemToDisplay, 230, 475, 34, 35); // display image of item at index 4 in inventory
       pop();
     } else if (i === 5) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 5
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 270, 475, 34, 35);
+      image(invItemToDisplay, 270, 475, 34, 35); // display image of item at index 5 in inventory
       pop();
     } else if (i === 6) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 6
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 310, 475, 34, 35);
+      image(invItemToDisplay, 310, 475, 34, 35); // display image of item at index 6 in inventory
       pop();
     } else if (i === 7) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 7
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 350, 475, 34, 35);
+      image(invItemToDisplay, 350, 475, 34, 35); // display image of item at index 7 in inventory
       pop();
     } else if (i === 8) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 8
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 390, 475, 34, 35);
+      image(invItemToDisplay, 390, 475, 34, 35); // display image of item at index 8 in inventory
       pop();
     } else if (i === 9) {
-      itemToDisplay = player.inventory[i].itemImageName;
-
+      // in box 9
+      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
       push();
       imageMode(CENTER);
-      //console.log(i);
-      //image(peachImage, 40, 475);
-
-      image(itemToDisplay, 430, 475, 34, 35);
+      image(invItemToDisplay, 430, 475, 34, 35); // display image of item at index 9 in inventory
       pop();
     }
   }
@@ -324,7 +317,7 @@ function displayInventory() {
 function drawPeach(x, y) {
   push();
   imageMode(LEFT);
-  image(peachImage, x * gridCell, y * gridCell, 34, 35); // hard numbers
+  image(peachImage, x * gridUnit, y * gridUnit, 34, 35); // hard numbers
   pop();
   // display peach image
 }
@@ -332,17 +325,17 @@ function drawPeach(x, y) {
 function drawSmolPeach(x, y) {
   push();
   imageMode(CENTER);
-  image(peachImage, x * gridCell + 15, y * gridCell, 25, 26); // hard numbers
+  image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26); // hard numbers
   pop();
   // display peach image
 }
 
-function drawPlayer(x, y, color) {
+function drawCharacter(x, y, color) {
   push();
   noStroke();
   fill(color);
   ellipseMode(CORNER);
-  ellipse(x * gridCell, y * gridCell, gridCell);
+  ellipse(x * gridUnit, y * gridUnit, gridUnit);
   pop();
 }
 
@@ -732,32 +725,6 @@ function keyPressed() {
         //console.log("do you come back out of here?");
       }
     }
-  }
-}
-
-function displayText() {
-  //console.log(stopTextBubble);
-  if (stopTextBubble === false) {
-    //console.log("well???");
-    push();
-    fill(255);
-    rectMode(CENTER);
-    rect(250, 100, 320, 75);
-    pop();
-    push();
-    //textAlign(CENTER);
-    stroke(0);
-    fill(`yellow`);
-    textAlign(CENTER, CENTER);
-    textSize(15);
-    text("NPC", 120, 75);
-    noStroke();
-    fill(0);
-    textSize(12);
-    text(npcText, 250, 100);
-    pop();
-  } else if (stopTextBubble === true) {
-    // do nothing
   }
 }
 
