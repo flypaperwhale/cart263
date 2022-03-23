@@ -80,6 +80,8 @@ let peachFallAreas = [
   { row: 12, collumn: 11 },
 ];
 
+let state = "title"; // can be title, simulation
+
 /**
 preload peach, peach tree, sliceOPie png files
 */
@@ -122,21 +124,43 @@ function draw() {
   noStroke();
   // BACKGROUND //
   background(`skyblue`);
-  // draw grass
-  push();
-  fill(`green`);
-  rectMode(CENTER);
-  rect(250, 432, width, height / 1.5);
-  pop();
-  // display the tree!
-  push();
-  imageMode(CENTER);
-  image(peachTreeImage, 355, 270, 200, 200); // hard numbers
-  pop();
-  // END OF BACKGROUND //
-  displayText();
-  displayGrid();
-  displayInventory();
+  if (state === "title") {
+    push();
+    fill(50, 10, 100);
+    textAlign(CENTER);
+    textSize(54);
+    text("MISH MASH", 250, 200);
+    textSize(20);
+    text(
+      `» use arrow keys to move
+» use spacebar to talk or give item
+» use digit keys to select item in inventory
+» use 'I' to hold selected item out to give`,
+      250,
+      250
+    );
+    fill("red");
+    text("click to start!", 250, 360);
+    pop();
+  }
+
+  if (state === "simulation") {
+    // draw grass
+    push();
+    fill(`green`);
+    rectMode(CENTER);
+    rect(250, 432, width, height / 1.5);
+    pop();
+    // display the tree!
+    push();
+    imageMode(CENTER);
+    image(peachTreeImage, 355, 270, 200, 200); // hard numbers
+    pop();
+    // END OF BACKGROUND //
+    displayText();
+    displayGrid();
+    displayInventory();
+  }
 }
 
 function displayText() {
@@ -230,16 +254,16 @@ function displayInventory() {
   // the 10 boxes
   noFill();
   stroke(0);
-  rect(70, 475, 40, 40);
-  rect(110, 475, 40, 40);
-  rect(150, 475, 40, 40);
-  rect(190, 475, 40, 40);
-  rect(230, 475, 40, 40);
-  rect(270, 475, 40, 40);
-  rect(310, 475, 40, 40);
-  rect(350, 475, 40, 40);
-  rect(390, 475, 40, 40);
-  rect(430, 475, 40, 40);
+  rect(70, 475, 40, 40); // 0
+  rect(110, 475, 40, 40); // 1
+  rect(150, 475, 40, 40); // 2
+  rect(190, 475, 40, 40); // 3
+  rect(230, 475, 40, 40); // 4
+  rect(270, 475, 40, 40); // 5
+  rect(310, 475, 40, 40); // 6
+  rect(350, 475, 40, 40); // 7
+  rect(390, 475, 40, 40); // 8
+  rect(430, 475, 40, 40); // 9
   pop();
 
   // go through the player's inventory array and display each item in the array in the corresponding UI inventory box
@@ -353,10 +377,10 @@ function keyPressed() {
     // do not enter inventory
   } else if (playerPaused === false) {
     // when player isn't paused
-    // player can press 'C' to take out inventory item
+    // player can press 'I' to take out inventory item
     // and manage directions left, up, down, right
-    if (keyCode === 67) {
-      // when player presses 'C' //
+    if (keyCode === 73) {
+      // when player presses 'I' //
       // display item over avatar
       if (selectItemHeldOut === true) {
         // if selectItem is held out when C is pressed
@@ -659,6 +683,12 @@ function keyPressed() {
     // empty box, player can talk to npc without giving item
     selectItemNumber = 0;
     selectItem = player.inventory[0];
+    push();
+    noFill();
+    stroke(0);
+    strokeWeight(10);
+    rect(70, 475, 40, 40); // 0
+    pop();
   }
   if (keyCode === 49) {
     // 1
@@ -668,6 +698,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[1];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(110, 475, 40, 40); // 1
+      pop();
     }
   }
   if (keyCode === 50) {
@@ -678,6 +714,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[2];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(150, 475, 40, 40); // 2
+      pop();
     }
   }
   if (keyCode === 51) {
@@ -688,6 +730,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[3];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(190, 475, 40, 40); // 3
+      pop();
     }
   }
   if (keyCode === 52) {
@@ -698,6 +746,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[4];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(230, 475, 40, 40); // 4
+      pop();
     }
   }
   if (keyCode === 53) {
@@ -708,6 +762,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[5];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(270, 475, 40, 40); // 5
+      pop();
     }
   }
   if (keyCode === 54) {
@@ -718,6 +778,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[6];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(310, 475, 40, 40); // 6
+      pop();
     }
   }
   if (keyCode === 55) {
@@ -728,6 +794,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[7];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(350, 475, 40, 40); // 7
+      pop();
     }
   }
   if (keyCode === 56) {
@@ -738,6 +810,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[8];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(390, 475, 40, 40); // 8
+      pop();
     }
   }
   if (keyCode === 57) {
@@ -748,6 +826,12 @@ function keyPressed() {
       selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[9];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(4);
+      rect(430, 475, 40, 40); // 9
+      pop();
     }
   }
 
@@ -785,4 +869,5 @@ function mouseClicked() {
   console.log(npcPeachEvent);
   console.log(player.inventory);
   console.log(selectItem.itemName);
+  state = "simulation";
 }
