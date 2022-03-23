@@ -1010,7 +1010,7 @@ function dropPie() {
 
 // mouse used for debugging
 function mouseClicked() {
-  //console.log(gridMap);
+  // console.log(gridMap);
   console.log(npcPeachEvent);
   console.log(player.inventory);
   console.log(selectItem.itemName);
