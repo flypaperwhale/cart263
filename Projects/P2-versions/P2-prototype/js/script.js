@@ -27,38 +27,40 @@ let gridMap = [
   [(``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `)], // [13]
   [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [14]
 ];
+// these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
+let rows = 15;
+let columns = 15;
+let gridCell;
 
-// gridMap[R][C]
-//gridMap[currentPlayerIndex.playerRow][currentPlayerIndex.playerCollumn]
-
+// create player object with inventory array inside
 let player = {
+  // inventory array holds (item) objects with name, qty, and image name
   inventory: [{ itemName: "empty", itemQty: 0, itemImageName: "no image" }],
 };
 
-let playerPaused = false;
-let showInventory = false;
+let playerPaused = false; // status whether player is paused or not, starts unpaused
+
+// initializes selectItem to empty
 let selectItem = { itemName: "empty", itemQty: 0, itemImageName: "no image" };
-let selectItemNumber = 0;
-let itemDisplay = false;
-let itemToDisplay;
+let selectItemNumber = 0; // to manage inventory using digit keys
 
-let npcText = `How fantastic to meet you!`;
-let npcPeachEvent = 0;
-let npcPeachEventOngoing = true;
-let npcFriendEvent = 0;
-let npcFriendEventOngoing = false;
+let selectItemHeldOut = false; // status whether select item is held out or not, starts item "empty" hidden
+let itemToDisplay; // item that will be displayed, in each box from the inventory
 
-let peachImage, peachTreeImage;
-let currentPlayerIndex;
+let npcText = `How fantastic to meet you!`; // npc's first utterance
+let npcPeachEvent = 0; // peach event npc state handler, starts at zero and increases with every gifted peach
+let npcPeachEventOngoing = true; // this maintains the peach event npc state, starts true
+let npcFriendEvent = 0; // friend event npc state handler
+let npcFriendEventOngoing = false; // this maintains the friend event npc state, is turned true once peach event is completed
 
-//let gridMap = [];
-let rows = 15;
-let columns = 15;
+// image names
+let peachImage, peachTreeImage, sliceOPieImage;
 
-let unit;
+let currentPlayerIndex; // indexed grid cell where Player currently is
 
-let stopTextBubble = true;
+let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
+// array of gridcells where peaches can appear when one is picked up by player
 let peachFallAreas = [
   { row: 9, collumn: 8 },
   { row: 9, collumn: 9 },
@@ -77,9 +79,6 @@ let peachFallAreas = [
   { row: 12, collumn: 10 },
   { row: 12, collumn: 11 },
 ];
-
-let fallenPeachRow;
-let fallenPeachCollumn;
 
 ("use strict");
 
@@ -122,7 +121,7 @@ function setup() {
   //   }
   // }
   //
-  unit = height / gridMap.length;
+  gridCell = height / gridMap.length;
 }
 
 /**
@@ -167,13 +166,13 @@ function displayGrid() {
       push();
       noFill();
       stroke(0);
-      //rect(x * unit, y * unit, unit, unit);
+      //rect(x * gridCell, y * gridCell, gridCell, gridCell);
       pop();
       let cell = gridMap[y][x];
       if (cell === `Pl`) {
         // Pl for Player
         drawPlayer(x, y, `lime`);
-        if (itemDisplay === true) {
+        if (selectItemHeldOut === true) {
           if (selectItem.itemName === "empty") {
             //display nothing
           } else {
@@ -325,7 +324,7 @@ function displayInventory() {
 function drawPeach(x, y) {
   push();
   imageMode(LEFT);
-  image(peachImage, x * unit, y * unit, 34, 35); // hard numbers
+  image(peachImage, x * gridCell, y * gridCell, 34, 35); // hard numbers
   pop();
   // display peach image
 }
@@ -333,7 +332,7 @@ function drawPeach(x, y) {
 function drawSmolPeach(x, y) {
   push();
   imageMode(CENTER);
-  image(peachImage, x * unit + 15, y * unit, 25, 26); // hard numbers
+  image(peachImage, x * gridCell + 15, y * gridCell, 25, 26); // hard numbers
   pop();
   // display peach image
 }
@@ -343,7 +342,7 @@ function drawPlayer(x, y, color) {
   noStroke();
   fill(color);
   ellipseMode(CORNER);
-  ellipse(x * unit, y * unit, unit);
+  ellipse(x * gridCell, y * gridCell, gridCell);
   pop();
 }
 
@@ -364,11 +363,11 @@ function keyPressed() {
   } else if (playerPaused === false) {
     if (keyCode === RETURN) {
       // display item over avatar
-      if (itemDisplay === true) {
-        itemDisplay = false;
-      } else if (itemDisplay === false) {
+      if (selectItemHeldOut === true) {
+        selectItemHeldOut = false;
+      } else if (selectItemHeldOut === false) {
         // do nothing
-        itemDisplay = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === LEFT_ARROW) {
@@ -603,7 +602,7 @@ function keyPressed() {
             }
 
             // npc verifies what player is giving
-            if (selectItem.itemName === "peach" && itemDisplay === true) {
+            if (selectItem.itemName === "peach" && selectItemHeldOut === true) {
               player.inventory.splice(selectItemNumber, 1);
               selectItem = player.inventory[0];
               if (npcPeachEventOngoing === true) {
