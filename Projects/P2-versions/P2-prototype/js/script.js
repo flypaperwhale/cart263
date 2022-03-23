@@ -583,7 +583,7 @@ function keyPressed() {
 
           // pick up peach, add to inventory ###
         }
-        let treeDropTime = random(15000, 35000);
+        let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
       } else {
@@ -774,8 +774,14 @@ function displayText() {
     pop();
     push();
     //textAlign(CENTER);
-    fill(0);
+    stroke(0);
+    fill(`yellow`);
     textAlign(CENTER, CENTER);
+    textSize(15);
+    text("NPC", 120, 75);
+    noStroke();
+    fill(0);
+    textSize(12);
     text(npcText, 250, 100);
     pop();
   } else if (stopTextBubble === true) {
