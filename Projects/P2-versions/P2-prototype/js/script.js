@@ -315,22 +315,23 @@ function displayInventory() {
 }
 
 function drawPeach(x, y) {
+  // draws peach png at row x, collumn y
   push();
   imageMode(LEFT);
-  image(peachImage, x * gridUnit, y * gridUnit, 34, 35); // hard numbers
+  image(peachImage, x * gridUnit, y * gridUnit, 34, 35);
   pop();
-  // display peach image
 }
 
 function drawSmolPeach(x, y) {
+  // draws small peach over player's head
   push();
   imageMode(CENTER);
-  image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26); // hard numbers
+  image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26);
   pop();
-  // display peach image
 }
 
 function drawCharacter(x, y, color) {
+  // draws circle character at row x, collumn y on the grid, with a specified color
   push();
   noStroke();
   fill(color);
@@ -340,32 +341,34 @@ function drawCharacter(x, y, color) {
 }
 
 function playerBarrier(x, y) {
-  // block player from moving onto
+  // block player from moving on
 }
 
-function controlPlayer(currentPressedKey) {
-  // if (currentPressedKey === ``){
-  //
-  // }
-}
-
+// keyPressed functions left, up, down, right, spacebar, enter, and 0,1,2,3,4,5,6,7,8,9
 function keyPressed() {
+  // manage pause
   if (playerPaused === true) {
+    // when player is paused
     // do not move
     // do not enter inventory
   } else if (playerPaused === false) {
-    if (keyCode === RETURN) {
+    // when player isn't paused
+    // player can press 'C' to take out inventory item
+    // and manage directions left, up, down, right
+    if (keyCode === 67) {
+      // when player presses 'C' //
       // display item over avatar
       if (selectItemHeldOut === true) {
-        selectItemHeldOut = false;
+        // if selectItem is held out when C is pressed
+        selectItemHeldOut = false; // hide selectItem
       } else if (selectItemHeldOut === false) {
-        // do nothing
-        selectItemHeldOut = true;
+        // if selectItem is hidden when C is pressed
+        selectItemHeldOut = true; // show selectItem over player's head
       }
     }
     if (keyCode === LEFT_ARROW) {
-      //console.log("wait a minute?");
       if (
+        // when player tries to move left, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] === `S` ||
@@ -378,42 +381,47 @@ function keyPressed() {
       ) {
         // do nothing
       } else if (
+        // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] === `Pe`
       ) {
+        // if there is a peach
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player used to be is now an empty space
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] = `Pl`;
+        ] = `Pl`; // where the peach used to be, now is the player
         if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
         } else {
-          // pick up peach, add to inventory ###
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
           player.inventory.push({
             itemName: "peach",
             itemQty: 1,
             itemImageName: peachImage,
           });
         }
+        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
-        console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
       } else {
+        // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player was will now be empty
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] = `Pl`;
+        ] = `Pl`; // and the player will now be one cell left
       }
     }
 
     if (keyCode === RIGHT_ARROW) {
-      //console.log("wait a minute?");
       if (
+        // when player tries to move right, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] === `S` ||
@@ -426,44 +434,48 @@ function keyPressed() {
       ) {
         // do nothing
       } else if (
+        // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] === `Pe`
       ) {
+        // if there is a peach
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player used to be is now an empty space
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
-        ] = `Pl`;
+        ] = `Pl`; // where the peach used to be, now is the player
         if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
         } else {
-          // pick up peach, add to inventory ###
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
           player.inventory.push({
             itemName: "peach",
             itemQty: 1,
             itemImageName: peachImage,
           });
-
-          // pick up peach, add to inventory ###
         }
+        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
       } else {
+        // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player was will now be empty
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
-        ] = `Pl`;
+        ] = `Pl`; // and the player will now be one cell left
       }
     }
 
     if (keyCode === UP_ARROW) {
-      //console.log("wait a minute?");
       if (
+        // when player tries to move up, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] === `S` ||
@@ -476,44 +488,48 @@ function keyPressed() {
       ) {
         // do nothing
       } else if (
+        // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] === `Pe`
       ) {
+        // if there is a peach
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player used to be is now an empty space
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] = `Pl`;
+        ] = `Pl`; // where the peach used to be, now is the player
         if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
         } else {
-          // pick up peach, add to inventory ###
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
           player.inventory.push({
             itemName: "peach",
             itemQty: 1,
             itemImageName: peachImage,
           });
-
-          // pick up peach, add to inventory ###
         }
+        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
       } else {
+        // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player was will now be empty
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] = `Pl`;
+        ] = `Pl`; // and the player will now be one cell left
       }
     }
 
     if (keyCode === DOWN_ARROW) {
-      //console.log("wait a minute?");
       if (
+        // when player tries to move down, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] === `S` ||
@@ -526,49 +542,54 @@ function keyPressed() {
       ) {
         // do nothing
       } else if (
+        // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] === `Pe`
       ) {
+        // if there is a peach
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player used to be is now an empty space
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
-        ] = `Pl`;
+        ] = `Pl`; // where the peach used to be, now is the player
         if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
         } else {
-          // pick up peach, add to inventory ###
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
           player.inventory.push({
             itemName: "peach",
             itemQty: 1,
             itemImageName: peachImage,
           });
-
-          // pick up peach, add to inventory ###
         }
+        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
       } else {
+        // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
-        ] = ` `;
+        ] = ` `; // where the player was will now be empty
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
-        ] = `Pl`;
+        ] = `Pl`; // and the player will now be one cell left
       }
     }
   }
 
+  // press spacebar
   if (keyCode === 32) {
-    //console.log("yum");
-    // if player is adjacent to NPC, dialog box, or give item
+    // if player is adjacent to NPC, dialog box is toggled, and give any items held out
+    // when space is pressed go through the gridMap
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < columns; c++) {
-        //console.log(`${gridMap[r][c]}`);
         if (
+          // for each cell adjacent to the NPC in which the player stands
           (gridMap[r][c] === `NPC` && gridMap[r - 1][c - 1] === `Pl`) ||
           (gridMap[r][c] === `NPC` && gridMap[r - 1][c] === `Pl`) ||
           (gridMap[r][c] === `NPC` && gridMap[r - 1][c + 1] === `Pl`) ||
@@ -579,39 +600,45 @@ function keyPressed() {
           (gridMap[r][c] === `NPC` && gridMap[r + 1][c] === `Pl`) ||
           (gridMap[r][c] === `NPC` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
-          console.log("NPC DIALOG");
           if (stopTextBubble === true) {
             // when space is pressed beside npc, text bubble is displayed
-            // player is paused
-            playerPaused = true;
-            // if player item is out, player gives npc item ###
-            stopTextBubble = false;
-
+            playerPaused = true; // player is paused
+            stopTextBubble = false; //  text bubble is not stopped anymore
+            // npcFriendEvent gets launched after npcPeachEvent is completed
             if (npcFriendEvent === 1) {
               npcFriendEvent++;
               if (npcFriendEvent === 2) {
-                npcText = "Hey, buddy! How's it going?";
+                npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
+                // when player presses space beside the npc
+                // while the player is NOT holding out a peach to give
               }
             }
-
+            // if player item is out, player gives npc item
             // npc verifies what player is giving
             if (selectItem.itemName === "peach" && selectItemHeldOut === true) {
-              player.inventory.splice(selectItemNumber, 1);
-              selectItem = player.inventory[0];
+              player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
+              selectItem = player.inventory[0]; // select item is reset to 0
+              // npcPeachEvent //
               if (npcPeachEventOngoing === true) {
-                npcPeachEvent++;
+                // while npcPeachEvent is ongoing
+                npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
                 npcText = "Thanks for that peach, can you bring me 5 total?";
                 if (npcPeachEvent === 5) {
-                  npcText = "You are the bomb! I love you!";
-                  npcPeachEventOngoing = false;
+                  // when npcPeachEvent reaches status 5
+                  npcText = "You are the bomb! I love you!"; // npc now loves the player
+                  npcPeachEventOngoing = false; // the npcPeachEvent is now over
                 }
               } else {
+                // no longer in the npcPeachEvent, when the player gives npc another peach
                 npcText = "Another peach! You shouldn't have.";
-                npcFriendEventOngoing = true;
+                npcFriendEventOngoing = true; // the npcFriendEvent now begins
               }
               if (npcFriendEventOngoing === true) {
-                npcFriendEvent++;
+                // while npcFriendEvent is ongoing
+                npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
                 if (npcFriendEvent >= 3) {
+                  // when its status is 3 or more, you've reached final text
+                  // status will keep going up, but text won't change here
                   npcText = "Thanks, I know you've got me covered";
                   return;
                 }
@@ -626,6 +653,7 @@ function keyPressed() {
     }
   }
 
+  // pressing the digit keys to select an item in the inventory //
   if (keyCode === 48) {
     // 0
     // empty box, player can talk to npc without giving item
@@ -636,7 +664,8 @@ function keyPressed() {
     // 1
     selectItemNumber = 1;
     if (player.inventory[1] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 1
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[1];
     }
@@ -645,7 +674,8 @@ function keyPressed() {
     // 2
     selectItemNumber = 2;
     if (player.inventory[2] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 2
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[2];
     }
@@ -654,7 +684,8 @@ function keyPressed() {
     // 3
     selectItemNumber = 3;
     if (player.inventory[3] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 3
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[3];
     }
@@ -663,7 +694,8 @@ function keyPressed() {
     // 4
     selectItemNumber = 4;
     if (player.inventory[4] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 4
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[4];
     }
@@ -672,7 +704,8 @@ function keyPressed() {
     // 5
     selectItemNumber = 5;
     if (player.inventory[5] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 5
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[5];
     }
@@ -681,7 +714,8 @@ function keyPressed() {
     // 6
     selectItemNumber = 6;
     if (player.inventory[6] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 6
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[6];
     }
@@ -690,7 +724,8 @@ function keyPressed() {
     // 7
     selectItemNumber = 7;
     if (player.inventory[7] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 7
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[7];
     }
@@ -699,7 +734,8 @@ function keyPressed() {
     // 8
     selectItemNumber = 8;
     if (player.inventory[8] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 8
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[8];
     }
@@ -708,12 +744,15 @@ function keyPressed() {
     // 9
     selectItemNumber = 9;
     if (player.inventory[9] === undefined) {
-      selectItem = player.inventory[0];
+      // if there is nothing in array index 9
+      selectItem = player.inventory[0]; // select the empty box
     } else {
       selectItem = player.inventory[9];
     }
   }
 
+  // go through girdMap after everytime a key is pressed
+  // to reassure which cell the player is in
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
       if (gridMap[r][c] === `Pl`) {
@@ -722,26 +761,25 @@ function keyPressed() {
           playerRow: r,
           playerCollumn: c,
         };
-        //console.log("do you come back out of here?");
       }
     }
   }
 }
 
 function dropPeach() {
-  // randomly select a place near the tree to drop a peach
-  //console.log("do you come here?");
+  // randomly select a place near the peach tree to drop a peach
   let fallenPeachIndex = random(peachFallAreas);
   if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
+    // if peach tries to fall in a cell where the player is standing, select another cell and try again
     fallenPeachIndex = random(peachFallAreas);
     dropPeach();
   } else {
+    // drop the peach
     gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
   }
 }
 
-// ### remember for inventory, use an array that player can press numbers to select items
-
+// mouse used for debugging
 function mouseClicked() {
   //console.log(gridMap);
   console.log(npcPeachEvent);
