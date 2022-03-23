@@ -221,9 +221,10 @@ function displayGrid() {
           if (selectItem.itemName === "empty") {
             // if item selected by player is the empty box
             //display nothing
-          } else {
-            // ### if peach smolpeach, if pie smolpie  drawSmolItem
+          } else if (selectItem.itemName === "peach") {
             drawSmolPeach(x, y);
+          } else if (selectItem.itemName === "slice of pie") {
+            drawSmolPie(x, y);
           }
         }
       }
@@ -406,6 +407,164 @@ function keyPressed() {
     // when player isn't paused
     // player can press 'I' to take out inventory item
     // and manage directions left, up, down, right
+    // and use digits
+    // pressing the digit keys to select an item in the inventory //
+    if (keyCode === 48) {
+      // 0
+      // empty box, player can talk to npc without giving item
+      selectItemNumber = 0;
+      selectItem = player.inventory[0];
+      push();
+      noFill();
+      stroke(0);
+      strokeWeight(10);
+      rect(70, 475, 40, 40); // 0
+      pop();
+    }
+    if (keyCode === 49) {
+      // 1
+      selectItemNumber = 1;
+      if (player.inventory[1] === undefined) {
+        // if there is nothing in array index 1
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[1];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(110, 475, 40, 40); // 1
+        pop();
+      }
+    }
+    if (keyCode === 50) {
+      // 2
+      selectItemNumber = 2;
+      if (player.inventory[2] === undefined) {
+        // if there is nothing in array index 2
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[2];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(150, 475, 40, 40); // 2
+        pop();
+      }
+    }
+    if (keyCode === 51) {
+      // 3
+      selectItemNumber = 3;
+      if (player.inventory[3] === undefined) {
+        // if there is nothing in array index 3
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[3];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(190, 475, 40, 40); // 3
+        pop();
+      }
+    }
+    if (keyCode === 52) {
+      // 4
+      selectItemNumber = 4;
+      if (player.inventory[4] === undefined) {
+        // if there is nothing in array index 4
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[4];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(230, 475, 40, 40); // 4
+        pop();
+      }
+    }
+    if (keyCode === 53) {
+      // 5
+      selectItemNumber = 5;
+      if (player.inventory[5] === undefined) {
+        // if there is nothing in array index 5
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[5];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(270, 475, 40, 40); // 5
+        pop();
+      }
+    }
+    if (keyCode === 54) {
+      // 6
+      selectItemNumber = 6;
+      if (player.inventory[6] === undefined) {
+        // if there is nothing in array index 6
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[6];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(310, 475, 40, 40); // 6
+        pop();
+      }
+    }
+    if (keyCode === 55) {
+      // 7
+      selectItemNumber = 7;
+      if (player.inventory[7] === undefined) {
+        // if there is nothing in array index 7
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[7];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(350, 475, 40, 40); // 7
+        pop();
+      }
+    }
+    if (keyCode === 56) {
+      // 8
+      selectItemNumber = 8;
+      if (player.inventory[8] === undefined) {
+        // if there is nothing in array index 8
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[8];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(390, 475, 40, 40); // 8
+        pop();
+      }
+    }
+    if (keyCode === 57) {
+      // 9
+      selectItemNumber = 9;
+      if (player.inventory[9] === undefined) {
+        // if there is nothing in array index 9
+        selectItem = player.inventory[0]; // select the empty box
+      } else {
+        selectItem = player.inventory[9];
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(4);
+        rect(430, 475, 40, 40); // 9
+        pop();
+      }
+    }
     if (keyCode === 73) {
       // when player presses 'I' //
       // display item over avatar
@@ -459,6 +618,31 @@ function keyPressed() {
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         setTimeout(dropPeach, treeDropTime);
+      } else if (
+        // if there is an item, or an empty space different things happen
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Pi`
+      ) {
+        // if there is a pie
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `; // where the player used to be is now an empty space
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] = `Pl`; // where the peach used to be, now is the player
+        if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a pie
+          alert("inventory is full, item not picked up");
+        } else {
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
+          player.inventory.push({
+            itemName: "slice of pie",
+            itemQty: 1,
+            itemImageName: sliceOPieImage,
+          });
+        }
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -513,6 +697,31 @@ function keyPressed() {
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
         setTimeout(dropPeach, treeDropTime);
+      } else if (
+        // if there is an item, or an empty space different things happen
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === `Pi`
+      ) {
+        // if there is a pie
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn
+        ] = ` `; // where the player used to be is now an empty space
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] = `Pl`; // where the peach used to be, now is the player
+        if (player.inventory.length === 10) {
+          // if the player inventory is already at length 10 when stepping over a pie
+          alert("inventory is full, item not picked up");
+        } else {
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
+          player.inventory.push({
+            itemName: "slice of pie",
+            itemQty: 1,
+            itemImageName: sliceOPieImage,
+          });
+        }
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -554,6 +763,31 @@ function keyPressed() {
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
+        } else if (
+          // if there is an item, or an empty space different things happen
+          gridMap[currentPlayerIndex.playerRow - 1][
+            currentPlayerIndex.playerCollumn
+          ] === `Pi`
+        ) {
+          // if there is a pie
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
+          gridMap[currentPlayerIndex.playerRow - 1][
+            currentPlayerIndex.playerCollumn
+          ] = `Pl`; // where the peach used to be, now is the player
+          if (player.inventory.length === 10) {
+            // if the player inventory is already at length 10 when stepping over a pie
+            alert("inventory is full, item not picked up");
+          } else {
+            // if there is still room in the inventory
+            // pick up peach and add it to inventory
+            player.inventory.push({
+              itemName: "slice of pie",
+              itemQty: 1,
+              itemImageName: sliceOPieImage,
+            });
+          }
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
@@ -608,6 +842,31 @@ function keyPressed() {
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
+        } else if (
+          // if there is an item, or an empty space different things happen
+          gridMap[currentPlayerIndex.playerRow + 1][
+            currentPlayerIndex.playerCollumn
+          ] === `Pi`
+        ) {
+          // if there is a pie
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
+          gridMap[currentPlayerIndex.playerRow + 1][
+            currentPlayerIndex.playerCollumn
+          ] = `Pl`; // where the peach used to be, now is the player
+          if (player.inventory.length === 10) {
+            // if the player inventory is already at length 10 when stepping over a pie
+            alert("inventory is full, item not picked up");
+          } else {
+            // if there is still room in the inventory
+            // pick up peach and add it to inventory
+            player.inventory.push({
+              itemName: "slice of pie",
+              itemQty: 1,
+              itemImageName: sliceOPieImage,
+            });
+          }
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
@@ -705,164 +964,6 @@ function keyPressed() {
           }
         }
       }
-    }
-  }
-
-  // pressing the digit keys to select an item in the inventory //
-  if (keyCode === 48) {
-    // 0
-    // empty box, player can talk to npc without giving item
-    selectItemNumber = 0;
-    selectItem = player.inventory[0];
-    push();
-    noFill();
-    stroke(0);
-    strokeWeight(10);
-    rect(70, 475, 40, 40); // 0
-    pop();
-  }
-  if (keyCode === 49) {
-    // 1
-    selectItemNumber = 1;
-    if (player.inventory[1] === undefined) {
-      // if there is nothing in array index 1
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[1];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(110, 475, 40, 40); // 1
-      pop();
-    }
-  }
-  if (keyCode === 50) {
-    // 2
-    selectItemNumber = 2;
-    if (player.inventory[2] === undefined) {
-      // if there is nothing in array index 2
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[2];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(150, 475, 40, 40); // 2
-      pop();
-    }
-  }
-  if (keyCode === 51) {
-    // 3
-    selectItemNumber = 3;
-    if (player.inventory[3] === undefined) {
-      // if there is nothing in array index 3
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[3];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(190, 475, 40, 40); // 3
-      pop();
-    }
-  }
-  if (keyCode === 52) {
-    // 4
-    selectItemNumber = 4;
-    if (player.inventory[4] === undefined) {
-      // if there is nothing in array index 4
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[4];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(230, 475, 40, 40); // 4
-      pop();
-    }
-  }
-  if (keyCode === 53) {
-    // 5
-    selectItemNumber = 5;
-    if (player.inventory[5] === undefined) {
-      // if there is nothing in array index 5
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[5];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(270, 475, 40, 40); // 5
-      pop();
-    }
-  }
-  if (keyCode === 54) {
-    // 6
-    selectItemNumber = 6;
-    if (player.inventory[6] === undefined) {
-      // if there is nothing in array index 6
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[6];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(310, 475, 40, 40); // 6
-      pop();
-    }
-  }
-  if (keyCode === 55) {
-    // 7
-    selectItemNumber = 7;
-    if (player.inventory[7] === undefined) {
-      // if there is nothing in array index 7
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[7];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(350, 475, 40, 40); // 7
-      pop();
-    }
-  }
-  if (keyCode === 56) {
-    // 8
-    selectItemNumber = 8;
-    if (player.inventory[8] === undefined) {
-      // if there is nothing in array index 8
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[8];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(390, 475, 40, 40); // 8
-      pop();
-    }
-  }
-  if (keyCode === 57) {
-    // 9
-    selectItemNumber = 9;
-    if (player.inventory[9] === undefined) {
-      // if there is nothing in array index 9
-      selectItem = player.inventory[0]; // select the empty box
-    } else {
-      selectItem = player.inventory[9];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(4);
-      rect(430, 475, 40, 40); // 9
-      pop();
     }
   }
 
