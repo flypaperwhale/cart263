@@ -7,22 +7,8 @@ An peach collecting simulation, where player can give NPC peaches, and the NPC b
 The friendly NPC changes its dialog, (and gives player a piece of pie).
 */
 
-/*
-TO DO:
-+ use OOP states // title, simulation (would possibly be subdivided in final),
-+ create canvas (grass and sky)
-+ implement a grid system
-+ create Player class
-+ create NPC class
-+ create Object class
-+ have player pick up item, add item to an inventory,
-+ have player select item box or empty box, selected box display item over player
-+ have player give item to NPC (this will manipulate NPC property value for event "collecting item X")
-+ have possibility for player to collect multiples of item
-+ have item disappear when picked, and a new one appear randomly on map
-
-*/
-
+// the playable area of the canvas is seperated in a 15 by 15 cell grid
+// keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
 let gridMap = [
   //[`0`,`1`,`2`,`3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`,`12`,`13`,`14`]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
@@ -37,24 +23,8 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [9]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [10]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `], // [11]
-  [
-    ` `,
-    `NPC`,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    ` `,
-    `Pl`,
-    ` `,
-  ], // [12]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
+  [``, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ``], // [12]
+  [(``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `)], // [13]
   [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [14]
 ];
 
