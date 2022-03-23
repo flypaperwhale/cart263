@@ -3,6 +3,8 @@ Mish Mash
 Frankie Latreille
 
 This is the prototype for my CART 263 P2
+An peach collecting simulation, where player can give NPC peaches, and the NPC becomes friendly.
+The friendly NPC changes its dialog, (and gives player a piece of pie).
 */
 
 /*
