@@ -9,15 +9,20 @@
 // ];
 
 let forest = [];
-let rows = 5;
-let cols = 5;
+let rows = 32;
+let cols = 27;
+
+let SCENE_W = 1066.56;
+let SCENE_H = 899.91;
+
+//let frame;
 
 let unit;
 
 let player;
 
 function setup() {
-  createCanvas(1066.56, 899.91);
+  createCanvas(500, 500);
 
   createPlayer(230, 200); // (x,y) starting positions declared and new Player is created
 
@@ -44,11 +49,35 @@ function createPlayer(x, y) {
 function draw() {
   handlePausePlayerState(); // Handle pause player state
 
+  //a camera is created automatically at the beginning
+
+  //.5 zoom is zooming out (50% of the normal size)
+  if (mouseIsPressed) camera.zoom = 0.5;
+  else camera.zoom = 1;
+
+  //set the camera position to the player position
+  camera.position.x = player.x;
+  camera.position.y = player.y;
+
+  //limit the player movements
+  if (player.x < 0) player.x = 0;
+  if (player.y < 0) player.y = 0;
+  if (player.x > SCENE_W) player.x = SCENE_W;
+  if (player.y > SCENE_H) player.y = SCENE_H;
+
+  //draw the scene
+  //rocks first
   background(200);
   displayPlayer(); // displays player and also constrains them to move only on the ground
 
   createCamBox(480, 320, 250, 250);
-  //displayForest();
+  displayForest();
+
+  //I can turn on and off the camera at any point to restore
+  //the normal drawing coordinates, the frame will be drawn at
+  //the absolute 0,0 (try to see what happens if you don't turn it off
+  camera.off();
+  //image(frame, 0, 0);
 }
 
 // Program draw function functions //
@@ -83,26 +112,26 @@ function displayPlayer() {
 function createCamBox(x, y, w, h) {
   push();
   fill(0);
-  rectMode(CENTER);
+  //rectMode(CENTER);
   rect(x, y, w, h);
   pop();
 }
-// function displayForest() {
-//   for (let y = 0; y < forest.length; y++) {
-//     let row = forest[y];
-//     for (let x = 0; x < forest[y].length; x++) {
-//       push();
-//       noFill();
-//       stroke(0);
-//       rect(x * unit, y * unit, unit, unit);
-//       pop();
-//       let cell = forest[y][x];
-//       if (cell === `F`) {
-//         drawFirTree(x, y);
-//       }
-//     }
-//   }
-// }
+function displayForest() {
+  for (let y = 0; y < forest.length; y++) {
+    let row = forest[y];
+    for (let x = 0; x < forest[y].length; x++) {
+      push();
+      noFill();
+      stroke(0);
+      rect(x * unit, y * unit, unit, unit);
+      pop();
+      let cell = forest[y][x];
+      if (cell === `F`) {
+        //drawFirTree(x, y);
+      }
+    }
+  }
+}
 
 function drawFirTree(x, y) {
   push();

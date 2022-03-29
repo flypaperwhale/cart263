@@ -14,8 +14,8 @@ class Player {
 
   constrain() {
     // constrain player to the ground
-    this.x = constrain(this.x, 0, 600);
-    this.y = constrain(this.y, 402, 810);
+    // this.x = constrain(this.x, 0, 600);
+    // this.y = constrain(this.y, 402, 810);
   }
 
   handleInput() {
