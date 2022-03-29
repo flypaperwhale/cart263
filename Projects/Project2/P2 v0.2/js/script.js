@@ -149,6 +149,7 @@ function draw() {
   // BACKGROUND //
   background(`skyblue`);
   if (state === "title") {
+    playerPaused = true;
     push();
     fill(50, 10, 100);
     textAlign(CENTER);
@@ -207,7 +208,7 @@ function displayText() {
     fill(`yellow`);
     textAlign(CENTER, CENTER);
     textSize(15);
-    text("NPC", 120, 75);
+    text("NPC", player.x - 115, player.y - 120);
     // npc text
     noStroke();
     fill(0);
@@ -1008,8 +1009,21 @@ function keyPressed() {
         player.y = player.y + gridUnit;
       }
     }
-  }
 
+    // go through girdMap after everytime a key is pressed
+    // to reassure which cell the player is in
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < columns; c++) {
+        if (gridMap[r][c] === `Pl`) {
+          // save player's current position
+          currentPlayerIndex = {
+            playerRow: r,
+            playerCollumn: c,
+          };
+        }
+      }
+    }
+  }
   // press spacebar
   if (keyCode === 32) {
     // if player is adjacent to NPC, dialog box is toggled, and give any items held out
@@ -1085,20 +1099,6 @@ function keyPressed() {
       }
     }
   }
-
-  // go through girdMap after everytime a key is pressed
-  // to reassure which cell the player is in
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < columns; c++) {
-      if (gridMap[r][c] === `Pl`) {
-        // save player's current position
-        currentPlayerIndex = {
-          playerRow: r,
-          playerCollumn: c,
-        };
-      }
-    }
-  }
 }
 
 function dropPeach() {
@@ -1134,5 +1134,8 @@ function mouseClicked() {
   console.log(npcPeachEvent);
   console.log(player.inventory);
   console.log(selectItem.itemName);
-  state = "simulation";
+  if (state === `title`) {
+    state = "simulation";
+    playerPaused = false;
+  }
 }
