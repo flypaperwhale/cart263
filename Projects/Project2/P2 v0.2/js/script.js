@@ -198,7 +198,7 @@ function displayText() {
     push();
     fill(255);
     rectMode(CENTER);
-    rect(250, 100, 320, 75);
+    rect(player.x, player.y - 100, 320, 75);
     pop();
     //
     push();
@@ -212,7 +212,7 @@ function displayText() {
     noStroke();
     fill(0);
     textSize(12);
-    text(npcText, 250, 100);
+    text(npcText, player.x, player.y - 100);
     pop();
   } else if (stopTextBubble === true) {
     // do nothing
