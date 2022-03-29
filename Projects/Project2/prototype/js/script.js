@@ -46,7 +46,7 @@ let playerPaused = false; // status whether player is paused or not, starts unpa
 // initializes selectItem to empty
 let selectItem = { itemName: "empty", itemQty: 0, itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
-let selectItemHeldOut = false; // status whether select item is held out or not, starts item "empty" hidden
+let selectItemHeldOut = true; // status whether select item is held out or not, starts item "empty" hidden
 
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
 let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
@@ -636,17 +636,17 @@ function keyPressed() {
         selectItem = player.inventory[9];
       }
     }
-    if (keyCode === 73) {
-      // when player presses 'I' //
-      // display item over avatar
-      if (selectItemHeldOut === true) {
-        // if selectItem is held out when C is pressed
-        selectItemHeldOut = false; // hide selectItem
-      } else if (selectItemHeldOut === false) {
-        // if selectItem is hidden when C is pressed
-        selectItemHeldOut = true; // show selectItem over player's head
-      }
-    }
+    // if (keyCode === 73) {
+    //   // when player presses 'I' //
+    //   // display item over avatar
+    //   if (selectItemHeldOut === true) {
+    //     // if selectItem is held out when C is pressed
+    //     selectItemHeldOut = false; // hide selectItem
+    //   } else if (selectItemHeldOut === false) {
+    //     // if selectItem is hidden when C is pressed
+    //     selectItemHeldOut = true; // show selectItem over player's head
+    //   }
+    // }
     if (keyCode === LEFT_ARROW) {
       if (
         // when player tries to move left, if there is a barrier, an npc, or an unknown
