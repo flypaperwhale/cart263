@@ -57,6 +57,8 @@ let npcPeachEventOngoing = true; // this maintains the peach event npc state, st
 let npcFriendEvent = 0; // friend event npc state handler
 let npcFriendEventOngoing = false; // this maintains the friend event npc state, is turned true once peach event is completed
 
+let currentDigitPressed = 0;
+
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
 
@@ -205,12 +207,12 @@ function displayGrid() {
     for (let x = 0; x < gridMap[y].length; x++) {
       // collumns
 
-      /* Comment out if you want to see the grid //
+      //  /* Comment out if you want to see the grid //
       push();
       noFill();
       stroke(0);
       rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
-      pop(); */
+      pop();
 
       let cell = gridMap[y][x]; // cell = index
       // check each cell for a key
@@ -281,6 +283,17 @@ function displayInventory() {
   // go through the player's inventory array and display each item in the array in the corresponding UI inventory box
   for (let i = 0; i < player.inventory.length; i++) {
     if (i === 0) {
+      // if user pressed 0, current digit pressed is 0
+      if (currentDigitPressed === 0) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(70, 475, 40, 40); // 0
+        pop();
+      }
+
       // in box 0
       //display nothing
     } else if (i === 1) {
@@ -290,6 +303,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 110, 475, 34, 35); // display image of item at index 1 in inventory
       pop();
+      // BOX
+      if (currentDigitPressed === 1) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(110, 475, 40, 40); // 1
+        pop();
+      }
     } else if (i === 2) {
       // in box 2
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
@@ -297,6 +320,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 150, 475, 34, 35); // display image of item at index 2 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 2) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(150, 475, 40, 40); // 2
+        pop();
+      }
     } else if (i === 3) {
       // in box 3
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
@@ -304,6 +337,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 190, 475, 34, 35); // display image of item at index 3 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 3) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(190, 475, 40, 40); // 3
+        pop();
+      }
     } else if (i === 4) {
       // in box 4
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
@@ -311,6 +354,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 230, 475, 34, 35); // display image of item at index 4 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 4) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(230, 475, 40, 40); // 4
+        pop();
+      }
     } else if (i === 5) {
       // in box 5
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
@@ -318,6 +371,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 270, 475, 34, 35); // display image of item at index 5 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 5) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(270, 475, 40, 40); // 5
+        pop();
+      }
     } else if (i === 6) {
       // in box 6
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
@@ -325,6 +388,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 310, 475, 34, 35); // display image of item at index 6 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 6) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(310, 475, 40, 40); // 6
+        pop();
+      }
     } else if (i === 7) {
       // in box 7
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
@@ -332,6 +405,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 350, 475, 34, 35); // display image of item at index 7 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 7) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(350, 475, 40, 40); // 7
+        pop();
+      }
     } else if (i === 8) {
       // in box 8
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
@@ -339,6 +422,17 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 390, 475, 34, 35); // display image of item at index 8 in inventory
       pop();
+      // box
+      // if user pressed 0, current digit pressed is 0
+      if (currentDigitPressed === 8) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(390, 475, 40, 40); // 8
+        pop();
+      }
     } else if (i === 9) {
       // in box 9
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
@@ -346,6 +440,16 @@ function displayInventory() {
       imageMode(CENTER);
       image(invItemToDisplay, 430, 475, 34, 35); // display image of item at index 9 in inventory
       pop();
+      // box
+      if (currentDigitPressed === 9) {
+        push();
+        noFill();
+        stroke(0);
+        strokeWeight(3.5);
+        rectMode(CENTER);
+        rect(430, 475, 40, 40); // 9
+        pop();
+      }
     }
   }
 }
@@ -411,30 +515,22 @@ function keyPressed() {
     // pressing the digit keys to select an item in the inventory //
     if (keyCode === 48) {
       // 0
+      currentDigitPressed = 0;
       // empty box, player can talk to npc without giving item
       selectItemNumber = 0;
       selectItem = player.inventory[0];
-      push();
-      noFill();
-      stroke(0);
-      strokeWeight(10);
-      rect(70, 475, 40, 40); // 0
-      pop();
     }
     if (keyCode === 49) {
       // 1
       selectItemNumber = 1;
       if (player.inventory[1] === undefined) {
         // if there is nothing in array index 1
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 1;
+
         selectItem = player.inventory[1];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(110, 475, 40, 40); // 1
-        pop();
       }
     }
     if (keyCode === 50) {
@@ -442,15 +538,12 @@ function keyPressed() {
       selectItemNumber = 2;
       if (player.inventory[2] === undefined) {
         // if there is nothing in array index 2
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 2;
+
         selectItem = player.inventory[2];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(150, 475, 40, 40); // 2
-        pop();
       }
     }
     if (keyCode === 51) {
@@ -458,15 +551,12 @@ function keyPressed() {
       selectItemNumber = 3;
       if (player.inventory[3] === undefined) {
         // if there is nothing in array index 3
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 3;
+
         selectItem = player.inventory[3];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(190, 475, 40, 40); // 3
-        pop();
       }
     }
     if (keyCode === 52) {
@@ -474,15 +564,12 @@ function keyPressed() {
       selectItemNumber = 4;
       if (player.inventory[4] === undefined) {
         // if there is nothing in array index 4
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 4;
+
         selectItem = player.inventory[4];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(230, 475, 40, 40); // 4
-        pop();
       }
     }
     if (keyCode === 53) {
@@ -490,15 +577,12 @@ function keyPressed() {
       selectItemNumber = 5;
       if (player.inventory[5] === undefined) {
         // if there is nothing in array index 5
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 5;
+
         selectItem = player.inventory[5];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(270, 475, 40, 40); // 5
-        pop();
       }
     }
     if (keyCode === 54) {
@@ -506,15 +590,11 @@ function keyPressed() {
       selectItemNumber = 6;
       if (player.inventory[6] === undefined) {
         // if there is nothing in array index 6
-        selectItem = player.inventory[0]; // select the empty box
+        //currentDigitPressed = ;
+        //selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 6;
         selectItem = player.inventory[6];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(310, 475, 40, 40); // 6
-        pop();
       }
     }
     if (keyCode === 55) {
@@ -522,15 +602,12 @@ function keyPressed() {
       selectItemNumber = 7;
       if (player.inventory[7] === undefined) {
         // if there is nothing in array index 7
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 7;
+
         selectItem = player.inventory[7];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(350, 475, 40, 40); // 7
-        pop();
       }
     }
     if (keyCode === 56) {
@@ -538,15 +615,12 @@ function keyPressed() {
       selectItemNumber = 8;
       if (player.inventory[8] === undefined) {
         // if there is nothing in array index 8
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 8;
+
         selectItem = player.inventory[8];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(390, 475, 40, 40); // 8
-        pop();
       }
     }
     if (keyCode === 57) {
@@ -554,15 +628,12 @@ function keyPressed() {
       selectItemNumber = 9;
       if (player.inventory[9] === undefined) {
         // if there is nothing in array index 9
-        selectItem = player.inventory[0]; // select the empty box
+        // currentDigitPressed = 0;
+        // selectItem = player.inventory[0]; // select the empty box
       } else {
+        currentDigitPressed = 9;
+
         selectItem = player.inventory[9];
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(4);
-        rect(430, 475, 40, 40); // 9
-        pop();
       }
     }
     if (keyCode === 73) {
@@ -928,6 +999,7 @@ function keyPressed() {
             if (selectItem.itemName === "peach" && selectItemHeldOut === true) {
               player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
               selectItem = player.inventory[0]; // select item is reset to 0
+              currentDigitPressed = 0;
               // npcPeachEvent //
               if (npcPeachEventOngoing === true) {
                 // while npcPeachEvent is ongoing
