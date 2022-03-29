@@ -111,7 +111,7 @@ setup is used to save the player's initial position in currentPlayerIndex and ca
 both variables are needed to permit the player to move around the grid
 */
 function setup() {
-  createCanvas(320, 129);
+  createCanvas(450, 450);
   // move throughout the gridMap, save the player's initial position in currentPlayerIndex
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
