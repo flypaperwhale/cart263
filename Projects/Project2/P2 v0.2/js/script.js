@@ -111,7 +111,7 @@ setup is used to save the player's initial position in currentPlayerIndex and ca
 both variables are needed to permit the player to move around the grid
 */
 function setup() {
-  createCanvas(450, 450);
+  createCanvas(450, 380);
   // move throughout the gridMap, save the player's initial position in currentPlayerIndex
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -275,28 +275,28 @@ function displayInventory() {
   push();
   fill(220, 200, 100); // beige
   rectMode(CENTER);
-  rect(250, 475, 400, 40);
+  rect(player.x, player.y + 150, 400, 40);
   // digits, 0 is always empty
   fill(0);
   textAlign(LEFT);
   text(
     "0          1          2          3          4          5          6          7          8          9",
-    80,
-    465
+    player.x - 170,
+    player.y + 141
   );
   // the 10 boxes
   noFill();
   stroke(0);
-  rect(70, 475, 40, 40); // 0
-  rect(110, 475, 40, 40); // 1
-  rect(150, 475, 40, 40); // 2
-  rect(190, 475, 40, 40); // 3
-  rect(230, 475, 40, 40); // 4
-  rect(270, 475, 40, 40); // 5
-  rect(310, 475, 40, 40); // 6
-  rect(350, 475, 40, 40); // 7
-  rect(390, 475, 40, 40); // 8
-  rect(430, 475, 40, 40); // 9
+  rect(player.x - 180, player.y + 150, 40, 40); // 0
+  rect(player.x - 140, player.y + 150, 40, 40); // 1
+  rect(player.x - 100, player.y + 150, 40, 40); // 2
+  rect(player.x - 60, player.y + 150, 40, 40); // 3
+  rect(player.x - 20, player.y + 150, 40, 40); // 4
+  rect(player.x + 20, player.y + 150, 40, 40); // 5
+  rect(player.x + 60, player.y + 150, 40, 40); // 6
+  rect(player.x + 100, player.y + 150, 40, 40); // 7
+  rect(player.x + 140, player.y + 150, 40, 40); // 8
+  rect(player.x + 180, player.y + 150, 40, 40); // 9
   pop();
 
   // go through the player's inventory array and display each item in the array in the corresponding UI inventory box
@@ -309,7 +309,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(70, 475, 40, 40); // 0
+        rect(player.x - 180, player.y + 150, 40, 40); // 0
         pop();
       }
 
@@ -320,7 +320,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 110, 475, 34, 35); // display image of item at index 1 in inventory
+      image(invItemToDisplay, player.x - 140, player.y + 150, 34, 35); // display image of item at index 1 in inventory
       pop();
       // BOX
       if (currentDigitPressed === 1) {
@@ -329,7 +329,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(110, 475, 40, 40); // 1
+        rect(player.x - 140, player.y + 150, 40, 40); // 1
         pop();
       }
     } else if (i === 2) {
@@ -337,7 +337,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 150, 475, 34, 35); // display image of item at index 2 in inventory
+      image(invItemToDisplay, player.x - 100, player.y + 150, 34, 35); // display image of item at index 2 in inventory
       pop();
       // box
       if (currentDigitPressed === 2) {
@@ -346,7 +346,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(150, 475, 40, 40); // 2
+        rect(player.x - 100, player.y + 150, 40, 40); // 2
         pop();
       }
     } else if (i === 3) {
@@ -354,7 +354,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 190, 475, 34, 35); // display image of item at index 3 in inventory
+      image(invItemToDisplay, player.x - 60, player.y + 150, 34, 35); // display image of item at index 3 in inventory
       pop();
       // box
       if (currentDigitPressed === 3) {
@@ -363,7 +363,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(190, 475, 40, 40); // 3
+        rect(player.x - 60, player.y + 150, 40, 40); // 3
         pop();
       }
     } else if (i === 4) {
@@ -371,7 +371,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 230, 475, 34, 35); // display image of item at index 4 in inventory
+      image(invItemToDisplay, player.x - 20, player.y + 150, 34, 35); // display image of item at index 4 in inventory
       pop();
       // box
       if (currentDigitPressed === 4) {
@@ -380,7 +380,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(230, 475, 40, 40); // 4
+        rect(player.x - 20, player.y + 150, 40, 40); // 4
         pop();
       }
     } else if (i === 5) {
@@ -388,7 +388,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 270, 475, 34, 35); // display image of item at index 5 in inventory
+      image(invItemToDisplay, player.x + 20, player.y + 150, 34, 35); // display image of item at index 5 in inventory
       pop();
       // box
       if (currentDigitPressed === 5) {
@@ -397,7 +397,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(270, 475, 40, 40); // 5
+        rect(player.x + 20, player.y + 150, 40, 40); // 5
         pop();
       }
     } else if (i === 6) {
@@ -405,7 +405,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 310, 475, 34, 35); // display image of item at index 6 in inventory
+      image(invItemToDisplay, player.x + 60, player.y + 150, 34, 35); // display image of item at index 6 in inventory
       pop();
       // box
       if (currentDigitPressed === 6) {
@@ -414,7 +414,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(310, 475, 40, 40); // 6
+        rect(player.x + 60, player.y + 150, 40, 40); // 6
         pop();
       }
     } else if (i === 7) {
@@ -422,7 +422,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 350, 475, 34, 35); // display image of item at index 7 in inventory
+      image(invItemToDisplay, player.x + 100, player.y + 150, 34, 35); // display image of item at index 7 in inventory
       pop();
       // box
       if (currentDigitPressed === 7) {
@@ -431,7 +431,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(350, 475, 40, 40); // 7
+        rect(player.x + 100, player.y + 150, 40, 40); // 7
         pop();
       }
     } else if (i === 8) {
@@ -439,7 +439,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 390, 475, 34, 35); // display image of item at index 8 in inventory
+      image(invItemToDisplay, player.x + 140, player.y + 150, 34, 35); // display image of item at index 8 in inventory
       pop();
       // box
       // if user pressed 0, current digit pressed is 0
@@ -449,7 +449,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(390, 475, 40, 40); // 8
+        rect(player.x + 140, player.y + 150, 40, 40); // 8
         pop();
       }
     } else if (i === 9) {
@@ -457,7 +457,7 @@ function displayInventory() {
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, 430, 475, 34, 35); // display image of item at index 9 in inventory
+      image(invItemToDisplay, player.x + 180, player.y + 150, 34, 35); // display image of item at index 9 in inventory
       pop();
       // box
       if (currentDigitPressed === 9) {
@@ -466,7 +466,7 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(430, 475, 40, 40); // 9
+        rect(player.x + 180, player.y + 150, 40, 40); // 9
         pop();
       }
     }
