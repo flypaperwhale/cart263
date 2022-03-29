@@ -12,8 +12,8 @@ let forest = [];
 let rows = 32;
 let cols = 27;
 
-let SCENE_W = 1066.56;
-let SCENE_H = 899.91;
+let SCENE_H = 1066.56;
+let SCENE_W = 899.91;
 
 //let frame;
 
@@ -22,7 +22,7 @@ let unit;
 let player;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(320, 320);
 
   createPlayer(230, 200); // (x,y) starting positions declared and new Player is created
 
@@ -37,7 +37,7 @@ function setup() {
     }
   }
 
-  unit = height / forest.length;
+  unit = SCENE_H / forest.length;
 }
 
 // Create player
