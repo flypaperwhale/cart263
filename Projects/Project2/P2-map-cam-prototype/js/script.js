@@ -22,7 +22,7 @@ let unit;
 let player;
 
 function setup() {
-  createCanvas(320, 320);
+  createCanvas(250, 180);
 
   createPlayer(230, 200); // (x,y) starting positions declared and new Player is created
 
@@ -52,7 +52,7 @@ function draw() {
   //a camera is created automatically at the beginning
 
   //.5 zoom is zooming out (50% of the normal size)
-  if (mouseIsPressed) camera.zoom = 0.5;
+  if (mouseIsPressed) camera.zoom = 0.65;
   else camera.zoom = 1;
 
   //set the camera position to the player position

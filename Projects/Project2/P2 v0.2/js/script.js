@@ -34,8 +34,13 @@ let rows = 15;
 let columns = 15;
 let gridUnit;
 
+let SCENE_H = 500;
+let SCENE_W = 500;
+
 // create player object with inventory array inside
 let player = {
+  x: 466.66,
+  y: 433.33,
   // inventory array holds (item) objects with name, qty, and image name
   inventory: [{ itemName: "empty", itemQty: 0, itemImageName: "no image" }],
 };
@@ -106,7 +111,7 @@ setup is used to save the player's initial position in currentPlayerIndex and ca
 both variables are needed to permit the player to move around the grid
 */
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(320, 129);
   // move throughout the gridMap, save the player's initial position in currentPlayerIndex
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
@@ -120,7 +125,7 @@ function setup() {
     }
   }
   // calculate the size of the gridUnit by dividing canvas height by gridMap array length i.e., number of rows
-  gridUnit = height / gridMap.length;
+  gridUnit = SCENE_H / gridMap.length;
 }
 
 /**
@@ -130,6 +135,16 @@ display the grid (this displays everything that is on the grid, npcs, items, and
 and display inventory, which displays the ui boxes where item pngs appear when items are picked up off the grid
 */
 function draw() {
+  //a camera is created automatically at the beginning
+
+  //.5 zoom is zooming out (50% of the normal size)
+  if (mouseIsPressed) camera.zoom = 0.65;
+  else camera.zoom = 1;
+
+  //set the camera position to the player position
+  camera.position.x = player.x;
+  camera.position.y = player.y;
+
   noStroke();
   // BACKGROUND //
   background(`skyblue`);
@@ -144,7 +159,7 @@ function draw() {
       `» use arrow keys to move
 » use spacebar to talk or give item
 » use digit keys to select item in inventory
-» use 'I' to hold selected item out to give`,
+`,
       250,
       250
     );
@@ -170,6 +185,10 @@ function draw() {
     displayGrid();
     displayInventory();
   }
+  //I can turn on and off the camera at any point to restore
+  //the normal drawing coordinates, the frame will be drawn at
+  //the absolute 0,0 (try to see what happens if you don't turn it off
+  camera.off();
 }
 
 function displayText() {
@@ -674,6 +693,10 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`; // where the peach used to be, now is the player
+        // change player.x for camera
+        // move camera left!
+        player.x = player.x - gridUnit;
+        console.log(player.x);
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
@@ -702,6 +725,9 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`; // where the peach used to be, now is the player
+        // move camera left!
+        player.x = player.x - gridUnit;
+        console.log(player.x);
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a pie
           alert("inventory is full, item not picked up");
@@ -722,6 +748,9 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] = `Pl`; // and the player will now be one cell left
+        // move camera left!
+        player.x = player.x - gridUnit;
+        console.log(player.x);
       }
     }
 
@@ -752,6 +781,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] = `Pl`; // where the peach used to be, now is the player
+        // move camera right!
+        player.x = player.x + gridUnit;
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
@@ -781,6 +812,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] = `Pl`; // where the peach used to be, now is the player
+        // move camera right!
+        player.x = player.x + gridUnit;
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a pie
           alert("inventory is full, item not picked up");
@@ -801,6 +834,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] = `Pl`; // and the player will now be one cell left
+        // move camera right!
+        player.x = player.x + gridUnit;
       }
     }
 
@@ -831,6 +866,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] = `Pl`; // where the peach used to be, now is the player
+        // move camera up!
+        player.y = player.y - gridUnit;
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
@@ -847,6 +884,8 @@ function keyPressed() {
           gridMap[currentPlayerIndex.playerRow - 1][
             currentPlayerIndex.playerCollumn
           ] = `Pl`; // where the peach used to be, now is the player
+          // move camera up!
+          player.y = player.y - gridUnit;
           if (player.inventory.length === 10) {
             // if the player inventory is already at length 10 when stepping over a pie
             alert("inventory is full, item not picked up");
@@ -879,7 +918,9 @@ function keyPressed() {
         ] = ` `; // where the player was will now be empty
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] = `Pl`; // and the player will now be one cell left
+        ] = `Pl`; // and the player will now be one cell up
+        // move camera up!
+        player.y = player.y - gridUnit;
       }
     }
 
@@ -910,6 +951,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] = `Pl`; // where the peach used to be, now is the player
+        // move camera down!
+        player.y = player.y + gridUnit;
         if (player.inventory.length === 10) {
           // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
@@ -926,6 +969,8 @@ function keyPressed() {
           gridMap[currentPlayerIndex.playerRow + 1][
             currentPlayerIndex.playerCollumn
           ] = `Pl`; // where the peach used to be, now is the player
+          // move camera down!
+          player.y = player.y + gridUnit;
           if (player.inventory.length === 10) {
             // if the player inventory is already at length 10 when stepping over a pie
             alert("inventory is full, item not picked up");
@@ -959,6 +1004,8 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] = `Pl`; // and the player will now be one cell left
+        // move camera down!
+        player.y = player.y + gridUnit;
       }
     }
   }
