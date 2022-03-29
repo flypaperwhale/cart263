@@ -712,7 +712,7 @@ function keyPressed() {
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
-        setTimeout(dropPeach, treeDropTime);
+        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else if (
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
@@ -799,7 +799,7 @@ function keyPressed() {
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
-        setTimeout(dropPeach, treeDropTime);
+        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else if (
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
@@ -911,7 +911,7 @@ function keyPressed() {
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
-        setTimeout(dropPeach, treeDropTime);
+        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -996,7 +996,7 @@ function keyPressed() {
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
         console.log(dropPeach, treeDropTime);
-        setTimeout(dropPeach, treeDropTime);
+        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -1069,7 +1069,8 @@ function keyPressed() {
                 if (npcPeachEvent === 5) {
                   // when npcPeachEvent reaches status 5
                   if (triggerOnce === 0) {
-                    dropPie();
+                    dropItem(`pie`);
+                    //dropPie();
                     triggerOnce = 1;
                   }
                   npcText = "You are the bomb! I love you!"; // npc now loves the player
@@ -1101,30 +1102,37 @@ function keyPressed() {
   }
 }
 
+function dropItem(item) {
+  if (item === `peach`) {
+    let fallenPeachIndex = random(peachFallAreas);
+    if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
+      // if peach tries to fall in a cell where the player is standing, select another cell and try again
+      fallenPeachIndex = random(peachFallAreas);
+      dropItem(`peach`); //dropPeach();
+    } else {
+      // drop the peach
+      gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
+    }
+  }
+  if (item === `pie`) {
+    let fallenPieIndex = random(pieFallAreas);
+    if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
+      // if peach tries to fall in a cell where the player is standing, select another cell and try again
+      fallenPieIndex = random(pieFallAreas);
+      dropItem(`pie`); //dropPie();
+    } else {
+      // drop the slice of pie
+      gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
+    }
+  }
+}
+
 function dropPeach() {
   // randomly select a place near the peach tree to drop a peach
-  let fallenPeachIndex = random(peachFallAreas);
-  if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
-    // if peach tries to fall in a cell where the player is standing, select another cell and try again
-    fallenPeachIndex = random(peachFallAreas);
-    dropPeach();
-  } else {
-    // drop the peach
-    gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
-  }
 }
 
 function dropPie() {
   // drop pie in 1 of 2 places, depending on where player is standing
-  let fallenPieIndex = random(pieFallAreas);
-  if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
-    // if peach tries to fall in a cell where the player is standing, select another cell and try again
-    fallenPieIndex = random(pieFallAreas);
-    dropPie();
-  } else {
-    // drop the slice of pie
-    gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
-  }
 }
 
 // mouse used for debugging
