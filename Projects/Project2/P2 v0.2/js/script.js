@@ -704,11 +704,7 @@ function keyPressed() {
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "peach",
-            itemQty: 1,
-            itemImageName: peachImage,
-          });
+          itemPickup(`peach`);
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
@@ -735,11 +731,7 @@ function keyPressed() {
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "slice of pie",
-            itemQty: 1,
-            itemImageName: sliceOPieImage,
-          });
+          itemPickup(`sliceOPie`);
         }
       } else {
         // and if the player steps into an empty cell
@@ -790,11 +782,7 @@ function keyPressed() {
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "peach",
-            itemQty: 1,
-            itemImageName: peachImage,
-          });
+          itemPickup(`peach`);
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
@@ -821,11 +809,7 @@ function keyPressed() {
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "slice of pie",
-            itemQty: 1,
-            itemImageName: sliceOPieImage,
-          });
+          itemPickup(`sliceOPie`);
         }
       } else {
         // and if the player steps into an empty cell
@@ -893,20 +877,12 @@ function keyPressed() {
           } else {
             // if there is still room in the inventory
             // pick up peach and add it to inventory
-            player.inventory.push({
-              itemName: "slice of pie",
-              itemQty: 1,
-              itemImageName: sliceOPieImage,
-            });
+            itemPickup(`sliceOPie`);
           }
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "peach",
-            itemQty: 1,
-            itemImageName: peachImage,
-          });
+          itemPickup(`peach`);
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
@@ -978,20 +954,12 @@ function keyPressed() {
           } else {
             // if there is still room in the inventory
             // pick up peach and add it to inventory
-            player.inventory.push({
-              itemName: "slice of pie",
-              itemQty: 1,
-              itemImageName: sliceOPieImage,
-            });
+            itemPickup(`sliceOPie`);
           }
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          player.inventory.push({
-            itemName: "peach",
-            itemQty: 1,
-            itemImageName: peachImage,
-          });
+          itemPickup(`peach`);
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
@@ -1099,6 +1067,24 @@ function keyPressed() {
         }
       }
     }
+  }
+}
+
+function itemPickup(item) {
+  if (item === `peach`) {
+    player.inventory.push({
+      itemName: "peach",
+      itemQty: 1,
+      itemImageName: peachImage,
+    });
+  }
+
+  if (item === `sliceOPie`) {
+    player.inventory.push({
+      itemName: "slice of pie",
+      itemQty: 1,
+      itemImageName: sliceOPieImage,
+    });
   }
 }
 
