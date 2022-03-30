@@ -244,19 +244,24 @@ function displayGrid() {
             // if item selected by player is the empty box
             //display nothing
           } else if (selectItem.itemName === "peach") {
-            drawSmolPeach(x, y);
+            drawSmolItem(`peach`, x, y);
+            //drawSmolPeach(x, y);
           } else if (selectItem.itemName === "slice of pie") {
-            drawSmolPie(x, y);
+            drawSmolItem(`pie`, x, y);
+
+            //drawSmolPie(x, y);
           }
         }
       }
       if (cell === `Pe`) {
         // Pe for Peach
-        drawPeach(x, y);
+        drawItem(`peach`, x, y);
+        //drawPeach(x, y);
       }
       if (cell === `Pi`) {
         // Pi for Pie
-        drawPie(x, y);
+        //drawPie(x, y);
+        drawItem(`pie`, x, y);
       }
       if (cell === `NPC`) {
         // NPC
@@ -474,37 +479,65 @@ function displayInventory() {
   }
 }
 
-function drawPeach(x, y) {
-  // draws peach png at row x, collumn y
+function drawItem(item, x, y) {
+  // draws item png at row x, collumn y
+  if (item === `peach`) {
+    currentItemIamge = peachImage;
+  }
+  if (item === `pie`) {
+    currentItemIamge = sliceOPieImage;
+  }
   push();
   imageMode(LEFT);
-  image(peachImage, x * gridUnit, y * gridUnit, 34, 35);
+  image(currentItemIamge, x * gridUnit, y * gridUnit, 34, 35);
   pop();
 }
 
-function drawSmolPeach(x, y) {
-  // draws small peach over player's head
+function drawSmolItem(item, x, y) {
+  // draws small item over player's head
+  if (item === `peach`) {
+    currentItemIamge = peachImage;
+  }
+  if (item === `pie`) {
+    currentItemIamge = sliceOPieImage;
+  }
   push();
   imageMode(CENTER);
   image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26);
   pop();
 }
 
-function drawPie(x, y) {
-  // draws pie png at row x, collumn y
-  push();
-  imageMode(LEFT);
-  image(sliceOPieImage, x * gridUnit, y * gridUnit, 34, 35);
-  pop();
-}
+// function drawPeach(x, y) {
+//   // draws peach png at row x, collumn y
+//   push();
+//   imageMode(LEFT);
+//   image(peachImage, x * gridUnit, y * gridUnit, 34, 35);
+//   pop();
+// }
 
-function drawSmolPie(x, y) {
-  // draws small pie over player's head
-  push();
-  imageMode(CENTER);
-  image(sliceOPieImage, x * gridUnit + 15, y * gridUnit, 25, 26);
-  pop();
-}
+// function drawSmolPeach(x, y) {
+//   // draws small peach over player's head
+//   push();
+//   imageMode(CENTER);
+//   image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26);
+//   pop();
+// }
+
+// function drawPie(x, y) {
+//   // draws pie png at row x, collumn y
+//   push();
+//   imageMode(LEFT);
+//   image(sliceOPieImage, x * gridUnit, y * gridUnit, 34, 35);
+//   pop();
+// }
+
+// function drawSmolPie(x, y) {
+//   // draws small pie over player's head
+//   push();
+//   imageMode(CENTER);
+//   image(sliceOPieImage, x * gridUnit + 15, y * gridUnit, 25, 26);
+//   pop();
+// }
 
 function drawCharacter(x, y, color) {
   // draws circle character at row x, collumn y on the grid, with a specified color
