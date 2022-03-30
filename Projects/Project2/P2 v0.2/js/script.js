@@ -239,20 +239,20 @@ function displayGrid() {
       if (cell === `Pl`) {
         // Pl for Player
         drawCharacter(x, y, `lime`);
-        if (selectItemHeldOut === true) {
-          if (selectItem.itemName === "empty") {
-            // if item selected by player is the empty box
-            //display nothing
-          } else if (selectItem.itemName === "peach") {
-            drawSmolItem(`peach`, x, y);
-            //drawSmolPeach(x, y);
-          } else if (selectItem.itemName === "slice of pie") {
-            drawSmolItem(`pie`, x, y);
-
-            //drawSmolPie(x, y);
-          }
+        // display selected item over player's avatar's head
+        //if (selectItemHeldOut === true) {
+        if (selectItem.itemName === "empty") {
+          // if item selected by player is the empty box
+          //display nothing
+        } else if (selectItem.itemName === "peach") {
+          drawSmolItem(`peach`, x, y);
+          //drawSmolPeach(x, y);
+        } else if (selectItem.itemName === "slice of pie") {
+          drawSmolItem(`pie`, x, y);
+          //drawSmolPie(x, y);
         }
       }
+      //  }
       if (cell === `Pe`) {
         // Pe for Peach
         drawItem(`peach`, x, y);
