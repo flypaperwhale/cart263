@@ -135,19 +135,28 @@ display the grid (this displays everything that is on the grid, npcs, items, and
 and display inventory, which displays the ui boxes where item pngs appear when items are picked up off the grid
 */
 function draw() {
-  //a camera is created automatically at the beginning
-
-  //.5 zoom is zooming out (50% of the normal size)
-  if (mouseIsPressed) camera.zoom = 0.65;
-  else camera.zoom = 1;
-
-  //set the camera position to the player position
-  camera.position.x = player.x;
-  camera.position.y = player.y;
-
+  cameraSetup();
   noStroke();
   // BACKGROUND //
   background(`skyblue`);
+  titleState();
+  simulationState();
+  //I can turn on and off the camera at any point to restore
+  //the normal drawing coordinates, the frame will be drawn at
+  //the absolute 0,0 (try to see what happens if you don't turn it off
+}
+
+function cameraSetup() {
+  //a camera is created automatically at the beginning
+  //.5 zoom is zooming out (50% of the normal size)
+  if (mouseIsPressed) camera.zoom = 0.65;
+  else camera.zoom = 1;
+  //set the camera position to the player position
+  camera.position.x = player.x;
+  camera.position.y = player.y;
+}
+
+function titleState() {
   if (state === "title") {
     playerPaused = true;
     push();
@@ -168,7 +177,9 @@ function draw() {
     text("click to start!", 250, 360);
     pop();
   }
+}
 
+function simulationState() {
   if (state === "simulation") {
     // draw grass
     push();
@@ -186,10 +197,6 @@ function draw() {
     displayGrid();
     displayInventory();
   }
-  //I can turn on and off the camera at any point to restore
-  //the normal drawing coordinates, the frame will be drawn at
-  //the absolute 0,0 (try to see what happens if you don't turn it off
-  camera.off();
 }
 
 function displayText() {
@@ -276,33 +283,35 @@ function displayGrid() {
 }
 
 function displayInventory() {
+  camera.off();
   // displays UI 10 inventory boxes at the bottom of canvas
   // long rectangle at the bottom of canvas
   push();
   fill(220, 200, 100); // beige
   rectMode(CENTER);
-  rect(player.x, player.y + 150, 400, 40);
+  rect(225, 350, 400, 40);
   // digits, 0 is always empty
   fill(0);
   textAlign(LEFT);
   text(
     "0          1          2          3          4          5          6          7          8          9",
-    player.x - 170,
-    player.y + 141
+    80,
+    391
   );
   // the 10 boxes
   noFill();
   stroke(0);
-  rect(player.x - 180, player.y + 150, 40, 40); // 0
-  rect(player.x - 140, player.y + 150, 40, 40); // 1
-  rect(player.x - 100, player.y + 150, 40, 40); // 2
-  rect(player.x - 60, player.y + 150, 40, 40); // 3
-  rect(player.x - 20, player.y + 150, 40, 40); // 4
-  rect(player.x + 20, player.y + 150, 40, 40); // 5
-  rect(player.x + 60, player.y + 150, 40, 40); // 6
-  rect(player.x + 100, player.y + 150, 40, 40); // 7
-  rect(player.x + 140, player.y + 150, 40, 40); // 8
-  rect(player.x + 180, player.y + 150, 40, 40); // 9
+  /// turn to for loop
+  rect(45, 350, 40, 40); // 0
+  rect(85, 350, 40, 40); // 1
+  rect(125, 350, 40, 40); // 2
+  rect(165, 350, 40, 40); // 3
+  rect(205, 350, 40, 40); // 4
+  rect(245, 350, 40, 40); // 5
+  rect(285, 350, 40, 40); // 6
+  rect(325, 350, 40, 40); // 7
+  rect(365, 350, 40, 40); // 8
+  rect(405, 350, 40, 40); // 9
   pop();
 
   // go through the player's inventory array and display each item in the array in the corresponding UI inventory box
@@ -318,15 +327,14 @@ function displayInventory() {
         rect(player.x - 180, player.y + 150, 40, 40); // 0
         pop();
       }
-
       // in box 0
       //display nothing
-    } else if (i === 1) {
+    } else {
       // in box 1
       invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
       push();
       imageMode(CENTER);
-      image(invItemToDisplay, player.x - 140, player.y + 150, 34, 35); // display image of item at index 1 in inventory
+      image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
       pop();
       // BOX
       if (currentDigitPressed === 1) {
@@ -335,147 +343,167 @@ function displayInventory() {
         stroke(0);
         strokeWeight(3.5);
         rectMode(CENTER);
-        rect(player.x - 140, player.y + 150, 40, 40); // 1
-        pop();
-      }
-    } else if (i === 2) {
-      // in box 2
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x - 100, player.y + 150, 34, 35); // display image of item at index 2 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 2) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x - 100, player.y + 150, 40, 40); // 2
-        pop();
-      }
-    } else if (i === 3) {
-      // in box 3
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x - 60, player.y + 150, 34, 35); // display image of item at index 3 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 3) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x - 60, player.y + 150, 40, 40); // 3
-        pop();
-      }
-    } else if (i === 4) {
-      // in box 4
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x - 20, player.y + 150, 34, 35); // display image of item at index 4 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 4) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x - 20, player.y + 150, 40, 40); // 4
-        pop();
-      }
-    } else if (i === 5) {
-      // in box 5
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x + 20, player.y + 150, 34, 35); // display image of item at index 5 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 5) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x + 20, player.y + 150, 40, 40); // 5
-        pop();
-      }
-    } else if (i === 6) {
-      // in box 6
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x + 60, player.y + 150, 34, 35); // display image of item at index 6 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 6) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x + 60, player.y + 150, 40, 40); // 6
-        pop();
-      }
-    } else if (i === 7) {
-      // in box 7
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x + 100, player.y + 150, 34, 35); // display image of item at index 7 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 7) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x + 100, player.y + 150, 40, 40); // 7
-        pop();
-      }
-    } else if (i === 8) {
-      // in box 8
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x + 140, player.y + 150, 34, 35); // display image of item at index 8 in inventory
-      pop();
-      // box
-      // if user pressed 0, current digit pressed is 0
-      if (currentDigitPressed === 8) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x + 140, player.y + 150, 40, 40); // 8
-        pop();
-      }
-    } else if (i === 9) {
-      // in box 9
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
-      push();
-      imageMode(CENTER);
-      image(invItemToDisplay, player.x + 180, player.y + 150, 34, 35); // display image of item at index 9 in inventory
-      pop();
-      // box
-      if (currentDigitPressed === 9) {
-        push();
-        noFill();
-        stroke(0);
-        strokeWeight(3.5);
-        rectMode(CENTER);
-        rect(player.x + 180, player.y + 150, 40, 40); // 9
+        rect(45 + i * 40, 350, 40, 40); // 1
         pop();
       }
     }
+
+    //   else if (i === 1) {
+    //     // in box 1
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x - 140, player.y + 150, 34, 35); // display image of item at index 1 in inventory
+    //     pop();
+    //     // BOX
+    //     if (currentDigitPressed === 1) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x - 140, player.y + 150, 40, 40); // 1
+    //       pop();
+    //     }
+    //   } else if (i === 2) {
+    //     // in box 2
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x - 100, player.y + 150, 34, 35); // display image of item at index 2 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 2) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x - 100, player.y + 150, 40, 40); // 2
+    //       pop();
+    //     }
+    //   } else if (i === 3) {
+    //     // in box 3
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x - 60, player.y + 150, 34, 35); // display image of item at index 3 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 3) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x - 60, player.y + 150, 40, 40); // 3
+    //       pop();
+    //     }
+    //   } else if (i === 4) {
+    //     // in box 4
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x - 20, player.y + 150, 34, 35); // display image of item at index 4 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 4) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x - 20, player.y + 150, 40, 40); // 4
+    //       pop();
+    //     }
+    //   } else if (i === 5) {
+    //     // in box 5
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x + 20, player.y + 150, 34, 35); // display image of item at index 5 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 5) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x + 20, player.y + 150, 40, 40); // 5
+    //       pop();
+    //     }
+    //   } else if (i === 6) {
+    //     // in box 6
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x + 60, player.y + 150, 34, 35); // display image of item at index 6 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 6) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x + 60, player.y + 150, 40, 40); // 6
+    //       pop();
+    //     }
+    //   } else if (i === 7) {
+    //     // in box 7
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x + 100, player.y + 150, 34, 35); // display image of item at index 7 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 7) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x + 100, player.y + 150, 40, 40); // 7
+    //       pop();
+    //     }
+    //   } else if (i === 8) {
+    //     // in box 8
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x + 140, player.y + 150, 34, 35); // display image of item at index 8 in inventory
+    //     pop();
+    //     // box
+    //     // if user pressed 0, current digit pressed is 0
+    //     if (currentDigitPressed === 8) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x + 140, player.y + 150, 40, 40); // 8
+    //       pop();
+    //     }
+    //   } else if (i === 9) {
+    //     // in box 9
+    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
+    //     push();
+    //     imageMode(CENTER);
+    //     image(invItemToDisplay, player.x + 180, player.y + 150, 34, 35); // display image of item at index 9 in inventory
+    //     pop();
+    //     // box
+    //     if (currentDigitPressed === 9) {
+    //       push();
+    //       noFill();
+    //       stroke(0);
+    //       strokeWeight(3.5);
+    //       rectMode(CENTER);
+    //       rect(player.x + 180, player.y + 150, 40, 40); // 9
+    //       pop();
+    //     }
+    //   }
+    // }
   }
 }
 
@@ -819,7 +847,7 @@ function keyPressed() {
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
-        console.log(dropPeach, treeDropTime);
+        //console.log(dropPeach, treeDropTime);
         setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else if (
         // if there is an item, or an empty space different things happen
@@ -919,7 +947,7 @@ function keyPressed() {
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
-        console.log(dropPeach, treeDropTime);
+        //console.log(dropPeach, treeDropTime);
         setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
@@ -996,7 +1024,7 @@ function keyPressed() {
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
-        console.log(dropPeach, treeDropTime);
+        //console.log(dropPeach, treeDropTime);
         setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
@@ -1146,13 +1174,13 @@ function dropItem(item) {
   }
 }
 
-function dropPeach() {
-  // randomly select a place near the peach tree to drop a peach
-}
+// function dropPeach() {
+//   // randomly select a place near the peach tree to drop a peach
+// }
 
-function dropPie() {
-  // drop pie in 1 of 2 places, depending on where player is standing
-}
+// function dropPie() {
+//   // drop pie in 1 of 2 places, depending on where player is standing
+// }
 
 // mouse used for debugging
 function mouseClicked() {
