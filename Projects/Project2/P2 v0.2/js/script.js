@@ -295,8 +295,8 @@ function displayInventory() {
   textAlign(LEFT);
   text(
     "0          1          2          3          4          5          6          7          8          9",
-    80,
-    391
+    55,
+    341
   );
   // the 10 boxes
   noFill();
@@ -337,7 +337,7 @@ function displayInventory() {
       image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
       pop();
       // BOX
-      if (currentDigitPressed === 1) {
+      if (currentDigitPressed === i) {
         push();
         noFill();
         stroke(0);
@@ -347,225 +347,36 @@ function displayInventory() {
         pop();
       }
     }
-
-    //   else if (i === 1) {
-    //     // in box 1
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x - 140, player.y + 150, 34, 35); // display image of item at index 1 in inventory
-    //     pop();
-    //     // BOX
-    //     if (currentDigitPressed === 1) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x - 140, player.y + 150, 40, 40); // 1
-    //       pop();
-    //     }
-    //   } else if (i === 2) {
-    //     // in box 2
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 2 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x - 100, player.y + 150, 34, 35); // display image of item at index 2 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 2) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x - 100, player.y + 150, 40, 40); // 2
-    //       pop();
-    //     }
-    //   } else if (i === 3) {
-    //     // in box 3
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 3 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x - 60, player.y + 150, 34, 35); // display image of item at index 3 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 3) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x - 60, player.y + 150, 40, 40); // 3
-    //       pop();
-    //     }
-    //   } else if (i === 4) {
-    //     // in box 4
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 4 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x - 20, player.y + 150, 34, 35); // display image of item at index 4 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 4) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x - 20, player.y + 150, 40, 40); // 4
-    //       pop();
-    //     }
-    //   } else if (i === 5) {
-    //     // in box 5
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 5 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x + 20, player.y + 150, 34, 35); // display image of item at index 5 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 5) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x + 20, player.y + 150, 40, 40); // 5
-    //       pop();
-    //     }
-    //   } else if (i === 6) {
-    //     // in box 6
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 6 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x + 60, player.y + 150, 34, 35); // display image of item at index 6 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 6) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x + 60, player.y + 150, 40, 40); // 6
-    //       pop();
-    //     }
-    //   } else if (i === 7) {
-    //     // in box 7
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 7 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x + 100, player.y + 150, 34, 35); // display image of item at index 7 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 7) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x + 100, player.y + 150, 40, 40); // 7
-    //       pop();
-    //     }
-    //   } else if (i === 8) {
-    //     // in box 8
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 8 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x + 140, player.y + 150, 34, 35); // display image of item at index 8 in inventory
-    //     pop();
-    //     // box
-    //     // if user pressed 0, current digit pressed is 0
-    //     if (currentDigitPressed === 8) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x + 140, player.y + 150, 40, 40); // 8
-    //       pop();
-    //     }
-    //   } else if (i === 9) {
-    //     // in box 9
-    //     invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 9 in inventory
-    //     push();
-    //     imageMode(CENTER);
-    //     image(invItemToDisplay, player.x + 180, player.y + 150, 34, 35); // display image of item at index 9 in inventory
-    //     pop();
-    //     // box
-    //     if (currentDigitPressed === 9) {
-    //       push();
-    //       noFill();
-    //       stroke(0);
-    //       strokeWeight(3.5);
-    //       rectMode(CENTER);
-    //       rect(player.x + 180, player.y + 150, 40, 40); // 9
-    //       pop();
-    //     }
-    //   }
-    // }
   }
 }
 
 function drawItem(item, x, y) {
   // draws item png at row x, collumn y
   if (item === `peach`) {
-    currentItemIamge = peachImage;
+    currentItemImage = peachImage;
   }
   if (item === `pie`) {
-    currentItemIamge = sliceOPieImage;
+    currentItemImage = sliceOPieImage;
   }
   push();
   imageMode(LEFT);
-  image(currentItemIamge, x * gridUnit, y * gridUnit, 34, 35);
+  image(currentItemImage, x * gridUnit, y * gridUnit, 34, 35);
   pop();
 }
 
 function drawSmolItem(item, x, y) {
   // draws small item over player's head
   if (item === `peach`) {
-    currentItemIamge = peachImage;
+    currentItemImage = peachImage;
   }
   if (item === `pie`) {
-    currentItemIamge = sliceOPieImage;
+    currentItemImage = sliceOPieImage;
   }
   push();
   imageMode(CENTER);
-  image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26);
+  image(currentItemImage, x * gridUnit + 15, y * gridUnit, 25, 26);
   pop();
 }
-
-// function drawPeach(x, y) {
-//   // draws peach png at row x, collumn y
-//   push();
-//   imageMode(LEFT);
-//   image(peachImage, x * gridUnit, y * gridUnit, 34, 35);
-//   pop();
-// }
-
-// function drawSmolPeach(x, y) {
-//   // draws small peach over player's head
-//   push();
-//   imageMode(CENTER);
-//   image(peachImage, x * gridUnit + 15, y * gridUnit, 25, 26);
-//   pop();
-// }
-
-// function drawPie(x, y) {
-//   // draws pie png at row x, collumn y
-//   push();
-//   imageMode(LEFT);
-//   image(sliceOPieImage, x * gridUnit, y * gridUnit, 34, 35);
-//   pop();
-// }
-
-// function drawSmolPie(x, y) {
-//   // draws small pie over player's head
-//   push();
-//   imageMode(CENTER);
-//   image(sliceOPieImage, x * gridUnit + 15, y * gridUnit, 25, 26);
-//   pop();
-// }
 
 function drawCharacter(x, y, color) {
   // draws circle character at row x, collumn y on the grid, with a specified color
