@@ -26,8 +26,9 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [10]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `], // [11]
   [``, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ``], // [12]
-  [(``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `)], // [13]
-  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [14]
+  [``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
+  [``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
+  [`S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`], // [15]
 ];
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 15;
@@ -158,23 +159,24 @@ function cameraSetup() {
 
 function titleState() {
   if (state === "title") {
+    camera.off();
     playerPaused = true;
     push();
     fill(50, 10, 100);
     textAlign(CENTER);
     textSize(54);
-    text("MISH MASH", 250, 200);
+    text("MISH MASH", 225, 150);
     textSize(20);
     text(
       `» use arrow keys to move
 » use spacebar to talk or give item
 » use digit keys to select item in inventory
 `,
-      250,
-      250
+      225,
+      200
     );
     fill("red");
-    text("click to start!", 250, 360);
+    text("click to start!", 225, 300);
     pop();
   }
 }
@@ -185,7 +187,7 @@ function simulationState() {
     push();
     fill(`green`);
     rectMode(CENTER);
-    rect(250, 432, width, height / 1.5);
+    rect(SCENE_W / 2, 432, SCENE_W, SCENE_H / 1.5);
     pop();
     // display the tree!
     push();
