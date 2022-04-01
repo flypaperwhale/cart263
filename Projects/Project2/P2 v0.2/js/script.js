@@ -187,11 +187,11 @@ function simulationState() {
   if (state === "simulation") {
     // draw grass
     push();
-    imageMode(CENTER);
-    image(map, SCENE_W / 2, SCENE_H / 2, SCENE_W, SCENE_H); // hard numbers
-    // fill(`green`);
-    // rectMode(CENTER);
-    // rect(SCENE_W / 2, 432, SCENE_W, SCENE_H / 1.5);
+    // imageMode(CENTER);
+    // image(map, SCENE_W / 2, SCENE_H / 2, SCENE_W, SCENE_H);
+    fill(`green`);
+    rectMode(CENTER);
+    rect(SCENE_W / 2, 432, SCENE_W, SCENE_H / 1.5);
     pop();
     // display the tree!
     push();
