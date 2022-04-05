@@ -23,7 +23,7 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [7]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [8]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [9]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [10]
+  [` `, ` `, ` `, ` `, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [10]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [11]
   [``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ``,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [12]
   [``, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
@@ -39,7 +39,7 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [23]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [24]
   [` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [25]
-  [` `, ` `, ` `, `S`, `S`, `S`, `NPC`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [26]
+  [` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [26]
   [` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [27]
   [` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [29]
@@ -59,14 +59,14 @@ let player = {
   x: 466.66,
   y: 433.33,
   // inventory array holds (item) objects with name, qty, and image name
-  inventory: [{ itemName: "empty", itemQty: 0, itemImageName: "no image" }],
+  inventory: [{ itemName: "empty", itemImageName: "no image" }],
 };
 
 let currentPlayerIndex; // indexed grid cell where Player currently is
 let playerPaused = false; // status whether player is paused or not, starts unpaused
 
 // initializes selectItem to empty
-let selectItem = { itemName: "empty", itemQty: 0, itemImageName: "no image" };
+let selectItem = { itemName: "empty", itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
 let selectItemHeldOut = true; // status whether select item is held out or not, starts item "empty" hidden
 
@@ -74,6 +74,7 @@ let invItemToDisplay; // item that will be displayed, in each box from the inven
 let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
 let npcText = `How fantastic to meet you!`; // npc's first utterance
+
 let npcPeachEvent = 0; // peach event npc state handler, starts at zero and increases with every gifted peach
 let npcPeachEventOngoing = true; // this maintains the peach event npc state, starts true
 let npcFriendEvent = 0; // friend event npc state handler
@@ -113,6 +114,9 @@ let state = "title"; // can be title, simulation
 
 let triggerOnce = 0;
 
+let data = undefined;
+
+let depMate;
 /**
 preload peach, peach tree, sliceOPie png files
 */
@@ -123,6 +127,9 @@ function preload() {
   sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
 
   map = loadImage(`assets/images/mishmashmap.png`);
+
+  data = loadJSON(`assets/data/game-objects.json`);
+
 }
 
 /**
@@ -145,6 +152,13 @@ function setup() {
   }
   // calculate the size of the gridUnit by dividing canvas height by gridMap array length i.e., number of rows
   gridUnit = SCENE_H / gridMap.length;
+
+  // CREATE npcs
+  depMate = new NPC(data.npcs.depanneur);
+
+  // CREATE items
+
+  // add labels?
 }
 
 /**
@@ -296,6 +310,11 @@ function displayGrid() {
         // NPC
         drawCharacter(x, y, `yellow`);
       }
+      if (cell === `DEP`){
+        // dep npc
+        drawCharacter(x, y, depMate.color);
+      }
+
       if (cell === `S`) {
         // S for Solid
         playerBarrier();
@@ -559,7 +578,7 @@ function keyPressed() {
         ] === `S` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === `NPC` ||
+        ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] === undefined
@@ -639,7 +658,7 @@ function keyPressed() {
         ] === `S` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
-        ] === `NPC` ||
+        ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] === undefined
@@ -716,7 +735,7 @@ function keyPressed() {
         ] === `S` ||
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] === `NPC` ||
+        ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] === undefined
@@ -793,7 +812,7 @@ function keyPressed() {
         ] === `S` ||
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
-        ] === `NPC` ||
+        ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] === undefined
@@ -884,15 +903,15 @@ function keyPressed() {
       for (let c = 0; c < columns; c++) {
         if (
           // for each cell adjacent to the NPC in which the player stands
-          (gridMap[r][c] === `NPC` && gridMap[r - 1][c - 1] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r - 1][c] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r - 1][c + 1] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r][c - 1] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r][c] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r][c + 1] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r + 1][c - 1] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r + 1][c] === `Pl`) ||
-          (gridMap[r][c] === `NPC` && gridMap[r + 1][c + 1] === `Pl`)
+          (gridMap[r][c] === `DEP` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r][c] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `DEP` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
           if (stopTextBubble === true) {
             // when space is pressed beside npc, text bubble is displayed
