@@ -14,5 +14,12 @@
       }
     }
   },
-  "items": {}
+  "items": {
+    "peach": {
+      "type": "edible",
+      "value range": "1 = common - 5 = precious",
+      "value": 1,
+      "imageName": "peachImage"
+    }
+  }
 }
