@@ -5,8 +5,10 @@
         "row": 11,
         "collumn": 7
       },
+      "cell label": "DEP",
+      "color": "yellow",
       "personality": "friendly",
-      "rel. to player range": "-3 to 3",
+      "/* rel. to player range": "-3 to 3 */",
       "relationship to player": 0,
       "relationship to items": {
         "range": "-1 to 1",
@@ -16,8 +18,9 @@
   },
   "items": {
     "peach": {
+      "cell label": "Pe",
       "type": "edible",
-      "value range": "1 = common - 5 = precious",
+      "/* value range": "1 = common - 5 = precious */",
       "value": 1,
       "imageName": "peachImage"
     }
