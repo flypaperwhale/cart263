@@ -73,7 +73,8 @@ let selectItemHeldOut = true; // status whether select item is held out or not, 
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
 let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
-let npcText = `How fantastic to meet you!`; // npc's first utterance
+//let npcText = `How fantastic to meet you!`; // npc's first utterance
+let npcText = undefined;
 
 let npcPeachEvent = 0; // peach event npc state handler, starts at zero and increases with every gifted peach
 let npcPeachEventOngoing = true; // this maintains the peach event npc state, starts true
@@ -913,11 +914,15 @@ function keyPressed() {
           (gridMap[r][c] === `DEP` && gridMap[r + 1][c] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
+          //if (npcFriendEvent === 0) {
+            npcText = depMate.currentText;
+          //}
           if (stopTextBubble === true) {
             // when space is pressed beside npc, text bubble is displayed
             playerPaused = true; // player is paused
             stopTextBubble = false; //  text bubble is not stopped anymore
             // npcFriendEvent gets launched after npcPeachEvent is completed
+
             if (npcFriendEvent === 1) {
               npcFriendEvent++;
               if (npcFriendEvent === 2) {

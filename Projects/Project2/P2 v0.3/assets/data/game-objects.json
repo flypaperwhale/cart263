@@ -14,7 +14,8 @@
       "relationship to items": {
         "range": "-1 to 1",
         "peach": 0
-      }
+      },
+      "initial dialog": "How fantastic to meet you!"
     }
   },
   "items": {
