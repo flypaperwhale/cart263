@@ -1,0 +1,18 @@
+{
+  "npcs": {
+    "depanneur": {
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "personality": "friendly",
+      "rel. to player range": "-3 to 3",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      }
+    }
+  },
+  "items": {}
+}
