@@ -210,10 +210,10 @@ function simulationState() {
     // rect(SCENE_W / 2, 432, SCENE_W, SCENE_H / 1.5);
     pop();
     // display the tree!
-    push();
-    imageMode(CENTER);
-    image(peachTreeImage, 355, 270, 200, 200); // hard numbers
-    pop();
+    // push();
+    // imageMode(CENTER);
+    // image(peachTreeImage, 355, 270, 200, 200); // hard numbers
+    // pop();
     // END OF BACKGROUND //
     displayText();
     displayGrid();
@@ -550,7 +550,7 @@ function keyPressed() {
         selectItem = player.inventory[9];
       }
     }
-  
+
     if (keyCode === LEFT_ARROW) {
       if (
         // when player tries to move left, if there is a barrier, an npc, or an unknown

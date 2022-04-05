@@ -1,6 +1,7 @@
 {
   "npcs": {
     "depanneur": {
+      "name": "depanneur",
       "gridMap index": {
         "row": 11,
         "collumn": 7
@@ -18,11 +19,30 @@
   },
   "items": {
     "peach": {
+      "name": "peach",
       "cell label": "Pe",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
-      "imageName": "peachImage"
+      "imageName": "peachImage",
+      "drop zone": [
+        { "row": 9, "collumn": 8 },
+        { "row": 9, "collumn": 9 },
+        { "row": 9, "collumn": 11 },
+        { "row": 9, "collumn": 12 },
+        { "row": 10, "collumn": 8 },
+        { "row": 10, "collumn": 9 },
+        { "row": 10, "collumn": 11 },
+        { "row": 10, "collumn": 12 },
+        { "row": 11, "collumn": 8 },
+        { "row": 11, "collumn": 9 },
+        { "row": 11, "collumn": 10 },
+        { "row": 11, "collumn": 11 },
+        { "row": 11, "collumn": 12 },
+        { "row": 12, "collumn": 9 },
+        { "row": 12, "collumn": 10 },
+        { "row": 12, "collumn": 11 }
+      ]
     }
   }
 }
