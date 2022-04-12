@@ -11,6 +11,7 @@ The friendly NPC changes its dialog, (and gives player a piece of pie).
 
 // the playable area of the canvas is seperated in a 15 by 15 cell grid
 // keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
+
 let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
@@ -46,6 +47,7 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
 ];
+
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
 let columns = 27;
@@ -144,7 +146,6 @@ function preload() {
   map = loadImage(`assets/images/mishmashmap.png`);
 
   data = loadJSON(`assets/data/game-objects.json`);
-
 }
 
 /**
@@ -189,7 +190,7 @@ function draw() {
   cameraSetup();
   noStroke();
   // BACKGROUND //
-  background(93,149,252);
+  background(93, 149, 252);
   titleState();
   simulationState();
   //I can turn on and off the camera at any point to restore
@@ -332,7 +333,7 @@ function displayGrid() {
         // NPC
         drawCharacter(x, y, `yellow`);
       }
-      if (cell === `DEP`){
+      if (cell === `DEP`) {
         // dep npc
         drawCharacter(x, y, depMate.color);
       }
@@ -342,16 +343,17 @@ function displayGrid() {
         playerBarrier();
       }
 
-      if (cell === `Bh`) { //@@@
+      if (cell === `Bh`) {
+        //@@@
         // Pe for Peach
         image(bushImage, x * gridUnit, y * gridUnit, 34, 35);
-      //  drawItem(bushImage, x, y);
+        //  drawItem(bushImage, x, y);
         //drawPeach(x, y);
       }
       if (cell === `St`) {
         // Pe for Peach
         image(stoneImage, x * gridUnit, y * gridUnit, 34, 35);
-      //  drawItem(stoneImage, x, y);
+        //  drawItem(stoneImage, x, y);
         //drawPeach(x, y);
       }
     }
@@ -407,7 +409,9 @@ function displayInventory() {
       //display nothing
     } else {
       // in box 1
-      invItemToDisplay = player.inventory[i].itemImageName; // find itemImageName in the item object at index 1 in inventory
+      if (player.inventory[i].imageName === `peachImage`) {
+        invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
+      }
       push();
       imageMode(CENTER);
       image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
@@ -430,14 +434,11 @@ function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
   //console.log(`in draw item ${itemName}`);
   if (itemName === `peach`) {
-  //  console.log("in draw peach 1");
-
+    //  console.log("in draw peach 1");
 
     currentItemImage = imageBank[peachItem.imageName];
 
-
-
-//    console.log(`draw peach 2 ${currentItemImage}`);
+    //    console.log(`draw peach 2 ${currentItemImage}`);
     //
   }
   if (itemName === `pie`) {
@@ -454,7 +455,7 @@ function drawItem(itemName, x, y) {
 function drawSmolItem(itemName, x, y) {
   // draws small item over player's head
   if (itemName === `peach`) {
-    currentItemImage = peachItem.imageName;
+    currentItemImage = imageBank[peachItem.imageName];
   }
   if (itemName === `pie`) {
     currentItemImage = sliceOPieImage;
@@ -640,14 +641,18 @@ function keyPressed() {
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === `Pe`// || any other item label... ###
+        ] === `Pe` // || any other item label... ###
       ) {
-        if (player.inventory.length === 10){
-// do nothing
-        } else{
-          let currentItemName = //## need to create ITEMS with class!
+        if (player.inventory.length === 10) {
+          alert("inventory is full, item not picked up");
+          // do nothing
+        } else {
+          // ##### //
+          //let currentItem = undefined
+          //let currentItemName = undefined //## need to create ITEMS with class!
           // if there is a peach
           // ## manage all picked up items here! ## //
+
           gridMap[currentPlayerIndex.playerRow][
             currentPlayerIndex.playerCollumn
           ] = ` `; // where the player used to be is now an empty space
@@ -657,47 +662,38 @@ function keyPressed() {
           // change player.x for camera
           // move camera left!
           player.x = player.x - gridUnit;
-          console.log(player.x);
-          if (player.inventory.length === 10) {
-            // if the player inventory is already at length 10 when stepping over a peach
-            alert("inventory is full, item not picked up");
-          } else {
-            // if there is still room in the inventory
-            // pick up peach and add it to inventory
-
-            itemPickup(`peach`);
-          }
-          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-          let treeDropTime = random(1500, 3500);
-          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+          //console.log(player.x);
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
+          itemPickup(`peach`);
         }
+        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+        let treeDropTime = random(1500, 3500);
+        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else if (
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
         ] === `Pi`
-      )   if (player.inventory.length === 10){
-// do nothing
-        } else {
-        // if there is a pie
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn
-        ] = ` `; // where the player used to be is now an empty space
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] = `Pl`; // where the peach used to be, now is the player
-        // move camera left!
-        player.x = player.x - gridUnit;
-        console.log(player.x);
+      )
         if (player.inventory.length === 10) {
-          // if the player inventory is already at length 10 when stepping over a pie
           alert("inventory is full, item not picked up");
+          // do nothing
         } else {
+          // if there is a pie
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn - 1
+          ] = `Pl`; // where the peach used to be, now is the player
+          // move camera left!
+          player.x = player.x - gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
           itemPickup(`sliceOPie`);
         }
-      } else {
+      else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -736,51 +732,48 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] === `Pe`
-      )   if (player.inventory.length === 10){
-// do nothing
-        } else {
-        // if there is a peach
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn
-        ] = ` `; // where the player used to be is now an empty space
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] = `Pl`; // where the peach used to be, now is the player
-        // move camera right!
-        player.x = player.x + gridUnit;
+      )
         if (player.inventory.length === 10) {
-          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
+          // do nothing
         } else {
+          // if there is a peach
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn + 1
+          ] = `Pl`; // where the peach used to be, now is the player
+          // move camera right!
+          player.x = player.x + gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
           itemPickup(`peach`);
+
+          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+          let treeDropTime = random(1500, 3500);
+          //console.log(dropPeach, treeDropTime);
+          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
         }
-        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-        let treeDropTime = random(1500, 3500);
-        //console.log(dropPeach, treeDropTime);
-        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-      } else if (
+      else if (
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
         ] === `Pi`
-      )   if (player.inventory.length === 10){
-// do nothing
-        } else {
-        // if there is a pie
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn
-        ] = ` `; // where the player used to be is now an empty space
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] = `Pl`; // where the peach used to be, now is the player
-        // move camera right!
-        player.x = player.x + gridUnit;
+      ) {
         if (player.inventory.length === 10) {
-          // if the player inventory is already at length 10 when stepping over a pie
           alert("inventory is full, item not picked up");
+          // do nothing
         } else {
+          // if there is a pie
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn + 1
+          ] = `Pl`; // where the peach used to be, now is the player
+          // move camera right!
+          player.x = player.x + gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
           itemPickup(`sliceOPie`);
@@ -808,9 +801,11 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn] === `Bh` ||
+          currentPlayerIndex.playerCollumn
+        ] === `Bh` ||
         gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn] === `St` ||
+          currentPlayerIndex.playerCollumn
+        ] === `St` ||
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] === undefined
@@ -821,29 +816,38 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
         ] === `Pe`
-      )   if (player.inventory.length === 10){
-// do nothing
-        } else {
-        // if there is a peach
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn
-        ] = ` `; // where the player used to be is now an empty space
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] = `Pl`; // where the peach used to be, now is the player
-        // move camera up!
-        player.y = player.y - gridUnit;
+      ) {
         if (player.inventory.length === 10) {
-          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
-        } else if (
-          // if there is an item, or an empty space different things happen
+          // do nothing
+        } else {
+          // if there is a peach
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
           gridMap[currentPlayerIndex.playerRow - 1][
             currentPlayerIndex.playerCollumn
-          ] === `Pi`
-        )   if (player.inventory.length === 10){
-  // do nothing
-          } else {
+          ] = `Pl`; // where the peach used to be, now is the player
+          // move camera up!
+          player.y = player.y - gridUnit;
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
+          itemPickup(`peach`);
+          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+          let treeDropTime = random(1500, 3500);
+          //console.log(dropPeach, treeDropTime);
+          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+        }
+      } else if (
+        // if there is an item, or an empty space different things happen
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn
+        ] === `Pi`
+      ) {
+        if (player.inventory.length === 10) {
+          alert("inventory is full, item not picked up");
+          // do nothing
+        } else {
           // if there is a pie
           gridMap[currentPlayerIndex.playerRow][
             currentPlayerIndex.playerCollumn
@@ -853,23 +857,11 @@ function keyPressed() {
           ] = `Pl`; // where the peach used to be, now is the player
           // move camera up!
           player.y = player.y - gridUnit;
-          if (player.inventory.length === 10) {
-            // if the player inventory is already at length 10 when stepping over a pie
-            alert("inventory is full, item not picked up");
-          } else {
-            // if there is still room in the inventory
-            // pick up peach and add it to inventory
-            itemPickup(`sliceOPie`);
-          }
-        } else {
+
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
+          itemPickup(`sliceOPie`);
         }
-        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-        let treeDropTime = random(1500, 3500);
-        //console.log(dropPeach, treeDropTime);
-        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -893,9 +885,11 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn] === `Bh` ||
+          currentPlayerIndex.playerCollumn
+        ] === `Bh` ||
         gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn] === `St` ||
+          currentPlayerIndex.playerCollumn
+        ] === `St` ||
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] === undefined
@@ -906,29 +900,38 @@ function keyPressed() {
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
         ] === `Pe`
-      )   if (player.inventory.length === 10){
-// do nothing
-        } else {
-        // if there is a peach
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn
-        ] = ` `; // where the player used to be is now an empty space
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] = `Pl`; // where the peach used to be, now is the player
-        // move camera down!
-        player.y = player.y + gridUnit;
+      ) {
         if (player.inventory.length === 10) {
-          // if the player inventory is already at length 10 when stepping over a peach
           alert("inventory is full, item not picked up");
-        } else if (
-          // if there is an item, or an empty space different things happen
+          // do nothing
+        } else {
+          // if there is a peach
+          gridMap[currentPlayerIndex.playerRow][
+            currentPlayerIndex.playerCollumn
+          ] = ` `; // where the player used to be is now an empty space
           gridMap[currentPlayerIndex.playerRow + 1][
             currentPlayerIndex.playerCollumn
-          ] === `Pi`
-        )   if (player.inventory.length === 10){
-  // do nothing
-          } else {
+          ] = `Pl`; // where the peach used to be, now is the player
+          // move camera down!
+          player.y = player.y + gridUnit;
+          // if there is still room in the inventory
+          // pick up peach and add it to inventory
+          itemPickup(`peach`);
+          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+          let treeDropTime = random(1500, 3500);
+          //console.log(dropPeach, treeDropTime);
+          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+        }
+      } else if (
+        // if there is an item, or an empty space different things happen
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn
+        ] === `Pi`
+      ) {
+        if (player.inventory.length === 10) {
+          alert("inventory is full, item not picked up");
+          // do nothing
+        } else {
           // if there is a pie
           gridMap[currentPlayerIndex.playerRow][
             currentPlayerIndex.playerCollumn
@@ -938,23 +941,11 @@ function keyPressed() {
           ] = `Pl`; // where the peach used to be, now is the player
           // move camera down!
           player.y = player.y + gridUnit;
-          if (player.inventory.length === 10) {
-            // if the player inventory is already at length 10 when stepping over a pie
-            alert("inventory is full, item not picked up");
-          } else {
-            // if there is still room in the inventory
-            // pick up peach and add it to inventory
-            itemPickup(`sliceOPie`);
-          }
-        } else {
+
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
+          itemPickup(`sliceOPie`);
         }
-        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-        let treeDropTime = random(1500, 3500);
-        //console.log(dropPeach, treeDropTime);
-        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -1001,7 +992,7 @@ function keyPressed() {
           (gridMap[r][c] === `DEP` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
           //if (npcFriendEvent === 0) {
-            npcText = depMate.currentText;
+          npcText = depMate.currentText;
           //}
           if (stopTextBubble === true) {
             // when space is pressed beside npc, text bubble is displayed
@@ -1066,11 +1057,13 @@ function keyPressed() {
 
 function itemPickup(item) {
   if (item === `peach`) {
-    player.inventory.push({
-      itemName: "peach",
-      itemQty: 1,
-      itemImageName: peachImage,
-    });
+    console.log("at least yea");
+    // player.inventory.push({
+    //   itemName: "peach",
+    //   itemQty: 1,
+    //   itemImageName: peachImage,
+    // });
+    player.inventory.push(peachItem);
   }
 
   if (item === `sliceOPie`) {
