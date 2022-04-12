@@ -24,7 +24,7 @@ let gridMap = [
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
-  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
+  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, `Pe`, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
   [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
@@ -94,6 +94,7 @@ let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
 
 // array of gridUnits where peaches can appear when one is picked up by player
+// SORT THIS OUT IN JSON x SCRIPT ###
 let peachFallAreas = [
   { row: 9, collumn: 8 },
   { row: 9, collumn: 9 },
@@ -138,7 +139,7 @@ function preload() {
 
   imageBank.peachImage = loadImage(`assets/images/peach.png`);
   //peachTreeImage = loadImage(`assets/images/peachtree.png`);
-  sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
+  imageBank.sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
@@ -176,6 +177,7 @@ function setup() {
 
   // CREATE items
   peachItem = new Item(data.items.peach);
+  pieItem = new Item(data.items.sliceOPie);
 
   // add labels?
 }
@@ -307,10 +309,10 @@ function displayGrid() {
         if (selectItem.itemName === "empty") {
           // if item selected by player is the empty box
           //display nothing
-        } else if (selectItem.itemName === "peach") {
+        } else if (selectItem.name === "peach") {
           drawSmolItem(`peach`, x, y);
           //drawSmolPeach(x, y);
-        } else if (selectItem.itemName === "slice of pie") {
+        } else if (selectItem.name === "slice of pie") {
           drawSmolItem(`pie`, x, y);
           //drawSmolPie(x, y);
         }
@@ -412,6 +414,9 @@ function displayInventory() {
       if (player.inventory[i].imageName === `peachImage`) {
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       }
+      else if (player.inventory[i].imageName === `sliceOPieImage`) {
+          invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
+        }
       push();
       imageMode(CENTER);
       image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
@@ -442,7 +447,7 @@ function drawItem(itemName, x, y) {
     //
   }
   if (itemName === `pie`) {
-    currentItemImage = sliceOPieImage;
+    currentItemImage = imageBank[pieItem.imageName];
   }
   push();
   imageMode(LEFT);
@@ -458,7 +463,7 @@ function drawSmolItem(itemName, x, y) {
     currentItemImage = imageBank[peachItem.imageName];
   }
   if (itemName === `pie`) {
-    currentItemImage = sliceOPieImage;
+    currentItemImage = imageBank[pieItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -1010,7 +1015,7 @@ function keyPressed() {
             }
             // if player item is out, player gives npc item
             // npc verifies what player is giving
-            if (selectItem.itemName === "peach" && selectItemHeldOut === true) {
+            if (selectItem.name === "peach" && selectItemHeldOut === true) {
               player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
               selectItem = player.inventory[0]; // select item is reset to 0
               currentDigitPressed = 0;
@@ -1067,11 +1072,7 @@ function itemPickup(item) {
   }
 
   if (item === `sliceOPie`) {
-    player.inventory.push({
-      itemName: "slice of pie",
-      itemQty: 1,
-      itemImageName: sliceOPieImage,
-    });
+    player.inventory.push(pieItem);
   }
 }
 
@@ -1111,11 +1112,11 @@ function dropItem(item) {
 // mouse used for debugging
 function mouseClicked() {
   // console.log(gridMap);
-  console.log(currentDigitPressed);
-  console.log(gridUnit);
-  console.log(npcPeachEvent);
+  //console.log(currentDigitPressed);
+  //console.log(gridUnit);
+  //console.log(npcPeachEvent);
   console.log(player.inventory);
-  console.log(selectItem.itemName);
+  console.log(selectItem.name);
   if (state === `title`) {
     state = "simulation";
     playerPaused = false;

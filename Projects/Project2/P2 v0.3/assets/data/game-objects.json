@@ -35,6 +35,15 @@
         { "row": 28, "collumn": 4 },
         { "row": 28, "collumn": 5 }
       ]
+    },
+    "sliceOPie": {
+      "name": "sliceOPie",
+      "cell label": "Pi",
+      "type": "edible",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 3,
+      "imageName": "sliceOPieImage",
+      "dropZone": []
     }
   }
 }
