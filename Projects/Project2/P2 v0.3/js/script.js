@@ -23,11 +23,11 @@ let gridMap = [
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
-  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
+  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
   [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
-  [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, `Pl`, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
+  [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [15]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [16]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Bh`, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [17]
@@ -56,8 +56,10 @@ let SCENE_W = 899.91;
 
 // create player object with inventory array inside
 let player = {
-  x: 466.66,
-  y: 433.33,
+  // x: 496.66,
+  // y: 433.33,
+  x: 380.66,
+  y: 340.33,
   // inventory array holds (item) objects with name, qty, and image name
   inventory: [{ itemName: "empty", itemImageName: "no image" }],
 };
@@ -82,6 +84,8 @@ let npcFriendEvent = 0; // friend event npc state handler
 let npcFriendEventOngoing = false; // this maintains the friend event npc state, is turned true once peach event is completed
 
 let currentDigitPressed = 0;
+
+let imageBank = {};
 
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
@@ -129,7 +133,8 @@ preload peach, peach tree, sliceOPie png files
 */
 function preload() {
   // image assets
-  peachImage = loadImage(`assets/images/peach.png`);
+
+  imageBank.peachImage = loadImage(`assets/images/peach.png`);
   //peachTreeImage = loadImage(`assets/images/peachtree.png`);
   sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
 
@@ -157,6 +162,8 @@ function setup() {
           playerRow: r,
           playerCollumn: c,
         };
+        // player.x = c * gridUnit;
+        // player.y = r * gridUnit;
       }
     }
   }
@@ -309,8 +316,8 @@ function displayGrid() {
       //  }
       if (cell === `Pe`) {
         // Pe for Peach
-        console.log(peachItem);
-        console.log(`in peach cell ${peachItem} + ${peachItem.name}`);
+        //console.log(peachItem);
+        //console.log(`in peach cell ${peachItem} + ${peachItem.name}`);
         drawItem(peachItem.name, x, y);
         //drawPeach(x, y);
       }
@@ -420,11 +427,16 @@ function displayInventory() {
 
 function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
-  console.log(`in draw item ${itemName}`);
+  //console.log(`in draw item ${itemName}`);
   if (itemName === `peach`) {
-    console.log("in draw peach 1");
-    currentItemImage = peachItem.imageName;
-    console.log(`draw peach 2 ${currentItemImage}`);
+  //  console.log("in draw peach 1");
+
+
+    currentItemImage = imageBank[peachItem.imageName];
+
+
+
+//    console.log(`draw peach 2 ${currentItemImage}`);
     //
   }
   if (itemName === `pie`) {
@@ -432,9 +444,9 @@ function drawItem(itemName, x, y) {
   }
   push();
   imageMode(LEFT);
-  console.log("aannnnddd");
+  //console.log("aannnnddd");
   image(currentItemImage, x * gridUnit, y * gridUnit, 34, 35);
-  console.log("nope");
+  //console.log("nope");
   pop();
 }
 
