@@ -26,23 +26,14 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
       "imageName": "peachImage",
-      "drop zone": [
-        { "row": 9, "collumn": 8 },
-        { "row": 9, "collumn": 9 },
-        { "row": 9, "collumn": 11 },
-        { "row": 9, "collumn": 12 },
-        { "row": 10, "collumn": 8 },
-        { "row": 10, "collumn": 9 },
-        { "row": 10, "collumn": 11 },
-        { "row": 10, "collumn": 12 },
-        { "row": 11, "collumn": 8 },
-        { "row": 11, "collumn": 9 },
-        { "row": 11, "collumn": 10 },
-        { "row": 11, "collumn": 11 },
-        { "row": 11, "collumn": 12 },
-        { "row": 12, "collumn": 9 },
-        { "row": 12, "collumn": 10 },
-        { "row": 12, "collumn": 11 }
+      "dropZone": [
+        { "row": 27, "collumn": 2 },
+        { "row": 27, "collumn": 4 },
+        { "row": 27, "collumn": 5 },
+        { "row": 28, "collumn": 2 },
+        { "row": 28, "collumn": 3 },
+        { "row": 28, "collumn": 4 },
+        { "row": 28, "collumn": 5 }
       ]
     }
   }

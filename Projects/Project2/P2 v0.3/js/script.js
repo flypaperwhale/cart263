@@ -15,24 +15,24 @@ let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [1]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [2]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `St`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [2]
   [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `], // [3]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `DEP`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
-  [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `S`, ` `], // [6]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `], // [8]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
+  [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
+  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
+  [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
-  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
-  [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
-  [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
+  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
+  [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
+  [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
   [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, `Pl`, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [15]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [16]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [17]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Bh`, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [17]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [18]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `DEP`, ` `, ` `, ` `, ` `, ` `, `DEP`, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [19]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`,`DEP`,` `, ` `, ` `, ` `, ` `,`DEP`, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [19]
   [` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [20]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [21]
   [` `, `S`, ` `, `S`, `S`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [22]
@@ -41,7 +41,7 @@ let gridMap = [
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [25]
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [26]
   [` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [27]
-  [` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
+  [` `, `S`, ` `, ` `, `S`, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [29]
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
@@ -85,6 +85,7 @@ let currentDigitPressed = 0;
 
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
+let bushImage, stoneImage;
 
 // array of gridUnits where peaches can appear when one is picked up by player
 let peachFallAreas = [
@@ -118,14 +119,22 @@ let triggerOnce = 0;
 let data = undefined;
 
 let depMate;
+
+let peachItem;
+
+let currentItemImage;
+
 /**
 preload peach, peach tree, sliceOPie png files
 */
 function preload() {
   // image assets
   peachImage = loadImage(`assets/images/peach.png`);
-  peachTreeImage = loadImage(`assets/images/peachtree.png`);
+  //peachTreeImage = loadImage(`assets/images/peachtree.png`);
   sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
+
+  bushImage = loadImage(`assets/images/bush.png`);
+  stoneImage = loadImage(`assets/images/boulder.png`);
 
   map = loadImage(`assets/images/mishmashmap.png`);
 
@@ -158,6 +167,7 @@ function setup() {
   depMate = new NPC(data.npcs.depanneur);
 
   // CREATE items
+  peachItem = new Item(data.items.peach);
 
   // add labels?
 }
@@ -299,9 +309,12 @@ function displayGrid() {
       //  }
       if (cell === `Pe`) {
         // Pe for Peach
-        drawItem(`peach`, x, y);
+        console.log(peachItem);
+        console.log(`in peach cell ${peachItem} + ${peachItem.name}`);
+        drawItem(peachItem.name, x, y);
         //drawPeach(x, y);
       }
+
       if (cell === `Pi`) {
         // Pi for Pie
         //drawPie(x, y);
@@ -319,6 +332,19 @@ function displayGrid() {
       if (cell === `S`) {
         // S for Solid
         playerBarrier();
+      }
+
+      if (cell === `Bh`) { //@@@
+        // Pe for Peach
+        image(bushImage, x * gridUnit, y * gridUnit, 34, 35);
+      //  drawItem(bushImage, x, y);
+        //drawPeach(x, y);
+      }
+      if (cell === `St`) {
+        // Pe for Peach
+        image(stoneImage, x * gridUnit, y * gridUnit, 34, 35);
+      //  drawItem(stoneImage, x, y);
+        //drawPeach(x, y);
       }
     }
   }
@@ -392,26 +418,32 @@ function displayInventory() {
   }
 }
 
-function drawItem(item, x, y) {
+function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
-  if (item === `peach`) {
-    currentItemImage = peachImage;
+  console.log(`in draw item ${itemName}`);
+  if (itemName === `peach`) {
+    console.log("in draw peach 1");
+    currentItemImage = peachItem.imageName;
+    console.log(`draw peach 2 ${currentItemImage}`);
+    //
   }
-  if (item === `pie`) {
+  if (itemName === `pie`) {
     currentItemImage = sliceOPieImage;
   }
   push();
   imageMode(LEFT);
+  console.log("aannnnddd");
   image(currentItemImage, x * gridUnit, y * gridUnit, 34, 35);
+  console.log("nope");
   pop();
 }
 
-function drawSmolItem(item, x, y) {
+function drawSmolItem(itemName, x, y) {
   // draws small item over player's head
-  if (item === `peach`) {
-    currentItemImage = peachImage;
+  if (itemName === `peach`) {
+    currentItemImage = peachItem.imageName;
   }
-  if (item === `pie`) {
+  if (itemName === `pie`) {
     currentItemImage = sliceOPieImage;
   }
   push();
@@ -582,16 +614,24 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === undefined
+        ] === undefined ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `St`
       ) {
         // do nothing
       } else if (
         // if there is an item, or an empty space different things happen
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === `Pe`
+        ] === `Pe`// || any other item label... ###
       ) {
+        let currentItemName = //## need to create ITEMS with class!
         // if there is a peach
+        // ## manage all picked up items here! ## //
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
         ] = ` `; // where the player used to be is now an empty space
@@ -608,6 +648,7 @@ function keyPressed() {
         } else {
           // if there is still room in the inventory
           // pick up peach and add it to inventory
+
           itemPickup(`peach`);
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
@@ -662,7 +703,13 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
-        ] === undefined
+        ] === undefined ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `St`
       ) {
         // do nothing
       } else if (
@@ -739,7 +786,13 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] === undefined
+        ] === undefined ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `St`
       ) {
         // do nothing
       } else if (
@@ -816,7 +869,13 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
-        ] === undefined
+        ] === undefined ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === `St`
       ) {
         // do nothing
       } else if (

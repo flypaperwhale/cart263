@@ -1,10 +1,11 @@
 class Item {
-  constructor(){
-    this.name = undefined;
-    this.cellLabel = undefined;
-    this.type = undefined;
-    this.value = undefined;
-    this.imageName = undefined;
-    this.dropZone = []; // used unless item is dropped by NPC
+  constructor(data) {
+    this.name = data.name;
+    this.cellLabel = data["cell label"];
+    this.type = data.type;
+    this.value = data.value;
+    this.imageName = data.imageName;
+    this.dropZone = data.dropZone; // used unless item is dropped by NPC
+    //### why doesn't this work?
   }
 }
