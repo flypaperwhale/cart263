@@ -189,7 +189,7 @@ function draw() {
   cameraSetup();
   noStroke();
   // BACKGROUND //
-  background(`skyblue`);
+  background(93,149,252);
   titleState();
   simulationState();
   //I can turn on and off the camera at any point to restore
