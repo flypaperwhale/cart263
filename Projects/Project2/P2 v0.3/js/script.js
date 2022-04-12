@@ -24,7 +24,7 @@ let gridMap = [
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
-  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, `Pe`, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
+  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
   [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
@@ -95,24 +95,24 @@ let bushImage, stoneImage;
 
 // array of gridUnits where peaches can appear when one is picked up by player
 // SORT THIS OUT IN JSON x SCRIPT ###
-let peachFallAreas = [
-  { row: 9, collumn: 8 },
-  { row: 9, collumn: 9 },
-  { row: 9, collumn: 11 },
-  { row: 9, collumn: 12 },
-  { row: 10, collumn: 8 },
-  { row: 10, collumn: 9 },
-  { row: 10, collumn: 11 },
-  { row: 10, collumn: 12 },
-  { row: 11, collumn: 8 },
-  { row: 11, collumn: 9 },
-  { row: 11, collumn: 10 },
-  { row: 11, collumn: 11 },
-  { row: 11, collumn: 12 },
-  { row: 12, collumn: 9 },
-  { row: 12, collumn: 10 },
-  { row: 12, collumn: 11 },
-];
+// let peachFallAreas = [
+//   { row: 9, collumn: 8 },
+//   { row: 9, collumn: 9 },
+//   { row: 9, collumn: 11 },
+//   { row: 9, collumn: 12 },
+//   { row: 10, collumn: 8 },
+//   { row: 10, collumn: 9 },
+//   { row: 10, collumn: 11 },
+//   { row: 10, collumn: 12 },
+//   { row: 11, collumn: 8 },
+//   { row: 11, collumn: 9 },
+//   { row: 11, collumn: 10 },
+//   { row: 11, collumn: 11 },
+//   { row: 11, collumn: 12 },
+//   { row: 12, collumn: 9 },
+//   { row: 12, collumn: 10 },
+//   { row: 12, collumn: 11 },
+// ];
 
 let pieFallAreas = [
   { row: 11, collumn: 1 },
@@ -1078,7 +1078,7 @@ function itemPickup(item) {
 
 function dropItem(item) {
   if (item === `peach`) {
-    let fallenPeachIndex = random(peachFallAreas);
+    let fallenPeachIndex = random(peachItem.dropZone);
     if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
       fallenPeachIndex = random(peachFallAreas);
@@ -1113,7 +1113,6 @@ function dropItem(item) {
 function mouseClicked() {
   // console.log(gridMap);
   //console.log(currentDigitPressed);
-  //console.log(gridUnit);
   //console.log(npcPeachEvent);
   console.log(player.inventory);
   console.log(selectItem.name);
