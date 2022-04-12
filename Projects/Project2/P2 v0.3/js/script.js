@@ -626,13 +626,13 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === undefined ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
         ] === `Bh` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn - 1
-        ] === `St`
+        ] === `St` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn - 1
+        ] === undefined
       ) {
         // do nothing
       } else if (
@@ -715,13 +715,13 @@ function keyPressed() {
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn + 1
-        ] === undefined ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
         ] === `Bh` ||
         gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `St`
+          currentPlayerIndex.playerCollumn + 1
+        ] === `St` ||
+        gridMap[currentPlayerIndex.playerRow][
+          currentPlayerIndex.playerCollumn + 1
+        ] === undefined
       ) {
         // do nothing
       } else if (
@@ -797,14 +797,12 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow - 1][
+          currentPlayerIndex.playerCollumn] === `St` ||
+        gridMap[currentPlayerIndex.playerRow - 1][
           currentPlayerIndex.playerCollumn
-        ] === undefined ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `St`
+        ] === undefined
       ) {
         // do nothing
       } else if (
@@ -880,14 +878,12 @@ function keyPressed() {
           currentPlayerIndex.playerCollumn
         ] === `DEP` ||
         gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn] === `Bh` ||
+        gridMap[currentPlayerIndex.playerRow + 1][
+          currentPlayerIndex.playerCollumn] === `St` ||
+        gridMap[currentPlayerIndex.playerRow + 1][
           currentPlayerIndex.playerCollumn
-        ] === undefined ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `St`
+        ] === undefined
       ) {
         // do nothing
       } else if (
