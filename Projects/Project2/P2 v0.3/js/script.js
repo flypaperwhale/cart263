@@ -670,7 +670,7 @@ function keyPressed() {
           //console.log(player.x);
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
+          itemPickup(`peach`); // ## generalize this with a variable ##
         }
         // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
         let treeDropTime = random(1500, 3500);
@@ -1077,6 +1077,7 @@ function itemPickup(item) {
 }
 
 function dropItem(item) {
+  //
   if (item === `peach`) {
     let fallenPeachIndex = random(peachItem.dropZone);
     if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
