@@ -22,7 +22,7 @@ let gridMap = [
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
   [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
+  [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
   [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
@@ -137,11 +137,13 @@ preload peach, peach tree, sliceOPie png files
 */
 function preload() {
   // image assets
-
   imageBank.peachImage = loadImage(`assets/images/peach.png`);
-  //peachTreeImage = loadImage(`assets/images/peachtree.png`);
   imageBank.sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
-  imageBank;
+  imageBank.diamondImage = loadImage(`assets/images/diamond.png`);
+  imageBank.emeraldImage = loadImage(`assets/images/emerald.png`);
+  imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
+  imageBank.fireworkImage = loadImage(`assets/images/fireworks.png`);
+  imageBank.coinImage = loadImage(`assets/images/coin.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
@@ -182,6 +184,13 @@ function setup() {
   // CREATE items
   peachItem = new Item(data.items.peach);
   pieItem = new Item(data.items.sliceOPie);
+  diamondItem = new Item(data.items.diamond);
+  emeraldItem = new Item(data.items.emerald);
+  petRockItem = new Item(data.items.petRock);
+
+// fireworkItem = new Item(data.items.)
+// coinItem = new Item(data.items.)
+
 
   // add labels?
 }
