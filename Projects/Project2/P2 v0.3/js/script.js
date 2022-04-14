@@ -311,7 +311,7 @@ function displayGrid() {
         } else if (selectItem.name === "peach") {
           drawSmolItem(`peach`, x, y);
           //drawSmolPeach(x, y);
-        } else if (selectItem.name === "slice of pie") {
+        } else if (selectItem.name === "pie") {
           drawSmolItem(`pie`, x, y);
           //drawSmolPie(x, y);
         }
@@ -328,7 +328,7 @@ function displayGrid() {
       if (cell === `Pi`) {
         // Pi for Pie
         //drawPie(x, y);
-        drawItem(`pie`, x, y);
+        drawItem(pieItem.name, x, y);
       }
       if (cell === `NPC`) {
         // NPC
@@ -398,6 +398,9 @@ function displayInventory() {
   stroke(0);
   /// turn to for loop
   rect(45, 350, 40, 40); // 0
+  textAlign(CENTER);
+  textSize(20);
+  text(`X`, 45, 358);
   rect(85, 350, 40, 40); // 1
   rect(125, 350, 40, 40); // 2
   rect(165, 350, 40, 40); // 3
@@ -638,9 +641,9 @@ function keyPressed() {
 
     if (keyCode === LEFT_ARROW) {
       nextCol = currentPlayerIndex.playerCollumn - 1;
-      console.log(nextCell);
+      //console.log(nextCell);
       nextCell = gridMap[nextRow][nextCol];
-      console.log(nextCell);
+      //console.log(nextCell);
       // if there is a solid element
       if (
         nextCell === `S` ||
@@ -677,7 +680,7 @@ function keyPressed() {
           pickItemUp();
         }
       } else {
-        console.log("hi");
+        //console.log("hi");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -694,9 +697,9 @@ function keyPressed() {
       nextRow = currentPlayerIndex.playerRow;
       nextCol = currentPlayerIndex.playerCollumn + 1;
 
-      console.log(nextCol);
+      //console.log(nextCol);
       nextCell = gridMap[nextRow][nextCol];
-      console.log(nextCell);
+    //  console.log(nextCell);
       // if there is a solid element
       if (
         nextCell === `S` ||
@@ -705,7 +708,7 @@ function keyPressed() {
         nextCell === `St` ||
         nextCell === undefined
       ) {
-        console.log("WHYYY");
+      //  console.log("WHYYY");
         solidBlock();
       }
       // else move player, and pick up item if there is
@@ -728,7 +731,7 @@ function keyPressed() {
           pickItemUp();
         }
       } else {
-        console.log("helloooooo");
+        //console.log("helloooooo");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -934,7 +937,7 @@ function keyPressed() {
 }
 
 function solidBlock() {
-  console.log("yessir");
+  //console.log("yessir");
   if (
     nextCell === `S` ||
     nextCell === `DEP` ||
@@ -942,7 +945,7 @@ function solidBlock() {
     nextCell === `St` ||
     nextCell === undefined
   ) {
-    console.log("nosir");
+    //console.log("nosir");
     // do nothing
   }
 }
@@ -961,7 +964,7 @@ function pickItemUp() {
 
 function itemPickup(item) {
   if (item === `peach`) {
-    console.log("at least yea");
+  //  console.log("at least yea");
     // player.inventory.push({
     //   itemName: "peach",
     //   itemQty: 1,
@@ -978,10 +981,11 @@ function itemPickup(item) {
 function dropItem(item) {
   //
   if (item === `peach`) {
+    console.log("this is no pie");
     let fallenPeachIndex = random(peachItem.dropZone);
     if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      fallenPeachIndex = random(peachFallAreas);
+      fallenPeachIndex = random(peachItem.dropZone);
       dropItem(`peach`); //dropPeach();
     } else {
       // drop the peach
@@ -989,10 +993,11 @@ function dropItem(item) {
     }
   }
   if (item === `pie`) {
-    let fallenPieIndex = random(pieFallAreas);
+    console.log("yes, this is a pie, not a peach");
+    let fallenPieIndex = random(idleMate.itemDropZone);
     if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      fallenPieIndex = random(pieFallAreas);
+      fallenPieIndex = random(idleMate.itemDropZone);
       dropItem(`pie`); //dropPie();
     } else {
       // drop the slice of pie
@@ -1011,7 +1016,8 @@ function dropItem(item) {
 
 // mouse used for debugging
 function mouseClicked() {
-  // console.log(gridMap);
+  console.log(pieItem.name);
+  console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
   //console.log(player.inventory);

@@ -58,8 +58,8 @@
         "peach": 0
       },
       "itemDropZone": [
-        { "row": 11, "collumn": 1 },
-        { "row": 12, "collumn": 2 }
+        { "row": 24, "collumn": 5 },
+        { "row": 24, "collumn": 6 }
       ],
       "initial dialog": "How fantastic to meet you!"
     },
@@ -200,7 +200,7 @@
       ]
     },
     "sliceOPie": {
-      "name": "sliceOPie",
+      "name": "pie",
       "cell label": "Pi",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
