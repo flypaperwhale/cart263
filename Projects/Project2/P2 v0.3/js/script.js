@@ -11,6 +11,7 @@ The friendly NPC changes its dialog, (and gives player a piece of pie).
 
 // the playable area of the canvas is seperated in a 15 by 15 cell grid
 // keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
+
 let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
@@ -20,8 +21,8 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
+  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
@@ -172,9 +173,8 @@ function setup() {
   emeraldItem = new Item(data.items.emerald);
   petRockItem = new Item(data.items.petRock);
 
-// fireworkItem = new Item(data.items.)
-// coinItem = new Item(data.items.)
-
+  // fireworkItem = new Item(data.items.)
+  // coinItem = new Item(data.items.)
 
   // add labels?
 }
@@ -330,6 +330,11 @@ function displayGrid() {
         //drawPie(x, y);
         drawItem(pieItem.name, x, y);
       }
+
+      if (cell === `Em`){
+      drawItem(emeraldItem.name, x, y);
+      }
+
       if (cell === `NPC`) {
         // NPC
         drawCharacter(x, y, `yellow`);
@@ -466,11 +471,13 @@ function drawItem(itemName, x, y) {
   if (itemName === `pie`) {
     currentItemImage = imageBank[pieItem.imageName];
   }
+  if (itemName === `emerald`){
+    currentItemImage = imageBank[emeraldItem.imageName];
+  }
+
   push();
   imageMode(LEFT);
-  //console.log("aannnnddd");
   image(currentItemImage, x * gridUnit, y * gridUnit, 34, 35);
-  //console.log("nope");
   pop();
 }
 
@@ -648,6 +655,10 @@ function keyPressed() {
       if (
         nextCell === `S` ||
         nextCell === `DEP` ||
+        nextCell === `BOT` ||
+        nextCell === `HIK` ||
+        nextCell === `PDL` ||
+        nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
         nextCell === undefined
@@ -699,16 +710,20 @@ function keyPressed() {
 
       //console.log(nextCol);
       nextCell = gridMap[nextRow][nextCol];
-    //  console.log(nextCell);
+      //  console.log(nextCell);
       // if there is a solid element
       if (
         nextCell === `S` ||
         nextCell === `DEP` ||
+        nextCell === `BOT` ||
+        nextCell === `HIK` ||
+        nextCell === `PDL` ||
+        nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
         nextCell === undefined
       ) {
-      //  console.log("WHYYY");
+        //  console.log("WHYYY");
         solidBlock();
       }
       // else move player, and pick up item if there is
@@ -754,6 +769,10 @@ function keyPressed() {
       if (
         nextCell === `S` ||
         nextCell === `DEP` ||
+        nextCell === `BOT` ||
+        nextCell === `HIK` ||
+        nextCell === `PDL` ||
+        nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
         nextCell === undefined
@@ -802,6 +821,10 @@ function keyPressed() {
       if (
         nextCell === `S` ||
         nextCell === `DEP` ||
+        nextCell === `BOT` ||
+        nextCell === `HIK` ||
+        nextCell === `PDL` ||
+        nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
         nextCell === undefined
@@ -866,11 +889,42 @@ function keyPressed() {
           (gridMap[r][c] === `DEP` && gridMap[r - 1][c] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r - 1][c + 1] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r][c - 1] === `Pl`) ||
-          (gridMap[r][c] === `DEP` && gridMap[r][c] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r][c + 1] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r + 1][c - 1] === `Pl`) ||
           (gridMap[r][c] === `DEP` && gridMap[r + 1][c] === `Pl`) ||
-          (gridMap[r][c] === `DEP` && gridMap[r + 1][c + 1] === `Pl`)
+          (gridMap[r][c] === `DEP` && gridMap[r + 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `BOT` && gridMap[r + 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `HIK` && gridMap[r + 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `PDL` && gridMap[r + 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r - 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r - 1][c] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r - 1][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r][c + 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r + 1][c - 1] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r + 1][c] === `Pl`) ||
+          (gridMap[r][c] === `IDL` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
           //if (npcFriendEvent === 0) {
           npcText = depMate.currentText;
@@ -964,7 +1018,7 @@ function pickItemUp() {
 
 function itemPickup(item) {
   if (item === `peach`) {
-  //  console.log("at least yea");
+    //  console.log("at least yea");
     // player.inventory.push({
     //   itemName: "peach",
     //   itemQty: 1,
@@ -981,7 +1035,7 @@ function itemPickup(item) {
 function dropItem(item) {
   //
   if (item === `peach`) {
-    console.log("this is no pie");
+    //console.log("this is no pie");
     let fallenPeachIndex = random(peachItem.dropZone);
     if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
@@ -993,7 +1047,7 @@ function dropItem(item) {
     }
   }
   if (item === `pie`) {
-    console.log("yes, this is a pie, not a peach");
+    //console.log("yes, this is a pie, not a peach");
     let fallenPieIndex = random(idleMate.itemDropZone);
     if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
