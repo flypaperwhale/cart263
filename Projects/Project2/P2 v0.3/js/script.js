@@ -502,7 +502,7 @@ function drawSmolItem(itemName, x, y) {
   }
   push();
   imageMode(CENTER);
-  image(currentItemImage, x * gridUnit +17, y * gridUnit, 25, 26);
+  image(currentItemImage, x * gridUnit + 17, y * gridUnit, 25, 26);
   pop();
 }
 
@@ -1020,13 +1020,16 @@ function pickItemUp() {
     itemPickup(`peach`); // ## generalize this with a variable ##
     // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
     let treeDropTime = random(1500, 3500);
-    setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+    setTimeout(dropItem.bind(this, `peach`), treeDropTime); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
+    // but if peach is dropped by npc do not redrop ###
   }
   if (nextCell === `Pi`) {
     itemPickup(`sliceOPie`);
   }
   if (nextCell === `Em`){
     itemPickup(`emerald`);
+    let rockDropTime = random(5000,15000); // extend timing!! ##
+    setTimeout(dropItem.bind(this, `emerald`), rockDropTime);
   }
 }
 
@@ -1066,6 +1069,18 @@ function dropItem(item) {
     } else {
       // drop the slice of pie
       gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
+    }
+  }
+  if (item === `emerald`) { // HAVE ALL river stones here##
+    //console.log("this is no pie");
+    let fallenEmeraldIndex = random(emeraldItem.dropZone);
+    if (gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`) {
+      // if peach tries to fall in a cell where the player is standing, select another cell and try again
+      fallenEmeraldIndex = random(emeraldItem.dropZone);
+      dropItem(`emerald`); //dropPeach(); ### HAVE random stones!
+    } else {
+      // drop the peach
+      gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
     }
   }
 }
