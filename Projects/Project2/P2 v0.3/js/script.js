@@ -302,7 +302,7 @@ function displayGrid() {
       // check each cell for a key
       if (cell === `Pl`) {
         // Pl for Player
-        drawCharacter(x, y, `lime`);
+        drawCharacter(x, y, `chartreuse`);
         // display selected item over player's avatar's head
         //if (selectItemHeldOut === true) {
         if (selectItem.itemName === "empty") {

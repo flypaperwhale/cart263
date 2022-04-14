@@ -28,7 +28,7 @@
         "collumn": 7
       },
       "cell label": "BOT",
-      "color": "cornflowerblue",
+      "color": "darkslategray",
       "personality": "busy",
       "/* rel. to player range": "-3 to 3 */",
       "relationship to player": 0,
@@ -70,7 +70,7 @@
         "collumn": 7
       },
       "cell label": "PDL",
-      "color": "darkorange",
+      "color": "brown",
       "personality": "mysterious",
       "/* rel. to player range": "-3 to 3 */",
       "relationship to player": 0,
@@ -91,7 +91,7 @@
         "collumn": 7
       },
       "cell label": "HIK",
-      "color": "slateblue",
+      "color": "lightslategrey",
       "personality": "friendly",
       "/* rel. to player range": "-3 to 3 */",
       "relationship to player": 0,
