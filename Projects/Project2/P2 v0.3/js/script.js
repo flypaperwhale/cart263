@@ -315,6 +315,10 @@ function displayGrid() {
           drawSmolItem(`pie`, x, y);
           //drawSmolPie(x, y);
         }
+        else if (selectItem.name === "emerald") {
+          drawSmolItem(`emerald`, x, y);
+          //drawSmolPie(x, y);
+        }
       }
       //  }
       if (cell === `Pe`) {
@@ -439,6 +443,10 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `sliceOPieImage`) {
         invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       }
+      else if (player.inventory[i].imageName === `emeraldImage`){
+        invItemToDisplay = imageBank[emeraldItem.imageName];
+      }
+
       push();
       imageMode(CENTER);
       image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
@@ -489,9 +497,12 @@ function drawSmolItem(itemName, x, y) {
   if (itemName === `pie`) {
     currentItemImage = imageBank[pieItem.imageName]; // ### wont show up??
   }
+  if (itemName === `emerald`) {
+    currentItemImage = imageBank[emeraldItem.imageName]; // ### wont show up??
+  }
   push();
   imageMode(CENTER);
-  image(currentItemImage, x * gridUnit + 15, y * gridUnit, 25, 26);
+  image(currentItemImage, x * gridUnit +17, y * gridUnit, 25, 26);
   pop();
 }
 
@@ -666,7 +677,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -727,7 +738,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -780,7 +791,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -832,7 +843,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -1014,21 +1025,20 @@ function pickItemUp() {
   if (nextCell === `Pi`) {
     itemPickup(`sliceOPie`);
   }
+  if (nextCell === `Em`){
+    itemPickup(`emerald`);
+  }
 }
 
 function itemPickup(item) {
   if (item === `peach`) {
-    //  console.log("at least yea");
-    // player.inventory.push({
-    //   itemName: "peach",
-    //   itemQty: 1,
-    //   itemImageName: peachImage,
-    // });
     player.inventory.push(peachItem);
   }
-
   if (item === `sliceOPie`) {
     player.inventory.push(pieItem);
+  }
+  if (item === `emerald`){
+    player.inventory.push(emeraldItem);
   }
 }
 
@@ -1071,10 +1081,10 @@ function dropItem(item) {
 // mouse used for debugging
 function mouseClicked() {
   console.log(pieItem.name);
-  console.log(gridMap);
+  //console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
-  //console.log(player.inventory);
+  console.log(player.inventory);
   //console.log(selectItem.name);
   console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
