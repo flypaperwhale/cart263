@@ -11,7 +11,6 @@ The friendly NPC changes its dialog, (and gives player a piece of pie).
 
 // the playable area of the canvas is seperated in a 15 by 15 cell grid
 // keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
-
 let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
@@ -53,6 +52,8 @@ let rows = 32;
 let columns = 27;
 let gridUnit;
 
+let nextCol, nextRow;
+
 let SCENE_H = 1066.56;
 let SCENE_W = 899.91;
 
@@ -92,6 +93,7 @@ let imageBank = {};
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
+let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage;
 
 // array of gridUnits where peaches can appear when one is picked up by player
 // SORT THIS OUT IN JSON x SCRIPT ###
@@ -140,6 +142,7 @@ function preload() {
   imageBank.peachImage = loadImage(`assets/images/peach.png`);
   //peachTreeImage = loadImage(`assets/images/peachtree.png`);
   imageBank.sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
+  imageBank;
 
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
@@ -293,11 +296,11 @@ function displayGrid() {
       // collumns
 
       //  /* Comment out if you want to see the grid //
-      // push();
-      // noFill();
-      // stroke(0);
-      // rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
-      // pop();
+      push();
+      noFill();
+      stroke(0);
+      rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
+      pop();
 
       let cell = gridMap[y][x]; // cell = index
       // check each cell for a key
@@ -413,10 +416,9 @@ function displayInventory() {
       // in box 1
       if (player.inventory[i].imageName === `peachImage`) {
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
+      } else if (player.inventory[i].imageName === `sliceOPieImage`) {
+        invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       }
-      else if (player.inventory[i].imageName === `sliceOPieImage`) {
-          invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
-        }
       push();
       imageMode(CENTER);
       image(invItemToDisplay, 45 + i * 40, 350, 34, 35); // display image of item at index 1 in inventory
@@ -623,31 +625,19 @@ function keyPressed() {
     }
 
     if (keyCode === LEFT_ARROW) {
+      nextRow = currentPlayerIndex.playerRow;
+      nextCol = currentPlayerIndex.playerCollumn - 1;
+      nextCell = gridMap[nextRow][nextCol];
+
       if (
-        // when player tries to move left, if there is a barrier, an npc, or an unknown
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `S` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `DEP` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `St` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === undefined
+        nextCell === `S` ||
+        nextCell === `DEP` ||
+        nextCell === `Bh` ||
+        nextCell === `St` ||
+        nextCell === undefined
       ) {
         // do nothing
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `Pe` // || any other item label... ###
-      ) {
+      } else if (nextCell === `Pe` || nextCell === `Pi`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -657,7 +647,6 @@ function keyPressed() {
           //let currentItemName = undefined //## need to create ITEMS with class!
           // if there is a peach
           // ## manage all picked up items here! ## //
-
           gridMap[currentPlayerIndex.playerRow][
             currentPlayerIndex.playerCollumn
           ] = ` `; // where the player used to be is now an empty space
@@ -670,34 +659,17 @@ function keyPressed() {
           //console.log(player.x);
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`); // ## generalize this with a variable ##
+          if (nextCell === `Pe`) {
+            itemPickup(`peach`); // ## generalize this with a variable ##
+            // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+            let treeDropTime = random(1500, 3500);
+            setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+          }
+          if (nextCell === `Pi`) {
+            itemPickup(`sliceOPie`);
+          }
         }
-        // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-        let treeDropTime = random(1500, 3500);
-        setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn - 1
-        ] === `Pi`
-      )
-        if (player.inventory.length === 10) {
-          alert("inventory is full, item not picked up");
-          // do nothing
-        } else {
-          // if there is a pie
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn
-          ] = ` `; // where the player used to be is now an empty space
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn - 1
-          ] = `Pl`; // where the peach used to be, now is the player
-          // move camera left!
-          player.x = player.x - gridUnit;
-          // if there is still room in the inventory
-          // pick up peach and add it to inventory
-          itemPickup(`sliceOPie`);
-        }
+      }
       else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -708,11 +680,14 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera left!
         player.x = player.x - gridUnit;
-        console.log(player.x);
       }
     }
 
     if (keyCode === RIGHT_ARROW) {
+      nextRow = currentPlayerIndex.playerRow;
+      nextCol = currentPlayerIndex.playerCollum + 1;
+      nextCell = gridMap[nextRow][nextCol];
+
       if (
         // when player tries to move right, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow][
@@ -797,6 +772,10 @@ function keyPressed() {
     }
 
     if (keyCode === UP_ARROW) {
+      nextCol = currentPlayerIndex.playerCollum;
+      nextRow = currentPlayerIndex.playerRow - 1;
+      nextCell = gridMap[nextRow][nextCol];
+
       if (
         // when player tries to move up, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow - 1][
@@ -881,6 +860,10 @@ function keyPressed() {
     }
 
     if (keyCode === DOWN_ARROW) {
+      nextCol = currentPlayerIndex.playerCollum;
+      nextRow = currentPlayerIndex.playerRow + 1;
+      nextCell = gridMap[nextRow][nextCol];
+
       if (
         // when player tries to move down, if there is a barrier, an npc, or an unknown
         gridMap[currentPlayerIndex.playerRow + 1][

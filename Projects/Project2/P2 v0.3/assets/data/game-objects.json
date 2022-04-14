@@ -22,7 +22,7 @@
     "peach": {
       "name": "peach",
       "cell label": "Pe",
-      "type": "edible",
+      "type": "edible fruit",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
       "imageName": "peachImage",
@@ -40,6 +40,75 @@
         { "row": 27, "collumn": 6 },
         { "row": 26, "collumn": 2 },
         { "row": 26, "collumn": 6 }
+      ]
+    },
+    "petRock": {
+      "name": "petRock",
+      "cell label": "Pr",
+      "type": "stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 1,
+      "imageName": "petRockImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
+      ]
+    },
+    "diamond": {
+      "name": "diamond",
+      "cell label": "Di",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 5,
+      "imageName": "diamondImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
+      ]
+    },
+    "emerald": {
+      "name": "emerald",
+      "cell label": "Em",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 4,
+      "imageName": "emeraldImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
       ]
     },
     "sliceOPie": {
