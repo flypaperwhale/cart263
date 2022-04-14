@@ -46,13 +46,12 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
 ];
-
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
 let columns = 27;
 let gridUnit;
 
-let nextCol, nextRow;
+let nextCol, nextRow, nextCell;
 
 let SCENE_H = 1066.56;
 let SCENE_W = 899.91;
@@ -167,6 +166,8 @@ function setup() {
           playerRow: r,
           playerCollumn: c,
         };
+        nextCol = currentPlayerIndex.playerCollum;
+        nextRow = currentPlayerIndex.playerRow;
         // player.x = c * gridUnit;
         // player.y = r * gridUnit;
       }
@@ -192,6 +193,8 @@ display the grid (this displays everything that is on the grid, npcs, items, and
 and display inventory, which displays the ui boxes where item pngs appear when items are picked up off the grid
 */
 function draw() {
+  nextRow = currentPlayerIndex.playerRow;
+  nextCol = currentPlayerIndex.playerCollum;
   cameraSetup();
   noStroke();
   // BACKGROUND //
@@ -625,10 +628,11 @@ function keyPressed() {
     }
 
     if (keyCode === LEFT_ARROW) {
-      nextRow = currentPlayerIndex.playerRow;
       nextCol = currentPlayerIndex.playerCollumn - 1;
+      console.log(nextCell);
       nextCell = gridMap[nextRow][nextCol];
-
+      console.log(nextCell);
+      // if there is a solid element
       if (
         nextCell === `S` ||
         nextCell === `DEP` ||
@@ -636,8 +640,10 @@ function keyPressed() {
         nextCell === `St` ||
         nextCell === undefined
       ) {
-        // do nothing
-      } else if (nextCell === `Pe` || nextCell === `Pi`) {
+        solidBlock();
+      }
+      // else move player, and pick up item if there is
+      else if (nextCell === `Pe` || nextCell === `Pi`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -659,18 +665,10 @@ function keyPressed() {
           //console.log(player.x);
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          if (nextCell === `Pe`) {
-            itemPickup(`peach`); // ## generalize this with a variable ##
-            // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-            let treeDropTime = random(1500, 3500);
-            setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-          }
-          if (nextCell === `Pi`) {
-            itemPickup(`sliceOPie`);
-          }
+          pickItemUp();
         }
-      }
-      else {
+      } else {
+        console.log("hi");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -685,34 +683,24 @@ function keyPressed() {
 
     if (keyCode === RIGHT_ARROW) {
       nextRow = currentPlayerIndex.playerRow;
-      nextCol = currentPlayerIndex.playerCollum + 1;
-      nextCell = gridMap[nextRow][nextCol];
+      nextCol = currentPlayerIndex.playerCollumn + 1;
 
+      console.log(nextCol);
+      nextCell = gridMap[nextRow][nextCol];
+      console.log(nextCell);
+      // if there is a solid element
       if (
-        // when player tries to move right, if there is a barrier, an npc, or an unknown
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `S` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `DEP` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `St` ||
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === undefined
+        nextCell === `S` ||
+        nextCell === `DEP` ||
+        nextCell === `Bh` ||
+        nextCell === `St` ||
+        nextCell === undefined
       ) {
-        // do nothing
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `Pe`
-      )
+        console.log("WHYYY");
+        solidBlock();
+      }
+      // else move player, and pick up item if there is
+      else if (nextCell === `Pe` || nextCell === `Pi`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -728,37 +716,10 @@ function keyPressed() {
           player.x = player.x + gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
-
-          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-          let treeDropTime = random(1500, 3500);
-          //console.log(dropPeach, treeDropTime);
-          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-        }
-      else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow][
-          currentPlayerIndex.playerCollumn + 1
-        ] === `Pi`
-      ) {
-        if (player.inventory.length === 10) {
-          alert("inventory is full, item not picked up");
-          // do nothing
-        } else {
-          // if there is a pie
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn
-          ] = ` `; // where the player used to be is now an empty space
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn + 1
-          ] = `Pl`; // where the peach used to be, now is the player
-          // move camera right!
-          player.x = player.x + gridUnit;
-          // if there is still room in the inventory
-          // pick up peach and add it to inventory
-          itemPickup(`sliceOPie`);
+          pickItemUp();
         }
       } else {
+        console.log("helloooooo");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -772,35 +733,23 @@ function keyPressed() {
     }
 
     if (keyCode === UP_ARROW) {
-      nextCol = currentPlayerIndex.playerCollum;
+      nextRow = currentPlayerIndex.playerRow;
+      nextCol = currentPlayerIndex.playerCollumn;
       nextRow = currentPlayerIndex.playerRow - 1;
       nextCell = gridMap[nextRow][nextCol];
 
+      // if there is a solid element
       if (
-        // when player tries to move up, if there is a barrier, an npc, or an unknown
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `S` ||
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `DEP` ||
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `St` ||
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === undefined
+        nextCell === `S` ||
+        nextCell === `DEP` ||
+        nextCell === `Bh` ||
+        nextCell === `St` ||
+        nextCell === undefined
       ) {
-        // do nothing
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Pe`
-      ) {
+        solidBlock();
+      }
+      // else move player, and pick up item if there is
+      else if (nextCell === `Pe` || nextCell === `Pi`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -816,35 +765,7 @@ function keyPressed() {
           player.y = player.y - gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
-          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-          let treeDropTime = random(1500, 3500);
-          //console.log(dropPeach, treeDropTime);
-          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-        }
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow - 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Pi`
-      ) {
-        if (player.inventory.length === 10) {
-          alert("inventory is full, item not picked up");
-          // do nothing
-        } else {
-          // if there is a pie
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn
-          ] = ` `; // where the player used to be is now an empty space
-          gridMap[currentPlayerIndex.playerRow - 1][
-            currentPlayerIndex.playerCollumn
-          ] = `Pl`; // where the peach used to be, now is the player
-          // move camera up!
-          player.y = player.y - gridUnit;
-
-          // if there is still room in the inventory
-          // pick up peach and add it to inventory
-          itemPickup(`sliceOPie`);
+          pickItemUp();
         }
       } else {
         // and if the player steps into an empty cell
@@ -860,35 +781,23 @@ function keyPressed() {
     }
 
     if (keyCode === DOWN_ARROW) {
-      nextCol = currentPlayerIndex.playerCollum;
+      nextRow = currentPlayerIndex.playerRow;
+      nextCol = currentPlayerIndex.playerCollumn;
       nextRow = currentPlayerIndex.playerRow + 1;
       nextCell = gridMap[nextRow][nextCol];
 
+      // if there is a solid element
       if (
-        // when player tries to move down, if there is a barrier, an npc, or an unknown
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `S` ||
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `DEP` ||
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Bh` ||
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `St` ||
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === undefined
+        nextCell === `S` ||
+        nextCell === `DEP` ||
+        nextCell === `Bh` ||
+        nextCell === `St` ||
+        nextCell === undefined
       ) {
-        // do nothing
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Pe`
-      ) {
+        solidBlock();
+      }
+      // else move player, and pick up item if there is
+      else if (nextCell === `Pe` || nextCell === `Pi`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -904,35 +813,7 @@ function keyPressed() {
           player.y = player.y + gridUnit;
           // if there is still room in the inventory
           // pick up peach and add it to inventory
-          itemPickup(`peach`);
-          // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
-          let treeDropTime = random(1500, 3500);
-          //console.log(dropPeach, treeDropTime);
-          setTimeout(dropItem.bind(this, `peach`), treeDropTime);
-        }
-      } else if (
-        // if there is an item, or an empty space different things happen
-        gridMap[currentPlayerIndex.playerRow + 1][
-          currentPlayerIndex.playerCollumn
-        ] === `Pi`
-      ) {
-        if (player.inventory.length === 10) {
-          alert("inventory is full, item not picked up");
-          // do nothing
-        } else {
-          // if there is a pie
-          gridMap[currentPlayerIndex.playerRow][
-            currentPlayerIndex.playerCollumn
-          ] = ` `; // where the player used to be is now an empty space
-          gridMap[currentPlayerIndex.playerRow + 1][
-            currentPlayerIndex.playerCollumn
-          ] = `Pl`; // where the peach used to be, now is the player
-          // move camera down!
-          player.y = player.y + gridUnit;
-
-          // if there is still room in the inventory
-          // pick up peach and add it to inventory
-          itemPickup(`sliceOPie`);
+          pickItemUp();
         }
       } else {
         // and if the player steps into an empty cell
@@ -1043,6 +924,32 @@ function keyPressed() {
   }
 }
 
+function solidBlock() {
+  console.log("yessir");
+  if (
+    nextCell === `S` ||
+    nextCell === `DEP` ||
+    nextCell === `Bh` ||
+    nextCell === `St` ||
+    nextCell === undefined
+  ) {
+    console.log("nosir");
+    // do nothing
+  }
+}
+
+function pickItemUp() {
+  if (nextCell === `Pe`) {
+    itemPickup(`peach`); // ## generalize this with a variable ##
+    // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
+    let treeDropTime = random(1500, 3500);
+    setTimeout(dropItem.bind(this, `peach`), treeDropTime);
+  }
+  if (nextCell === `Pi`) {
+    itemPickup(`sliceOPie`);
+  }
+}
+
 function itemPickup(item) {
   if (item === `peach`) {
     console.log("at least yea");
@@ -1098,8 +1005,9 @@ function mouseClicked() {
   // console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
-  console.log(player.inventory);
-  console.log(selectItem.name);
+  //console.log(player.inventory);
+  //console.log(selectItem.name);
+  console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
     state = "simulation";
     playerPaused = false;
