@@ -17,10 +17,10 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [1]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `St`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [2]
   [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `], // [3]
-  [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `DEP`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
+  [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
@@ -32,11 +32,11 @@ let gridMap = [
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [16]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Bh`, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [17]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [18]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`,`DEP`,` `, ` `, ` `, ` `, ` `,`DEP`, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [19]
+  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`,`BOT`,` `, ` `, ` `, ` `, ` `,`PDL`, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [19]
   [` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [20]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [21]
   [` `, `S`, ` `, `S`, `S`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [22]
-  [` `, `S`, ` `, `S`, `S`, `DEP`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [23]
+  [` `, `S`, ` `, `S`, `S`, `IDL`, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [23]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [24]
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [25]
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [26]
@@ -46,6 +46,7 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
 ];
+
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
 let columns = 27;
@@ -94,31 +95,10 @@ let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
 let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage;
 
-// array of gridUnits where peaches can appear when one is picked up by player
-// SORT THIS OUT IN JSON x SCRIPT ###
-// let peachFallAreas = [
-//   { row: 9, collumn: 8 },
-//   { row: 9, collumn: 9 },
-//   { row: 9, collumn: 11 },
-//   { row: 9, collumn: 12 },
-//   { row: 10, collumn: 8 },
-//   { row: 10, collumn: 9 },
-//   { row: 10, collumn: 11 },
-//   { row: 10, collumn: 12 },
-//   { row: 11, collumn: 8 },
-//   { row: 11, collumn: 9 },
-//   { row: 11, collumn: 10 },
-//   { row: 11, collumn: 11 },
-//   { row: 11, collumn: 12 },
-//   { row: 12, collumn: 9 },
-//   { row: 12, collumn: 10 },
-//   { row: 12, collumn: 11 },
+// let pieFallAreas = [
+//   { row: 11, collumn: 1 },
+//   { row: 12, collumn: 2 },
 // ];
-
-let pieFallAreas = [
-  { row: 11, collumn: 1 },
-  { row: 12, collumn: 2 },
-];
 
 let state = "title"; // can be title, simulation
 
@@ -180,6 +160,10 @@ function setup() {
 
   // CREATE npcs
   depMate = new NPC(data.npcs.depanneur);
+  boatMate = new NPC(data.npcs.boater);
+  hikeMate = new NPC(data.npcs.hiker);
+  peddleMate = new NPC(data.npcs.peddler);
+  idleMate = new NPC(data.npcs.idler);
 
   // CREATE items
   peachItem = new Item(data.items.peach);
@@ -308,11 +292,11 @@ function displayGrid() {
       // collumns
 
       //  /* Comment out if you want to see the grid //
-      push();
-      noFill();
-      stroke(0);
-      rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
-      pop();
+      // push();
+      // noFill();
+      // stroke(0);
+      // rect(x * gridUnit, y * gridUnit, gridUnit, gridUnit);
+      // pop();
 
       let cell = gridMap[y][x]; // cell = index
       // check each cell for a key
@@ -353,6 +337,22 @@ function displayGrid() {
       if (cell === `DEP`) {
         // dep npc
         drawCharacter(x, y, depMate.color);
+      }
+      if (cell === `HIK`) {
+        // dep npc
+        drawCharacter(x, y, hikeMate.color);
+      }
+      if (cell === `PDL`) {
+        // dep npc
+        drawCharacter(x, y, peddleMate.color);
+      }
+      if (cell === `BOT`) {
+        // dep npc
+        drawCharacter(x, y, boatMate.color);
+      }
+      if (cell === `IDL`) {
+        // dep npc
+        drawCharacter(x, y, idleMate.color);
       }
 
       if (cell === `S`) {

@@ -15,7 +15,7 @@ class NPC {
     //   peach: 0,
     // };
 
-    this.itemDropZone = [];
+    this.itemDropZone = data.itemDropZone;
     this.currentText = data["initial dialog"];
   }
 

@@ -7,6 +7,48 @@
         "collumn": 7
       },
       "cell label": "DEP",
+      "color": "salmon",
+      "personality": "friendly",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "boater": {
+      "name": "boater",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "BOT",
+      "color": "cornflowerblue",
+      "personality": "busy",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "idler": {
+      "name": "idler",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "IDL",
       "color": "yellow",
       "personality": "friendly",
       "/* rel. to player range": "-3 to 3 */",
@@ -15,6 +57,52 @@
         "range": "-1 to 1",
         "peach": 0
       },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "peddler": {
+      "name": "peddler",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "PDL",
+      "color": "darkorange",
+      "personality": "mysterious",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "hiker": {
+      "name": "hiker",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "HIK",
+      "color": "slateblue",
+      "personality": "friendly",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
       "initial dialog": "How fantastic to meet you!"
     }
   },
