@@ -11,7 +11,6 @@ The friendly NPC changes its dialog, (and gives player a piece of pie).
 
 // the playable area of the canvas is seperated in a 15 by 15 cell grid
 // keys in these indexed cells represent an NPC, a Peach, the player, and solid barriers
-
 let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
@@ -47,7 +46,6 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
 ];
-
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
 let columns = 27;
@@ -79,6 +77,8 @@ let selectItemHeldOut = true; // status whether select item is held out or not, 
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
 let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
+let adjacentNPC;
+let playerAdjacentCells = [];
 //let npcText = `How fantastic to meet you!`; // npc's first utterance
 let npcText = undefined;
 
@@ -96,7 +96,7 @@ let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
 let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage;
 
-let riverRocks = [`emerald`,`diamond`,`petRock`];
+let riverRocks = [`emerald`, `diamond`, `petRock`];
 
 // let pieFallAreas = [
 //   { row: 11, collumn: 1 },
@@ -180,6 +180,20 @@ function setup() {
   // coinItem = new Item(data.items.)
 
   // add labels?
+//   for (let r = 0; r < rows; r++) {
+//     for (let c = 0; c < columns; c++) {
+//   playerAdjacentCells = [
+//     gridMap[r - 1][c - 1],
+//     gridMap[r - 1][c],
+//     gridMap[r - 1][c + 1],
+//     gridMap[r][c - 1],
+//     gridMap[r][c + 1],
+//     gridMap[r + 1][c - 1],
+//     gridMap[r + 1][c],
+//     gridMap[r + 1][c + 1],
+//   ];
+// }}
+
 }
 
 /**
@@ -191,6 +205,7 @@ and display inventory, which displays the ui boxes where item pngs appear when i
 function draw() {
   nextRow = currentPlayerIndex.playerRow;
   nextCol = currentPlayerIndex.playerCollum;
+
   cameraSetup();
   noStroke();
   // BACKGROUND //
@@ -256,6 +271,23 @@ function simulationState() {
     displayGrid();
     displayText();
     displayInventory();
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < columns; c++) {
+    if (gridMap[r][c] === `Pl`)
+    playerAdjacentCells = [
+      gridMap[r - 1][c - 1],
+      gridMap[r - 1][c],
+      gridMap[r - 1][c + 1],
+      gridMap[r][c - 1],
+      gridMap[r][c + 1],
+      gridMap[r + 1][c - 1],
+      gridMap[r + 1][c],
+      gridMap[r + 1][c + 1],
+    ];
+  }
+}
+
   }
 }
 
@@ -318,16 +350,13 @@ function displayGrid() {
         } else if (selectItem.name === "pie") {
           drawSmolItem(`pie`, x, y);
           //drawSmolPie(x, y);
-        }
-        else if (selectItem.name === "emerald") {
+        } else if (selectItem.name === "emerald") {
           drawSmolItem(`emerald`, x, y);
           //drawSmolPie(x, y);
-        }
-        else if (selectItem.name === "diamond") {
+        } else if (selectItem.name === "diamond") {
           drawSmolItem(`diamond`, x, y);
           //drawSmolPie(x, y);
-        }
-        else if (selectItem.name === "petRock") {
+        } else if (selectItem.name === "petRock") {
           drawSmolItem(`petRock`, x, y);
           //drawSmolPie(x, y);
         }
@@ -347,8 +376,8 @@ function displayGrid() {
         drawItem(pieItem.name, x, y);
       }
 
-      if (cell === `Em`){
-      drawItem(emeraldItem.name, x, y);
+      if (cell === `Em`) {
+        drawItem(emeraldItem.name, x, y);
       }
 
       if (cell === `Di`) {
@@ -465,17 +494,13 @@ function displayInventory() {
       if (player.inventory[i].imageName === `peachImage`) {
         //console.log("PE?");
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
-      }
-      else if (player.inventory[i].imageName === `sliceOPieImage`) {
+      } else if (player.inventory[i].imageName === `sliceOPieImage`) {
         invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
-      }
-      else if (player.inventory[i].imageName === `emeraldImage`){
+      } else if (player.inventory[i].imageName === `emeraldImage`) {
         invItemToDisplay = imageBank[emeraldItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `diamondImage`){
+      } else if (player.inventory[i].imageName === `diamondImage`) {
         invItemToDisplay = imageBank[diamondItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `petRockImage`){
+      } else if (player.inventory[i].imageName === `petRockImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
       }
@@ -512,13 +537,13 @@ function drawItem(itemName, x, y) {
   if (itemName === `pie`) {
     currentItemImage = imageBank[pieItem.imageName];
   }
-  if (itemName === `emerald`){
+  if (itemName === `emerald`) {
     currentItemImage = imageBank[emeraldItem.imageName];
   }
-  if (itemName === `diamond`){
+  if (itemName === `diamond`) {
     currentItemImage = imageBank[diamondItem.imageName];
   }
-  if (itemName === `petRock`){
+  if (itemName === `petRock`) {
     currentItemImage = imageBank[petRockItem.imageName];
   }
 
@@ -722,7 +747,13 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
+      else if (
+        nextCell === `Pe` ||
+        nextCell === `Pi` ||
+        nextCell === `Em` ||
+        nextCell === `Di` ||
+        nextCell === `Pr`
+      ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -757,6 +788,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera left!
         player.x = player.x - gridUnit;
+      //   for (let r = 0; r < rows; r++) {
+      //     for (let c = 0; c < columns; c++) {
+      //   playerAdjacentCells = [
+      //     gridMap[r - 1][c - 1],
+      //     gridMap[r - 1][c],
+      //     gridMap[r - 1][c + 1],
+      //     gridMap[r][c - 1],
+      //     gridMap[r][c + 1],
+      //     gridMap[r + 1][c - 1],
+      //     gridMap[r + 1][c],
+      //     gridMap[r + 1][c + 1],
+      //   ];
+      // }}
       }
     }
 
@@ -783,7 +827,13 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
+      else if (
+        nextCell === `Pe` ||
+        nextCell === `Pi` ||
+        nextCell === `Em` ||
+        nextCell === `Di` ||
+        nextCell === `Pr`
+      ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -812,6 +862,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera right!
         player.x = player.x + gridUnit;
+      //   for (let r = 0; r < rows; r++) {
+      //     for (let c = 0; c < columns; c++) {
+      //   playerAdjacentCells = [
+      //     gridMap[r - 1][c - 1],
+      //     gridMap[r - 1][c],
+      //     gridMap[r - 1][c + 1],
+      //     gridMap[r][c - 1],
+      //     gridMap[r][c + 1],
+      //     gridMap[r + 1][c - 1],
+      //     gridMap[r + 1][c],
+      //     gridMap[r + 1][c + 1],
+      //   ];
+      // }}
       }
     }
 
@@ -836,7 +899,13 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
+      else if (
+        nextCell === `Pe` ||
+        nextCell === `Pi` ||
+        nextCell === `Em` ||
+        nextCell === `Di` ||
+        nextCell === `Pr`
+      ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -864,6 +933,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell up
         // move camera up!
         player.y = player.y - gridUnit;
+      //   for (let r = 0; r < rows; r++) {
+      //     for (let c = 0; c < columns; c++) {
+      //   playerAdjacentCells = [
+      //     gridMap[r - 1][c - 1],
+      //     gridMap[r - 1][c],
+      //     gridMap[r - 1][c + 1],
+      //     gridMap[r][c - 1],
+      //     gridMap[r][c + 1],
+      //     gridMap[r + 1][c - 1],
+      //     gridMap[r + 1][c],
+      //     gridMap[r + 1][c + 1],
+      //   ];
+      // }}
       }
     }
 
@@ -888,7 +970,13 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
+      else if (
+        nextCell === `Pe` ||
+        nextCell === `Pi` ||
+        nextCell === `Em` ||
+        nextCell === `Di` ||
+        nextCell === `Pr`
+      ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -916,6 +1004,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera down!
         player.y = player.y + gridUnit;
+      //   for (let r = 0; r < rows; r++) {
+      //     for (let c = 0; c < columns; c++) {
+      //   playerAdjacentCells = [
+      //     gridMap[r - 1][c - 1],
+      //     gridMap[r - 1][c],
+      //     gridMap[r - 1][c + 1],
+      //     gridMap[r][c - 1],
+      //     gridMap[r][c + 1],
+      //     gridMap[r + 1][c - 1],
+      //     gridMap[r + 1][c],
+      //     gridMap[r + 1][c + 1],
+      //   ];
+      // }}
       }
     }
 
@@ -983,7 +1084,23 @@ function keyPressed() {
           (gridMap[r][c] === `IDL` && gridMap[r + 1][c + 1] === `Pl`)
         ) {
           //if (npcFriendEvent === 0) {
-          npcText = depMate.currentText;
+
+          for (let i = 0; i < 8; i++) {
+            if (playerAdjacentCells[i] === `DEP`) {
+              adjacentNPC = depMate;
+              console.log("YESSSIRRRR");
+            } else if (playerAdjacentCells[i] === `BOT`) {
+              adjacentNPC = boatMate;
+            } else if (playerAdjacentCells[i] === `HIK`) {
+              adjacentNPC = hikeMate;
+            } else if (playerAdjacentCells[i] === `PDL`) {
+              adjacentNPC = peddleMate;
+            } else if (playerAdjacentCells[i] === `IDL`) {
+              adjacentNPC = idleMate;
+            }
+          }
+
+          currentNPC = npcText = depMate.currentText; // use player coordinates
           //}
           if (stopTextBubble === true) {
             // when space is pressed beside npc, text bubble is displayed
@@ -1038,17 +1155,16 @@ function keyPressed() {
                   return;
                 }
               }
-            }
-            else if (selectItem.name === "emerald" && selectItemHeldOut === true
-            || selectItem.name === "diamond" && selectItemHeldOut === true
-            || selectItem.name === "petRock" && selectItemHeldOut === true
-            || selectItem.name === "pie" && selectItemHeldOut === true){
+            } else if (
+              (selectItem.name === "emerald" && selectItemHeldOut === true) ||
+              (selectItem.name === "diamond" && selectItemHeldOut === true) ||
+              (selectItem.name === "petRock" && selectItemHeldOut === true) ||
+              (selectItem.name === "pie" && selectItemHeldOut === true)
+            ) {
               player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
               selectItem = player.inventory[0]; // select item is reset to 0
               currentDigitPressed = 0;
             }
-
-
           } else if (stopTextBubble === false) {
             stopTextBubble = true;
             playerPaused = false;
@@ -1088,27 +1204,25 @@ function pickItemUp() {
   if (nextCell === `Di`) {
     //console.log("huh?")
     itemPickup(`diamond`);
-    let rockDropTime = random(1000,5000); // extend timing!! ##
+    let rockDropTime = random(1000, 5000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
   if (nextCell === `Pr`) {
     //console.log("huh?")
     itemPickup(`petRock`);
-    let rockDropTime = random(1000,5000); // extend timing!! ##
+    let rockDropTime = random(1000, 5000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
 
-  if (nextCell === `Em`){
-      itemPickup(`emerald`);
-    let rockDropTime = random(1000,5000); // extend timing!! ##
+  if (nextCell === `Em`) {
+    itemPickup(`emerald`);
+    let rockDropTime = random(1000, 5000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
 }
-
-
 
 function itemPickup(item) {
   if (item === `peach`) {
@@ -1117,15 +1231,15 @@ function itemPickup(item) {
   if (item === `sliceOPie`) {
     player.inventory.push(pieItem);
   }
-  if (item === `emerald`){
+  if (item === `emerald`) {
     player.inventory.push(emeraldItem);
   }
-  if (item === `diamond`){
+  if (item === `diamond`) {
     //console.log(`hey...`)
     player.inventory.push(diamondItem);
   }
-  if (item === `petRock`){
-      //console.log(`hey...`)
+  if (item === `petRock`) {
+    //console.log(`hey...`)
     player.inventory.push(petRockItem);
   }
 }
@@ -1156,7 +1270,8 @@ function dropItem(item) {
       gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
     }
   }
-  if (item === `emerald` || item === `diamond` || item === `petRock`) { // HAVE ALL river stones here##
+  if (item === `emerald` || item === `diamond` || item === `petRock`) {
+    // HAVE ALL river stones here##
     //console.log("this is no pie");
     let currentRiverRock = item;
     let fallenEmeraldIndex = random(emeraldItem.dropZone);
@@ -1166,13 +1281,11 @@ function dropItem(item) {
       dropItem(currentRiverRock); //dropPeach(); ### HAVE random stones!
     } else {
       // drop the peach
-      if (currentRiverRock === `emerald`){
+      if (currentRiverRock === `emerald`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
-      }
-      else if (currentRiverRock === `diamond`){
+      } else if (currentRiverRock === `diamond`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Di`;
-      }
-      else if (currentRiverRock === `petRock`){
+      } else if (currentRiverRock === `petRock`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Pr`;
       }
     }
@@ -1189,11 +1302,12 @@ function dropItem(item) {
 
 // mouse used for debugging
 function mouseClicked() {
+  console.log(adjacentNPC);
   //console.log(pieItem.name);
-  console.log(gridMap);
+  //console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
-  console.log(player.inventory);
+  //console.log(player.inventory);
   console.log(selectItem.name);
   //console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
