@@ -312,7 +312,7 @@ function displayGrid() {
           // if item selected by player is the empty box
           //display nothing
         } else if (selectItem.name === "peach") {
-          console.log ("how did you come in here?");
+          //console.log ("how did you come in here?");
           drawSmolItem(`peach`, x, y);
           //drawSmolPeach(x, y);
         } else if (selectItem.name === "pie") {
@@ -463,7 +463,7 @@ function displayInventory() {
     } else {
       // in box 1
       if (player.inventory[i].imageName === `peachImage`) {
-        console.log("PE?");
+        //console.log("PE?");
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       }
       else if (player.inventory[i].imageName === `sliceOPieImage`) {
@@ -476,7 +476,7 @@ function displayInventory() {
         invItemToDisplay = imageBank[diamondItem.imageName];
       }
       else if (player.inventory[i].imageName === `petRockImage`){
-        console.log("???");
+        //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
       }
 
@@ -1001,6 +1001,9 @@ function keyPressed() {
             }
             // if player item is out, player gives npc item
             // npc verifies what player is giving
+
+            givenItem = selectItem.name;
+
             if (selectItem.name === "peach" && selectItemHeldOut === true) {
               player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
               selectItem = player.inventory[0]; // select item is reset to 0
@@ -1036,6 +1039,16 @@ function keyPressed() {
                 }
               }
             }
+            else if (selectItem.name === "emerald" && selectItemHeldOut === true
+            || selectItem.name === "diamond" && selectItemHeldOut === true
+            || selectItem.name === "petRock" && selectItemHeldOut === true
+            || selectItem.name === "pie" && selectItemHeldOut === true){
+              player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
+              selectItem = player.inventory[0]; // select item is reset to 0
+              currentDigitPressed = 0;
+            }
+
+
           } else if (stopTextBubble === false) {
             stopTextBubble = true;
             playerPaused = false;
