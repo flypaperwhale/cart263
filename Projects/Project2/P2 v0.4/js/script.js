@@ -96,6 +96,8 @@ let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
 let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage;
 
+let riverRocks = [`emerald`,`diamond`,`petRock`];
+
 // let pieFallAreas = [
 //   { row: 11, collumn: 1 },
 //   { row: 12, collumn: 2 },
@@ -310,6 +312,7 @@ function displayGrid() {
           // if item selected by player is the empty box
           //display nothing
         } else if (selectItem.name === "peach") {
+          console.log ("how did you come in here?");
           drawSmolItem(`peach`, x, y);
           //drawSmolPeach(x, y);
         } else if (selectItem.name === "pie") {
@@ -318,6 +321,14 @@ function displayGrid() {
         }
         else if (selectItem.name === "emerald") {
           drawSmolItem(`emerald`, x, y);
+          //drawSmolPie(x, y);
+        }
+        else if (selectItem.name === "diamond") {
+          drawSmolItem(`diamond`, x, y);
+          //drawSmolPie(x, y);
+        }
+        else if (selectItem.name === "petRock") {
+          drawSmolItem(`petRock`, x, y);
           //drawSmolPie(x, y);
         }
       }
@@ -338,6 +349,18 @@ function displayGrid() {
 
       if (cell === `Em`){
       drawItem(emeraldItem.name, x, y);
+      }
+
+      if (cell === `Di`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(diamondItem.name, x, y);
+      }
+
+      if (cell === `Pr`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(petRockItem.name, x, y);
       }
 
       if (cell === `NPC`) {
@@ -440,12 +463,21 @@ function displayInventory() {
     } else {
       // in box 1
       if (player.inventory[i].imageName === `peachImage`) {
+        console.log("PE?");
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
-      } else if (player.inventory[i].imageName === `sliceOPieImage`) {
+      }
+      else if (player.inventory[i].imageName === `sliceOPieImage`) {
         invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       }
       else if (player.inventory[i].imageName === `emeraldImage`){
         invItemToDisplay = imageBank[emeraldItem.imageName];
+      }
+      else if (player.inventory[i].imageName === `diamondImage`){
+        invItemToDisplay = imageBank[diamondItem.imageName];
+      }
+      else if (player.inventory[i].imageName === `petRockImage`){
+        console.log("???");
+        invItemToDisplay = imageBank[petRockItem.imageName];
       }
 
       push();
@@ -483,6 +515,12 @@ function drawItem(itemName, x, y) {
   if (itemName === `emerald`){
     currentItemImage = imageBank[emeraldItem.imageName];
   }
+  if (itemName === `diamond`){
+    currentItemImage = imageBank[diamondItem.imageName];
+  }
+  if (itemName === `petRock`){
+    currentItemImage = imageBank[petRockItem.imageName];
+  }
 
   push();
   imageMode(LEFT);
@@ -500,6 +538,12 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `emerald`) {
     currentItemImage = imageBank[emeraldItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `diamond`) {
+    currentItemImage = imageBank[diamondItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `petRock`) {
+    currentItemImage = imageBank[petRockItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -678,7 +722,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -739,7 +783,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -792,7 +836,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -844,7 +888,7 @@ function keyPressed() {
         solidBlock();
       }
       // else move player, and pick up item if there is
-      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em`) {
+      else if (nextCell === `Pe` || nextCell === `Pi` || nextCell === `Em` || nextCell === `Di` || nextCell === `Pr`) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
           // do nothing
@@ -1027,12 +1071,31 @@ function pickItemUp() {
   if (nextCell === `Pi`) {
     itemPickup(`sliceOPie`);
   }
+
+  if (nextCell === `Di`) {
+    //console.log("huh?")
+    itemPickup(`diamond`);
+    let rockDropTime = random(1000,5000); // extend timing!! ##
+    rockDropSelection = random(riverRocks);
+    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
+  }
+  if (nextCell === `Pr`) {
+    //console.log("huh?")
+    itemPickup(`petRock`);
+    let rockDropTime = random(1000,5000); // extend timing!! ##
+    rockDropSelection = random(riverRocks);
+    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
+  }
+
   if (nextCell === `Em`){
-    itemPickup(`emerald`);
-    let rockDropTime = random(5000,15000); // extend timing!! ##
-    setTimeout(dropItem.bind(this, `emerald`), rockDropTime);
+      itemPickup(`emerald`);
+    let rockDropTime = random(1000,5000); // extend timing!! ##
+    rockDropSelection = random(riverRocks);
+    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
 }
+
+
 
 function itemPickup(item) {
   if (item === `peach`) {
@@ -1043,6 +1106,14 @@ function itemPickup(item) {
   }
   if (item === `emerald`){
     player.inventory.push(emeraldItem);
+  }
+  if (item === `diamond`){
+    //console.log(`hey...`)
+    player.inventory.push(diamondItem);
+  }
+  if (item === `petRock`){
+      //console.log(`hey...`)
+    player.inventory.push(petRockItem);
   }
 }
 
@@ -1072,16 +1143,25 @@ function dropItem(item) {
       gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
     }
   }
-  if (item === `emerald`) { // HAVE ALL river stones here##
+  if (item === `emerald` || item === `diamond` || item === `petRock`) { // HAVE ALL river stones here##
     //console.log("this is no pie");
+    let currentRiverRock = item;
     let fallenEmeraldIndex = random(emeraldItem.dropZone);
     if (gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
       fallenEmeraldIndex = random(emeraldItem.dropZone);
-      dropItem(`emerald`); //dropPeach(); ### HAVE random stones!
+      dropItem(currentRiverRock); //dropPeach(); ### HAVE random stones!
     } else {
       // drop the peach
-      gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
+      if (currentRiverRock === `emerald`){
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
+      }
+      else if (currentRiverRock === `diamond`){
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Di`;
+      }
+      else if (currentRiverRock === `petRock`){
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Pr`;
+      }
     }
   }
 }
@@ -1096,13 +1176,13 @@ function dropItem(item) {
 
 // mouse used for debugging
 function mouseClicked() {
-  console.log(pieItem.name);
-  //console.log(gridMap);
+  //console.log(pieItem.name);
+  console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
   console.log(player.inventory);
-  //console.log(selectItem.name);
-  console.log(gridMap[nextRow][nextCol]);
+  console.log(selectItem.name);
+  //console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
     state = "simulation";
     playerPaused = false;
