@@ -1,0 +1,212 @@
+{
+  "npcs": {
+    "depanneur": {
+      "name": "depanneur",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "DEP",
+      "color": "salmon",
+      "personality": "friendly",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "boater": {
+      "name": "boater",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "BOT",
+      "color": "darkslategray",
+      "personality": "busy",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "idler": {
+      "name": "idler",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "IDL",
+      "color": "yellow",
+      "personality": "friendly",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 24, "collumn": 5 },
+        { "row": 24, "collumn": 6 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "peddler": {
+      "name": "peddler",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "PDL",
+      "color": "brown",
+      "personality": "mysterious",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    },
+    "hiker": {
+      "name": "hiker",
+      "gridMap index": {
+        "row": 11,
+        "collumn": 7
+      },
+      "cell label": "HIK",
+      "color": "lightslategrey",
+      "personality": "friendly",
+      "/* rel. to player range": "-3 to 3 */",
+      "relationship to player": 0,
+      "relationship to items": {
+        "range": "-1 to 1",
+        "peach": 0
+      },
+      "itemDropZone": [
+        { "row": 11, "collumn": 1 },
+        { "row": 12, "collumn": 2 }
+      ],
+      "initial dialog": "How fantastic to meet you!"
+    }
+  },
+  "items": {
+    "peach": {
+      "name": "peach",
+      "cell label": "Pe",
+      "type": "edible fruit",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 1,
+      "imageName": "peachImage",
+      "dropZone": [
+        { "row": 29, "collumn": 3 },
+        { "row": 29, "collumn": 4 },
+        { "row": 29, "collumn": 5 },
+        { "row": 28, "collumn": 2 },
+        { "row": 28, "collumn": 3 },
+        { "row": 28, "collumn": 5 },
+        { "row": 28, "collumn": 6 },
+        { "row": 27, "collumn": 2 },
+        { "row": 27, "collumn": 3 },
+        { "row": 27, "collumn": 5 },
+        { "row": 27, "collumn": 6 },
+        { "row": 26, "collumn": 2 },
+        { "row": 26, "collumn": 6 }
+      ]
+    },
+    "petRock": {
+      "name": "petRock",
+      "cell label": "Pr",
+      "type": "stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 1,
+      "imageName": "petRockImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
+      ]
+    },
+    "diamond": {
+      "name": "diamond",
+      "cell label": "Di",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 5,
+      "imageName": "diamondImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
+      ]
+    },
+    "emerald": {
+      "name": "emerald",
+      "cell label": "Em",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 4,
+      "imageName": "emeraldImage",
+      "dropZone": [
+        { "row": 7, "collumn": 18 },
+        { "row": 7, "collumn": 19 },
+        { "row": 7, "collumn": 20 },
+        { "row": 8, "collumn": 18 },
+        { "row": 8, "collumn": 19 },
+        { "row": 8, "collumn": 20 },
+        { "row": 9, "collumn": 18 },
+        { "row": 9, "collumn": 19 },
+        { "row": 10, "collumn": 19 },
+        { "row": 10, "collumn": 20 },
+        { "row": 11, "collumn": 19 },
+        { "row": 11, "collumn": 20 },
+        { "row": 11, "collumn": 21 }
+      ]
+    },
+    "sliceOPie": {
+      "name": "pie",
+      "cell label": "Pi",
+      "type": "edible",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 3,
+      "imageName": "sliceOPieImage",
+      "dropZone": []
+    }
+  }
+}
