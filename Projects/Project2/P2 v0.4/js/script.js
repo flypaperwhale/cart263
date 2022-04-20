@@ -75,6 +75,9 @@ let selectItemNumber = 0; // to manage inventory using digit keys
 let selectItemHeldOut = true; // status whether select item is held out or not, starts item "empty" hidden
 
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
+
+let currentRelationToPlayer;
+
 let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
 let adjacentNPC;
@@ -272,21 +275,9 @@ function simulationState() {
     displayText();
     displayInventory();
 
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < columns; c++) {
-    if (gridMap[r][c] === `Pl`)
-    playerAdjacentCells = [
-      gridMap[r - 1][c - 1],
-      gridMap[r - 1][c],
-      gridMap[r - 1][c + 1],
-      gridMap[r][c - 1],
-      gridMap[r][c + 1],
-      gridMap[r + 1][c - 1],
-      gridMap[r + 1][c],
-      gridMap[r + 1][c + 1],
-    ];
-  }
-}
+checkForAdjacentNPC();
+
+
 
   }
 }
@@ -522,6 +513,25 @@ function displayInventory() {
     }
   }
 }
+
+function checkForAdjacentNPC(){
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < columns; c++) {
+  if (gridMap[r][c] === `Pl`)
+  playerAdjacentCells = [
+    gridMap[r - 1][c - 1],
+    gridMap[r - 1][c],
+    gridMap[r - 1][c + 1],
+    gridMap[r][c - 1],
+    gridMap[r][c + 1],
+    gridMap[r + 1][c - 1],
+    gridMap[r + 1][c],
+    gridMap[r + 1][c + 1],
+  ];
+}
+}
+}
+
 
 function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
@@ -1089,6 +1099,12 @@ function keyPressed() {
             if (playerAdjacentCells[i] === `DEP`) {
               adjacentNPC = depMate;
               console.log("YESSSIRRRR");
+              //check for given item
+              //select a dialog
+              // check relationship to player
+              currentRelationToPlayer = depMate.relationship2player;
+
+
             } else if (playerAdjacentCells[i] === `BOT`) {
               adjacentNPC = boatMate;
             } else if (playerAdjacentCells[i] === `HIK`) {
@@ -1303,6 +1319,7 @@ function dropItem(item) {
 // mouse used for debugging
 function mouseClicked() {
   console.log(adjacentNPC);
+  console.log(currentRelationToPlayer);
   //console.log(pieItem.name);
   //console.log(gridMap);
   //console.log(currentDigitPressed);

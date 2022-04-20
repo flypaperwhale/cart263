@@ -10,8 +10,8 @@
       "color": "salmon",
       "personality": "friendly",
       "/* rel. to player range": "-3 to 3 */",
-      "relationship to player": 0,
-      "relationship to items": {
+      "relationship2player": 1,
+      "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
       },
@@ -31,8 +31,8 @@
       "color": "darkslategray",
       "personality": "busy",
       "/* rel. to player range": "-3 to 3 */",
-      "relationship to player": 0,
-      "relationship to items": {
+      "relationship2player": 0,
+      "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
       },
@@ -52,8 +52,8 @@
       "color": "yellow",
       "personality": "friendly",
       "/* rel. to player range": "-3 to 3 */",
-      "relationship to player": 0,
-      "relationship to items": {
+      "relationship2player": 0,
+      "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
       },
@@ -73,8 +73,8 @@
       "color": "brown",
       "personality": "mysterious",
       "/* rel. to player range": "-3 to 3 */",
-      "relationship to player": 0,
-      "relationship to items": {
+      "relationship2player": 0,
+      "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
       },
@@ -94,8 +94,8 @@
       "color": "lightslategrey",
       "personality": "friendly",
       "/* rel. to player range": "-3 to 3 */",
-      "relationship to player": 0,
-      "relationship to items": {
+      "relationship2player": 0,
+      "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
       },

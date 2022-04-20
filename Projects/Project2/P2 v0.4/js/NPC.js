@@ -9,8 +9,8 @@ class NPC {
     this.cellLabel = data["cell label"];
     this.color = data.color;
     this.personality = data.personality;
-    this.playerRelation = data["relationship to player"];
-    this.itemRelations = data["relationship to items"];
+    this.relationship2player = data.relationship2player;
+    this.relationship2items = data.relationship2items;
     // {
     //   peach: 0,
     // };
