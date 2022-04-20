@@ -203,7 +203,7 @@
       "cell label": "Di",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 5,
+      "value": 3,
       "imageName": "diamondImage",
       "dropZone": [
         { "row": 7, "collumn": 18 },
@@ -244,13 +244,13 @@
         { "row": 11, "collumn": 21 }
       ]
     },
-    "sliceOPie": {
+    "pie": {
       "name": "pie",
       "cell label": "Pi",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 3,
-      "imageName": "sliceOPieImage",
+      "value": 5,
+      "imageName": "pieImage",
       "dropZone": []
     },
     "cherry": {
@@ -276,17 +276,17 @@
       "cell label": "Fw",
       "type": "explosive",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 4,
+      "value": 3,
       "imageName": "fireworkImage",
       "dropZone": []
     },
-    "painting": {
-      "name": "painting",
+    "valsPainting": {
+      "name": "valsPainting",
       "cell label": "Pa",
       "type": "artwork",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 3,
-      "imageName": "paintingImage",
+      "value": 5,
+      "imageName": "valsPaintingImage",
       "dropZone": []
     },
     "goldcoin": {
@@ -295,7 +295,7 @@
       "type": "money",
       "/* value range": "1 = common - 5 = precious */",
       "value": 4,
-      "imageName": "mushroomImage",
+      "imageName": "goldcoinImage",
       "dropZone": []
     }
   }

@@ -20,8 +20,8 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
+  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Pa`, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, `Fw`, `S`, `S`, ` `, `Gc`, ` `,` `, ` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
@@ -95,9 +95,8 @@ let currentDigitPressed = 0;
 let imageBank = {};
 
 // image names
-let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
-let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage, mushroomImage;
+let peachImage, pieImage, cherryImage, goldcoinImage, diamondImage, emeraldImage, fireworkImage, mushroomImage, valsPaintingImage, petRockImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
 
@@ -124,15 +123,15 @@ preload peach, peach tree, sliceOPie png files
 function preload() {
   // image assets
   imageBank.peachImage = loadImage(`assets/images/peach.png`);
-  imageBank.sliceOPieImage = loadImage(`assets/images/slice-of-pie.png`);
+  imageBank.pieImage = loadImage(`assets/images/slice-of-pie.png`);
   imageBank.diamondImage = loadImage(`assets/images/diamond.png`);
   imageBank.emeraldImage = loadImage(`assets/images/emerald.png`);
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
   imageBank.fireworkImage = loadImage(`assets/images/fireworks.png`);
-  imageBank.coinImage = loadImage(`assets/images/coin.png`);
+  imageBank.goldcoinImage = loadImage(`assets/images/coin.png`);
   imageBank.petRockImage = loadImage(`assets/images/petRock.png`);
   imageBank.mushroomImage = loadImage(`assets/images/mushroom.png`);
-
+imageBank.valsPaintingImage = loadImage(`assets/images/valsPainting.png`);
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
@@ -179,12 +178,15 @@ function setup() {
 
   // CREATE items
   peachItem = new Item(data.items.peach);
-  pieItem = new Item(data.items.sliceOPie);
+  pieItem = new Item(data.items.pie);
   diamondItem = new Item(data.items.diamond);
   emeraldItem = new Item(data.items.emerald);
   petRockItem = new Item(data.items.petRock);
   cherryItem = new Item(data.items.cherry);
   mushroomItem = new Item(data.items.mushroom);
+  fireworkItem = new Item(data.items.firework);
+  goldcoinItem = new Item(data.items.goldcoin);
+  valsPaintingItem = new Item(data.items.valsPainting);
 
   // fireworkItem = new Item(data.items.)
   // coinItem = new Item(data.items.)
@@ -366,6 +368,18 @@ function displayGrid() {
         drawSmolItem(`mushroom`, x, y);
         //drawSmolPie(x, y);
       }
+      else if (selectItem.name === "firework") {
+        drawSmolItem(`firework`, x, y);
+        //drawSmolPie(x, y);
+      }
+      else if (selectItem.name === "valsPainting") {
+       drawSmolItem(`valsPainting`, x, y);
+       //drawSmolPie(x, y);
+     }
+     else if (selectItem.name === "goldcoin") {
+      drawSmolItem(`goldcoin`, x, y);
+      //drawSmolPie(x, y);
+    }
       }
       //  }
       if (cell === `Pe`) {
@@ -403,6 +417,19 @@ function displayGrid() {
         //drawPie(x, y);
         drawItem(mushroomItem.name, x, y);
       }
+      if (cell === `Fw`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(fireworkItem.name, x, y);
+      }  if (cell === `Pa`) {
+          // Pi for Pie
+          //drawPie(x, y);
+          drawItem(valsPaintingItem.name, x, y);
+        }  if (cell === `Gc`) {
+            // Pi for Pie
+            //drawPie(x, y);
+            drawItem(goldcoinItem.name, x, y);
+          }
 
       if (cell === `NPC`) {
         // NPC
@@ -512,7 +539,7 @@ function displayInventory() {
       if (player.inventory[i].imageName === `peachImage`) {
         //console.log("PE?");
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
-      } else if (player.inventory[i].imageName === `sliceOPieImage`) {
+      } else if (player.inventory[i].imageName === `pieImage`) {
         invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       } else if (player.inventory[i].imageName === `emeraldImage`) {
         invItemToDisplay = imageBank[emeraldItem.imageName];
@@ -529,6 +556,18 @@ function displayInventory() {
       else if (player.inventory[i].imageName === `mushroomImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[mushroomItem.imageName];
+      }
+      else if (player.inventory[i].imageName === `fireworkImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[fireworkItem.imageName];
+      }
+      else if (player.inventory[i].imageName === `valsPaintingImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[valsPaintingItem.imageName];
+      }
+      else if (player.inventory[i].imageName === `goldcoinImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[goldcoinItem.imageName];
       }
 
       push();
@@ -594,6 +633,15 @@ function drawItem(itemName, x, y) {
   if (itemName === `mushroom`) {
     currentItemImage = imageBank[mushroomItem.imageName];
   }
+  if (itemName === `firework`) {
+    currentItemImage = imageBank[fireworkItem.imageName];
+  }
+  if (itemName === `valsPainting`) {
+    currentItemImage = imageBank[valsPaintingItem.imageName];
+  }
+  if (itemName === `goldcoin`) {
+    currentItemImage = imageBank[goldcoinItem.imageName];
+  }
 
   push();
   imageMode(LEFT);
@@ -623,6 +671,13 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `mushroom`) {
     currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `firework`) {
+    currentItemImage = imageBank[fireworkItem.imageName]; // ### wont show up??
+  }if (itemName === `valsPainting`) {
+    currentItemImage = imageBank[valsPaintingItem.imageName]; // ### wont show up??
+  }if (itemName === `goldcoin`) {
+    currentItemImage = imageBank[goldcoinItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -807,7 +862,10 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`
+        nextCell === `Mu` ||
+        nextCell === `Fw` ||
+        nextCell === `Pa` ||
+        nextCell === `Gc`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -888,7 +946,10 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`
+        nextCell === `Mu`||
+        nextCell === `Fw` ||
+        nextCell === `Pa` ||
+        nextCell === `Gc`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -961,7 +1022,10 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`
+        nextCell === `Mu`||
+        nextCell === `Fw` ||
+        nextCell === `Pa` ||
+        nextCell === `Gc`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1033,7 +1097,10 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`
+        nextCell === `Mu`||
+        nextCell === `Fw` ||
+        nextCell === `Pa` ||
+        nextCell === `Gc`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1317,7 +1384,13 @@ function removeItemFromInv(){
     (selectItem.name === "pie" && selectItemHeldOut === true) ||
     (selectItem.name === "cherry" && selectItemHeldOut === true) ||
       (selectItem.name === "mushroom" && selectItemHeldOut === true)
-  ) {
+  ||
+    (selectItem.name === "firework" && selectItemHeldOut === true)
+ ||
+  (selectItem.name === "valsPainting" && selectItemHeldOut === true)
+ ||
+  (selectItem.name === "goldcoin" && selectItemHeldOut === true)
+ ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
     currentDigitPressed = 0;
@@ -1347,7 +1420,7 @@ function pickItemUp() {
     // but if peach is dropped by npc do not redrop ###
   }
   if (nextCell === `Pi`) {
-    itemPickup(`sliceOPie`);
+    itemPickup(`pie`);
   }
 
   if (nextCell === `Di`) {
@@ -1381,7 +1454,7 @@ function itemPickup(item) {
   if (item === `peach`) {
     player.inventory.push(peachItem);
   }
-  if (item === `sliceOPie`) {
+  if (item === `pie`) {
     player.inventory.push(pieItem);
   }
   if (item === `emerald`) {
@@ -1399,6 +1472,16 @@ function itemPickup(item) {
     //console.log(`hey...`)
     player.inventory.push(mushroomItem);
   }
+  if (item === `firework`) {
+    //console.log(`hey...`)
+    player.inventory.push(fireworkItem);
+  }  if (item === `valsPainting`) {
+      //console.log(`hey...`)
+      player.inventory.push(valsPaintingItem);
+    }  if (item === `goldcoin`) {
+        //console.log(`hey...`)
+        player.inventory.push(goldcoinItem);
+      }
 }
 
 function dropItem(item) {
