@@ -20,7 +20,7 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
   [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
@@ -97,7 +97,7 @@ let imageBank = {};
 // image names
 let peachImage, peachTreeImage, sliceOPieImage;
 let bushImage, stoneImage;
-let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage;
+let cherryImage, coinImage, diamondImage, emeraldImage, fireworkImage, mushroomImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
 
@@ -131,6 +131,7 @@ function preload() {
   imageBank.fireworkImage = loadImage(`assets/images/fireworks.png`);
   imageBank.coinImage = loadImage(`assets/images/coin.png`);
   imageBank.petRockImage = loadImage(`assets/images/petRock.png`);
+  imageBank.mushroomImage = loadImage(`assets/images/mushroom.png`);
 
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
 
@@ -183,6 +184,7 @@ function setup() {
   emeraldItem = new Item(data.items.emerald);
   petRockItem = new Item(data.items.petRock);
   cherryItem = new Item(data.items.cherry);
+  mushroomItem = new Item(data.items.mushroom);
 
   // fireworkItem = new Item(data.items.)
   // coinItem = new Item(data.items.)
@@ -360,6 +362,10 @@ function displayGrid() {
          drawSmolItem(`cherry`, x, y);
          //drawSmolPie(x, y);
        }
+       else if (selectItem.name === "mushroom") {
+        drawSmolItem(`mushroom`, x, y);
+        //drawSmolPie(x, y);
+      }
       }
       //  }
       if (cell === `Pe`) {
@@ -390,6 +396,12 @@ function displayGrid() {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(petRockItem.name, x, y);
+      }
+
+      if (cell === `Mu`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(mushroomItem.name, x, y);
       }
 
       if (cell === `NPC`) {
@@ -514,6 +526,10 @@ function displayInventory() {
         //console.log("???");
         invItemToDisplay = imageBank[cherryItem.imageName];
       }
+      else if (player.inventory[i].imageName === `mushroomImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[mushroomItem.imageName];
+      }
 
       push();
       imageMode(CENTER);
@@ -575,6 +591,9 @@ function drawItem(itemName, x, y) {
   if (itemName === `petRock`) {
     currentItemImage = imageBank[petRockItem.imageName];
   }
+  if (itemName === `mushroom`) {
+    currentItemImage = imageBank[mushroomItem.imageName];
+  }
 
   push();
   imageMode(LEFT);
@@ -600,6 +619,9 @@ function drawSmolItem(itemName, x, y) {
     currentItemImage = imageBank[petRockItem.imageName]; // ### wont show up??
   }
   if (itemName === `cherry`) {
+    currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `mushroom`) {
     currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
   }
   push();
@@ -784,7 +806,8 @@ function keyPressed() {
         nextCell === `Pi` ||
         nextCell === `Em` ||
         nextCell === `Di` ||
-        nextCell === `Pr`
+        nextCell === `Pr` ||
+        nextCell === `Mu`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -864,7 +887,8 @@ function keyPressed() {
         nextCell === `Pi` ||
         nextCell === `Em` ||
         nextCell === `Di` ||
-        nextCell === `Pr`
+        nextCell === `Pr` ||
+        nextCell === `Mu`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -936,7 +960,8 @@ function keyPressed() {
         nextCell === `Pi` ||
         nextCell === `Em` ||
         nextCell === `Di` ||
-        nextCell === `Pr`
+        nextCell === `Pr` ||
+        nextCell === `Mu`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1007,7 +1032,8 @@ function keyPressed() {
         nextCell === `Pi` ||
         nextCell === `Em` ||
         nextCell === `Di` ||
-        nextCell === `Pr`
+        nextCell === `Pr` ||
+        nextCell === `Mu`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1289,7 +1315,8 @@ function removeItemFromInv(){
     (selectItem.name === "diamond" && selectItemHeldOut === true) ||
     (selectItem.name === "petRock" && selectItemHeldOut === true) ||
     (selectItem.name === "pie" && selectItemHeldOut === true) ||
-    (selectItem.name === "cherry" && selectItemHeldOut === true)
+    (selectItem.name === "cherry" && selectItemHeldOut === true) ||
+      (selectItem.name === "mushroom" && selectItemHeldOut === true)
   ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
@@ -1344,6 +1371,10 @@ function pickItemUp() {
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
+
+  if (nextCell === `Mu`) {
+    itemPickup(`mushroom`);
+  }
 }
 
 function itemPickup(item) {
@@ -1363,6 +1394,10 @@ function itemPickup(item) {
   if (item === `petRock`) {
     //console.log(`hey...`)
     player.inventory.push(petRockItem);
+  }
+  if (item === `mushroom`) {
+    //console.log(`hey...`)
+    player.inventory.push(mushroomItem);
   }
 }
 

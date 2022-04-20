@@ -261,6 +261,42 @@
       "value": 2,
       "imageName": "cherryImage",
       "dropZone": []
+    },
+    "mushroom": {
+      "name": "mushroom",
+      "cell label": "Mu",
+      "type": "edible",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 2,
+      "imageName": "mushroomImage",
+      "dropZone": []
+    },
+    "firework": {
+      "name": "firework",
+      "cell label": "Fw",
+      "type": "explosive",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 4,
+      "imageName": "fireworkImage",
+      "dropZone": []
+    },
+    "painting": {
+      "name": "painting",
+      "cell label": "Pa",
+      "type": "artwork",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 3,
+      "imageName": "paintingImage",
+      "dropZone": []
+    },
+    "goldcoin": {
+      "name": "goldcoin",
+      "cell label": "Gc",
+      "type": "money",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 4,
+      "imageName": "mushroomImage",
+      "dropZone": []
     }
   }
 }
