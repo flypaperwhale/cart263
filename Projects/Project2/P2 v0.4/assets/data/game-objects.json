@@ -6,7 +6,7 @@
         "row": 11,
         "collumn": 7
       },
-      "cell label": "DEP",
+      "cellLabel": "DEP",
       "color": "salmon",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
@@ -16,8 +16,8 @@
         "peach": 0,
         "emerald": 0,
         "diamond": 1,
-        "cherry": 0,
-        "artwork": 1,
+        "cherry": 1,
+        "valsPainting": 1,
         "petRock": 0,
         "pie": 1,
         "firework": 0,
@@ -40,7 +40,7 @@
         "row": 11,
         "collumn": 7
       },
-      "cell label": "BOT",
+      "cellLabel": "BOT",
       "color": "darkslategray",
       "personality": "busy",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
@@ -51,7 +51,7 @@
         "emerald": 0,
         "diamond": 0,
         "cherry": 0,
-        "artwork": 0,
+        "valsPainting": 0,
         "petRock": -1,
         "pie": 1,
         "firework": 0,
@@ -84,7 +84,7 @@
         "emerald": 0,
         "diamond": 0,
         "cherry": 1,
-        "artwork": 1,
+        "valsPainting": 1,
         "petRock": 1,
         "pie": 1,
         "firework": 0,
@@ -107,7 +107,7 @@
         "row": 11,
         "collumn": 7
       },
-      "cell label": "PDL",
+      "cellLabel": "PDL",
       "color": "brown",
       "personality": "mysterious",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
@@ -118,7 +118,7 @@
         "emerald": 1,
         "diamond": 0,
         "cherry": 0,
-        "artwork": 0,
+        "valsPainting": 0,
         "petRock": 0,
         "pie": 1,
         "firework": 0,
@@ -141,7 +141,7 @@
         "row": 11,
         "collumn": 7
       },
-      "cell label": "HIK",
+      "cellLabel": "HIK",
       "color": "lightslategrey",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
@@ -152,7 +152,7 @@
         "emerald": 0,
         "diamond": 1,
         "cherry": 0,
-        "artwork": 1,
+        "valsPainting": 1,
         "petRock": 0,
         "pie": 1,
         "firework": 1,
@@ -170,7 +170,7 @@
   "items": {
     "peach": {
       "name": "peach",
-      "cell label": "Pe",
+      "cellLabel": "Pe",
       "type": "edible fruit",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
@@ -193,7 +193,7 @@
     },
     "petRock": {
       "name": "petRock",
-      "cell label": "Pr",
+      "cellLabel": "Pr",
       "type": "stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
@@ -216,7 +216,7 @@
     },
     "diamond": {
       "name": "diamond",
-      "cell label": "Di",
+      "cellLabel": "Di",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 4,
@@ -239,7 +239,7 @@
     },
     "emerald": {
       "name": "emerald",
-      "cell label": "Em",
+      "cellLabel": "Em",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 3,
@@ -262,7 +262,7 @@
     },
     "pie": {
       "name": "pie",
-      "cell label": "Pi",
+      "cellLabel": "Pi",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
       "value": 5,
@@ -271,7 +271,7 @@
     },
     "cherry": {
       "name": "cherry",
-      "cell label": "Ch",
+      "cellLabel": "Ch",
       "type": "edible fruit",
       "/* value range": "1 = common - 5 = precious */",
       "value": 2,
@@ -280,7 +280,7 @@
     },
     "mushroom": {
       "name": "mushroom",
-      "cell label": "Mu",
+      "cellLabel": "Mu",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
       "value": 2,
@@ -289,7 +289,7 @@
     },
     "firework": {
       "name": "firework",
-      "cell label": "Fw",
+      "cellLabel": "Fw",
       "type": "explosive",
       "/* value range": "1 = common - 5 = precious */",
       "value": 3,
@@ -298,7 +298,7 @@
     },
     "valsPainting": {
       "name": "valsPainting",
-      "cell label": "Pa",
+      "cellLabel": "Pa",
       "type": "artwork",
       "/* value range": "1 = common - 5 = precious */",
       "value": 5,
@@ -307,7 +307,7 @@
     },
     "goldcoin": {
       "name": "goldcoin",
-      "cell label": "Gc",
+      "cellLabel": "Gc",
       "type": "money",
       "/* value range": "1 = common - 5 = precious */",
       "value": 4,

@@ -6,7 +6,7 @@ class NPC {
     //   row: undefined,
     //   collumn: undefined,
     // };
-    this.cellLabel = data["cell label"];
+    this.cellLabel = data.cellLabel;
     this.color = data.color;
     this.personality = data.personality;
     this.relationship2player = data.relationship2player;
