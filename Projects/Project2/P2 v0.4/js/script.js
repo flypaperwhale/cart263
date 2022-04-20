@@ -1314,8 +1314,17 @@ function keyPressed() {
               adjacentNPC = idleMate;
               //idle mate wants 5 peaches in exchange for pie, infinite
               // anything else is received as a gift
-              npcText = idleMate.initialDialog; // use player coordinates
+              //npcText = idleMate.initialDialog; // use player coordinates
               //}
+
+              if (adjacentNPC.firstTalk === "true") {
+                console.log("yo");
+                npcText = adjacentNPC.initialDialog; // use player coordinates
+                adjacentNPC.firstTalk = "false";
+                playerPaused = true; // player is paused
+                stopTextBubble = false; //  text bubble is not stopped anymore
+                return;
+              }
 
               if (stopTextBubble === true) {
                 // when space is pressed beside npc, text bubble is displayed
