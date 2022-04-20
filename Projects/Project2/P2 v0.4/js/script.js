@@ -1100,26 +1100,70 @@ function keyPressed() {
               adjacentNPC = depMate;
               //dep mate gives gold coins for fruit edibles types
               // otherwise he receives items as gifts which improve rel2pl
+              if (selectItem !== { itemName: "empty", itemImageName: "no image" }){
+                // if player is holding out item
+                let npcReceivingItemName = selectItem.itemName
+                if (adjacentNPC.relationship2items.npcReceivingItemName === 0){
+                  // no effect on rel2pl
+                  // receiving item = true
+                }
+                else if (adjacentNPC.relationship2items.npcReceivingItemName === 1){
+                    // +.2 on rel2pl
+                    // receiving item = true
+                  }
+                  else if (adjacentNPC.relationship2items.npcReceivingItemName === -1){
+                      // -.2 on rel2pl
+                      //receiving item = true
+                    }
+              } else {
+                // npc receives no gift, no effect on rel2pl
+              }
               console.log("YESSSIRRRR");
               //check for given item
               //select a dialog
               // check relationship to player
-              currentRelationToPlayer = depMate.relationship2player;
+              currentRelationToPlayer = adjacentNPC.relationship2player;
               if (currentRelationToPlayer === 0){
                 // neutral dialog
                 //is item being received? if yes display received item dialog, else just chitchat
-                currentNPC = npcText = depMate.currentText; // use player coordinates
-
+                currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
+                if (stopTextBubble === true) {
+                  // when space is pressed beside npc, text bubble is displayed
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                }
+                else if (stopTextBubble === false) {
+                  stopTextBubble = true;
+                  playerPaused = false;
+                }
               }
               if (currentRelationToPlayer === 1){
                 // friendly dialog
                 //is item being received? if yes display received item dialog, else just chitchat
-
+                currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
+                if (stopTextBubble === true) {
+                  // when space is pressed beside npc, text bubble is displayed
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                }
+                else if (stopTextBubble === false) {
+                  stopTextBubble = true;
+                  playerPaused = false;
+                }
               }
               if (currentRelationToPlayer === -1){
                 // unhappy dialog
                 //is item being received? if yes display received item dialog, else just chitchat
-
+                currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
+                if (stopTextBubble === true) {
+                  // when space is pressed beside npc, text bubble is displayed
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                }
+                else if (stopTextBubble === false) {
+                  stopTextBubble = true;
+                  playerPaused = false;
+                }
               }
 
 
@@ -1141,7 +1185,7 @@ function keyPressed() {
               // anything else is received as a gift
               currentNPC = npcText = depMate.currentText; // use player coordinates
               //}
-              
+
               if (stopTextBubble === true) {
                 // when space is pressed beside npc, text bubble is displayed
                 playerPaused = true; // player is paused
@@ -1349,6 +1393,7 @@ function dropItem(item) {
 function mouseClicked() {
   console.log(adjacentNPC);
   console.log(currentRelationToPlayer);
+  console.log(selectItem);
   //console.log(pieItem.name);
   //console.log(gridMap);
   //console.log(currentDigitPressed);

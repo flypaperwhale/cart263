@@ -14,6 +14,15 @@
       "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
+        "emerald": 0
+        "diamond": 0
+        "cherry": 0
+        "artwork": 0
+        "petRock": 0
+        "pie": 0
+        "firework": 0
+        "mushroom": 0
+        "goldcoin": 0
       },
       "itemDropZone": [
         { "row": 11, "collumn": 1 },
@@ -35,6 +44,15 @@
       "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
+        "emerald": 0
+        "diamond": 0
+        "cherry": 0
+        "artwork": 0
+        "petRock": 0
+        "pie": 0
+        "firework": 0
+        "mushroom": 0
+        "goldcoin": 0
       },
       "itemDropZone": [
         { "row": 11, "collumn": 1 },
@@ -56,6 +74,15 @@
       "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
+        "emerald": 0
+        "diamond": 0
+        "cherry": 0
+        "artwork": 0
+        "petRock": 0
+        "pie": 0
+        "firework": 0
+        "mushroom": 0
+        "goldcoin": 0
       },
       "itemDropZone": [
         { "row": 24, "collumn": 5 },
@@ -77,6 +104,15 @@
       "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
+        "emerald": 0
+        "diamond": 0
+        "cherry": 0
+        "artwork": 0
+        "petRock": 0
+        "pie": 0
+        "firework": 0
+        "mushroom": 0
+        "goldcoin": 0
       },
       "itemDropZone": [
         { "row": 11, "collumn": 1 },
@@ -98,6 +134,15 @@
       "relationship2items": {
         "range": "-1 to 1",
         "peach": 0
+        "emerald": 0
+        "diamond": 0
+        "cherry": 0
+        "artwork": 0
+        "petRock": 0
+        "pie": 0
+        "firework": 0
+        "mushroom": 0
+        "goldcoin": 0
       },
       "itemDropZone": [
         { "row": 11, "collumn": 1 },
