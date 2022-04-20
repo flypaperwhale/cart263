@@ -63,7 +63,16 @@ let player = {
   x: 380.66,
   y: 340.33,
   // inventory array holds (item) objects with name, qty, and image name
-  inventory: [{ itemName: "empty", itemImageName: "no image" }, {name: `cherry`, cellLabel: `Ch`, type: `edible fruit`, value: 2, imageName: `cherryImage`}],
+  inventory: [
+    { itemName: "empty", itemImageName: "no image" },
+    {
+      name: `cherry`,
+      cellLabel: `Ch`,
+      type: `edible fruit`,
+      value: 2,
+      imageName: `cherryImage`,
+    },
+  ],
 };
 
 let currentPlayerIndex; // indexed grid cell where Player currently is
@@ -96,7 +105,16 @@ let imageBank = {};
 
 // image names
 let bushImage, stoneImage;
-let peachImage, pieImage, cherryImage, goldcoinImage, diamondImage, emeraldImage, fireworkImage, mushroomImage, valsPaintingImage, petRockImage;
+let peachImage,
+  pieImage,
+  cherryImage,
+  goldcoinImage,
+  diamondImage,
+  emeraldImage,
+  fireworkImage,
+  mushroomImage,
+  valsPaintingImage,
+  petRockImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
 
@@ -131,7 +149,7 @@ function preload() {
   imageBank.goldcoinImage = loadImage(`assets/images/coin.png`);
   imageBank.petRockImage = loadImage(`assets/images/petRock.png`);
   imageBank.mushroomImage = loadImage(`assets/images/mushroom.png`);
-imageBank.valsPaintingImage = loadImage(`assets/images/valsPainting.png`);
+  imageBank.valsPaintingImage = loadImage(`assets/images/valsPainting.png`);
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
@@ -192,20 +210,19 @@ function setup() {
   // coinItem = new Item(data.items.)
 
   // add labels?
-//   for (let r = 0; r < rows; r++) {
-//     for (let c = 0; c < columns; c++) {
-//   playerAdjacentCells = [
-//     gridMap[r - 1][c - 1],
-//     gridMap[r - 1][c],
-//     gridMap[r - 1][c + 1],
-//     gridMap[r][c - 1],
-//     gridMap[r][c + 1],
-//     gridMap[r + 1][c - 1],
-//     gridMap[r + 1][c],
-//     gridMap[r + 1][c + 1],
-//   ];
-// }}
-
+  //   for (let r = 0; r < rows; r++) {
+  //     for (let c = 0; c < columns; c++) {
+  //   playerAdjacentCells = [
+  //     gridMap[r - 1][c - 1],
+  //     gridMap[r - 1][c],
+  //     gridMap[r - 1][c + 1],
+  //     gridMap[r][c - 1],
+  //     gridMap[r][c + 1],
+  //     gridMap[r + 1][c - 1],
+  //     gridMap[r + 1][c],
+  //     gridMap[r + 1][c + 1],
+  //   ];
+  // }}
 }
 
 /**
@@ -284,10 +301,7 @@ function simulationState() {
     displayText();
     displayInventory();
 
-checkForAdjacentNPC();
-
-
-
+    checkForAdjacentNPC();
   }
 }
 
@@ -359,27 +373,22 @@ function displayGrid() {
         } else if (selectItem.name === "petRock") {
           drawSmolItem(`petRock`, x, y);
           //drawSmolPie(x, y);
+        } else if (selectItem.name === "cherry") {
+          drawSmolItem(`cherry`, x, y);
+          //drawSmolPie(x, y);
+        } else if (selectItem.name === "mushroom") {
+          drawSmolItem(`mushroom`, x, y);
+          //drawSmolPie(x, y);
+        } else if (selectItem.name === "firework") {
+          drawSmolItem(`firework`, x, y);
+          //drawSmolPie(x, y);
+        } else if (selectItem.name === "valsPainting") {
+          drawSmolItem(`valsPainting`, x, y);
+          //drawSmolPie(x, y);
+        } else if (selectItem.name === "goldcoin") {
+          drawSmolItem(`goldcoin`, x, y);
+          //drawSmolPie(x, y);
         }
-        else if (selectItem.name === "cherry") {
-         drawSmolItem(`cherry`, x, y);
-         //drawSmolPie(x, y);
-       }
-       else if (selectItem.name === "mushroom") {
-        drawSmolItem(`mushroom`, x, y);
-        //drawSmolPie(x, y);
-      }
-      else if (selectItem.name === "firework") {
-        drawSmolItem(`firework`, x, y);
-        //drawSmolPie(x, y);
-      }
-      else if (selectItem.name === "valsPainting") {
-       drawSmolItem(`valsPainting`, x, y);
-       //drawSmolPie(x, y);
-     }
-     else if (selectItem.name === "goldcoin") {
-      drawSmolItem(`goldcoin`, x, y);
-      //drawSmolPie(x, y);
-    }
       }
       //  }
       if (cell === `Pe`) {
@@ -421,15 +430,17 @@ function displayGrid() {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(fireworkItem.name, x, y);
-      }  if (cell === `Pa`) {
-          // Pi for Pie
-          //drawPie(x, y);
-          drawItem(valsPaintingItem.name, x, y);
-        }  if (cell === `Gc`) {
-            // Pi for Pie
-            //drawPie(x, y);
-            drawItem(goldcoinItem.name, x, y);
-          }
+      }
+      if (cell === `Pa`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(valsPaintingItem.name, x, y);
+      }
+      if (cell === `Gc`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(goldcoinItem.name, x, y);
+      }
 
       if (cell === `NPC`) {
         // NPC
@@ -475,11 +486,9 @@ function displayGrid() {
         //drawPeach(x, y);
       }
 
-      if (cell === `Bo`){
+      if (cell === `Bo`) {
         image(boatImage, x * gridUnit, y * gridUnit, 40, 35);
-
       }
-
     }
   }
 }
@@ -548,24 +557,19 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `petRockImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `cherryImage`) {
+      } else if (player.inventory[i].imageName === `cherryImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[cherryItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `mushroomImage`) {
+      } else if (player.inventory[i].imageName === `mushroomImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[mushroomItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `fireworkImage`) {
+      } else if (player.inventory[i].imageName === `fireworkImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[fireworkItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `valsPaintingImage`) {
+      } else if (player.inventory[i].imageName === `valsPaintingImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[valsPaintingItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `goldcoinImage`) {
+      } else if (player.inventory[i].imageName === `goldcoinImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[goldcoinItem.imageName];
       }
@@ -588,24 +592,23 @@ function displayInventory() {
   }
 }
 
-function checkForAdjacentNPC(){
+function checkForAdjacentNPC() {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < columns; c++) {
-  if (gridMap[r][c] === `Pl`)
-  playerAdjacentCells = [
-    gridMap[r - 1][c - 1],
-    gridMap[r - 1][c],
-    gridMap[r - 1][c + 1],
-    gridMap[r][c - 1],
-    gridMap[r][c + 1],
-    gridMap[r + 1][c - 1],
-    gridMap[r + 1][c],
-    gridMap[r + 1][c + 1],
-  ];
+      if (gridMap[r][c] === `Pl`)
+        playerAdjacentCells = [
+          gridMap[r - 1][c - 1],
+          gridMap[r - 1][c],
+          gridMap[r - 1][c + 1],
+          gridMap[r][c - 1],
+          gridMap[r][c + 1],
+          gridMap[r + 1][c - 1],
+          gridMap[r + 1][c],
+          gridMap[r + 1][c + 1],
+        ];
+    }
+  }
 }
-}
-}
-
 
 function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
@@ -674,9 +677,11 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `firework`) {
     currentItemImage = imageBank[fireworkItem.imageName]; // ### wont show up??
-  }if (itemName === `valsPainting`) {
+  }
+  if (itemName === `valsPainting`) {
     currentItemImage = imageBank[valsPaintingItem.imageName]; // ### wont show up??
-  }if (itemName === `goldcoin`) {
+  }
+  if (itemName === `goldcoin`) {
     currentItemImage = imageBank[goldcoinItem.imageName]; // ### wont show up??
   }
   push();
@@ -901,19 +906,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera left!
         player.x = player.x - gridUnit;
-      //   for (let r = 0; r < rows; r++) {
-      //     for (let c = 0; c < columns; c++) {
-      //   playerAdjacentCells = [
-      //     gridMap[r - 1][c - 1],
-      //     gridMap[r - 1][c],
-      //     gridMap[r - 1][c + 1],
-      //     gridMap[r][c - 1],
-      //     gridMap[r][c + 1],
-      //     gridMap[r + 1][c - 1],
-      //     gridMap[r + 1][c],
-      //     gridMap[r + 1][c + 1],
-      //   ];
-      // }}
+        //   for (let r = 0; r < rows; r++) {
+        //     for (let c = 0; c < columns; c++) {
+        //   playerAdjacentCells = [
+        //     gridMap[r - 1][c - 1],
+        //     gridMap[r - 1][c],
+        //     gridMap[r - 1][c + 1],
+        //     gridMap[r][c - 1],
+        //     gridMap[r][c + 1],
+        //     gridMap[r + 1][c - 1],
+        //     gridMap[r + 1][c],
+        //     gridMap[r + 1][c + 1],
+        //   ];
+        // }}
       }
     }
 
@@ -946,7 +951,7 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`||
+        nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
         nextCell === `Gc`
@@ -979,19 +984,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera right!
         player.x = player.x + gridUnit;
-      //   for (let r = 0; r < rows; r++) {
-      //     for (let c = 0; c < columns; c++) {
-      //   playerAdjacentCells = [
-      //     gridMap[r - 1][c - 1],
-      //     gridMap[r - 1][c],
-      //     gridMap[r - 1][c + 1],
-      //     gridMap[r][c - 1],
-      //     gridMap[r][c + 1],
-      //     gridMap[r + 1][c - 1],
-      //     gridMap[r + 1][c],
-      //     gridMap[r + 1][c + 1],
-      //   ];
-      // }}
+        //   for (let r = 0; r < rows; r++) {
+        //     for (let c = 0; c < columns; c++) {
+        //   playerAdjacentCells = [
+        //     gridMap[r - 1][c - 1],
+        //     gridMap[r - 1][c],
+        //     gridMap[r - 1][c + 1],
+        //     gridMap[r][c - 1],
+        //     gridMap[r][c + 1],
+        //     gridMap[r + 1][c - 1],
+        //     gridMap[r + 1][c],
+        //     gridMap[r + 1][c + 1],
+        //   ];
+        // }}
       }
     }
 
@@ -1022,7 +1027,7 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`||
+        nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
         nextCell === `Gc`
@@ -1054,19 +1059,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell up
         // move camera up!
         player.y = player.y - gridUnit;
-      //   for (let r = 0; r < rows; r++) {
-      //     for (let c = 0; c < columns; c++) {
-      //   playerAdjacentCells = [
-      //     gridMap[r - 1][c - 1],
-      //     gridMap[r - 1][c],
-      //     gridMap[r - 1][c + 1],
-      //     gridMap[r][c - 1],
-      //     gridMap[r][c + 1],
-      //     gridMap[r + 1][c - 1],
-      //     gridMap[r + 1][c],
-      //     gridMap[r + 1][c + 1],
-      //   ];
-      // }}
+        //   for (let r = 0; r < rows; r++) {
+        //     for (let c = 0; c < columns; c++) {
+        //   playerAdjacentCells = [
+        //     gridMap[r - 1][c - 1],
+        //     gridMap[r - 1][c],
+        //     gridMap[r - 1][c + 1],
+        //     gridMap[r][c - 1],
+        //     gridMap[r][c + 1],
+        //     gridMap[r + 1][c - 1],
+        //     gridMap[r + 1][c],
+        //     gridMap[r + 1][c + 1],
+        //   ];
+        // }}
       }
     }
 
@@ -1097,7 +1102,7 @@ function keyPressed() {
         nextCell === `Em` ||
         nextCell === `Di` ||
         nextCell === `Pr` ||
-        nextCell === `Mu`||
+        nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
         nextCell === `Gc`
@@ -1129,19 +1134,19 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera down!
         player.y = player.y + gridUnit;
-      //   for (let r = 0; r < rows; r++) {
-      //     for (let c = 0; c < columns; c++) {
-      //   playerAdjacentCells = [
-      //     gridMap[r - 1][c - 1],
-      //     gridMap[r - 1][c],
-      //     gridMap[r - 1][c + 1],
-      //     gridMap[r][c - 1],
-      //     gridMap[r][c + 1],
-      //     gridMap[r + 1][c - 1],
-      //     gridMap[r + 1][c],
-      //     gridMap[r + 1][c + 1],
-      //   ];
-      // }}
+        //   for (let r = 0; r < rows; r++) {
+        //     for (let c = 0; c < columns; c++) {
+        //   playerAdjacentCells = [
+        //     gridMap[r - 1][c - 1],
+        //     gridMap[r - 1][c],
+        //     gridMap[r - 1][c + 1],
+        //     gridMap[r][c - 1],
+        //     gridMap[r][c + 1],
+        //     gridMap[r + 1][c - 1],
+        //     gridMap[r + 1][c],
+        //     gridMap[r + 1][c + 1],
+        //   ];
+        // }}
       }
     }
 
@@ -1215,25 +1220,27 @@ function keyPressed() {
               adjacentNPC = depMate;
               //dep mate gives gold coins for fruit edibles types
               // otherwise he receives items as gifts which improve rel2pl
-              if (selectItem !== { itemName: "empty", itemImageName: "no image" }){
-
-removeItemFromInv();
-
+              if (
+                selectItem !== { itemName: "empty", itemImageName: "no image" }
+              ) {
+                removeItemFromInv();
 
                 // if player is holding out item
-                let npcReceivingItemName = selectItem.itemName
-                if (adjacentNPC.relationship2items.npcReceivingItemName === 0){
+                let npcReceivingItemName = selectItem.itemName;
+                if (adjacentNPC.relationship2items.npcReceivingItemName === 0) {
                   // no effect on rel2pl
                   // receiving item = true
+                } else if (
+                  adjacentNPC.relationship2items.npcReceivingItemName === 1
+                ) {
+                  // +.2 on rel2pl
+                  // receiving item = true
+                } else if (
+                  adjacentNPC.relationship2items.npcReceivingItemName === -1
+                ) {
+                  // -.2 on rel2pl
+                  //receiving item = true
                 }
-                else if (adjacentNPC.relationship2items.npcReceivingItemName === 1){
-                    // +.2 on rel2pl
-                    // receiving item = true
-                  }
-                  else if (adjacentNPC.relationship2items.npcReceivingItemName === -1){
-                      // -.2 on rel2pl
-                      //receiving item = true
-                    }
               } else {
                 // npc receives no gift, no effect on rel2pl
               }
@@ -1242,7 +1249,7 @@ removeItemFromInv();
               //select a dialog
               // check relationship to player
               currentRelationToPlayer = adjacentNPC.relationship2player;
-              if (currentRelationToPlayer === 0){
+              if (currentRelationToPlayer === 0) {
                 // neutral dialog
                 //is item being received? if yes display received item dialog, else just chitchat
                 currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
@@ -1250,13 +1257,12 @@ removeItemFromInv();
                   // when space is pressed beside npc, text bubble is displayed
                   playerPaused = true; // player is paused
                   stopTextBubble = false; //  text bubble is not stopped anymore
-                }
-                else if (stopTextBubble === false) {
+                } else if (stopTextBubble === false) {
                   stopTextBubble = true;
                   playerPaused = false;
                 }
               }
-              if (currentRelationToPlayer === 1){
+              if (currentRelationToPlayer === 1) {
                 // friendly dialog
                 //is item being received? if yes display received item dialog, else just chitchat
                 currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
@@ -1264,13 +1270,12 @@ removeItemFromInv();
                   // when space is pressed beside npc, text bubble is displayed
                   playerPaused = true; // player is paused
                   stopTextBubble = false; //  text bubble is not stopped anymore
-                }
-                else if (stopTextBubble === false) {
+                } else if (stopTextBubble === false) {
                   stopTextBubble = true;
                   playerPaused = false;
                 }
               }
-              if (currentRelationToPlayer === -1){
+              if (currentRelationToPlayer === -1) {
                 // unhappy dialog
                 //is item being received? if yes display received item dialog, else just chitchat
                 currentNPC = npcText = adjacentNPC.currentText; // use player coordinates
@@ -1278,19 +1283,15 @@ removeItemFromInv();
                   // when space is pressed beside npc, text bubble is displayed
                   playerPaused = true; // player is paused
                   stopTextBubble = false; //  text bubble is not stopped anymore
-                }
-                else if (stopTextBubble === false) {
+                } else if (stopTextBubble === false) {
                   stopTextBubble = true;
                   playerPaused = false;
                 }
               }
-
-
             } else if (playerAdjacentCells[i] === `BOT`) {
               adjacentNPC = boatMate;
               //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
               // otherwise he receives items as gifts which improve rel2pl
-
             } else if (playerAdjacentCells[i] === `HIK`) {
               adjacentNPC = hikeMate;
               //hiker receives items as gifts
@@ -1332,7 +1333,8 @@ removeItemFromInv();
                   if (npcPeachEventOngoing === true) {
                     // while npcPeachEvent is ongoing
                     npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
-                    npcText = "Thanks for that peach, can you bring me 5 total?";
+                    npcText =
+                      "Thanks for that peach, can you bring me 5 total?";
                     if (npcPeachEvent === 5) {
                       // when npcPeachEvent reaches status 5
                       if (triggerOnce === 0) {
@@ -1359,38 +1361,32 @@ removeItemFromInv();
                     }
                   }
                 } else {
-                removeItemFromInv();
+                  removeItemFromInv();
                 }
               } else if (stopTextBubble === false) {
                 stopTextBubble = true;
                 playerPaused = false;
               }
-
             }
           }
-
-
         }
       }
     }
   }
 }
 
-function removeItemFromInv(){
+function removeItemFromInv() {
   if (
     (selectItem.name === "emerald" && selectItemHeldOut === true) ||
     (selectItem.name === "diamond" && selectItemHeldOut === true) ||
     (selectItem.name === "petRock" && selectItemHeldOut === true) ||
     (selectItem.name === "pie" && selectItemHeldOut === true) ||
     (selectItem.name === "cherry" && selectItemHeldOut === true) ||
-      (selectItem.name === "mushroom" && selectItemHeldOut === true)
-  ||
-    (selectItem.name === "firework" && selectItemHeldOut === true)
- ||
-  (selectItem.name === "valsPainting" && selectItemHeldOut === true)
- ||
-  (selectItem.name === "goldcoin" && selectItemHeldOut === true)
- ) {
+    (selectItem.name === "mushroom" && selectItemHeldOut === true) ||
+    (selectItem.name === "firework" && selectItemHeldOut === true) ||
+    (selectItem.name === "valsPainting" && selectItemHeldOut === true) ||
+    (selectItem.name === "goldcoin" && selectItemHeldOut === true)
+  ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
     currentDigitPressed = 0;
@@ -1448,6 +1444,16 @@ function pickItemUp() {
   if (nextCell === `Mu`) {
     itemPickup(`mushroom`);
   }
+
+  if (nextCell === `Fw`) {
+    itemPickup(`firework`);
+  }
+  if (nextCell === `Pa`) {
+    itemPickup(`valsPainting`);
+  }
+  if (nextCell === `Gc`) {
+    itemPickup(`goldcoin`);
+  }
 }
 
 function itemPickup(item) {
@@ -1475,13 +1481,15 @@ function itemPickup(item) {
   if (item === `firework`) {
     //console.log(`hey...`)
     player.inventory.push(fireworkItem);
-  }  if (item === `valsPainting`) {
-      //console.log(`hey...`)
-      player.inventory.push(valsPaintingItem);
-    }  if (item === `goldcoin`) {
-        //console.log(`hey...`)
-        player.inventory.push(goldcoinItem);
-      }
+  }
+  if (item === `valsPainting`) {
+    //console.log(`hey...`)
+    player.inventory.push(valsPaintingItem);
+  }
+  if (item === `goldcoin`) {
+    //console.log(`hey...`)
+    player.inventory.push(goldcoinItem);
+  }
 }
 
 function dropItem(item) {
