@@ -14,9 +14,13 @@ class NPC {
     // {
     //   peach: 0,
     // };
-
     this.itemDropZone = data.itemDropZone;
-    this.currentText = data["initial dialog"];
+
+    this.firstTalk = data.firstTalk;
+    this.initialDialog = data.initialDialog;
+    this.neutralDialog = data.neutralDialog;
+    this.dislikeDialog = data.dislikeDialog;
+    this.friendlyDialog = data.friendlyDialog;
   }
 
   // events
