@@ -10,7 +10,7 @@
       "color": "salmon",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 10,
+      "relationship2player": 5,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
@@ -28,7 +28,10 @@
         { "row": 11, "collumn": 4 },
         { "row": 10, "collumn": 5 }
       ],
-      "initial dialog": "How fantastic to meet you!"
+      "initial dialog": "Welcome to my market stand!",
+      "neutral dialog": ["I've got fresh fruit for you", "Bring me some fresh produce, I will pay you for it", "I hope you're having a good day"],
+      "dislike dialog": ["I don't even know how you made me dislike you so much"],
+      "friendly dialog": ["Well if it isn't my favorite associate!", "I appreciate doing business with you", "I find this island has improved with you around"]
     },
     "boater": {
       "name": "boater",
@@ -48,7 +51,7 @@
         "diamond": 0,
         "cherry": 0,
         "artwork": 0,
-        "petRock": 0,
+        "petRock": -1,
         "pie": 1,
         "firework": 0,
         "mushroom": 0,
@@ -58,8 +61,10 @@
         { "row": 19, "collumn": 14 },
         { "row": 20, "collumn": 14 }
       ],
-      "initial dialog": "How fantastic to meet you!"
-    },
+      "initial dialog": "Hey there. You like boats?",
+      "neutral dialog": ["I'll rent you a boat for 3 gold coins", "I don't know what I'd do for something fresh right now", "When work is over, I hop on my boat a fish until the sun sets"],
+      "dislike dialog": ["I don't like you very much"],
+      "friendly dialog": ["You are a good person to know", "You should come fishing with me one of these days"]    },
     "idler": {
       "name": "idler",
       "gridMap index": {
@@ -88,7 +93,10 @@
         { "row": 24, "collumn": 5 },
         { "row": 24, "collumn": 6 }
       ],
-      "initial dialog": "How fantastic to meet you!"
+      "initial dialog": "How fantastic to meet you!",
+      "neutral dialog": ["What do I do? What do you mean?", "I was born on this island, I've never thought of leaving", "I love baking, desserts are my true passion", "I have a passion for taking it easy, if I hadn't said it yet"],
+      "dislike dialog": ["Aww, chill out pal"],
+      "friendly dialog": ["You are the bomb!", "Stick with me, friends like you make life even sweeter", "... I'm just happy you're spending time with me"]
     },
     "peddler": {
       "name": "peddler",
@@ -118,7 +126,10 @@
         { "row": 19, "collumn": 18 },
         { "row": 20, "collumn": 18 }
       ],
-      "initial dialog": "How fantastic to meet you!"
+      "initial dialog": "Hi there! I'm trading wares, you might find something you like",
+      "neutral dialog": [],
+      "dislike dialog": ["I've got all sorts of things. What do you want?"],
+      "friendly dialog": []
     },
     "hiker": {
       "name": "hiker",
@@ -145,7 +156,10 @@
         "goldcoin": 0
       },
       "itemDropZone": [],
-      "initial dialog": "How fantastic to meet you!"
+      "initial dialog": "Oh, hi! I'm a bit busy here, I can't talk much",
+      "neutral dialog": ["I'm... just trying to get to the top of this mountain", "I've set up camp over there while I work on this mountain", "There are a lot of minerals hiding in this mountain"],
+      "dislike dialog": [],
+      "friendly dialog": ["Howdy! Enjoy the nice weather!"]
     }
   },
   "items": {

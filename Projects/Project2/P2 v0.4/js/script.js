@@ -1288,7 +1288,10 @@ function keyPressed() {
                   playerPaused = false;
                 }
               }
-            } else if (playerAdjacentCells[i] === `BOT`) {
+            }
+
+
+            else if (playerAdjacentCells[i] === `BOT`) {
               adjacentNPC = boatMate;
               //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
               // otherwise he receives items as gifts which improve rel2pl
@@ -1299,7 +1302,10 @@ function keyPressed() {
               adjacentNPC = peddleMate;
               //pedler exchanges items for equal value item
               // does not receive gifts
-            } else if (playerAdjacentCells[i] === `IDL`) {
+            }
+
+
+            else if (playerAdjacentCells[i] === `IDL`) {
               adjacentNPC = idleMate;
               //idle mate wants 5 peaches in exchange for pie, infinite
               // anything else is received as a gift
@@ -1323,12 +1329,9 @@ function keyPressed() {
                 // if player item is out, player gives npc item
                 // npc verifies what player is giving
 
-                givenItem = selectItem.name;
 
                 if (selectItem.name === "peach" && selectItemHeldOut === true) {
-                  player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
-                  selectItem = player.inventory[0]; // select item is reset to 0
-                  currentDigitPressed = 0;
+                  removeItemFromInv();
                   // npcPeachEvent //
                   if (npcPeachEventOngoing === true) {
                     // while npcPeachEvent is ongoing
@@ -1337,13 +1340,14 @@ function keyPressed() {
                       "Thanks for that peach, can you bring me 5 total?";
                     if (npcPeachEvent === 5) {
                       // when npcPeachEvent reaches status 5
-                      if (triggerOnce === 0) {
+                      //if (triggerOnce === 0) {
                         dropItem(`pie`);
                         //dropPie();
-                        triggerOnce = 1;
-                      }
+                        //triggerOnce = 1;
+                        npcPeachEvent = 0;
+                      //}
                       npcText = "You are the bomb! I love you!"; // npc now loves the player
-                      npcPeachEventOngoing = false; // the npcPeachEvent is now over
+                      npcPeachEventOngoing = true; // the npcPeachEvent repeats
                     }
                   } else {
                     // no longer in the npcPeachEvent, when the player gives npc another peach
@@ -1376,7 +1380,7 @@ function keyPressed() {
 }
 
 function removeItemFromInv() {
-  if (
+  if ((selectItem.name === "peach" && selectItemHeldOut === true) ||
     (selectItem.name === "emerald" && selectItemHeldOut === true) ||
     (selectItem.name === "diamond" && selectItemHeldOut === true) ||
     (selectItem.name === "petRock" && selectItemHeldOut === true) ||
