@@ -21,7 +21,7 @@ let gridMap = [
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
   [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Pa`, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, `Fw`, `S`, `S`, ` `, `Gc`, ` `,` `, ` `, ` `, ` `, ` `, `Em`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
+  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, `Fw`, `S`, `S`, ` `, `Gc`, ` `,` `, ` `, ` `, ` `, ` `, `EmG`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
@@ -41,7 +41,7 @@ let gridMap = [
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [25]
   [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [26]
   [` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [27]
-  [` `, `S`, ` `, ` `, `S`, ` `, `Pe`, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
+  [` `, `S`, ` `, ` `, `S`, ` `, `PeG`, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [29]
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
@@ -214,6 +214,12 @@ function setup() {
   diamondItem = new Item(data.items.diamond);
   emeraldItem = new Item(data.items.emerald);
   petRockItem = new Item(data.items.petRock);
+
+  peachNPCItem = new Item(data.items.npcPeach);
+  diamondNPCItem = new Item(data.items.npcDiamond);
+  emeraldNPCItem = new Item(data.items.npcEmerald);
+  petRockNPCITem = new Item(data.items.npcPetRock);
+
   cherryItem = new Item(data.items.cherry);
   mushroomItem = new Item(data.items.mushroom);
   fireworkItem = new Item(data.items.firework);
@@ -405,7 +411,7 @@ function displayGrid() {
         }
       }
       //  }
-      if (cell === `Pe`) {
+      if (cell === `PeG` || cell === `PeN`) {
         // Pe for Peach
         //console.log(peachItem);
         //console.log(`in peach cell ${peachItem} + ${peachItem.name}`);
@@ -419,17 +425,17 @@ function displayGrid() {
         drawItem(pieItem.name, x, y);
       }
 
-      if (cell === `Em`) {
+      if (cell === `EmG` || cell === `EmN`) {
         drawItem(emeraldItem.name, x, y);
       }
 
-      if (cell === `Di`) {
+      if (cell === `DiG` || cell === `DiN`) {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(diamondItem.name, x, y);
       }
 
-      if (cell === `Pr`) {
+      if (cell === `PrG` || cell === `PrN`) {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(petRockItem.name, x, y);
@@ -876,11 +882,15 @@ function keyPressed() {
       }
       // else move player, and pick up item if there is
       else if (
-        nextCell === `Pe` ||
+        nextCell === `PeG` ||
         nextCell === `Pi` ||
-        nextCell === `Em` ||
-        nextCell === `Di` ||
-        nextCell === `Pr` ||
+        nextCell === `EmG` ||
+        nextCell === `DiG` ||
+        nextCell === `PeN` ||
+        nextCell === `EmN` ||
+        nextCell === `DiN` ||
+        nextCell === `PrN` ||
+        nextCell === `PrG` ||
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
@@ -960,11 +970,15 @@ function keyPressed() {
       }
       // else move player, and pick up item if there is
       else if (
-        nextCell === `Pe` ||
+        nextCell === `PeG` ||
         nextCell === `Pi` ||
-        nextCell === `Em` ||
-        nextCell === `Di` ||
-        nextCell === `Pr` ||
+        nextCell === `EmG` ||
+        nextCell === `DiG` ||
+        nextCell === `PeN` ||
+        nextCell === `EmN` ||
+        nextCell === `DiN` ||
+        nextCell === `PrN` ||
+        nextCell === `PrG` ||
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
@@ -1036,11 +1050,15 @@ function keyPressed() {
       }
       // else move player, and pick up item if there is
       else if (
-        nextCell === `Pe` ||
+        nextCell === `PeG` ||
         nextCell === `Pi` ||
-        nextCell === `Em` ||
-        nextCell === `Di` ||
-        nextCell === `Pr` ||
+        nextCell === `EmG` ||
+        nextCell === `DiG` ||
+        nextCell === `PeN` ||
+        nextCell === `EmN` ||
+        nextCell === `DiN` ||
+        nextCell === `PrN` ||
+        nextCell === `PrG` ||
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
@@ -1111,11 +1129,15 @@ function keyPressed() {
       }
       // else move player, and pick up item if there is
       else if (
-        nextCell === `Pe` ||
+        nextCell === `PeG` ||
         nextCell === `Pi` ||
-        nextCell === `Em` ||
-        nextCell === `Di` ||
-        nextCell === `Pr` ||
+        nextCell === `EmG` ||
+        nextCell === `DiG` ||
+        nextCell === `PeN` ||
+        nextCell === `EmN` ||
+        nextCell === `DiN` ||
+        nextCell === `PrN` ||
+        nextCell === `PrG` ||
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
@@ -1273,6 +1295,7 @@ function keyPressed() {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
+  removeItemFromInv();
                         // console.log(selectItem.name);
                         // console.log(receivedItem);
                         // console.log(
@@ -1280,71 +1303,81 @@ function keyPressed() {
                       //  );
                         if (receivedItem === `peach` || receivedItem === `cherry` || receivedItem === `mushroom`){
                           //dropItem
+                    dropItem(goldcoinItem, depMate.itemDropZone);
+
                         }
+                        else if (receivedItem === `goldcoin`){
+                          let depMateItems = [peachNPCItem, cherryItem, fireworkItem];
+                          depMateItemToDrop = random(depMateItems);
+                          dropItem(depMateItemToDrop,depMate.itemDropZone);
+                        }
+else {
+    npcText = `Thanks for the ${receivedItem}`;
+    let relationshipManipulator =
+      adjacentNPC.relationship2items[receivedItem];
 
-                        let relationshipManipulator =
-                          adjacentNPC.relationship2items[receivedItem];
+    //console.log(adjacentNPC.cellLabel);
 
-                        //console.log(adjacentNPC.cellLabel);
+    console.log(adjacentNPC.relationship2player);
+    console.log(
+      `the manipulator is ${relationshipManipulator}`
+    );
 
-                        console.log(adjacentNPC.relationship2player);
-                        console.log(
-                          `the manipulator is ${relationshipManipulator}`
-                        );
+    adjacentNPC.relationship2player =
+      adjacentNPC.relationship2player +
+      relationshipManipulator;
 
-                        adjacentNPC.relationship2player =
-                          adjacentNPC.relationship2player +
-                          relationshipManipulator;
+    console.log(adjacentNPC.relationship2player);
+    removeItemFromInv();
+  }
+}
+}
 
-                        console.log(adjacentNPC.relationship2player);
-                        removeItemFromInv();
-                      }
-                    }
-                  }
+// now that rel2ply has been manipulated
+if (
+  adjacentNPC.relationship2player >= -9 &&
+  adjacentNPC.relationship2player <= 9
+) {
+  let dialogSelection = adjacentNPC.neutralDialog;
+  let lastNPCText = npcText;
+  npcText = random(dialogSelection); // use player coordinates
+  if(npcText === lastNPCText){
+    npcText = random(dialogSelection); // use player coordinates
+  }
+  playerPaused = true; // player is paused
+  stopTextBubble = false; //  text bubble is not stopped anymore
+  // no effect on rel2pl
+  // receiving item = true
+  //return;
+} else if (adjacentNPC.relationship2player >= 10) {
+  let dialogSelection = adjacentNPC.friendlyDialog;
+  let lastNPCText = npcText;
+  npcText = random(dialogSelection); // use player coordinates
+  if(npcText === lastNPCText){
+    npcText = random(dialogSelection); // use player coordinates
+  }
+  playerPaused = true; // player is paused
+  stopTextBubble = false; //  text bubble is not stopped anymore
+  // +.2 on rel2pl
+  // receiving item = true
+  //return;
+} else if (adjacentNPC.relationship2items <= -10) {
+  let dialogSelection = adjacentNPC.dislikeDialog;
+  let lastNPCText = npcText;
+  npcText = random(dialogSelection); // use player coordinates
+  if(npcText === lastNPCText){
+    npcText = random(dialogSelection); // use player coordinates
+  }
+            playerPaused = true; // player is paused
+  stopTextBubble = false; //  text bubble is not stopped anymore
+  // -.2 on rel2pl
+  //receiving item = true
+  //return;
+} else {
+  // npc receives no gift, no effect on rel2pl
+}
+}
 
-                  // now that rel2ply has been manipulated
-                    if (
-                      adjacentNPC.relationship2player >= -9 &&
-                      adjacentNPC.relationship2player <= 9
-                    ) {
-                      let dialogSelection = adjacentNPC.neutralDialog;
-                      let lastNPCText = npcText;
-                      npcText = random(dialogSelection); // use player coordinates
-                      if(npcText === lastNPCText){
-                        npcText = random(dialogSelection); // use player coordinates
-                      }
-                      playerPaused = true; // player is paused
-                      stopTextBubble = false; //  text bubble is not stopped anymore
-                      // no effect on rel2pl
-                      // receiving item = true
-                      //return;
-                    } else if (adjacentNPC.relationship2player >= 10) {
-                      let dialogSelection = adjacentNPC.friendlyDialog;
-                      let lastNPCText = npcText;
-                      npcText = random(dialogSelection); // use player coordinates
-                      if(npcText === lastNPCText){
-                        npcText = random(dialogSelection); // use player coordinates
-                      }
-                      playerPaused = true; // player is paused
-                      stopTextBubble = false; //  text bubble is not stopped anymore
-                      // +.2 on rel2pl
-                      // receiving item = true
-                      //return;
-                    } else if (adjacentNPC.relationship2items <= -10) {
-                      let dialogSelection = adjacentNPC.dislikeDialog;
-                      let lastNPCText = npcText;
-                      npcText = random(dialogSelection); // use player coordinates
-                      if(npcText === lastNPCText){
-                        npcText = random(dialogSelection); // use player coordinates
-                      }
-                                playerPaused = true; // player is paused
-                      stopTextBubble = false; //  text bubble is not stopped anymore
-                      // -.2 on rel2pl
-                      //receiving item = true
-                      //return;
-                    } else {
-                      // npc receives no gift, no effect on rel2pl
-                    }
                   console.log("YESSSIRRRR");
                   //check for given item
                   //select a dialog
@@ -1536,18 +1569,14 @@ function solidBlock() {
 }
 
 function pickItemUp() {
-  if (nextCell === `Pe`) {
+  if (nextCell === `PeG`) {
     itemPickup(`peach`); // ## generalize this with a variable ##
     // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
     let treeDropTime = random(1500, 3500);
     setTimeout(dropItem.bind(this, peachItem, peachItem.dropZone), treeDropTime); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
     // but if peach is dropped by npc do not redrop ###
   }
-  if (nextCell === `Pi`) {
-    itemPickup(`pie`);
-  }
-
-  if (nextCell === `Di`) {
+  if (nextCell === `DiG`) {
     //console.log("huh?")
     itemPickup(`diamond`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
@@ -1564,7 +1593,7 @@ function pickItemUp() {
 
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
-  if (nextCell === `Pr`) {
+  if (nextCell === `PrG`) {
     //console.log("huh?")
     itemPickup(`petRock`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
@@ -1581,7 +1610,7 @@ function pickItemUp() {
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
 
-  if (nextCell === `Em`) {
+  if (nextCell === `EmG`) {
     itemPickup(`emerald`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
@@ -1596,7 +1625,18 @@ function pickItemUp() {
     }
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
-
+  if (nextCell === `EmN`) {
+    itemPickup(`emerald`);
+  }  if (nextCell === `PeN`) {
+      itemPickup(`peach`);
+    }  if (nextCell === `PrN`) {
+        itemPickup(`petRock`);
+      }  if (nextCell === `DiN`) {
+          itemPickup(`Diamond`);
+        }
+  if (nextCell === `Pi`) {
+    itemPickup(`pie`);
+  }
   if (nextCell === `Mu`) {
     itemPickup(`mushroom`);
   }
@@ -1651,6 +1691,7 @@ function itemPickup(item) {
 function dropItem(item, dropZone) {
   //
 if (dropZone === item.dropZone){
+  console.log("wait a minute");
   if (item.name === `peach`) {
     //console.log("this is no pie");
     let fallenPeachIndex = random(dropZone);
@@ -1660,7 +1701,7 @@ if (dropZone === item.dropZone){
       dropItem(item, dropZone); //dropPeach();
     } else {
       // drop the peach
-      gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
+      gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `PeG`;
     }
   }
 
@@ -1676,11 +1717,11 @@ if (dropZone === item.dropZone){
     } else {
       // drop the peach
       if (currentRiverRock.name === `emerald`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `EmG`;
       } else if (currentRiverRock.name === `diamond`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Di`;
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `DiG`;
       } else if (currentRiverRock.name === `petRock`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Pr`;
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `PrG`;
       }
     }
   }

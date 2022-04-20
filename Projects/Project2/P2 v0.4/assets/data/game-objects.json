@@ -30,9 +30,19 @@
       ],
       "firstTalk": "true",
       "initialDialog": "Welcome to my market stand!",
-      "neutralDialog": ["I've got fresh fruit for you", "Bring me some fresh produce, I will pay you for it", "I hope you're having a good day"],
-      "dislikeDialog": ["I don't even know how you made me dislike you so much"],
-      "friendlyDialog": ["Well if it isn't my favorite associate!", "I appreciate doing business with you", "I find this island has improved with you around"]
+      "neutralDialog": [
+        "I've got fresh fruit for you",
+        "Bring me some fresh produce, I will pay you for it",
+        "I hope you're having a good day"
+      ],
+      "dislikeDialog": [
+        "I don't even know how you made me dislike you so much"
+      ],
+      "friendlyDialog": [
+        "Well if it isn't my favorite associate!",
+        "I appreciate doing business with you",
+        "I find this island has improved with you around"
+      ]
     },
     "boater": {
       "name": "boater",
@@ -64,9 +74,17 @@
       ],
       "firstTalk": "true",
       "initialDialog": "Hey there. You like boats?",
-      "neutralDialog": ["I'll rent you a boat for 3 gold coins", "I don't know what I'd do for something fresh right now", "When work is over, I hop on my boat a fish until the sun sets"],
+      "neutralDialog": [
+        "I'll rent you a boat for 3 gold coins",
+        "I don't know what I'd do for something fresh right now",
+        "When work is over, I hop on my boat a fish until the sun sets"
+      ],
       "dislikeDialog": ["I don't like you very much"],
-      "friendlyDialog": ["You are a good person to know", "You should come fishing with me one of these days"]    },
+      "friendlyDialog": [
+        "You are a good person to know",
+        "You should come fishing with me one of these days"
+      ]
+    },
     "idler": {
       "name": "idler",
       "gridMap index": {
@@ -97,9 +115,18 @@
       ],
       "firstTalk": "true",
       "initialDialog": "How fantastic to meet you!",
-      "neutralDialog": ["What do I do? What do you mean?", "I was born on this island, I've never thought of leaving", "I love baking, desserts are my true passion", "I have a passion for taking it easy, if I hadn't said it yet"],
+      "neutralDialog": [
+        "What do I do? What do you mean?",
+        "I was born on this island, I've never thought of leaving",
+        "I love baking, desserts are my true passion",
+        "I have a passion for taking it easy, if I hadn't said it yet"
+      ],
       "dislikeDialog": ["Aww, chill out pal"],
-      "friendlyDialog": ["You are the bomb!", "Stick with me, friends like you make life even sweeter", "... I'm just happy you're spending time with me"]
+      "friendlyDialog": [
+        "You are the bomb!",
+        "Stick with me, friends like you make life even sweeter",
+        "... I'm just happy you're spending time with me"
+      ]
     },
     "peddler": {
       "name": "peddler",
@@ -162,7 +189,11 @@
       "itemDropZone": [],
       "firstTalk": "true",
       "initialDialog": "Oh, hi! I'm a bit busy here, I can't talk much",
-      "neutralDialog": ["I'm... just trying to get to the top of this mountain", "I've set up camp over there while I work on this mountain", "There are a lot of minerals hiding in this mountain"],
+      "neutralDialog": [
+        "I'm... just trying to get to the top of this mountain",
+        "I've set up camp over there while I work on this mountain",
+        "There are a lot of minerals hiding in this mountain"
+      ],
       "dislikeDialog": [],
       "friendlDdialog": ["Howdy! Enjoy the nice weather!"]
     }
@@ -170,7 +201,7 @@
   "items": {
     "peach": {
       "name": "peach",
-      "cellLabel": "Pe",
+      "cellLabel": "PeG",
       "type": "edible fruit",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
@@ -193,7 +224,7 @@
     },
     "petRock": {
       "name": "petRock",
-      "cellLabel": "Pr",
+      "cellLabel": "PrG",
       "type": "stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
@@ -216,7 +247,7 @@
     },
     "diamond": {
       "name": "diamond",
-      "cellLabel": "Di",
+      "cellLabel": "DiG",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 4,
@@ -239,7 +270,7 @@
     },
     "emerald": {
       "name": "emerald",
-      "cellLabel": "Em",
+      "cellLabel": "EmG",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 3,
@@ -260,6 +291,42 @@
         { "row": 11, "collumn": 21 }
       ]
     },
+    "npcPeach": {
+      "name": "peach",
+      "cellLabel": "PeN",
+      "type": "edible fruit",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 1,
+      "imageName": "peachImage",
+      "dropZone": [0]
+    },
+    "npcEmerald": {
+      "name": "emerald",
+      "cellLabel": "EmN",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 3,
+      "imageName": "emeraldImage",
+      "dropZone": [0]
+    },
+    "npcDiamond": {
+      "name": "diamond",
+      "cellLabel": "DiN",
+      "type": "precious stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 4,
+      "imageName": "diamondImage",
+      "dropZone": [0]
+    },
+    "npcPetRock": {
+      "name": "petRock",
+      "cellLabel": "Ch",
+      "type": "stone",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 1,
+      "imageName": "petRockImage",
+      "dropZone": [0]
+    },
     "pie": {
       "name": "pie",
       "cellLabel": "Pi",
@@ -267,7 +334,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 5,
       "imageName": "pieImage",
-      "dropZone": []
+      "dropZone": [0]
     },
     "cherry": {
       "name": "cherry",
@@ -276,7 +343,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 2,
       "imageName": "cherryImage",
-      "dropZone": []
+      "dropZone": [0]
     },
     "mushroom": {
       "name": "mushroom",
@@ -285,7 +352,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 2,
       "imageName": "mushroomImage",
-      "dropZone": []
+      "dropZone": [0]
     },
     "firework": {
       "name": "firework",
@@ -294,7 +361,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 3,
       "imageName": "fireworkImage",
-      "dropZone": []
+      "dropZone": [0]
     },
     "valsPainting": {
       "name": "valsPainting",
@@ -303,7 +370,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 5,
       "imageName": "valsPaintingImage",
-      "dropZone": []
+      "dropZone": [0]
     },
     "goldcoin": {
       "name": "goldcoin",
@@ -312,7 +379,7 @@
       "/* value range": "1 = common - 5 = precious */",
       "value": 4,
       "imageName": "goldcoinImage",
-      "dropZone": []
+      "dropZone": [0]
     }
   }
 }
