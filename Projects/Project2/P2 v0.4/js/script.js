@@ -250,7 +250,7 @@ function draw() {
   cameraSetup();
   noStroke();
   // BACKGROUND //
-  background(93, 149, 252);
+  background(54, 99, 182);
   titleState();
   simulationState();
   //I can turn on and off the camera at any point to restore
@@ -1227,145 +1227,163 @@ function keyPressed() {
         ) {
           //if (npcFriendEvent === 0) {
 
+          if (playerPaused === true) {
+            // if player is paused
+            stopTextBubble = true; // bubble off
+            playerPaused = false; // un pause
+            ///return;
+          }
+          else {
           for (let i = 0; i < 8; i++) {
+            // go through cells around player
             if (playerAdjacentCells[i] === `DEP`) {
+              // if DEP is adjacent to player
               adjacentNPC = depMate;
 
-if (playerPaused === true){
-  playerPaused = false;
-  return;
-}
-else{
-  if (adjacentNPC.firstTalk === "true") {
-    console.log("yo");
-    npcText = adjacentNPC.initialDialog; // use player coordinates
-    adjacentNPC.firstTalk = "false";
-    playerPaused = true; // player is paused
-    stopTextBubble = false; //  text bubble is not stopped anymore
-    return;
-  }
-
-  if (selectItemHeldOut === true){
-  //dep mate gives gold coins for fruit edibles types
-  // otherwise he receives items as gifts which improve rel2pl
-  if (
-    selectItem !== { itemName: "empty", itemImageName: "no image" }
-  ) {
-    //console.log("yes you come here");
-    // if player is holding out item
-
-      //console.log("ok");
-
-    // go through item name list
-    for (let i = 0; i < itemNameList.length; i++) {
-      //console.log("nah?");
-      //console.log(itemNameList[i]);
-      //console.log(selectItem.name);
-      if (itemNameList[i] === selectItem.name) {
-        console.log(`you've given a ${selectItem.name}`);
-        //determine how much relationship manipulated
-        receivedItem = selectItem.name;
-        console.log(selectItem.name);
-        console.log(receivedItem);
-          console.log(`${adjacentNPC.relationship2items[receivedItem]}`);
-        let relationshipManipulator = adjacentNPC.relationship2items[receivedItem];
-
-        //console.log(adjacentNPC.cellLabel);
-
-  console.log(adjacentNPC.relationship2player);
-          console.log(`the manipulator is ${relationshipManipulator}`);
-
-        adjacentNPC.relationship2player =
-          adjacentNPC.relationship2player + relationshipManipulator;
 
 
-          console.log(adjacentNPC.relationship2player);
-            removeItemFromInv();
-      }
-    }
-  }
 
 
-    if (selectItem.itemName === adjacentNPC.relationship2items)
-      if (
-        adjacentNPC.relationship2player >= -9 &&
-        adjacentNPC.relationship2player <= 9
-      ) {
-        let dialogSelection = adjacentNPC.neutralDialog;
-        npcText = random(dialogSelection); // use player coordinates
-        playerPaused = true; // player is paused
-        stopTextBubble = false; //  text bubble is not stopped anymore
-        // no effect on rel2pl
-        // receiving item = true
-      } else if (adjacentNPC.relationship2player >= 10) {
-        let dialogSelection = adjacentNPC.frienlyDialog;
-        npcText = random(dialogSelection); // use player coordinates
-        playerPaused = true; // player is paused
-        stopTextBubble = false; //  text bubble is not stopped anymore
-        // +.2 on rel2pl
-        // receiving item = true
-      } else if (adjacentNPC.relationship2items <= -10) {
-        let dialogSelection = adjacentNPC.dislikeDialog;
-        npcText = random(dialogSelection); // use player coordinates                  playerPaused = true; // player is paused
-        stopTextBubble = false; //  text bubble is not stopped anymore
-        // -.2 on rel2pl
-        //receiving item = true
-      }
-      else {
-       // npc receives no gift, no effect on rel2pl
-     }
-     console.log("YESSSIRRRR");
-     //check for given item
-     //select a dialog
-     // check relationship to player
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  console.log("yo");
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                }
 
-     currentRelationToPlayer = adjacentNPC.relationship2player;
-     if (currentRelationToPlayer <= -10) {
-       // bad dialog
-       //is item being received? if yes display received item dialog, else just chitchat
-       if (stopTextBubble === true) {
-         // when space is pressed beside npc, text bubble is displayed
-         playerPaused = true; // player is paused
-         stopTextBubble = false; //  text bubble is not stopped anymore
-       } else if (stopTextBubble === false) {
-         stopTextBubble = true;
-         playerPaused = false;
-       }
-     }
-     if (
-       adjacentNPC.relationship2player >= -9 &&
-       adjacentNPC.relationship2player <= 9
-     ) {
-       // neutral dialog
-       //is item being received? if yes display received item dialog, else just chitchat
-       npcTextArray = adjacentNPC.neutralDialog; // use player coordinates
-       if (stopTextBubble === true) {
-         // when space is pressed beside npc, text bubble is displayed
-         playerPaused = true; // player is paused
-         stopTextBubble = false; //  text bubble is not stopped anymore
-       } else if (stopTextBubble === false) {
-         stopTextBubble = true;
-         playerPaused = false;
-       }
-     }
-     if (currentRelationToPlayer >= 10) {
-       // friendly dialog
-       //is item being received? if yes display received item dialog, else just chitchat
-       npcText = adjacentNPC.currentText; // use player coordinates
-       if (stopTextBubble === true) {
-         // when space is pressed beside npc, text bubble is displayed
-         playerPaused = true; // player is paused
-         stopTextBubble = false; //  text bubble is not stopped anymore
-       } else if (stopTextBubble === false) {
-         stopTextBubble = true;
-         playerPaused = false;
-       }
-     }
-  }
-}
-}
+                if (selectItemHeldOut === true) {
+                  //dep mate gives gold coins for fruit edibles types
+                  // otherwise he receives items as gifts which improve rel2pl
+                  if (
+                    selectItem !==
+                    { itemName: "empty", itemImageName: "no image" }
+                  ) {
+                    //console.log("yes you come here");
+                    // if player is holding out item
 
+                    //console.log("ok");
 
+                    // go through item name list
+                    for (let i = 0; i < itemNameList.length; i++) {
+                      //console.log("nah?");
+                      //console.log(itemNameList[i]);
+                      //console.log(selectItem.name);
+                      if (itemNameList[i] === selectItem.name) {
+                        console.log(`you've given a ${selectItem.name}`);
+                        //determine how much relationship manipulated
+                        receivedItem = selectItem.name;
+                        console.log(selectItem.name);
+                        console.log(receivedItem);
+                        console.log(
+                          `${adjacentNPC.relationship2items[receivedItem]}`
+                        );
+                        let relationshipManipulator =
+                          adjacentNPC.relationship2items[receivedItem];
+
+                        //console.log(adjacentNPC.cellLabel);
+
+                        console.log(adjacentNPC.relationship2player);
+                        console.log(
+                          `the manipulator is ${relationshipManipulator}`
+                        );
+
+                        adjacentNPC.relationship2player =
+                          adjacentNPC.relationship2player +
+                          relationshipManipulator;
+
+                        console.log(adjacentNPC.relationship2player);
+                        removeItemFromInv();
+                      }
+                    }
+                  }
+
+                  // now that rel2ply has been manipulated
+                    if (
+                      adjacentNPC.relationship2player >= -9 &&
+                      adjacentNPC.relationship2player <= 9
+                    ) {
+                      let dialogSelection = adjacentNPC.neutralDialog;
+                      npcText = random(dialogSelection); // use player coordinates
+                      playerPaused = true; // player is paused
+                      stopTextBubble = false; //  text bubble is not stopped anymore
+                      // no effect on rel2pl
+                      // receiving item = true
+                      //return;
+                    } else if (adjacentNPC.relationship2player >= 10) {
+                      let dialogSelection = adjacentNPC.friendlyDialog;
+                      npcText = random(dialogSelection); // use player coordinates
+                      playerPaused = true; // player is paused
+                      stopTextBubble = false; //  text bubble is not stopped anymore
+                      // +.2 on rel2pl
+                      // receiving item = true
+                      //return;
+                    } else if (adjacentNPC.relationship2items <= -10) {
+                      let dialogSelection = adjacentNPC.dislikeDialog;
+                      npcText = random(dialogSelection); // use player coordinates                  playerPaused = true; // player is paused
+                      stopTextBubble = false; //  text bubble is not stopped anymore
+                      // -.2 on rel2pl
+                      //receiving item = true
+                      //return;
+                    } else {
+                      // npc receives no gift, no effect on rel2pl
+                    }
+                  console.log("YESSSIRRRR");
+                  //check for given item
+                  //select a dialog
+                  // check relationship to player
+
+                  // currentRelationToPlayer = adjacentNPC.relationship2player;
+                  // if (currentRelationToPlayer <= -10) {
+                  //   // bad dialog
+                  //   //is item being received? if yes display received item dialog, else just chitchat
+                  //   if (stopTextBubble === true) {
+                  //     // when space is pressed beside npc, text bubble is displayed
+                  //     playerPaused = true; // player is paused
+                  //     stopTextBubble = false; //  text bubble is not stopped anymore
+                  //   } else if (stopTextBubble === false) {
+                  //     stopTextBubble = true;
+                  //     playerPaused = false;
+                  //   }
+                  // }
+                  // if (
+                  //   adjacentNPC.relationship2player >= -9 &&
+                  //   adjacentNPC.relationship2player <= 9
+                  // ) {
+                  //   // neutral dialog
+                  //   //is item being received? if yes display received item dialog, else just chitchat
+                  //   npcTextArray = adjacentNPC.neutralDialog; // use player coordinates
+                  //   if (stopTextBubble === true) {
+                  //     // when space is pressed beside npc, text bubble is displayed
+                  //     playerPaused = true; // player is paused
+                  //     stopTextBubble = false; //  text bubble is not stopped anymore
+                  //   } else if (stopTextBubble === false) {
+                  //     stopTextBubble = true;
+                  //     playerPaused = false;
+                  //   }
+                  // }
+                  // if (currentRelationToPlayer >= 10) {
+                  //   // friendly dialog
+                  //   //is item being received? if yes display received item dialog, else just chitchat
+                  //   npcText = adjacentNPC.currentText; // use player coordinates
+                  //   if (stopTextBubble === true) {
+                  //     // when space is pressed beside npc, text bubble is displayed
+                  //     playerPaused = true; // player is paused
+                  //     stopTextBubble = false; //  text bubble is not stopped anymore
+                  //   }
+                  //
+                  //   else if (stopTextBubble === false) { // if there is text bubble when pressing start
+                  //     stopTextBubble = true; // turn text bubble off
+                  //     playerPaused = false; // un pause player
+                  //   }
+                  }
+                }
+
+              //}
+            //}
+            // DEP end
 
 
             else if (playerAdjacentCells[i] === `BOT`) {
@@ -1448,15 +1466,20 @@ else{
               } else {
                 removeItemFromInv();
               }
-            } else if (stopTextBubble === false) {
-              stopTextBubble = true;
-              playerPaused = false;
             }
+// if the text bubble is up and you press space
+            // else if (stopTextBubble === false) {
+            //   stopTextBubble = true; // bubble off
+            //   playerPaused = false; // player un pause
+            // }
           }
         }
       }
+      // end npc interactions
+
     }
   }
+}
 }
 
 function removeItemFromInv() {
@@ -1507,21 +1530,21 @@ function pickItemUp() {
   if (nextCell === `Di`) {
     //console.log("huh?")
     itemPickup(`diamond`);
-    let rockDropTime = random(1000, 5000); // extend timing!! ##
+    let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
   if (nextCell === `Pr`) {
     //console.log("huh?")
     itemPickup(`petRock`);
-    let rockDropTime = random(1000, 5000); // extend timing!! ##
+    let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
 
   if (nextCell === `Em`) {
     itemPickup(`emerald`);
-    let rockDropTime = random(1000, 5000); // extend timing!! ##
+    let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
   }
