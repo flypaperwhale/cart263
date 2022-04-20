@@ -25,7 +25,7 @@ let gridMap = [
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
-  [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
+  [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, `Ch`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
   [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [15]
@@ -226,23 +226,7 @@ function setup() {
   goldcoinItem = new Item(data.items.goldcoin);
   valsPaintingItem = new Item(data.items.valsPainting);
 
-  // fireworkItem = new Item(data.items.)
-  // coinItem = new Item(data.items.)
 
-  // add labels?
-  //   for (let r = 0; r < rows; r++) {
-  //     for (let c = 0; c < columns; c++) {
-  //   playerAdjacentCells = [
-  //     gridMap[r - 1][c - 1],
-  //     gridMap[r - 1][c],
-  //     gridMap[r - 1][c + 1],
-  //     gridMap[r][c - 1],
-  //     gridMap[r][c + 1],
-  //     gridMap[r + 1][c - 1],
-  //     gridMap[r + 1][c],
-  //     gridMap[r + 1][c + 1],
-  //   ];
-  // }}
 }
 
 /**
@@ -446,6 +430,11 @@ function displayGrid() {
         //drawPie(x, y);
         drawItem(mushroomItem.name, x, y);
       }
+      if (cell === `Ch`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(cherryItem.name, x, y);
+      }
       if (cell === `Fw`) {
         // Pi for Pie
         //drawPie(x, y);
@@ -577,9 +566,11 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `petRockImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
+
       } else if (player.inventory[i].imageName === `cherryImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[cherryItem.imageName];
+
       } else if (player.inventory[i].imageName === `mushroomImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[mushroomItem.imageName];
@@ -664,6 +655,9 @@ function drawItem(itemName, x, y) {
   }
   if (itemName === `goldcoin`) {
     currentItemImage = imageBank[goldcoinItem.imageName];
+  }
+  if (itemName === `cherry`) {
+    currentItemImage = imageBank[cherryItem.imageName];
   }
 
   push();
@@ -905,7 +899,8 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`
+        nextCell === `Gc` ||
+        nextCell === `Ch`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -993,7 +988,8 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`
+        nextCell === `Gc`||
+        nextCell === `Ch`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1073,7 +1069,8 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`
+        nextCell === `Gc`||
+        nextCell === `Ch`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1152,7 +1149,8 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`
+        nextCell === `Gc`||
+        nextCell === `Ch`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1356,7 +1354,9 @@ function keyPressed() {
                       }
                     }
                   }
+                }
 else if (selectItemHeldOut === false){
+  console.log("why not?");
   // now that rel2ply has been manipulated
   if (
     adjacentNPC.relationship2player >= -9 &&
@@ -1401,7 +1401,7 @@ else if (selectItemHeldOut === false){
     // npc receives no gift, no effect on rel2pl
   }
 }
-}
+
 
 
 
@@ -1642,6 +1642,9 @@ function pickItemUp() {
   if (nextCell === `Gc`) {
     itemPickup(`goldcoin`);
   }
+  if (nextCell === `Ch`) {
+    itemPickup(`cherry`);
+  }
 }
 
 function itemPickup(item) {
@@ -1677,6 +1680,10 @@ function itemPickup(item) {
   if (item === `goldcoin`) {
     //console.log(`hey...`)
     player.inventory.push(goldcoinItem);
+  }
+  if (item === `cherry`) {
+    //console.log(`hey...`)
+    player.inventory.push(cherryItem);
   }
 }
 
@@ -1724,20 +1731,7 @@ function dropItem(item, dropZone) {
       }
     }
   } else if (dropZone !== item.dropZone) {
-    // if (item === `pie`) {
-    //   //console.log("yes, this is a pie, not a peach");
-    //   let fallenPieIndex = random(idleMate.itemDropZone);
-    //   if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
-    //     // if peach tries to fall in a cell where the player is standing, select another cell and try again
-    //     fallenPieIndex = random(idleMate.itemDropZone);
-    //     dropItem(`pie`); //dropPie();
-    //   } else {
-    //     // drop the slice of pie
-    //     gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
-    //   }
-    // }
 
-    //console.log("yes, this is a pie, not a peach");
     let npcItemDropIndex = random(adjacentNPC.itemDropZone);
     if (gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
@@ -1747,6 +1741,7 @@ function dropItem(item, dropZone) {
       // drop the slice of pie
       console.log(item);
       console.log(item.cellLabel);
+      console.log(npcItemDropIndex);
       gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] = item.cellLabel;
     }
   }
@@ -1767,7 +1762,7 @@ function mouseClicked() {
   //console.log(currentRelationToPlayer);
   console.log(selectItem);
   //console.log(pieItem.name);
-  //console.log(gridMap);
+  console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
   console.log(npcText);
