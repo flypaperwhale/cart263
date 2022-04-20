@@ -1240,10 +1240,6 @@ function keyPressed() {
               // if DEP is adjacent to player
               adjacentNPC = depMate;
 
-
-
-
-
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
                   console.log("yo");
@@ -1275,11 +1271,15 @@ function keyPressed() {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
-                        console.log(selectItem.name);
-                        console.log(receivedItem);
-                        console.log(
-                          `${adjacentNPC.relationship2items[receivedItem]}`
-                        );
+                        // console.log(selectItem.name);
+                        // console.log(receivedItem);
+                        // console.log(
+                        //   `${adjacentNPC.relationship2items[receivedItem]}`
+                      //  );
+                        if (receivedItem === `peach` || receivedItem === `cherry` || receivedItem === `mushroom`){
+                          //dropItem
+                        }
+
                         let relationshipManipulator =
                           adjacentNPC.relationship2items[receivedItem];
 
@@ -1440,7 +1440,8 @@ function keyPressed() {
                   if (npcPeachEvent === 5) {
                     // when npcPeachEvent reaches status 5
                     //if (triggerOnce === 0) {
-                    dropItem(`pie`);
+                    console.log(adjacentNPC.itemDropZone);
+                    dropItem(pieItem, adjacentNPC.itemDropZone);
                     //dropPie();
                     //triggerOnce = 1;
                     npcPeachEvent = 0;
@@ -1524,7 +1525,7 @@ function pickItemUp() {
     itemPickup(`peach`); // ## generalize this with a variable ##
     // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
     let treeDropTime = random(1500, 3500);
-    setTimeout(dropItem.bind(this, `peach`), treeDropTime); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
+    setTimeout(dropItem.bind(this, peachItem, peachItem.dropZone), treeDropTime); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
     // but if peach is dropped by npc do not redrop ###
   }
   if (nextCell === `Pi`) {
@@ -1536,21 +1537,49 @@ function pickItemUp() {
     itemPickup(`diamond`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
+    if (rockDropSelection === `diamond`){
+      let itemToDrop = diamondItem;
+    }
+    if (rockDropSelection === `emerald`){
+      let itemToDrop = emeraldItem;
+    }
+    if (rockDropSelection === `petRock`){
+      let itemToDrop = petRockItem;
+    }
+
+    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
   if (nextCell === `Pr`) {
     //console.log("huh?")
     itemPickup(`petRock`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
+    if (rockDropSelection === `diamond`){
+      let itemToDrop = diamondItem;
+    }
+    if (rockDropSelection === `emerald`){
+      let itemToDrop = emeraldItem;
+    }
+    if (rockDropSelection === `petRock`){
+      let itemToDrop = petRockItem;
+    }
+    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
 
   if (nextCell === `Em`) {
     itemPickup(`emerald`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    setTimeout(dropItem.bind(this, rockDropSelection), rockDropTime);
+    if (rockDropSelection === `diamond`){
+      let itemToDrop = diamondItem;
+    }
+    if (rockDropSelection === `emerald`){
+      let itemToDrop = emeraldItem;
+    }
+    if (rockDropSelection === `petRock`){
+      let itemToDrop = petRockItem;
+    }
+    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
 
   if (nextCell === `Mu`) {
@@ -1604,33 +1633,23 @@ function itemPickup(item) {
   }
 }
 
-function dropItem(item) {
+function dropItem(item, dropZone) {
   //
-  if (item === `peach`) {
+if (dropZone === item.dropZone){
+  if (item.name === `peach`) {
     //console.log("this is no pie");
-    let fallenPeachIndex = random(peachItem.dropZone);
+    let fallenPeachIndex = random(dropZone);
     if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      fallenPeachIndex = random(peachItem.dropZone);
-      dropItem(`peach`); //dropPeach();
+      //fallenPeachIndex = random(dropZone);
+      dropItem(item, dropZone); //dropPeach();
     } else {
       // drop the peach
       gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `Pe`;
     }
   }
-  if (item === `pie`) {
-    //console.log("yes, this is a pie, not a peach");
-    let fallenPieIndex = random(idleMate.itemDropZone);
-    if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
-      // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      fallenPieIndex = random(idleMate.itemDropZone);
-      dropItem(`pie`); //dropPie();
-    } else {
-      // drop the slice of pie
-      gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
-    }
-  }
-  if (item === `emerald` || item === `diamond` || item === `petRock`) {
+
+  if (item.name === `emerald` || item.name === `diamond` || item.name === `petRock`) {
     // HAVE ALL river stones here##
     //console.log("this is no pie");
     let currentRiverRock = item;
@@ -1638,18 +1657,48 @@ function dropItem(item) {
     if (gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
       fallenEmeraldIndex = random(emeraldItem.dropZone);
-      dropItem(currentRiverRock); //dropPeach(); ### HAVE random stones!
+      dropItem(currentRiverRock, item.dropZone); //dropPeach(); ### HAVE random stones!
     } else {
       // drop the peach
-      if (currentRiverRock === `emerald`) {
+      if (currentRiverRock.name === `emerald`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Em`;
-      } else if (currentRiverRock === `diamond`) {
+      } else if (currentRiverRock.name === `diamond`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Di`;
-      } else if (currentRiverRock === `petRock`) {
+      } else if (currentRiverRock.name === `petRock`) {
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `Pr`;
       }
     }
   }
+}
+
+else if (dropZone !== item.dropZone){
+  // if (item === `pie`) {
+  //   //console.log("yes, this is a pie, not a peach");
+  //   let fallenPieIndex = random(idleMate.itemDropZone);
+  //   if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
+  //     // if peach tries to fall in a cell where the player is standing, select another cell and try again
+  //     fallenPieIndex = random(idleMate.itemDropZone);
+  //     dropItem(`pie`); //dropPie();
+  //   } else {
+  //     // drop the slice of pie
+  //     gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
+  //   }
+  // }
+
+    //console.log("yes, this is a pie, not a peach");
+    let npcItemDropIndex = random(adjacentNPC.itemDropZone);
+    if (gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] === `Pl`) {
+      // if peach tries to fall in a cell where the player is standing, select another cell and try again
+      //npcItemDropIndex = random(adjacentNPC.itemDropZone);
+      dropItem(item, adjacentNPC.itemDropZone); //dropPie();
+    } else {
+      // drop the slice of pie
+      console.log(item);
+      console.log(item.cellLabel);
+      gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] = item.cellLabel;
+    }
+  }
+//}
 }
 
 // function dropPeach() {

@@ -1,7 +1,7 @@
 class Item {
   constructor(data) {
     this.name = data.name;
-    this.cellLabel = data["cell label"];
+    this.cellLabel = data.cellLabel;
     this.type = data.type;
     this.value = data.value;
     this.imageName = data.imageName;
