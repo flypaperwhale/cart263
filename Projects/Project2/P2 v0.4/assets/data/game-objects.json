@@ -13,15 +13,15 @@
       "relationship2player": 1,
       "relationship2items": {
         "range": "-1 to 1",
-        "peach": 0
-        "emerald": 0
-        "diamond": 0
-        "cherry": 0
-        "artwork": 0
-        "petRock": 0
-        "pie": 0
-        "firework": 0
-        "mushroom": 0
+        "peach": 0,
+        "emerald": 0,
+        "diamond": 0,
+        "cherry": 0,
+        "artwork": 0,
+        "petRock": 0,
+        "pie": 0,
+        "firework": 0,
+        "mushroom": 0,
         "goldcoin": 0
       },
       "itemDropZone": [
@@ -43,15 +43,15 @@
       "relationship2player": 0,
       "relationship2items": {
         "range": "-1 to 1",
-        "peach": 0
-        "emerald": 0
-        "diamond": 0
-        "cherry": 0
-        "artwork": 0
-        "petRock": 0
-        "pie": 0
-        "firework": 0
-        "mushroom": 0
+        "peach": 0,
+        "emerald": 0,
+        "diamond": 0,
+        "cherry": 0,
+        "artwork": 0,
+        "petRock": 0,
+        "pie": 0,
+        "firework": 0,
+        "mushroom": 0,
         "goldcoin": 0
       },
       "itemDropZone": [
@@ -73,15 +73,15 @@
       "relationship2player": 0,
       "relationship2items": {
         "range": "-1 to 1",
-        "peach": 0
-        "emerald": 0
-        "diamond": 0
-        "cherry": 0
-        "artwork": 0
-        "petRock": 0
-        "pie": 0
-        "firework": 0
-        "mushroom": 0
+        "peach": 0,
+        "emerald": 0,
+        "diamond": 0,
+        "cherry": 0,
+        "artwork": 0,
+        "petRock": 0,
+        "pie": 0,
+        "firework": 0,
+        "mushroom": 0,
         "goldcoin": 0
       },
       "itemDropZone": [
@@ -103,15 +103,15 @@
       "relationship2player": 0,
       "relationship2items": {
         "range": "-1 to 1",
-        "peach": 0
-        "emerald": 0
-        "diamond": 0
-        "cherry": 0
-        "artwork": 0
-        "petRock": 0
-        "pie": 0
-        "firework": 0
-        "mushroom": 0
+        "peach": 0,
+        "emerald": 0,
+        "diamond": 0,
+        "cherry": 0,
+        "artwork": 0,
+        "petRock": 0,
+        "pie": 0,
+        "firework": 0,
+        "mushroom": 0,
         "goldcoin": 0
       },
       "itemDropZone": [
@@ -133,15 +133,15 @@
       "relationship2player": 0,
       "relationship2items": {
         "range": "-1 to 1",
-        "peach": 0
-        "emerald": 0
-        "diamond": 0
-        "cherry": 0
-        "artwork": 0
-        "petRock": 0
-        "pie": 0
-        "firework": 0
-        "mushroom": 0
+        "peach": 0,
+        "emerald": 0,
+        "diamond": 0,
+        "cherry": 0,
+        "artwork": 0,
+        "petRock": 0,
+        "pie": 0,
+        "firework": 0,
+        "mushroom": 0,
         "goldcoin": 0
       },
       "itemDropZone": [
