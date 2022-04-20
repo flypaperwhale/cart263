@@ -1098,93 +1098,122 @@ function keyPressed() {
           for (let i = 0; i < 8; i++) {
             if (playerAdjacentCells[i] === `DEP`) {
               adjacentNPC = depMate;
+              //dep mate gives gold coins for fruit edibles types
+              // otherwise he receives items as gifts which improve rel2pl
               console.log("YESSSIRRRR");
               //check for given item
               //select a dialog
               // check relationship to player
               currentRelationToPlayer = depMate.relationship2player;
+              if (currentRelationToPlayer === 0){
+                // neutral dialog
+                //is item being received? if yes display received item dialog, else just chitchat
+                currentNPC = npcText = depMate.currentText; // use player coordinates
+
+              }
+              if (currentRelationToPlayer === 1){
+                // friendly dialog
+                //is item being received? if yes display received item dialog, else just chitchat
+
+              }
+              if (currentRelationToPlayer === -1){
+                // unhappy dialog
+                //is item being received? if yes display received item dialog, else just chitchat
+
+              }
 
 
             } else if (playerAdjacentCells[i] === `BOT`) {
               adjacentNPC = boatMate;
+              //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
+              // otherwise he receives items as gifts which improve rel2pl
+
             } else if (playerAdjacentCells[i] === `HIK`) {
               adjacentNPC = hikeMate;
+              //hiker receives items as gifts
             } else if (playerAdjacentCells[i] === `PDL`) {
               adjacentNPC = peddleMate;
+              //pedler exchanges items for equal value item
+              // does not receive gifts
             } else if (playerAdjacentCells[i] === `IDL`) {
               adjacentNPC = idleMate;
-            }
-          }
+              //idle mate wants 5 peaches in exchange for pie, infinite
+              // anything else is received as a gift
+              currentNPC = npcText = depMate.currentText; // use player coordinates
+              //}
+              
+              if (stopTextBubble === true) {
+                // when space is pressed beside npc, text bubble is displayed
+                playerPaused = true; // player is paused
+                stopTextBubble = false; //  text bubble is not stopped anymore
+                // npcFriendEvent gets launched after npcPeachEvent is completed
 
-          currentNPC = npcText = depMate.currentText; // use player coordinates
-          //}
-          if (stopTextBubble === true) {
-            // when space is pressed beside npc, text bubble is displayed
-            playerPaused = true; // player is paused
-            stopTextBubble = false; //  text bubble is not stopped anymore
-            // npcFriendEvent gets launched after npcPeachEvent is completed
-
-            if (npcFriendEvent === 1) {
-              npcFriendEvent++;
-              if (npcFriendEvent === 2) {
-                npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
-                // when player presses space beside the npc
-                // while the player is NOT holding out a peach to give
-              }
-            }
-            // if player item is out, player gives npc item
-            // npc verifies what player is giving
-
-            givenItem = selectItem.name;
-
-            if (selectItem.name === "peach" && selectItemHeldOut === true) {
-              player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
-              selectItem = player.inventory[0]; // select item is reset to 0
-              currentDigitPressed = 0;
-              // npcPeachEvent //
-              if (npcPeachEventOngoing === true) {
-                // while npcPeachEvent is ongoing
-                npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
-                npcText = "Thanks for that peach, can you bring me 5 total?";
-                if (npcPeachEvent === 5) {
-                  // when npcPeachEvent reaches status 5
-                  if (triggerOnce === 0) {
-                    dropItem(`pie`);
-                    //dropPie();
-                    triggerOnce = 1;
+                if (npcFriendEvent === 1) {
+                  npcFriendEvent++;
+                  if (npcFriendEvent === 2) {
+                    npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
+                    // when player presses space beside the npc
+                    // while the player is NOT holding out a peach to give
                   }
-                  npcText = "You are the bomb! I love you!"; // npc now loves the player
-                  npcPeachEventOngoing = false; // the npcPeachEvent is now over
                 }
-              } else {
-                // no longer in the npcPeachEvent, when the player gives npc another peach
-                npcText = "Another peach! You shouldn't have.";
-                npcFriendEventOngoing = true; // the npcFriendEvent now begins
-              }
-              if (npcFriendEventOngoing === true) {
-                // while npcFriendEvent is ongoing
-                npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
-                if (npcFriendEvent >= 3) {
-                  // when its status is 3 or more, you've reached final text
-                  // status will keep going up, but text won't change here
-                  npcText = "Thanks, I know you've got me covered";
-                  return;
+                // if player item is out, player gives npc item
+                // npc verifies what player is giving
+
+                givenItem = selectItem.name;
+
+                if (selectItem.name === "peach" && selectItemHeldOut === true) {
+                  player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
+                  selectItem = player.inventory[0]; // select item is reset to 0
+                  currentDigitPressed = 0;
+                  // npcPeachEvent //
+                  if (npcPeachEventOngoing === true) {
+                    // while npcPeachEvent is ongoing
+                    npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
+                    npcText = "Thanks for that peach, can you bring me 5 total?";
+                    if (npcPeachEvent === 5) {
+                      // when npcPeachEvent reaches status 5
+                      if (triggerOnce === 0) {
+                        dropItem(`pie`);
+                        //dropPie();
+                        triggerOnce = 1;
+                      }
+                      npcText = "You are the bomb! I love you!"; // npc now loves the player
+                      npcPeachEventOngoing = false; // the npcPeachEvent is now over
+                    }
+                  } else {
+                    // no longer in the npcPeachEvent, when the player gives npc another peach
+                    npcText = "Another peach! You shouldn't have.";
+                    npcFriendEventOngoing = true; // the npcFriendEvent now begins
+                  }
+                  if (npcFriendEventOngoing === true) {
+                    // while npcFriendEvent is ongoing
+                    npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
+                    if (npcFriendEvent >= 3) {
+                      // when its status is 3 or more, you've reached final text
+                      // status will keep going up, but text won't change here
+                      npcText = "Thanks, I know you've got me covered";
+                      return;
+                    }
+                  }
+                } else if (
+                  (selectItem.name === "emerald" && selectItemHeldOut === true) ||
+                  (selectItem.name === "diamond" && selectItemHeldOut === true) ||
+                  (selectItem.name === "petRock" && selectItemHeldOut === true) ||
+                  (selectItem.name === "pie" && selectItemHeldOut === true)
+                ) {
+                  player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
+                  selectItem = player.inventory[0]; // select item is reset to 0
+                  currentDigitPressed = 0;
                 }
+              } else if (stopTextBubble === false) {
+                stopTextBubble = true;
+                playerPaused = false;
               }
-            } else if (
-              (selectItem.name === "emerald" && selectItemHeldOut === true) ||
-              (selectItem.name === "diamond" && selectItemHeldOut === true) ||
-              (selectItem.name === "petRock" && selectItemHeldOut === true) ||
-              (selectItem.name === "pie" && selectItemHeldOut === true)
-            ) {
-              player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
-              selectItem = player.inventory[0]; // select item is reset to 0
-              currentDigitPressed = 0;
+
             }
-          } else if (stopTextBubble === false) {
-            stopTextBubble = true;
-            playerPaused = false;
           }
+
+
         }
       }
     }
