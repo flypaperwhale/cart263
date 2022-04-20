@@ -1281,8 +1281,54 @@ function keyPressed() {
                   stopTextBubble = false; //  text bubble is not stopped anymore
                   return;
                 }
-
-                if (selectItemHeldOut === true) {
+console.log(selectItemHeldOut);
+                if (selectItemHeldOut === false){
+                  console.log("why not?");
+                  // now that rel2ply has been manipulated
+                  if (
+                    adjacentNPC.relationship2player >= -9 &&
+                    adjacentNPC.relationship2player <= 9
+                  ) {
+                    let dialogSelection = adjacentNPC.neutralDialog;
+                    let lastNPCText = npcText;
+                    npcText = random(dialogSelection); // use player coordinates
+                    if (npcText === lastNPCText) {
+                      npcText = random(dialogSelection); // use player coordinates
+                    }
+                    playerPaused = true; // player is paused
+                    stopTextBubble = false; //  text bubble is not stopped anymore
+                    // no effect on rel2pl
+                    // receiving item = true
+                    //return;
+                  } else if (adjacentNPC.relationship2player >= 10) {
+                    let dialogSelection = adjacentNPC.friendlyDialog;
+                    let lastNPCText = npcText;
+                    npcText = random(dialogSelection); // use player coordinates
+                    if (npcText === lastNPCText) {
+                      npcText = random(dialogSelection); // use player coordinates
+                    }
+                    playerPaused = true; // player is paused
+                    stopTextBubble = false; //  text bubble is not stopped anymore
+                    // +.2 on rel2pl
+                    // receiving item = true
+                    //return;
+                  } else if (adjacentNPC.relationship2items <= -10) {
+                    let dialogSelection = adjacentNPC.dislikeDialog;
+                    let lastNPCText = npcText;
+                    npcText = random(dialogSelection); // use player coordinates
+                    if (npcText === lastNPCText) {
+                      npcText = random(dialogSelection); // use player coordinates
+                    }
+                    playerPaused = true; // player is paused
+                    stopTextBubble = false; //  text bubble is not stopped anymore
+                    // -.2 on rel2pl
+                    //receiving item = true
+                    //return;
+                  } else {
+                    // npc receives no gift, no effect on rel2pl
+                  }
+                }
+                else if (selectItemHeldOut === true) {
                   //dep mate gives gold coins for fruit edibles types
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
@@ -1355,52 +1401,7 @@ function keyPressed() {
                     }
                   }
                 }
-else if (selectItemHeldOut === false){
-  console.log("why not?");
-  // now that rel2ply has been manipulated
-  if (
-    adjacentNPC.relationship2player >= -9 &&
-    adjacentNPC.relationship2player <= 9
-  ) {
-    let dialogSelection = adjacentNPC.neutralDialog;
-    let lastNPCText = npcText;
-    npcText = random(dialogSelection); // use player coordinates
-    if (npcText === lastNPCText) {
-      npcText = random(dialogSelection); // use player coordinates
-    }
-    playerPaused = true; // player is paused
-    stopTextBubble = false; //  text bubble is not stopped anymore
-    // no effect on rel2pl
-    // receiving item = true
-    //return;
-  } else if (adjacentNPC.relationship2player >= 10) {
-    let dialogSelection = adjacentNPC.friendlyDialog;
-    let lastNPCText = npcText;
-    npcText = random(dialogSelection); // use player coordinates
-    if (npcText === lastNPCText) {
-      npcText = random(dialogSelection); // use player coordinates
-    }
-    playerPaused = true; // player is paused
-    stopTextBubble = false; //  text bubble is not stopped anymore
-    // +.2 on rel2pl
-    // receiving item = true
-    //return;
-  } else if (adjacentNPC.relationship2items <= -10) {
-    let dialogSelection = adjacentNPC.dislikeDialog;
-    let lastNPCText = npcText;
-    npcText = random(dialogSelection); // use player coordinates
-    if (npcText === lastNPCText) {
-      npcText = random(dialogSelection); // use player coordinates
-    }
-    playerPaused = true; // player is paused
-    stopTextBubble = false; //  text bubble is not stopped anymore
-    // -.2 on rel2pl
-    //receiving item = true
-    //return;
-  } else {
-    // npc receives no gift, no effect on rel2pl
-  }
-}
+
 
 
 
@@ -1523,6 +1524,7 @@ function removeItemFromInv() {
   ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
+        selectItemHeldOut = false;
     currentDigitPressed = 0;
   }
 }
