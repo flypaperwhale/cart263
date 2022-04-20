@@ -63,7 +63,7 @@ let player = {
   x: 380.66,
   y: 340.33,
   // inventory array holds (item) objects with name, qty, and image name
-  inventory: [{ itemName: "empty", itemImageName: "no image" }],
+  inventory: [{ itemName: "empty", itemImageName: "no image" }, {name: `cherry`, cellLabel: `Ch`, type: `edible fruit`, value: 2, imageName: `cherryImage`}],
 };
 
 let currentPlayerIndex; // indexed grid cell where Player currently is
@@ -132,6 +132,8 @@ function preload() {
   imageBank.coinImage = loadImage(`assets/images/coin.png`);
   imageBank.petRockImage = loadImage(`assets/images/petRock.png`);
 
+  imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
+
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
 
@@ -180,6 +182,7 @@ function setup() {
   diamondItem = new Item(data.items.diamond);
   emeraldItem = new Item(data.items.emerald);
   petRockItem = new Item(data.items.petRock);
+  cherryItem = new Item(data.items.cherry);
 
   // fireworkItem = new Item(data.items.)
   // coinItem = new Item(data.items.)
@@ -353,6 +356,10 @@ function displayGrid() {
           drawSmolItem(`petRock`, x, y);
           //drawSmolPie(x, y);
         }
+        else if (selectItem.name === "cherry") {
+         drawSmolItem(`cherry`, x, y);
+         //drawSmolPie(x, y);
+       }
       }
       //  }
       if (cell === `Pe`) {
@@ -503,6 +510,10 @@ function displayInventory() {
         //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
       }
+      else if (player.inventory[i].imageName === `cherryImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[cherryItem.imageName];
+      }
 
       push();
       imageMode(CENTER);
@@ -587,6 +598,9 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `petRock`) {
     currentItemImage = imageBank[petRockItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `cherry`) {
+    currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -1109,6 +1123,10 @@ function keyPressed() {
               //dep mate gives gold coins for fruit edibles types
               // otherwise he receives items as gifts which improve rel2pl
               if (selectItem !== { itemName: "empty", itemImageName: "no image" }){
+
+removeItemFromInv();
+
+
                 // if player is holding out item
                 let npcReceivingItemName = selectItem.itemName
                 if (adjacentNPC.relationship2items.npcReceivingItemName === 0){
@@ -1247,15 +1265,8 @@ function keyPressed() {
                       return;
                     }
                   }
-                } else if (
-                  (selectItem.name === "emerald" && selectItemHeldOut === true) ||
-                  (selectItem.name === "diamond" && selectItemHeldOut === true) ||
-                  (selectItem.name === "petRock" && selectItemHeldOut === true) ||
-                  (selectItem.name === "pie" && selectItemHeldOut === true)
-                ) {
-                  player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
-                  selectItem = player.inventory[0]; // select item is reset to 0
-                  currentDigitPressed = 0;
+                } else {
+                removeItemFromInv();
                 }
               } else if (stopTextBubble === false) {
                 stopTextBubble = true;
@@ -1269,6 +1280,20 @@ function keyPressed() {
         }
       }
     }
+  }
+}
+
+function removeItemFromInv(){
+  if (
+    (selectItem.name === "emerald" && selectItemHeldOut === true) ||
+    (selectItem.name === "diamond" && selectItemHeldOut === true) ||
+    (selectItem.name === "petRock" && selectItemHeldOut === true) ||
+    (selectItem.name === "pie" && selectItemHeldOut === true) ||
+    (selectItem.name === "cherry" && selectItemHeldOut === true)
+  ) {
+    player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
+    selectItem = player.inventory[0]; // select item is reset to 0
+    currentDigitPressed = 0;
   }
 }
 
@@ -1406,7 +1431,7 @@ function mouseClicked() {
   //console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
-  //console.log(player.inventory);
+  console.log(player.inventory);
   console.log(selectItem.name);
   //console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {

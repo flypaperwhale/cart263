@@ -252,6 +252,15 @@
       "value": 3,
       "imageName": "sliceOPieImage",
       "dropZone": []
+    },
+    "cherry": {
+      "name": "cherry",
+      "cell label": "Ch",
+      "type": "edible fruit",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 2,
+      "imageName": "cherryImage",
+      "dropZone": []
     }
   }
 }
