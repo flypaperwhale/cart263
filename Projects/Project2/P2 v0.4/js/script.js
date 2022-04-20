@@ -685,7 +685,7 @@ function drawSmolItem(itemName, x, y) {
     currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
   }
   if (itemName === `mushroom`) {
-    currentItemImage = imageBank[cherryItem.imageName]; // ### wont show up??
+    currentItemImage = imageBank[mushroomItem.imageName]; // ### wont show up??
   }
   if (itemName === `firework`) {
     currentItemImage = imageBank[fireworkItem.imageName]; // ### wont show up??
