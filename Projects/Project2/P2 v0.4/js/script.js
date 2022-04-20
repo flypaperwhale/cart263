@@ -78,6 +78,8 @@ let player = {
 let currentPlayerIndex; // indexed grid cell where Player currently is
 let playerPaused = false; // status whether player is paused or not, starts unpaused
 
+let itemToDrop;
+
 // initializes selectItem to empty
 let selectItem = { itemName: "empty", itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
@@ -1306,7 +1308,11 @@ function keyPressed() {
                       adjacentNPC.relationship2player <= 9
                     ) {
                       let dialogSelection = adjacentNPC.neutralDialog;
+                      let lastNPCText = npcText;
                       npcText = random(dialogSelection); // use player coordinates
+                      if(npcText === lastNPCText){
+                        npcText = random(dialogSelection); // use player coordinates
+                      }
                       playerPaused = true; // player is paused
                       stopTextBubble = false; //  text bubble is not stopped anymore
                       // no effect on rel2pl
@@ -1314,7 +1320,11 @@ function keyPressed() {
                       //return;
                     } else if (adjacentNPC.relationship2player >= 10) {
                       let dialogSelection = adjacentNPC.friendlyDialog;
+                      let lastNPCText = npcText;
                       npcText = random(dialogSelection); // use player coordinates
+                      if(npcText === lastNPCText){
+                        npcText = random(dialogSelection); // use player coordinates
+                      }
                       playerPaused = true; // player is paused
                       stopTextBubble = false; //  text bubble is not stopped anymore
                       // +.2 on rel2pl
@@ -1322,7 +1332,12 @@ function keyPressed() {
                       //return;
                     } else if (adjacentNPC.relationship2items <= -10) {
                       let dialogSelection = adjacentNPC.dislikeDialog;
-                      npcText = random(dialogSelection); // use player coordinates                  playerPaused = true; // player is paused
+                      let lastNPCText = npcText;
+                      npcText = random(dialogSelection); // use player coordinates
+                      if(npcText === lastNPCText){
+                        npcText = random(dialogSelection); // use player coordinates
+                      }
+                                playerPaused = true; // player is paused
                       stopTextBubble = false; //  text bubble is not stopped anymore
                       // -.2 on rel2pl
                       //receiving item = true
@@ -1538,13 +1553,13 @@ function pickItemUp() {
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`){
-      let itemToDrop = diamondItem;
+      itemToDrop = diamondItem;
     }
     if (rockDropSelection === `emerald`){
-      let itemToDrop = emeraldItem;
+      itemToDrop = emeraldItem;
     }
     if (rockDropSelection === `petRock`){
-      let itemToDrop = petRockItem;
+      itemToDrop = petRockItem;
     }
 
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
@@ -1555,13 +1570,13 @@ function pickItemUp() {
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`){
-      let itemToDrop = diamondItem;
+      itemToDrop = diamondItem;
     }
     if (rockDropSelection === `emerald`){
-      let itemToDrop = emeraldItem;
+      itemToDrop = emeraldItem;
     }
     if (rockDropSelection === `petRock`){
-      let itemToDrop = petRockItem;
+      itemToDrop = petRockItem;
     }
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
@@ -1571,13 +1586,13 @@ function pickItemUp() {
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`){
-      let itemToDrop = diamondItem;
+      itemToDrop = diamondItem;
     }
     if (rockDropSelection === `emerald`){
-      let itemToDrop = emeraldItem;
+      itemToDrop = emeraldItem;
     }
     if (rockDropSelection === `petRock`){
-      let itemToDrop = petRockItem;
+      itemToDrop = petRockItem;
     }
     setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
   }
