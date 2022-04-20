@@ -1506,6 +1506,10 @@ function solidBlock() {
   if (
     nextCell === `S` ||
     nextCell === `DEP` ||
+    nextCell === `HIK` ||
+    nextCell === `BOT` ||
+    nextCell === `IDL` ||
+    nextCell === `PDL` ||
     nextCell === `Bh` ||
     nextCell === `St` ||
     nextCell === undefined
