@@ -83,7 +83,7 @@ let itemToDrop;
 // initializes selectItem to empty
 let selectItem = { itemName: "empty", itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
-let selectItemHeldOut = true; // status whether select item is held out or not, starts item "empty" hidden
+let selectItemHeldOut = false; // status whether select item is held out or not, starts item "empty" hidden
 
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
 
@@ -743,6 +743,7 @@ function keyPressed() {
       // empty box, player can talk to npc without giving item
       selectItemNumber = 0;
       selectItem = player.inventory[0];
+      selectItemHeldOut = false;
     }
     if (keyCode === 49) {
       // 1
@@ -755,6 +756,8 @@ function keyPressed() {
         currentDigitPressed = 1;
 
         selectItem = player.inventory[1];
+        selectItemHeldOut = true;
+
       }
     }
     if (keyCode === 50) {
@@ -768,6 +771,7 @@ function keyPressed() {
         currentDigitPressed = 2;
 
         selectItem = player.inventory[2];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 51) {
@@ -781,6 +785,7 @@ function keyPressed() {
         currentDigitPressed = 3;
 
         selectItem = player.inventory[3];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 52) {
@@ -794,6 +799,7 @@ function keyPressed() {
         currentDigitPressed = 4;
 
         selectItem = player.inventory[4];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 53) {
@@ -807,6 +813,7 @@ function keyPressed() {
         currentDigitPressed = 5;
 
         selectItem = player.inventory[5];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 54) {
@@ -819,6 +826,7 @@ function keyPressed() {
       } else {
         currentDigitPressed = 6;
         selectItem = player.inventory[6];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 55) {
@@ -832,6 +840,7 @@ function keyPressed() {
         currentDigitPressed = 7;
 
         selectItem = player.inventory[7];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 56) {
@@ -845,6 +854,7 @@ function keyPressed() {
         currentDigitPressed = 8;
 
         selectItem = player.inventory[8];
+                selectItemHeldOut = true;
       }
     }
     if (keyCode === 57) {
@@ -858,6 +868,7 @@ function keyPressed() {
         currentDigitPressed = 9;
 
         selectItem = player.inventory[9];
+                selectItemHeldOut = true;
       }
     }
 
@@ -1256,13 +1267,12 @@ function keyPressed() {
             stopTextBubble = true; // bubble off
             playerPaused = false; // un pause
             ///return;
-          }
-          else {
-          for (let i = 0; i < 8; i++) {
-            // go through cells around player
-            if (playerAdjacentCells[i] === `DEP`) {
-              // if DEP is adjacent to player
-              adjacentNPC = depMate;
+          } else {
+            for (let i = 0; i < 8; i++) {
+              // go through cells around player
+              if (playerAdjacentCells[i] === `DEP`) {
+                // if DEP is adjacent to player
+                adjacentNPC = depMate;
 
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
@@ -1295,240 +1305,207 @@ function keyPressed() {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
-  removeItemFromInv();
+                        removeItemFromInv();
                         // console.log(selectItem.name);
                         // console.log(receivedItem);
                         // console.log(
                         //   `${adjacentNPC.relationship2items[receivedItem]}`
-                      //  );
-                        if (receivedItem === `peach` || receivedItem === `cherry` || receivedItem === `mushroom`){
+                        //  );
+                        if (
+                          receivedItem === `peach` ||
+                          receivedItem === `cherry` ||
+                          receivedItem === `mushroom`
+                        ) {
                           //dropItem
-                    dropItem(goldcoinItem, depMate.itemDropZone);
+                          npcText = `Thanks for the produce! Here's a goldcoin!`;
 
-                        }
-                        else if (receivedItem === `goldcoin`){
-                          let depMateItems = [peachNPCItem, cherryItem, fireworkItem];
+                          dropItem(goldcoinItem, depMate.itemDropZone);
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        } else if (receivedItem === `goldcoin`) {
+
+
+                          let depMateItems = [
+                            peachNPCItem,
+                            cherryItem,
+                            fireworkItem,
+                          ];
                           depMateItemToDrop = random(depMateItems);
-                          dropItem(depMateItemToDrop,depMate.itemDropZone);
+                          npcText = `Here's a ${depMateItemToDrop.name}`;
+                          dropItem(depMateItemToDrop, depMate.itemDropZone);
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        } else {
+                          npcText = `Thanks for the ${receivedItem}`;
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
+
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
+
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv();
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+
                         }
-else {
-    npcText = `Thanks for the ${receivedItem}`;
-    let relationshipManipulator =
-      adjacentNPC.relationship2items[receivedItem];
-
-    //console.log(adjacentNPC.cellLabel);
-
-    console.log(adjacentNPC.relationship2player);
-    console.log(
-      `the manipulator is ${relationshipManipulator}`
-    );
-
-    adjacentNPC.relationship2player =
-      adjacentNPC.relationship2player +
-      relationshipManipulator;
-
-    console.log(adjacentNPC.relationship2player);
-    removeItemFromInv();
-  }
-}
-}
-
-// now that rel2ply has been manipulated
-if (
-  adjacentNPC.relationship2player >= -9 &&
-  adjacentNPC.relationship2player <= 9
-) {
-  let dialogSelection = adjacentNPC.neutralDialog;
-  let lastNPCText = npcText;
-  npcText = random(dialogSelection); // use player coordinates
-  if(npcText === lastNPCText){
-    npcText = random(dialogSelection); // use player coordinates
-  }
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  // no effect on rel2pl
-  // receiving item = true
-  //return;
-} else if (adjacentNPC.relationship2player >= 10) {
-  let dialogSelection = adjacentNPC.friendlyDialog;
-  let lastNPCText = npcText;
-  npcText = random(dialogSelection); // use player coordinates
-  if(npcText === lastNPCText){
-    npcText = random(dialogSelection); // use player coordinates
-  }
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  // +.2 on rel2pl
-  // receiving item = true
-  //return;
-} else if (adjacentNPC.relationship2items <= -10) {
-  let dialogSelection = adjacentNPC.dislikeDialog;
-  let lastNPCText = npcText;
-  npcText = random(dialogSelection); // use player coordinates
-  if(npcText === lastNPCText){
-    npcText = random(dialogSelection); // use player coordinates
-  }
-            playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  // -.2 on rel2pl
-  //receiving item = true
-  //return;
-} else {
-  // npc receives no gift, no effect on rel2pl
-}
-}
-
-                  console.log("YESSSIRRRR");
-                  //check for given item
-                  //select a dialog
-                  // check relationship to player
-
-                  // currentRelationToPlayer = adjacentNPC.relationship2player;
-                  // if (currentRelationToPlayer <= -10) {
-                  //   // bad dialog
-                  //   //is item being received? if yes display received item dialog, else just chitchat
-                  //   if (stopTextBubble === true) {
-                  //     // when space is pressed beside npc, text bubble is displayed
-                  //     playerPaused = true; // player is paused
-                  //     stopTextBubble = false; //  text bubble is not stopped anymore
-                  //   } else if (stopTextBubble === false) {
-                  //     stopTextBubble = true;
-                  //     playerPaused = false;
-                  //   }
-                  // }
-                  // if (
-                  //   adjacentNPC.relationship2player >= -9 &&
-                  //   adjacentNPC.relationship2player <= 9
-                  // ) {
-                  //   // neutral dialog
-                  //   //is item being received? if yes display received item dialog, else just chitchat
-                  //   npcTextArray = adjacentNPC.neutralDialog; // use player coordinates
-                  //   if (stopTextBubble === true) {
-                  //     // when space is pressed beside npc, text bubble is displayed
-                  //     playerPaused = true; // player is paused
-                  //     stopTextBubble = false; //  text bubble is not stopped anymore
-                  //   } else if (stopTextBubble === false) {
-                  //     stopTextBubble = true;
-                  //     playerPaused = false;
-                  //   }
-                  // }
-                  // if (currentRelationToPlayer >= 10) {
-                  //   // friendly dialog
-                  //   //is item being received? if yes display received item dialog, else just chitchat
-                  //   npcText = adjacentNPC.currentText; // use player coordinates
-                  //   if (stopTextBubble === true) {
-                  //     // when space is pressed beside npc, text bubble is displayed
-                  //     playerPaused = true; // player is paused
-                  //     stopTextBubble = false; //  text bubble is not stopped anymore
-                  //   }
-                  //
-                  //   else if (stopTextBubble === false) { // if there is text bubble when pressing start
-                  //     stopTextBubble = true; // turn text bubble off
-                  //     playerPaused = false; // un pause player
-                  //   }
+                      }
+                    }
                   }
+else if (selectItemHeldOut === false){
+  // now that rel2ply has been manipulated
+  if (
+    adjacentNPC.relationship2player >= -9 &&
+    adjacentNPC.relationship2player <= 9
+  ) {
+    let dialogSelection = adjacentNPC.neutralDialog;
+    let lastNPCText = npcText;
+    npcText = random(dialogSelection); // use player coordinates
+    if (npcText === lastNPCText) {
+      npcText = random(dialogSelection); // use player coordinates
+    }
+    playerPaused = true; // player is paused
+    stopTextBubble = false; //  text bubble is not stopped anymore
+    // no effect on rel2pl
+    // receiving item = true
+    //return;
+  } else if (adjacentNPC.relationship2player >= 10) {
+    let dialogSelection = adjacentNPC.friendlyDialog;
+    let lastNPCText = npcText;
+    npcText = random(dialogSelection); // use player coordinates
+    if (npcText === lastNPCText) {
+      npcText = random(dialogSelection); // use player coordinates
+    }
+    playerPaused = true; // player is paused
+    stopTextBubble = false; //  text bubble is not stopped anymore
+    // +.2 on rel2pl
+    // receiving item = true
+    //return;
+  } else if (adjacentNPC.relationship2items <= -10) {
+    let dialogSelection = adjacentNPC.dislikeDialog;
+    let lastNPCText = npcText;
+    npcText = random(dialogSelection); // use player coordinates
+    if (npcText === lastNPCText) {
+      npcText = random(dialogSelection); // use player coordinates
+    }
+    playerPaused = true; // player is paused
+    stopTextBubble = false; //  text bubble is not stopped anymore
+    // -.2 on rel2pl
+    //receiving item = true
+    //return;
+  } else {
+    // npc receives no gift, no effect on rel2pl
+  }
+}
+}
+
+
+
                 }
 
+
               //}
-            //}
-            // DEP end
-
-
-            else if (playerAdjacentCells[i] === `BOT`) {
-              adjacentNPC = boatMate;
-              //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
-              // otherwise he receives items as gifts which improve rel2pl
-            } else if (playerAdjacentCells[i] === `HIK`) {
-              adjacentNPC = hikeMate;
-              //hiker receives items as gifts
-            } else if (playerAdjacentCells[i] === `PDL`) {
-              adjacentNPC = peddleMate;
-              //pedler exchanges items for equal value item
-              // does not receive gifts
-            } else if (playerAdjacentCells[i] === `IDL`) {
-              adjacentNPC = idleMate;
-              //idle mate wants 5 peaches in exchange for pie, infinite
-              // anything else is received as a gift
-              //npcText = idleMate.initialDialog; // use player coordinates
               //}
+              // DEP end
+              else if (playerAdjacentCells[i] === `BOT`) {
+                adjacentNPC = boatMate;
+                //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
+                // otherwise he receives items as gifts which improve rel2pl
+              } else if (playerAdjacentCells[i] === `HIK`) {
+                adjacentNPC = hikeMate;
+                //hiker receives items as gifts
+              } else if (playerAdjacentCells[i] === `PDL`) {
+                adjacentNPC = peddleMate;
+                //pedler exchanges items for equal value item
+                // does not receive gifts
+              } else if (playerAdjacentCells[i] === `IDL`) {
+                adjacentNPC = idleMate;
+                //idle mate wants 5 peaches in exchange for pie, infinite
+                // anything else is received as a gift
+                //npcText = idleMate.initialDialog; // use player coordinates
+                //}
 
-              if (adjacentNPC.firstTalk === "true") {
-                console.log("yo");
-                npcText = adjacentNPC.initialDialog; // use player coordinates
-                adjacentNPC.firstTalk = "false";
-                playerPaused = true; // player is paused
-                stopTextBubble = false; //  text bubble is not stopped anymore
-                return;
-              }
+                if (adjacentNPC.firstTalk === "true") {
+                  console.log("yo");
+                  npcText = adjacentNPC.initialDialog; // use player coordinates
+                  adjacentNPC.firstTalk = "false";
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                }
 
-              if (stopTextBubble === true) {
-                // when space is pressed beside npc, text bubble is displayed
-                playerPaused = true; // player is paused
-                stopTextBubble = false; //  text bubble is not stopped anymore
-                // npcFriendEvent gets launched after npcPeachEvent is completed
+                if (stopTextBubble === true) {
+                  // when space is pressed beside npc, text bubble is displayed
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  // npcFriendEvent gets launched after npcPeachEvent is completed
 
-                // if (adjacentNPC.friendEvent === 1) {
-                //   adjacentNPC.FriendEvent++;
-                //   if (adjacentNPC.FriendEvent === 2) {
-                //     npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
-                // when player presses space beside the npc
-                // while the player is NOT holding out a peach to give
-              }
+                  // if (adjacentNPC.friendEvent === 1) {
+                  //   adjacentNPC.FriendEvent++;
+                  //   if (adjacentNPC.FriendEvent === 2) {
+                  //     npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
+                  // when player presses space beside the npc
+                  // while the player is NOT holding out a peach to give
+                }
 
-              // if player item is out, player gives npc item
-              // npc verifies what player is giving
+                // if player item is out, player gives npc item
+                // npc verifies what player is giving
 
-              if (selectItem.name === "peach" && selectItemHeldOut === true) {
-                removeItemFromInv();
-                // npcPeachEvent //
-                if (npcPeachEventOngoing === true) {
-                  // while npcPeachEvent is ongoing
-                  npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
-                  npcText = "Thanks for that peach, can you bring me 5 total?";
-                  if (npcPeachEvent === 5) {
-                    // when npcPeachEvent reaches status 5
-                    //if (triggerOnce === 0) {
-                    console.log(adjacentNPC.itemDropZone);
-                    dropItem(pieItem, adjacentNPC.itemDropZone);
-                    //dropPie();
-                    //triggerOnce = 1;
-                    npcPeachEvent = 0;
-                    //}
-                    npcText = "You are the bomb! I love you!"; // npc now loves the player
-                    npcPeachEventOngoing = true; // the npcPeachEvent repeats
+                if (selectItem.name === "peach" && selectItemHeldOut === true) {
+                  removeItemFromInv();
+                  // npcPeachEvent //
+                  if (npcPeachEventOngoing === true) {
+                    // while npcPeachEvent is ongoing
+                    npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
+                    npcText =
+                      "Thanks for that peach, can you bring me 5 total?";
+                    if (npcPeachEvent === 5) {
+                      // when npcPeachEvent reaches status 5
+                      //if (triggerOnce === 0) {
+                      console.log(adjacentNPC.itemDropZone);
+                      dropItem(pieItem, adjacentNPC.itemDropZone);
+                      //dropPie();
+                      //triggerOnce = 1;
+                      npcPeachEvent = 0;
+                      //}
+                      npcText = "You are the bomb! I love you!"; // npc now loves the player
+                      npcPeachEventOngoing = true; // the npcPeachEvent repeats
+                    }
+                  } else {
+                    // no longer in the npcPeachEvent, when the player gives npc another peach
+                    npcText = "Another peach! You shouldn't have.";
+                    npcFriendEventOngoing = true; // the npcFriendEvent now begins
+                  }
+                  if (npcFriendEventOngoing === true) {
+                    // while npcFriendEvent is ongoing
+                    npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
+                    if (npcFriendEvent >= 3) {
+                      // when its status is 3 or more, you've reached final text
+                      // status will keep going up, but text won't change here
+                      npcText = "Thanks, I know you've got me covered";
+                      return;
+                    }
                   }
                 } else {
-                  // no longer in the npcPeachEvent, when the player gives npc another peach
-                  npcText = "Another peach! You shouldn't have.";
-                  npcFriendEventOngoing = true; // the npcFriendEvent now begins
+                  removeItemFromInv();
                 }
-                if (npcFriendEventOngoing === true) {
-                  // while npcFriendEvent is ongoing
-                  npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
-                  if (npcFriendEvent >= 3) {
-                    // when its status is 3 or more, you've reached final text
-                    // status will keep going up, but text won't change here
-                    npcText = "Thanks, I know you've got me covered";
-                    return;
-                  }
-                }
-              } else {
-                removeItemFromInv();
               }
+              // if the text bubble is up and you press space
+              // else if (stopTextBubble === false) {
+              //   stopTextBubble = true; // bubble off
+              //   playerPaused = false; // player un pause
+              // }
             }
-// if the text bubble is up and you press space
-            // else if (stopTextBubble === false) {
-            //   stopTextBubble = true; // bubble off
-            //   playerPaused = false; // player un pause
-            // }
           }
         }
+        // end npc interactions
       }
-      // end npc interactions
-
     }
   }
-}
 }
 
 function removeItemFromInv() {
@@ -1573,7 +1550,10 @@ function pickItemUp() {
     itemPickup(`peach`); // ## generalize this with a variable ##
     // when a peach is picked up, another peach will be dropped in 1.5-3.5 seconds
     let treeDropTime = random(1500, 3500);
-    setTimeout(dropItem.bind(this, peachItem, peachItem.dropZone), treeDropTime); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
+    setTimeout(
+      dropItem.bind(this, peachItem, peachItem.dropZone),
+      treeDropTime
+    ); //## CAREFUL move this back, when peach picked was dropped by map, yes redrop
     // but if peach is dropped by npc do not redrop ###
   }
   if (nextCell === `DiG`) {
@@ -1581,59 +1561,71 @@ function pickItemUp() {
     itemPickup(`diamond`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    if (rockDropSelection === `diamond`){
+    if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
     }
-    if (rockDropSelection === `emerald`){
+    if (rockDropSelection === `emerald`) {
       itemToDrop = emeraldItem;
     }
-    if (rockDropSelection === `petRock`){
+    if (rockDropSelection === `petRock`) {
       itemToDrop = petRockItem;
     }
 
-    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
+    setTimeout(
+      dropItem.bind(this, itemToDrop, itemToDrop.dropZone),
+      rockDropTime
+    );
   }
   if (nextCell === `PrG`) {
     //console.log("huh?")
     itemPickup(`petRock`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    if (rockDropSelection === `diamond`){
+    if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
     }
-    if (rockDropSelection === `emerald`){
+    if (rockDropSelection === `emerald`) {
       itemToDrop = emeraldItem;
     }
-    if (rockDropSelection === `petRock`){
+    if (rockDropSelection === `petRock`) {
       itemToDrop = petRockItem;
     }
-    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
+    setTimeout(
+      dropItem.bind(this, itemToDrop, itemToDrop.dropZone),
+      rockDropTime
+    );
   }
 
   if (nextCell === `EmG`) {
     itemPickup(`emerald`);
     let rockDropTime = random(11000, 35000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
-    if (rockDropSelection === `diamond`){
+    if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
     }
-    if (rockDropSelection === `emerald`){
+    if (rockDropSelection === `emerald`) {
       itemToDrop = emeraldItem;
     }
-    if (rockDropSelection === `petRock`){
+    if (rockDropSelection === `petRock`) {
       itemToDrop = petRockItem;
     }
-    setTimeout(dropItem.bind(this, itemToDrop, itemToDrop.dropZone), rockDropTime);
+    setTimeout(
+      dropItem.bind(this, itemToDrop, itemToDrop.dropZone),
+      rockDropTime
+    );
   }
   if (nextCell === `EmN`) {
     itemPickup(`emerald`);
-  }  if (nextCell === `PeN`) {
-      itemPickup(`peach`);
-    }  if (nextCell === `PrN`) {
-        itemPickup(`petRock`);
-      }  if (nextCell === `DiN`) {
-          itemPickup(`Diamond`);
-        }
+  }
+  if (nextCell === `PeN`) {
+    itemPickup(`peach`);
+  }
+  if (nextCell === `PrN`) {
+    itemPickup(`petRock`);
+  }
+  if (nextCell === `DiN`) {
+    itemPickup(`Diamond`);
+  }
   if (nextCell === `Pi`) {
     itemPickup(`pie`);
   }
@@ -1690,56 +1682,60 @@ function itemPickup(item) {
 
 function dropItem(item, dropZone) {
   //
-if (dropZone === item.dropZone){
-  console.log("wait a minute");
-  if (item.name === `peach`) {
-    //console.log("this is no pie");
-    let fallenPeachIndex = random(dropZone);
-    if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
-      // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      //fallenPeachIndex = random(dropZone);
-      dropItem(item, dropZone); //dropPeach();
-    } else {
-      // drop the peach
-      gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `PeG`;
-    }
-  }
-
-  if (item.name === `emerald` || item.name === `diamond` || item.name === `petRock`) {
-    // HAVE ALL river stones here##
-    //console.log("this is no pie");
-    let currentRiverRock = item;
-    let fallenEmeraldIndex = random(emeraldItem.dropZone);
-    if (gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`) {
-      // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      fallenEmeraldIndex = random(emeraldItem.dropZone);
-      dropItem(currentRiverRock, item.dropZone); //dropPeach(); ### HAVE random stones!
-    } else {
-      // drop the peach
-      if (currentRiverRock.name === `emerald`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `EmG`;
-      } else if (currentRiverRock.name === `diamond`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `DiG`;
-      } else if (currentRiverRock.name === `petRock`) {
-        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `PrG`;
+  if (dropZone === item.dropZone) {
+    console.log("wait a minute");
+    if (item.name === `peach`) {
+      //console.log("this is no pie");
+      let fallenPeachIndex = random(dropZone);
+      if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
+        // if peach tries to fall in a cell where the player is standing, select another cell and try again
+        //fallenPeachIndex = random(dropZone);
+        dropItem(item, dropZone); //dropPeach();
+      } else {
+        // drop the peach
+        gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `PeG`;
       }
     }
-  }
-}
 
-else if (dropZone !== item.dropZone){
-  // if (item === `pie`) {
-  //   //console.log("yes, this is a pie, not a peach");
-  //   let fallenPieIndex = random(idleMate.itemDropZone);
-  //   if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
-  //     // if peach tries to fall in a cell where the player is standing, select another cell and try again
-  //     fallenPieIndex = random(idleMate.itemDropZone);
-  //     dropItem(`pie`); //dropPie();
-  //   } else {
-  //     // drop the slice of pie
-  //     gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
-  //   }
-  // }
+    if (
+      item.name === `emerald` ||
+      item.name === `diamond` ||
+      item.name === `petRock`
+    ) {
+      // HAVE ALL river stones here##
+      //console.log("this is no pie");
+      let currentRiverRock = item;
+      let fallenEmeraldIndex = random(emeraldItem.dropZone);
+      if (
+        gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`
+      ) {
+        // if peach tries to fall in a cell where the player is standing, select another cell and try again
+        fallenEmeraldIndex = random(emeraldItem.dropZone);
+        dropItem(currentRiverRock, item.dropZone); //dropPeach(); ### HAVE random stones!
+      } else {
+        // drop the peach
+        if (currentRiverRock.name === `emerald`) {
+          gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `EmG`;
+        } else if (currentRiverRock.name === `diamond`) {
+          gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `DiG`;
+        } else if (currentRiverRock.name === `petRock`) {
+          gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `PrG`;
+        }
+      }
+    }
+  } else if (dropZone !== item.dropZone) {
+    // if (item === `pie`) {
+    //   //console.log("yes, this is a pie, not a peach");
+    //   let fallenPieIndex = random(idleMate.itemDropZone);
+    //   if (gridMap[fallenPieIndex.row][fallenPieIndex.collumn] === `Pl`) {
+    //     // if peach tries to fall in a cell where the player is standing, select another cell and try again
+    //     fallenPieIndex = random(idleMate.itemDropZone);
+    //     dropItem(`pie`); //dropPie();
+    //   } else {
+    //     // drop the slice of pie
+    //     gridMap[fallenPieIndex.row][fallenPieIndex.collumn] = `Pi`;
+    //   }
+    // }
 
     //console.log("yes, this is a pie, not a peach");
     let npcItemDropIndex = random(adjacentNPC.itemDropZone);
@@ -1754,7 +1750,7 @@ else if (dropZone !== item.dropZone){
       gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] = item.cellLabel;
     }
   }
-//}
+  //}
 }
 
 // function dropPeach() {
