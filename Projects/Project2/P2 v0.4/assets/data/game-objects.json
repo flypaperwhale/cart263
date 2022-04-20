@@ -25,8 +25,8 @@
         "goldcoin": 0
       },
       "itemDropZone": [
-        { "row": 11, "collumn": 1 },
-        { "row": 12, "collumn": 2 }
+        { "row": 11, "collumn": 4 },
+        { "row": 10, "collumn": 5 }
       ],
       "initial dialog": "How fantastic to meet you!"
     },
@@ -55,8 +55,8 @@
         "goldcoin": 0
       },
       "itemDropZone": [
-        { "row": 11, "collumn": 1 },
-        { "row": 12, "collumn": 2 }
+        { "row": 19, "collumn": 14 },
+        { "row": 20, "collumn": 14 }
       ],
       "initial dialog": "How fantastic to meet you!"
     },
@@ -115,8 +115,8 @@
         "goldcoin": 1
       },
       "itemDropZone": [
-        { "row": 11, "collumn": 1 },
-        { "row": 12, "collumn": 2 }
+        { "row": 19, "collumn": 18 },
+        { "row": 20, "collumn": 18 }
       ],
       "initial dialog": "How fantastic to meet you!"
     },
@@ -144,10 +144,7 @@
         "mushroom": 1,
         "goldcoin": 0
       },
-      "itemDropZone": [
-        { "row": 11, "collumn": 1 },
-        { "row": 12, "collumn": 2 }
-      ],
+      "itemDropZone": [],
       "initial dialog": "How fantastic to meet you!"
     }
   },
@@ -203,7 +200,7 @@
       "cell label": "Di",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 3,
+      "value": 4,
       "imageName": "diamondImage",
       "dropZone": [
         { "row": 7, "collumn": 18 },
@@ -226,7 +223,7 @@
       "cell label": "Em",
       "type": "precious stone",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 4,
+      "value": 3,
       "imageName": "emeraldImage",
       "dropZone": [
         { "row": 7, "collumn": 18 },
