@@ -75,7 +75,7 @@
       "firstTalk": "true",
       "initialDialog": "Hey there. You like boats?",
       "neutralDialog": [
-        "I'll rent you a boat for 3 gold coins",
+        "The boat rental only costs three coins.",
         "I don't know what I'd do for something fresh right now",
         "When work is over, I hop on my boat and fish until sun set"
       ],
@@ -389,6 +389,15 @@
       "value": 6,
       "imageName": "boatKeyImage",
       "dropZone": [0]
-  }
+  },
+  "fish": {
+    "name": "fish",
+    "cellLabel": "Fs",
+    "type": "edible",
+    "/* value range": "1 = common - 5 = precious */",
+    "value": 2,
+    "imageName": "fishImage",
+    "dropZone": [0]
+}
 }
 }

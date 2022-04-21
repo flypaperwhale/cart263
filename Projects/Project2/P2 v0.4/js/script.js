@@ -101,6 +101,8 @@ let npcPeachEventOngoing = true; // this maintains the peach event npc state, st
 let npcFriendEvent = 0; // friend event npc state handler
 let npcFriendEventOngoing = false; // this maintains the friend event npc state, is turned true once peach event is completed
 
+let npcGoldcoinEvent = 0;
+
 let currentDigitPressed = 0;
 
 let imageBank = {};
@@ -116,6 +118,7 @@ let itemNameList = [
   "firework",
   "mushroom",
   "goldcoin",
+  "fish"
 ];
 // image names
 let bushImage, stoneImage;
@@ -129,7 +132,7 @@ let peachImage,
   mushroomImage,
   valsPaintingImage,
   petRockImage,
-  boatKeyImage;
+  boatKeyImage, fishImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
 
@@ -167,6 +170,7 @@ function preload() {
   imageBank.valsPaintingImage = loadImage(`assets/images/valsPainting.png`);
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
   imageBank.boatKeyImage = loadImage(`assets/images/boatKey.png`);
+  imageBank.fishImage = loadImage(`assets/images/fish.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
@@ -227,6 +231,7 @@ function setup() {
   fireworkItem = new Item(data.items.firework);
   goldcoinItem = new Item(data.items.goldcoin);
   valsPaintingItem = new Item(data.items.valsPainting);
+  fishItem = new Item(data.items.fish);
 
   boatKeyItem = new Item(data.items.boatKey);
 }
@@ -398,6 +403,10 @@ function displayGrid() {
           drawSmolItem(`boatKey`, x, y);
           //drawSmolPie(x, y);
         }
+        else if (selectItem.name === "fish") {
+          drawSmolItem(`fish`, x, y);
+          //drawSmolPie(x, y);
+        }
       }
       //  }
       if (cell === `PeG` || cell === `PeN`) {
@@ -459,6 +468,11 @@ function displayGrid() {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(boatKeyItem.name, x, y);
+      }
+      if (cell === `Fs`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(fishItem.name, x, y);
       }
 
       if (cell === `NPC`) {
@@ -595,6 +609,10 @@ function displayInventory() {
         //console.log("???");
         invItemToDisplay = imageBank[boatKeyItem.imageName];
       }
+      else if (player.inventory[i].imageName === `fishImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[fishItem.imageName];
+      }
 
       push();
       imageMode(CENTER);
@@ -673,7 +691,9 @@ function drawItem(itemName, x, y) {
   if (itemName === `boatKey`) {
     currentItemImage = imageBank[boatKeyItem.imageName];
   }
-
+  if (itemName === `fish`) {
+    currentItemImage = imageBank[fishItem.imageName];
+  }
   push();
   imageMode(LEFT);
   image(currentItemImage, x * gridUnit, y * gridUnit, 34, 35);
@@ -714,6 +734,9 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `boatKey`) {
     currentItemImage = imageBank[boatKeyItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `fish`) {
+    currentItemImage = imageBank[fishItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -917,7 +940,8 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`
+        nextCell === `Bk`||
+        nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1007,7 +1031,8 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`
+        nextCell === `Bk`||
+        nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1089,7 +1114,8 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`
+        nextCell === `Bk`||
+        nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1170,7 +1196,8 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`
+        nextCell === `Bk`||
+        nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1408,17 +1435,47 @@ function keyPressed() {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
-                        removeItemFromInv();
+
 
                         if (receivedItem === `goldcoin`) {
-                          //dropItem
-                          npcText = `Be sure to stay in the shallow waters!`;
+                          console.log(npcGoldcoinEvent);
 
-                          dropItem(boatKeyItem, boatMate.itemDropZone);
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        } else {
+                          npcGoldcoinEvent++;
+                            removeItemFromInv();
+                            console.log(npcGoldcoinEvent);
+                          if (npcGoldcoinEvent === 1){
+                            npcText = "That's it. Three coins to rent a boat.";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (npcGoldcoinEvent === 2){
+                            npcText = "One more coin and I'll hand you these keys.";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+
+
+                          if (npcGoldcoinEvent === 3){
+                            //dropItem
+                            npcText = `Be sure to stay in the shallow waters!`;
+
+                            dropItem(boatKeyItem, boatMate.itemDropZone);
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (npcGoldcoinEvent > 3){
+                            npcText = `Enjoy the catch of the day!`;
+                            dropItem(fishItem, boatMate.itemDropZone);
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                        }
+
+                        else {
                           npcText = `Thanks for the ${receivedItem}`;
                           let relationshipManipulator =
                             adjacentNPC.relationship2items[receivedItem];
@@ -1451,10 +1508,6 @@ if (adjacentNPC.firstTalk === "true") {
   return;
   //npcFirstTalk();
 }
-
-
-
-                //console.log(selectItemHeldOut);
 
                 npcDialog(); // normal dialog is generid
 
@@ -1628,20 +1681,6 @@ if (adjacentNPC.firstTalk === "true") {
                       npcText = "You are the bomb! I love you!"; // npc now loves the player
                       npcPeachEventOngoing = true; // the npcPeachEvent repeats
                     }
-                  } else {
-                    // no longer in the npcPeachEvent, when the player gives npc another peach
-                    npcText = "Another peach! You shouldn't have.";
-                    npcFriendEventOngoing = true; // the npcFriendEvent now begins
-                  }
-                  if (npcFriendEventOngoing === true) {
-                    // while npcFriendEvent is ongoing
-                    npcFriendEvent++; // every time plyer gives npc a peach, event adds 1 to its status
-                    if (npcFriendEvent >= 3) {
-                      // when its status is 3 or more, you've reached final text
-                      // status will keep going up, but text won't change here
-                      npcText = "Thanks, I know you've got me covered";
-                      return;
-                    }
                   }
                 } else {
                   removeItemFromInv();
@@ -1733,6 +1772,8 @@ function removeItemFromInv() {
     (selectItem.name === "firework" && selectItemHeldOut === true) ||
     (selectItem.name === "valsPainting" && selectItemHeldOut === true) ||
     (selectItem.name === "goldcoin" && selectItemHeldOut === true)
+    ||
+    (selectItem.name === "fish" && selectItemHeldOut === true)
   ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
@@ -1861,6 +1902,9 @@ function pickItemUp() {
   if (nextCell === `Bk`) {
     itemPickup(`boatKey`);
   }
+  if (nextCell === `Fs`) {
+    itemPickup(`fish`);
+  }
 }
 
 function itemPickup(item) {
@@ -1904,6 +1948,10 @@ function itemPickup(item) {
   if (item === `boatKey`) {
     //console.log(`hey...`)
     player.inventory.push(boatKeyItem);
+  }
+  if (item === `fish`) {
+    //console.log(`hey...`)
+    player.inventory.push(fishItem);
   }
 }
 
