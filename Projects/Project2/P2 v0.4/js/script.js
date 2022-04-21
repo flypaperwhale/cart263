@@ -182,6 +182,10 @@ function preload() {
   map = loadImage(`assets/images/mishmashmap.png`);
 
   data = loadJSON(`assets/data/game-objects.json`);
+
+  bgmusic1 = loadSound("assets/sounds/Guitar-Gentle.mp3");
+  bgmusic2 = loadSound("assets/sounds/Komiku_-_04_-_The_weekly_fair.mp3");
+
 }
 
 /**
@@ -295,6 +299,7 @@ function titleState() {
 
 function simulationState() {
   if (state === "simulation") {
+    playBGMusic();
     // draw grass
     push();
     imageMode(CENTER);
@@ -316,6 +321,15 @@ function simulationState() {
 
     checkForAdjacentNPC();
   }
+}
+
+function playBGMusic() { // plays bg music
+  push();
+  bgmusic2.playMode(`untilDone`); // bg music mode loops forever
+  bgmusic2.setVolume(0.2); // not too loud
+  bgmusic2.rate(0.95); // not too quick
+  bgmusic2.play(); // play bg music
+  pop();
 }
 
 function displayText() {
