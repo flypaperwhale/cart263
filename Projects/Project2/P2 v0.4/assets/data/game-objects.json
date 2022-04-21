@@ -350,7 +350,7 @@
       "cellLabel": "Mu",
       "type": "edible",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 2,
+      "value": 3,
       "imageName": "mushroomImage",
       "dropZone": [0]
     },
@@ -359,7 +359,7 @@
       "cellLabel": "Fw",
       "type": "explosive",
       "/* value range": "1 = common - 5 = precious */",
-      "value": 3,
+      "value": 2,
       "imageName": "fireworkImage",
       "dropZone": [0]
     },

@@ -20,12 +20,12 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
   [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Pa`, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, `Fw`, `S`, `S`, ` `, `Gc`, ` `,` `, ` `, ` `, ` `, ` `, `EmG`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
+  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
+  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `EmG`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
   [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
   [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
   [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
-  [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, `Ch`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
+  [` `, ` `, `S`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
   [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
   [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [14]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [15]
@@ -102,6 +102,8 @@ let npcFriendEvent = 0; // friend event npc state handler
 let npcFriendEventOngoing = false; // this maintains the friend event npc state, is turned true once peach event is completed
 
 let npcGoldcoinEvent = 0;
+
+let firstValue5GiveBack = true;
 
 let currentDigitPressed = 0;
 
@@ -224,7 +226,7 @@ function setup() {
   peachNPCItem = new Item(data.items.npcPeach);
   diamondNPCItem = new Item(data.items.npcDiamond);
   emeraldNPCItem = new Item(data.items.npcEmerald);
-  petRockNPCITem = new Item(data.items.npcPetRock);
+  petRockNPCItem = new Item(data.items.npcPetRock);
 
   cherryItem = new Item(data.items.cherry);
   mushroomItem = new Item(data.items.mushroom);
@@ -1354,7 +1356,8 @@ function keyPressed() {
                         if (
                           receivedItem === `peach` ||
                           receivedItem === `cherry` ||
-                          receivedItem === `mushroom`
+                          receivedItem === `mushroom`||
+                          receivedItem === `fish`
                         ) {
                           //dropItem
                           npcText = `Thanks for the produce! Here's a goldcoin!`;
@@ -1584,52 +1587,84 @@ if (adjacentNPC.firstTalk === "true") {
                       if (itemNameList[i] === selectItem.name) {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
-                        receivedItem = selectItem.name;
+                        receivedItem = selectItem;
                         removeItemFromInv();
                         // console.log(selectItem.name);
-                        // console.log(receivedItem);
+                         console.log(receivedItem);
                         // console.log(
                         //   `${adjacentNPC.relationship2items[receivedItem]}`
                         //  );
-                        if (
-                          receivedItem === `peach` ||
-                          receivedItem === `cherry` ||
-                          receivedItem === `mushroom`
-                        ) {
-                          //dropItem
-                          npcText = `Thanks for the produce! Here's a goldcoin!`;
+                        let value1Items = [petRockNPCItem,peachNPCItem];
+                        let value2Items = [fishItem, cherryItem, fireworkItem, mushroomItem];
+                        let value3Items = [emeraldNPCItem, mushroomItem];
+                        let value4Items = [goldcoinItem, diamondNPCItem];
+                        let value5Items = [diamondItem];
 
-                          dropItem(goldcoinItem, depMate.itemDropZone);
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        } else if (receivedItem === `goldcoin`) {
-                          let depMateItems = [
-                            peachNPCItem,
-                            cherryItem,
-                            fireworkItem,
-                          ];
-                          depMateItemToDrop = random(depMateItems);
-                          npcText = `Here's a ${depMateItemToDrop.name}`;
-                          dropItem(depMateItemToDrop, depMate.itemDropZone);
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        } else {
-                          npcText = `Thanks for the ${receivedItem}`;
-                          let relationshipManipulator =
-                            adjacentNPC.relationship2items[receivedItem];
+                        giveBackItemValue = receivedItem.value;
+                        console.log(giveBackItemValue);
+                        console.log(receivedItem.value);
 
-                          adjacentNPC.relationship2player =
-                            adjacentNPC.relationship2player +
-                            relationshipManipulator;
 
-                          console.log(adjacentNPC.relationship2player);
-                          removeItemFromInv();
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
+                        if(giveBackItemValue === 1){
+                          let giveBackItem = random(value1Items);
+                          if (giveBackItem === receivedItem){
+                            let giveBackItem = random(value1Items);
+                          }
+                          dropItem(giveBackItem,peddleMate.itemDropZone);
                         }
+                        else if(giveBackItemValue === 2){
+
+                          let giveBackItem = random(value2Items);
+                          if (giveBackItem === receivedItem){
+                            let giveBackItem = random(value2Items);
+}
+                          dropItem(giveBackItem,peddleMate.itemDropZone);
+                        }
+                        else if(giveBackItemValue === 3){
+                          let giveBackItem = random(value3Items);
+                          if (giveBackItem === receivedItem){
+                            let giveBackItem = random(value3Items);
+}
+                          dropItem(giveBackItem,peddleMate.itemDropZone);
+                        }
+                        else if(giveBackItemValue === 4){
+                          let giveBackItem = random(value4Items);
+                          while (giveBackItem === receivedItem){
+                            let giveBackItem = random(value4Items);
+}
+                          dropItem(giveBackItem,peddleMate.itemDropZone);
+                        }
+                        else if(giveBackItemValue === 5){
+                          if (firstValue5GiveBack === true){
+                            dropItem(valsPaintingItem,peddleMate.itemDropZone);
+                            firstValue5GiveBack = false;
+                            return;
+                          }
+
+                          let giveBackItem = random(value5Items);
+                          if (giveBackItem === receivedItem){
+                            let giveBackItem = random(value5Items);
+}
+                          dropItem(giveBackItem,peddleMate.itemDropZone);
+
+
+                        }
+
+                        // else {
+                        //   npcText = `Thanks for the ${receivedItem}`;
+                        //   let relationshipManipulator =
+                        //     adjacentNPC.relationship2items[receivedItem];
+                        //
+                        //   adjacentNPC.relationship2player =
+                        //     adjacentNPC.relationship2player +
+                        //     relationshipManipulator;
+                        //
+                        //   console.log(adjacentNPC.relationship2player);
+                        //   removeItemFromInv();
+                        //   playerPaused = true; // player is paused
+                        //   stopTextBubble = false; //  text bubble is not stopped anymore
+                        //   return;
+                        // }
                       }
                     }
                   }
@@ -1742,7 +1777,7 @@ function npcDialog() {
       // +.2 on rel2pl
       // receiving item = true
       //return;
-    } else if (adjacentNPC.relationship2items <= -10) {
+    } else if (adjacentNPC.relationship2player <= -10) {
       let dialogSelection = adjacentNPC.dislikeDialog;
       let lastNPCText = npcText;
       npcText = random(dialogSelection); // use player coordinates
