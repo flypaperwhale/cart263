@@ -1,5 +1,5 @@
 /**
-Mish Mash
+Chit Mash
 Frankie Latreille
 
 This is the prototype for my CART 263 P2
@@ -180,7 +180,6 @@ function preload() {
   data = loadJSON(`assets/data/game-objects.json`);
 
   bgmusic1 = loadSound("assets/sounds/Guitar-Gentle.mp3");
-  bgmusic2 = loadSound("assets/sounds/Komiku_-_04_-_The_weekly_fair.mp3");
 }
 
 /**
@@ -275,7 +274,7 @@ function titleState() {
     textAlign(CENTER);
     textSize(54);
     text("MISH CHAT", 225, 125);
-      text("CHIT MASH", 225, 165);
+    text("CHIT MASH", 225, 165);
     textSize(20);
     textAlign(LEFT);
     fill("lemonchiffon");
@@ -1500,8 +1499,8 @@ function keyPressed() {
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
                     selectItem !==
-                    { itemName: "empty", itemImageName: "no image" } ||
-                  selectItem !== boatKeyItem
+                      { itemName: "empty", itemImageName: "no image" } ||
+                    selectItem !== boatKeyItem
                   ) {
                     // if player is holding out item
                     // go through item name list
@@ -1549,8 +1548,8 @@ function keyPressed() {
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
                     selectItem !==
-                    { itemName: "empty", itemImageName: "no image" } ||
-                  selectItem !== boatKeyItem
+                      { itemName: "empty", itemImageName: "no image" } ||
+                    selectItem !== boatKeyItem
                   ) {
                     // if player is holding out item
                     // go through item name list
@@ -1559,7 +1558,11 @@ function keyPressed() {
                         //determine how much relationship manipulated
                         receivedItem = selectItem;
                         removeItemFromInv();
-                        let value1Items = [petRockNPCItem, peachNPCItem, cherryItem];
+                        let value1Items = [
+                          petRockNPCItem,
+                          peachNPCItem,
+                          cherryItem,
+                        ];
                         let value2Items = [
                           fishItem,
                           cherryItem,
@@ -1647,25 +1650,23 @@ function keyPressed() {
                         receivedItem = selectItem.name;
 
                         if (receivedItem === `peach`) {
-
                           npcPeachEvent++;
                           removeItemFromInv();
                           if (npcPeachEvent === 1) {
-                            npcText = "Thanks for that peach, can you bring me 5 total?";
+                            npcText =
+                              "Thanks for that peach, can you bring me 5 total?";
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
                           if (npcPeachEvent === 2) {
-                            npcText =
-                              "That makes two!";
+                            npcText = "That makes two!";
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
                           if (npcPeachEvent === 3) {
-                            npcText =
-                              "I only need two more peaches now!";
+                            npcText = "I only need two more peaches now!";
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
@@ -1688,7 +1689,6 @@ function keyPressed() {
                             npcPeachEvent = 0;
                             return;
                           }
-
                         } else {
                           npcText = `Thanks for the ${receivedItem}`;
                           let relationshipManipulator =

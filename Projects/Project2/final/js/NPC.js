@@ -1,27 +1,18 @@
 class NPC {
   constructor(data) {
-    this.name = data.name;
-    this.index = data["gridMap index"];
-    // {
-    //   row: undefined,
-    //   collumn: undefined,
-    // };
-    this.cellLabel = data.cellLabel;
-    this.color = data.color;
-    this.personality = data.personality;
-    this.relationship2player = data.relationship2player;
-    this.relationship2items = data.relationship2items;
-    // {
-    //   peach: 0,
-    // };
-    this.itemDropZone = data.itemDropZone;
-
-    this.firstTalk = data.firstTalk;
-    this.initialDialog = data.initialDialog;
-    this.neutralDialog = data.neutralDialog;
-    this.dislikeDialog = data.dislikeDialog;
-    this.friendlyDialog = data.friendlyDialog;
+    // pass in JSON npc data
+    this.name = data.name; // npc name
+    //this.index = data["gridMap index"]; // not used
+    this.cellLabel = data.cellLabel; // npc label in gridMap
+    this.color = data.color; // npc ellipse color fill
+    //this.personality = data.personality; // not used
+    this.relationship2player = data.relationship2player; // npc's orientation towards player, for dialog
+    this.relationship2items = data.relationship2items; // npc's orientation towards items, to manipulate npc's orientation towards player
+    this.itemDropZone = data.itemDropZone; // zone so items fall near dropping npc
+    this.initialDialog = data.initialDialog; // npc's first utterance
+    this.neutralDialog = data.neutralDialog; // npc's neutral phrases
+    this.dislikeDialog = data.dislikeDialog; // npc's dislike phrases
+    this.friendlyDialog = data.friendlyDialog; // npc's friendly phrases
   }
-
-  // events
+  // events (BOT's goldcoinEvent and IDL's peachEvent etc.) are handled manually in script
 }
