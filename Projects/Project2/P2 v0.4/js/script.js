@@ -310,10 +310,10 @@ function simulationState() {
 function playBGMusic() {
   // plays bg music
   push();
-  bgmusic2.playMode(`untilDone`); // bg music mode loops forever
-  bgmusic2.setVolume(0.2); // not too loud
-  bgmusic2.rate(0.95); // not too quick
-  bgmusic2.play(); // play bg music
+  bgmusic1.playMode(`untilDone`); // bg music mode loops forever
+  bgmusic1.setVolume(0.2); // not too loud
+  bgmusic1.rate(0.95); // not too quick
+  bgmusic1.play(); // play bg music
   pop();
 }
 
@@ -1535,7 +1535,7 @@ function keyPressed() {
                         //determine how much relationship manipulated
                         receivedItem = selectItem;
                         removeItemFromInv();
-                        let value1Items = [petRockNPCItem, peachNPCItem];
+                        let value1Items = [petRockNPCItem, peachNPCItem, cherryItem];
                         let value2Items = [
                           fishItem,
                           cherryItem,
@@ -1592,8 +1592,7 @@ function keyPressed() {
                 adjacentNPC = idleMate;
                 //idle mate wants 5 peaches in exchange for pie, infinite
                 // anything else is received as a gift
-                //npcText = idleMate.initialDialog; // use player coordinates
-                //}
+
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
                   npcText = adjacentNPC.initialDialog; // display npc initial dialog
@@ -1601,7 +1600,89 @@ function keyPressed() {
                   playerPaused = true; // player is paused
                   stopTextBubble = false; //  text bubble is not stopped anymore
                   return;
-                  //npcFirstTalk();
+                }
+
+                npcDialog();
+
+                // if item held out is unique for each npc
+                if (selectItemHeldOut === true) {
+                  //dep mate gives gold coins for fruit edibles types
+                  // otherwise he receives items as gifts which improve rel2pl
+                  if (
+                    selectItem !==
+                      { itemName: "empty", itemImageName: "no image" } ||
+                    selectItem !== boatKeyItem
+                  ) {
+                    // if player is holding out item
+
+                    // go through item name list
+                    for (let i = 0; i < itemNameList.length; i++) {
+                      if (itemNameList[i] === selectItem.name) {
+                        console.log(`you've given a ${selectItem.name}`);
+                        //determine how much relationship manipulated
+                        receivedItem = selectItem.name;
+
+                        if (receivedItem === `peach`) {
+
+                          npcPeachEvent++;
+                          removeItemFromInv();
+                          if (npcPeachEvent === 1) {
+                            npcText = "Thanks for that peach, can you bring me 5 total?";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (npcPeachEvent === 2) {
+                            npcText =
+                              "That makes two!";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (npcPeachEvent === 3) {
+                            npcText =
+                              "I only need two more peaches now!";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (npcPeachEvent === 4) {
+                            npcText =
+                              "Bring me one more and I'll share you something special";
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+
+                          if (npcPeachEvent === 5) {
+                            //dropItem
+                            npcText = `You are the bomb! I love you!`;
+
+                            dropItem(pieItem, adjacentNPC.itemDropZone);
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            npcPeachEvent = 0;
+                            return;
+                          }
+
+                        } else {
+                          npcText = `Thanks for the ${receivedItem}`;
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
+
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
+
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv();
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                      }
+                    }
+                  }
                 }
 
                 if (stopTextBubble === true) {
@@ -1611,33 +1692,7 @@ function keyPressed() {
                   // npcFriendEvent gets launched after npcPeachEvent is completed
                 }
 
-                // if player item is out, player gives npc item
-                // npc verifies what player is giving
 
-                if (selectItem.name === "peach" && selectItemHeldOut === true) {
-                  removeItemFromInv();
-                  // npcPeachEvent //
-                  if (npcPeachEventOngoing === true) {
-                    // while npcPeachEvent is ongoing
-                    npcPeachEvent++; // every time player gives npc a peach, event adds 1 to its status
-                    npcText =
-                      "Thanks for that peach, can you bring me 5 total?";
-                    if (npcPeachEvent === 5) {
-                      // when npcPeachEvent reaches status 5
-                      //if (triggerOnce === 0) {
-                      console.log(adjacentNPC.itemDropZone);
-                      dropItem(pieItem, adjacentNPC.itemDropZone);
-                      //dropPie();
-                      //triggerOnce = 1;
-                      npcPeachEvent = 0;
-                      //}
-                      npcText = "You are the bomb! I love you!"; // npc now loves the player
-                      npcPeachEventOngoing = true; // the npcPeachEvent repeats
-                    }
-                  }
-                } else {
-                  removeItemFromInv();
-                }
               }
             }
           }

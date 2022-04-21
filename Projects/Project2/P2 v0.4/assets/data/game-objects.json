@@ -10,7 +10,7 @@
       "color": "salmon",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 8,
+      "relationship2player": 7,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
@@ -55,7 +55,7 @@
       "color": "darkslategray",
       "personality": "busy",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 5,
+      "relationship2player": 6,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 1,
@@ -97,7 +97,7 @@
       "color": "yellow",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 0,
+      "relationship2player": 2,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
@@ -121,7 +121,7 @@
       "neutralDialog": [
         "What do I do? What do you mean?",
         "I was born on this island, I've never thought of leaving",
-        "I love baking, desserts are my true passion",
+        "I love baking. Desserts are my true passion!",
         "I have a passion for taking it easy, if I hadn't said it yet"
       ],
       "dislikeDialog": ["Aww, chill out pal"],
@@ -176,7 +176,7 @@
       "color": "lightslategrey",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 8,
+      "relationship2player": 5,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
@@ -325,7 +325,7 @@
     },
     "npcPetRock": {
       "name": "petRock",
-      "cellLabel": "Ch",
+      "cellLabel": "PrN",
       "type": "stone",
       "/* value range": "1 = common - 5 = precious */",
       "value": 1,
