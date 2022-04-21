@@ -13,3 +13,5 @@ What I have found through testing my program is that I have succeeded in creatin
 I am also proud to have created some of my first pixel art assets for this game, populating the game with items that I have drawn. I added the music last minute to elevate this program from a tech-demo style prototype to a stand-alone program. I also put a little more effort into making the title screen pleasant to look at.
 
 I did not work too hard on finding a title as this remains a prototype. The title evokes the mish mashed nature of having plenty of items to give around to to the different characters who will chit chat with the player. Ideally, players would feel there is value in their giving of items and could create scenarios in their minds that the character responses would give weight to.
+
+I was able to accomplish certain parts of the code after following examples given to me by Pippin, namely how to implement the grid, and how to check the next cell label (where the player will step) in a generic fashion.
