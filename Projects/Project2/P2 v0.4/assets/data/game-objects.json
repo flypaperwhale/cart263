@@ -22,7 +22,8 @@
         "pie": 1,
         "firework": 0,
         "mushroom": 0,
-        "goldcoin": 0
+        "goldcoin": 0,
+        "fish": 0
       },
       "itemDropZone": [
         { "row": 11, "collumn": 4 },
@@ -60,13 +61,14 @@
         "peach": 1,
         "emerald": 0,
         "diamond": 0,
-        "cherry": 0,
+        "cherry": 1,
         "valsPainting": 0,
         "petRock": -1,
         "pie": 1,
         "firework": 0,
         "mushroom": 0,
-        "goldcoin": 0
+        "goldcoin": 0,
+          "fish": 1
       },
       "itemDropZone": [
         { "row": 19, "collumn": 14 },
@@ -107,7 +109,8 @@
         "pie": 1,
         "firework": 0,
         "mushroom": 0,
-        "goldcoin": 0
+        "goldcoin": 0,
+          "fish": 1
       },
       "itemDropZone": [
         { "row": 24, "collumn": 5 },
@@ -150,7 +153,8 @@
         "pie": 1,
         "firework": 0,
         "mushroom": 0,
-        "goldcoin": 1
+        "goldcoin": 1,
+          "fish": 0
       },
       "itemDropZone": [
         { "row": 19, "collumn": 18 },
@@ -172,11 +176,11 @@
       "color": "lightslategrey",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 0,
+      "relationship2player": 8,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
-        "emerald": 0,
+        "emerald": 1,
         "diamond": 1,
         "cherry": 0,
         "valsPainting": 1,
@@ -184,7 +188,8 @@
         "pie": 1,
         "firework": 1,
         "mushroom": 1,
-        "goldcoin": 0
+        "goldcoin": 0,
+          "fish": 0
       },
       "itemDropZone": [],
       "firstTalk": "true",
@@ -195,7 +200,7 @@
         "There are a lot of minerals hiding in this mountain"
       ],
       "dislikeDialog": [],
-      "friendlDdialog": ["Howdy! Enjoy the nice weather!"]
+      "friendlyDialog": ["Howdy! Enjoy the nice weather!"]
     }
   },
   "items": {

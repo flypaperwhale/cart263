@@ -32,7 +32,7 @@ let gridMap = [
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, `S`, ` `, ` `], // [16]
   [` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `S`, `S`, ` `, ` `, ` `, ` `, `Bh`, `Sh`, ` `, ` `, ` `, `S`, ` `, ` `], // [17]
   [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [18]
-  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`,`BOT`,` `, ` `, ` `, ` `, ` `,`PDL`, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [19]
+  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `BoT`,`BOT`,` `, ` `, ` `, ` `, ` `,`PDL`, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [19]
   [` `, `S`, `Sh`, `Sh`, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bo`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [20]
   [` `, `S`, ` `, ` `, ` `, ` `, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, `S`, ` `, ` `], // [21]
   [` `, `S`, ` `, `S`, `S`, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, `S`, ``, ` `], // [22]
@@ -120,7 +120,7 @@ let itemNameList = [
   "firework",
   "mushroom",
   "goldcoin",
-  "fish"
+  "fish",
 ];
 // image names
 let bushImage, stoneImage;
@@ -134,14 +134,10 @@ let peachImage,
   mushroomImage,
   valsPaintingImage,
   petRockImage,
-  boatKeyImage, fishImage;
+  boatKeyImage,
+  fishImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
-
-// let pieFallAreas = [
-//   { row: 11, collumn: 1 },
-//   { row: 12, collumn: 2 },
-// ];
 
 let state = "title"; // can be title, simulation
 
@@ -185,7 +181,6 @@ function preload() {
 
   bgmusic1 = loadSound("assets/sounds/Guitar-Gentle.mp3");
   bgmusic2 = loadSound("assets/sounds/Komiku_-_04_-_The_weekly_fair.mp3");
-
 }
 
 /**
@@ -205,8 +200,6 @@ function setup() {
         };
         nextCol = currentPlayerIndex.playerCollum;
         nextRow = currentPlayerIndex.playerRow;
-        // player.x = c * gridUnit;
-        // player.y = r * gridUnit;
       }
     }
   }
@@ -304,16 +297,7 @@ function simulationState() {
     push();
     imageMode(CENTER);
     image(map, SCENE_W / 2, SCENE_H / 2, SCENE_W, SCENE_H);
-    // fill(`green`);
-    // rectMode(CENTER);
-    // rect(SCENE_W / 2, 432, SCENE_W, SCENE_H / 1.5);
     pop();
-    // display the tree!
-    // push();
-    // imageMode(CENTER);
-    // image(peachTreeImage, 355, 270, 200, 200); // hard numbers
-    // pop();
-    // END OF BACKGROUND //
 
     displayGrid();
     displayText();
@@ -323,7 +307,8 @@ function simulationState() {
   }
 }
 
-function playBGMusic() { // plays bg music
+function playBGMusic() {
+  // plays bg music
   push();
   bgmusic2.playMode(`untilDone`); // bg music mode loops forever
   bgmusic2.setVolume(0.2); // not too loud
@@ -418,8 +403,7 @@ function displayGrid() {
         } else if (selectItem.name === "boatKey") {
           drawSmolItem(`boatKey`, x, y);
           //drawSmolPie(x, y);
-        }
-        else if (selectItem.name === "fish") {
+        } else if (selectItem.name === "fish") {
           drawSmolItem(`fish`, x, y);
           //drawSmolPie(x, y);
         }
@@ -427,8 +411,7 @@ function displayGrid() {
       //  }
       if (cell === `PeG` || cell === `PeN`) {
         // Pe for Peach
-        //console.log(peachItem);
-        //console.log(`in peach cell ${peachItem} + ${peachItem.name}`);
+
         drawItem(peachItem.name, x, y);
         //drawPeach(x, y);
       }
@@ -522,7 +505,6 @@ function displayGrid() {
       }
 
       if (cell === `Bh`) {
-        //@@@
         // Pe for Peach
         image(bushImage, x * gridUnit, y * gridUnit, 34, 35);
         //  drawItem(bushImage, x, y);
@@ -535,7 +517,7 @@ function displayGrid() {
         //drawPeach(x, y);
       }
 
-      if (cell === `Bo`) {
+      if (cell === `Bo` || cell === `BoT`) {
         image(boatImage, x * gridUnit, y * gridUnit, 40, 35);
       }
     }
@@ -595,7 +577,6 @@ function displayInventory() {
     } else {
       // in box 1
       if (player.inventory[i].imageName === `peachImage`) {
-        //console.log("PE?");
         invItemToDisplay = imageBank[peachItem.imageName]; // find itemImageName in the item object at index 1 in inventory
       } else if (player.inventory[i].imageName === `pieImage`) {
         invItemToDisplay = imageBank[pieItem.imageName]; // find itemImageName in the item object at index 1 in inventory
@@ -604,29 +585,20 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `diamondImage`) {
         invItemToDisplay = imageBank[diamondItem.imageName];
       } else if (player.inventory[i].imageName === `petRockImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
       } else if (player.inventory[i].imageName === `cherryImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[cherryItem.imageName];
       } else if (player.inventory[i].imageName === `mushroomImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[mushroomItem.imageName];
       } else if (player.inventory[i].imageName === `fireworkImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[fireworkItem.imageName];
       } else if (player.inventory[i].imageName === `valsPaintingImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[valsPaintingItem.imageName];
       } else if (player.inventory[i].imageName === `goldcoinImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[goldcoinItem.imageName];
       } else if (player.inventory[i].imageName === `boatKeyImage`) {
-        //console.log("???");
         invItemToDisplay = imageBank[boatKeyItem.imageName];
-      }
-      else if (player.inventory[i].imageName === `fishImage`) {
-        //console.log("???");
+      } else if (player.inventory[i].imageName === `fishImage`) {
         invItemToDisplay = imageBank[fishItem.imageName];
       }
 
@@ -668,14 +640,8 @@ function checkForAdjacentNPC() {
 
 function drawItem(itemName, x, y) {
   // draws item png at row x, collumn y
-  //console.log(`in draw item ${itemName}`);
   if (itemName === `peach`) {
-    //  console.log("in draw peach 1");
-
     currentItemImage = imageBank[peachItem.imageName];
-
-    //    console.log(`draw peach 2 ${currentItemImage}`);
-    //
   }
   if (itemName === `pie`) {
     currentItemImage = imageBank[pieItem.imageName];
@@ -799,9 +765,6 @@ function keyPressed() {
       // 1
       selectItemNumber = 1;
       if (player.inventory[1] === undefined) {
-        // if there is nothing in array index 1
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 1;
 
@@ -813,9 +776,6 @@ function keyPressed() {
       // 2
       selectItemNumber = 2;
       if (player.inventory[2] === undefined) {
-        // if there is nothing in array index 2
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 2;
 
@@ -827,9 +787,6 @@ function keyPressed() {
       // 3
       selectItemNumber = 3;
       if (player.inventory[3] === undefined) {
-        // if there is nothing in array index 3
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 3;
 
@@ -841,9 +798,6 @@ function keyPressed() {
       // 4
       selectItemNumber = 4;
       if (player.inventory[4] === undefined) {
-        // if there is nothing in array index 4
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 4;
 
@@ -855,9 +809,6 @@ function keyPressed() {
       // 5
       selectItemNumber = 5;
       if (player.inventory[5] === undefined) {
-        // if there is nothing in array index 5
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 5;
 
@@ -869,9 +820,6 @@ function keyPressed() {
       // 6
       selectItemNumber = 6;
       if (player.inventory[6] === undefined) {
-        // if there is nothing in array index 6
-        //currentDigitPressed = ;
-        //selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 6;
         selectItem = player.inventory[6];
@@ -882,9 +830,6 @@ function keyPressed() {
       // 7
       selectItemNumber = 7;
       if (player.inventory[7] === undefined) {
-        // if there is nothing in array index 7
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 7;
 
@@ -896,9 +841,6 @@ function keyPressed() {
       // 8
       selectItemNumber = 8;
       if (player.inventory[8] === undefined) {
-        // if there is nothing in array index 8
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 8;
 
@@ -910,9 +852,6 @@ function keyPressed() {
       // 9
       selectItemNumber = 9;
       if (player.inventory[9] === undefined) {
-        // if there is nothing in array index 9
-        // currentDigitPressed = 0;
-        // selectItem = player.inventory[0]; // select the empty box
       } else {
         currentDigitPressed = 9;
 
@@ -923,9 +862,7 @@ function keyPressed() {
 
     if (keyCode === LEFT_ARROW) {
       nextCol = currentPlayerIndex.playerCollumn - 1;
-      //console.log(nextCell);
       nextCell = gridMap[nextRow][nextCol];
-      //console.log(nextCell);
       // if there is a solid element
       if (
         nextCell === `S` ||
@@ -936,6 +873,8 @@ function keyPressed() {
         nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
+        nextCell === `Sh` ||
+        nextCell === `BoT` ||
         nextCell === undefined
       ) {
         solidBlock();
@@ -956,7 +895,7 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`||
+        nextCell === `Bk` ||
         nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
@@ -977,13 +916,28 @@ function keyPressed() {
           // change player.x for camera
           // move camera left!
           player.x = player.x - gridUnit;
-          //console.log(player.x);
           // if there is still room in the inventory
           // pick up peach and add it to inventory
           pickItemUp();
         }
+      } else if (nextCell === `Bo`) {
+        for (i = 0; i < player.inventory.length; i++) {
+          if (player.inventory[i].name === "boatKey") {
+            console.log(player.inventory[i].name);
+            shallowPass();
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn
+            ] = ` `; // where the player was will now be empty
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn - 1
+            ] = `Pl`; // and the player will now be one cell left
+            // move camera left!
+            player.x = player.x - gridUnit;
+          } else {
+            solidBlock();
+          }
+        }
       } else {
-        //console.log("hi");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -993,19 +947,6 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera left!
         player.x = player.x - gridUnit;
-        //   for (let r = 0; r < rows; r++) {
-        //     for (let c = 0; c < columns; c++) {
-        //   playerAdjacentCells = [
-        //     gridMap[r - 1][c - 1],
-        //     gridMap[r - 1][c],
-        //     gridMap[r - 1][c + 1],
-        //     gridMap[r][c - 1],
-        //     gridMap[r][c + 1],
-        //     gridMap[r + 1][c - 1],
-        //     gridMap[r + 1][c],
-        //     gridMap[r + 1][c + 1],
-        //   ];
-        // }}
       }
     }
 
@@ -1026,9 +967,10 @@ function keyPressed() {
         nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
+        nextCell === `Sh` ||
+        nextCell === `BoT` ||
         nextCell === undefined
       ) {
-        //  console.log("WHYYY");
         solidBlock();
       }
       // else move player, and pick up item if there is
@@ -1047,7 +989,7 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`||
+        nextCell === `Bk` ||
         nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
@@ -1067,8 +1009,24 @@ function keyPressed() {
           // pick up peach and add it to inventory
           pickItemUp();
         }
+      } else if (nextCell === `Bo`) {
+        for (i = 0; i < player.inventory.length; i++) {
+          if (player.inventory[i].name === "boatKey") {
+            console.log(player.inventory[i].name);
+            shallowPass();
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn
+            ] = ` `; // where the player was will now be empty
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn + 1
+            ] = `Pl`; // and the player will now be one cell left
+            // move camera left!
+            player.x = player.x - gridUnit;
+          } else {
+            solidBlock();
+          }
+        }
       } else {
-        //console.log("helloooooo");
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -1078,19 +1036,6 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera right!
         player.x = player.x + gridUnit;
-        //   for (let r = 0; r < rows; r++) {
-        //     for (let c = 0; c < columns; c++) {
-        //   playerAdjacentCells = [
-        //     gridMap[r - 1][c - 1],
-        //     gridMap[r - 1][c],
-        //     gridMap[r - 1][c + 1],
-        //     gridMap[r][c - 1],
-        //     gridMap[r][c + 1],
-        //     gridMap[r + 1][c - 1],
-        //     gridMap[r + 1][c],
-        //     gridMap[r + 1][c + 1],
-        //   ];
-        // }}
       }
     }
 
@@ -1110,6 +1055,8 @@ function keyPressed() {
         nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
+        nextCell === `Sh` ||
+        nextCell === `BoT` ||
         nextCell === undefined
       ) {
         solidBlock();
@@ -1130,7 +1077,7 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`||
+        nextCell === `Bk` ||
         nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
@@ -1150,6 +1097,23 @@ function keyPressed() {
           // pick up peach and add it to inventory
           pickItemUp();
         }
+      } else if (nextCell === `Bo`) {
+        for (i = 0; i < player.inventory.length; i++) {
+          if (player.inventory[i].name === "boatKey") {
+            console.log(player.inventory[i].name);
+            shallowPass();
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn
+            ] = ` `; // where the player was will now be empty
+            gridMap[currentPlayerIndex.playerRow - 1][
+              currentPlayerIndex.playerCollumn
+            ] = `Pl`; // and the player will now be one cell left
+            // move camera left!
+            player.x = player.x - gridUnit;
+          } else {
+            solidBlock();
+          }
+        }
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -1160,19 +1124,6 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell up
         // move camera up!
         player.y = player.y - gridUnit;
-        //   for (let r = 0; r < rows; r++) {
-        //     for (let c = 0; c < columns; c++) {
-        //   playerAdjacentCells = [
-        //     gridMap[r - 1][c - 1],
-        //     gridMap[r - 1][c],
-        //     gridMap[r - 1][c + 1],
-        //     gridMap[r][c - 1],
-        //     gridMap[r][c + 1],
-        //     gridMap[r + 1][c - 1],
-        //     gridMap[r + 1][c],
-        //     gridMap[r + 1][c + 1],
-        //   ];
-        // }}
       }
     }
 
@@ -1192,6 +1143,8 @@ function keyPressed() {
         nextCell === `IDL` ||
         nextCell === `Bh` ||
         nextCell === `St` ||
+        nextCell === `Sh` ||
+        nextCell === `BoT` ||
         nextCell === undefined
       ) {
         solidBlock();
@@ -1212,7 +1165,7 @@ function keyPressed() {
         nextCell === `Pa` ||
         nextCell === `Gc` ||
         nextCell === `Ch` ||
-        nextCell === `Bk`||
+        nextCell === `Bk` ||
         nextCell === `Fs`
       ) {
         if (player.inventory.length === 10) {
@@ -1232,6 +1185,23 @@ function keyPressed() {
           // pick up peach and add it to inventory
           pickItemUp();
         }
+      } else if (nextCell === `Bo`) {
+        for (i = 0; i < player.inventory.length; i++) {
+          if (player.inventory[i].name === "boatKey") {
+            console.log(player.inventory[i].name);
+            shallowPass();
+            gridMap[currentPlayerIndex.playerRow + 1][
+              currentPlayerIndex.playerCollumn
+            ] = ` `; // where the player was will now be empty
+            gridMap[currentPlayerIndex.playerRow][
+              currentPlayerIndex.playerCollumn
+            ] = `Pl`; // and the player will now be one cell left
+            // move camera left!
+            player.x = player.x - gridUnit;
+          } else {
+            solidBlock();
+          }
+        }
       } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
@@ -1242,19 +1212,6 @@ function keyPressed() {
         ] = `Pl`; // and the player will now be one cell left
         // move camera down!
         player.y = player.y + gridUnit;
-        //   for (let r = 0; r < rows; r++) {
-        //     for (let c = 0; c < columns; c++) {
-        //   playerAdjacentCells = [
-        //     gridMap[r - 1][c - 1],
-        //     gridMap[r - 1][c],
-        //     gridMap[r - 1][c + 1],
-        //     gridMap[r][c - 1],
-        //     gridMap[r][c + 1],
-        //     gridMap[r + 1][c - 1],
-        //     gridMap[r + 1][c],
-        //     gridMap[r + 1][c + 1],
-        //   ];
-        // }}
       }
     }
 
@@ -1335,15 +1292,14 @@ function keyPressed() {
                 // if DEP is adjacent to player
                 adjacentNPC = depMate;
 
-              if (adjacentNPC.firstTalk === "true") {
-                // if this is the first time talking to npc
-                npcText = adjacentNPC.initialDialog; // display npc initial dialog
-                adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-                playerPaused = true; // player is paused
-                stopTextBubble = false; //  text bubble is not stopped anymore
-                return;
-                //npcFirstTalk();
-              }
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                }
 
                 npcDialog(); // normal dialog is generid
 
@@ -1357,10 +1313,8 @@ function keyPressed() {
                   ) {
                     // if player is holding out item
 
-
                     // go through item name list
                     for (let i = 0; i < itemNameList.length; i++) {
-
                       if (itemNameList[i] === selectItem.name) {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
@@ -1370,7 +1324,7 @@ function keyPressed() {
                         if (
                           receivedItem === `peach` ||
                           receivedItem === `cherry` ||
-                          receivedItem === `mushroom`||
+                          receivedItem === `mushroom` ||
                           receivedItem === `fish`
                         ) {
                           //dropItem
@@ -1412,25 +1366,21 @@ function keyPressed() {
                   }
                 }
               }
-
-              //}
-              //}
               // DEP end
               else if (playerAdjacentCells[i] === `BOT`) {
                 adjacentNPC = boatMate;
                 //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
                 // otherwise he receives items as gifts which improve rel2pl
 
-            if (adjacentNPC.firstTalk === "true") {
-              // if this is the first time talking to npc
-              npcText = adjacentNPC.initialDialog; // display npc initial dialog
-              adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-              playerPaused = true; // player is paused
-              stopTextBubble = false; //  text bubble is not stopped anymore
-              return;
-              //npcFirstTalk();
-            }
-                //console.log(selectItemHeldOut);
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                  //npcFirstTalk();
+                }
 
                 npcDialog(); // normal dialog is generid
 
@@ -1447,34 +1397,32 @@ function keyPressed() {
 
                     // go through item name list
                     for (let i = 0; i < itemNameList.length; i++) {
-
                       if (itemNameList[i] === selectItem.name) {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
 
-
                         if (receivedItem === `goldcoin`) {
                           console.log(npcGoldcoinEvent);
 
                           npcGoldcoinEvent++;
-                            removeItemFromInv();
-                            console.log(npcGoldcoinEvent);
-                          if (npcGoldcoinEvent === 1){
+                          removeItemFromInv();
+                          console.log(npcGoldcoinEvent);
+                          if (npcGoldcoinEvent === 1) {
                             npcText = "That's it. Three coins to rent a boat.";
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                          if (npcGoldcoinEvent === 2){
-                            npcText = "One more coin and I'll hand you these keys.";
+                          if (npcGoldcoinEvent === 2) {
+                            npcText =
+                              "One more coin and I'll hand you these keys.";
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
 
-
-                          if (npcGoldcoinEvent === 3){
+                          if (npcGoldcoinEvent === 3) {
                             //dropItem
                             npcText = `Be sure to stay in the shallow waters!`;
 
@@ -1483,16 +1431,14 @@ function keyPressed() {
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                          if (npcGoldcoinEvent > 3){
+                          if (npcGoldcoinEvent > 3) {
                             npcText = `Enjoy the catch of the day!`;
                             dropItem(fishItem, boatMate.itemDropZone);
                             playerPaused = true; // player is paused
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                        }
-
-                        else {
+                        } else {
                           npcText = `Thanks for the ${receivedItem}`;
                           let relationshipManipulator =
                             adjacentNPC.relationship2items[receivedItem];
@@ -1511,20 +1457,18 @@ function keyPressed() {
                     }
                   }
                 }
-
               } else if (playerAdjacentCells[i] === `HIK`) {
                 adjacentNPC = hikeMate;
                 //hiker receives items as gifts
 
-if (adjacentNPC.firstTalk === "true") {
-  // if this is the first time talking to npc
-  npcText = adjacentNPC.initialDialog; // display npc initial dialog
-  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  return;
-  //npcFirstTalk();
-}
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                }
 
                 npcDialog(); // normal dialog is generid
 
@@ -1539,44 +1483,40 @@ if (adjacentNPC.firstTalk === "true") {
                     // if player is holding out item
                     // go through item name list
                     for (let i = 0; i < itemNameList.length; i++) {
-
                       if (itemNameList[i] === selectItem.name) {
                         console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
 
-                          npcText = `Thanks for the ${receivedItem}`;
-                          let relationshipManipulator =
-                            adjacentNPC.relationship2items[receivedItem];
+                        npcText = `Thanks for the ${receivedItem}`;
+                        let relationshipManipulator =
+                          adjacentNPC.relationship2items[receivedItem];
 
-                          adjacentNPC.relationship2player =
-                            adjacentNPC.relationship2player +
-                            relationshipManipulator;
+                        adjacentNPC.relationship2player =
+                          adjacentNPC.relationship2player +
+                          relationshipManipulator;
 
-                          console.log(adjacentNPC.relationship2player);
-                          removeItemFromInv();
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        }
+                        console.log(adjacentNPC.relationship2player);
+                        removeItemFromInv();
+                        playerPaused = true; // player is paused
+                        stopTextBubble = false; //  text bubble is not stopped anymore
+                        return;
                       }
                     }
                   }
                 }
-               else if (playerAdjacentCells[i] === `PDL`) {
+              } else if (playerAdjacentCells[i] === `PDL`) {
                 adjacentNPC = peddleMate;
                 //pedler exchanges items for equal value item
                 // does not receive gifts
-              if (adjacentNPC.firstTalk === "true") {
-                // if this is the first time talking to npc
-                npcText = adjacentNPC.initialDialog; // display npc initial dialog
-                adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-                playerPaused = true; // player is paused
-                stopTextBubble = false; //  text bubble is not stopped anymore
-                return;
-                //npcFirstTalk();
-              }
-                //console.log(selectItemHeldOut);
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                }
 
                 npcDialog(); // normal dialog is generid
 
@@ -1588,117 +1528,81 @@ if (adjacentNPC.firstTalk === "true") {
                     selectItem !==
                     { itemName: "empty", itemImageName: "no image" }
                   ) {
-                    //console.log("yes you come here");
                     // if player is holding out item
-
-                    //console.log("ok");
-
                     // go through item name list
                     for (let i = 0; i < itemNameList.length; i++) {
-                      //console.log("nah?");
-                      //console.log(itemNameList[i]);
-                      //console.log(selectItem.name);
                       if (itemNameList[i] === selectItem.name) {
-                        console.log(`you've given a ${selectItem.name}`);
                         //determine how much relationship manipulated
                         receivedItem = selectItem;
                         removeItemFromInv();
-                        // console.log(selectItem.name);
-                         console.log(receivedItem);
-                        // console.log(
-                        //   `${adjacentNPC.relationship2items[receivedItem]}`
-                        //  );
-                        let value1Items = [petRockNPCItem,peachNPCItem];
-                        let value2Items = [fishItem, cherryItem, fireworkItem, mushroomItem];
+                        let value1Items = [petRockNPCItem, peachNPCItem];
+                        let value2Items = [
+                          fishItem,
+                          cherryItem,
+                          fireworkItem,
+                          mushroomItem,
+                        ];
                         let value3Items = [emeraldNPCItem, mushroomItem];
                         let value4Items = [goldcoinItem, diamondNPCItem];
-                        let value5Items = [diamondItem];
+                        let value5Items = [diamondNPCItem];
 
                         giveBackItemValue = receivedItem.value;
-                        console.log(giveBackItemValue);
-                        console.log(receivedItem.value);
 
-
-                        if(giveBackItemValue === 1){
+                        if (giveBackItemValue === 1) {
                           let giveBackItem = random(value1Items);
-                          if (giveBackItem === receivedItem){
+                          if (giveBackItem === receivedItem) {
                             let giveBackItem = random(value1Items);
                           }
-                          dropItem(giveBackItem,peddleMate.itemDropZone);
-                        }
-                        else if(giveBackItemValue === 2){
-
+                          dropItem(giveBackItem, peddleMate.itemDropZone);
+                        } else if (giveBackItemValue === 2) {
                           let giveBackItem = random(value2Items);
-                          if (giveBackItem === receivedItem){
+                          if (giveBackItem === receivedItem) {
                             let giveBackItem = random(value2Items);
-}
-                          dropItem(giveBackItem,peddleMate.itemDropZone);
-                        }
-                        else if(giveBackItemValue === 3){
+                          }
+                          dropItem(giveBackItem, peddleMate.itemDropZone);
+                        } else if (giveBackItemValue === 3) {
                           let giveBackItem = random(value3Items);
-                          if (giveBackItem === receivedItem){
+                          if (giveBackItem === receivedItem) {
                             let giveBackItem = random(value3Items);
-}
-                          dropItem(giveBackItem,peddleMate.itemDropZone);
-                        }
-                        else if(giveBackItemValue === 4){
+                          }
+                          dropItem(giveBackItem, peddleMate.itemDropZone);
+                        } else if (giveBackItemValue === 4) {
                           let giveBackItem = random(value4Items);
-                          while (giveBackItem === receivedItem){
+                          if (giveBackItem === receivedItem) {
                             let giveBackItem = random(value4Items);
-}
-                          dropItem(giveBackItem,peddleMate.itemDropZone);
-                        }
-                        else if(giveBackItemValue === 5){
-                          if (firstValue5GiveBack === true){
-                            dropItem(valsPaintingItem,peddleMate.itemDropZone);
+                          }
+                          dropItem(giveBackItem, peddleMate.itemDropZone);
+                        } else if (giveBackItemValue === 5) {
+                          if (firstValue5GiveBack === true) {
+                            dropItem(valsPaintingItem, peddleMate.itemDropZone);
                             firstValue5GiveBack = false;
                             return;
                           }
-
                           let giveBackItem = random(value5Items);
-                          if (giveBackItem === receivedItem){
+                          if (giveBackItem === receivedItem) {
                             let giveBackItem = random(value5Items);
-}
-                          dropItem(giveBackItem,peddleMate.itemDropZone);
-
-
+                          }
+                          dropItem(giveBackItem, peddleMate.itemDropZone);
                         }
-
-                        // else {
-                        //   npcText = `Thanks for the ${receivedItem}`;
-                        //   let relationshipManipulator =
-                        //     adjacentNPC.relationship2items[receivedItem];
-                        //
-                        //   adjacentNPC.relationship2player =
-                        //     adjacentNPC.relationship2player +
-                        //     relationshipManipulator;
-                        //
-                        //   console.log(adjacentNPC.relationship2player);
-                        //   removeItemFromInv();
-                        //   playerPaused = true; // player is paused
-                        //   stopTextBubble = false; //  text bubble is not stopped anymore
-                        //   return;
-                        // }
                       }
                     }
                   }
                 }
-
               } else if (playerAdjacentCells[i] === `IDL`) {
                 adjacentNPC = idleMate;
                 //idle mate wants 5 peaches in exchange for pie, infinite
                 // anything else is received as a gift
                 //npcText = idleMate.initialDialog; // use player coordinates
                 //}
-if (adjacentNPC.firstTalk === "true") {
-  // if this is the first time talking to npc
-  npcText = adjacentNPC.initialDialog; // display npc initial dialog
-  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  return;
-            //npcFirstTalk();
-          }
+                if (adjacentNPC.firstTalk === "true") {
+                  // if this is the first time talking to npc
+                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                  playerPaused = true; // player is paused
+                  stopTextBubble = false; //  text bubble is not stopped anymore
+                  return;
+                  //npcFirstTalk();
+                }
 
                 if (stopTextBubble === true) {
                   // when space is pressed beside npc, text bubble is displayed
@@ -1735,11 +1639,6 @@ if (adjacentNPC.firstTalk === "true") {
                   removeItemFromInv();
                 }
               }
-              // if the text bubble is up and you press space
-              // else if (stopTextBubble === false) {
-              //   stopTextBubble = true; // bubble off
-              //   playerPaused = false; // player un pause
-              // }
             }
           }
         }
@@ -1749,20 +1648,23 @@ if (adjacentNPC.firstTalk === "true") {
   }
 }
 
-// function npcFirstTalk(){
-//   //if (adjacentNPC.firstTalk === "true") {
-//     // if this is the first time talking to npc
-//     npcText = adjacentNPC.initialDialog; // display npc initial dialog
-//     adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-//     playerPaused = true; // player is paused
-//     stopTextBubble = false; //  text bubble is not stopped anymore
-//     return;
-//   //}
-// }
+function shallowPass() {
+  for (let y = 0; y < gridMap.length; y++) {
+    // rows
+    for (let x = 0; x < gridMap[y].length; x++) {
+      // collumns
+      console.log("try try");
+      let cell = gridMap[y][x]; // cell = index
+      // check each cell for a key
+      if (cell === `Sh`) {
+        gridMap[y][x] = `BSh`;
+      }
+    }
+  }
+}
 
 function npcDialog() {
   if (selectItemHeldOut === false) {
-    //console.log("why not?");
     // now that rel2ply has been manipulated
     if (
       adjacentNPC.relationship2player >= -9 &&
@@ -1776,9 +1678,6 @@ function npcDialog() {
       }
       playerPaused = true; // player is paused
       stopTextBubble = false; //  text bubble is not stopped anymore
-      // no effect on rel2pl
-      // receiving item = true
-      //return;
     } else if (adjacentNPC.relationship2player >= 10) {
       let dialogSelection = adjacentNPC.friendlyDialog;
       let lastNPCText = npcText;
@@ -1788,9 +1687,6 @@ function npcDialog() {
       }
       playerPaused = true; // player is paused
       stopTextBubble = false; //  text bubble is not stopped anymore
-      // +.2 on rel2pl
-      // receiving item = true
-      //return;
     } else if (adjacentNPC.relationship2player <= -10) {
       let dialogSelection = adjacentNPC.dislikeDialog;
       let lastNPCText = npcText;
@@ -1800,9 +1696,6 @@ function npcDialog() {
       }
       playerPaused = true; // player is paused
       stopTextBubble = false; //  text bubble is not stopped anymore
-      // -.2 on rel2pl
-      //receiving item = true
-      //return;
     } else {
       // npc receives no gift, no effect on rel2pl
     }
@@ -1820,8 +1713,7 @@ function removeItemFromInv() {
     (selectItem.name === "mushroom" && selectItemHeldOut === true) ||
     (selectItem.name === "firework" && selectItemHeldOut === true) ||
     (selectItem.name === "valsPainting" && selectItemHeldOut === true) ||
-    (selectItem.name === "goldcoin" && selectItemHeldOut === true)
-    ||
+    (selectItem.name === "goldcoin" && selectItemHeldOut === true) ||
     (selectItem.name === "fish" && selectItemHeldOut === true)
   ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
@@ -1842,9 +1734,9 @@ function solidBlock() {
     nextCell === `PDL` ||
     nextCell === `Bh` ||
     nextCell === `St` ||
+    nextCell === `BoT` ||
     nextCell === undefined
   ) {
-    //console.log("nosir");
     // do nothing
   }
 }
@@ -1863,7 +1755,7 @@ function pickItemUp() {
   if (nextCell === `DiG`) {
     //console.log("huh?")
     itemPickup(`diamond`);
-    let rockDropTime = random(11000, 35000); // extend timing!! ##
+    let rockDropTime = random(11000, 25000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
@@ -1883,7 +1775,7 @@ function pickItemUp() {
   if (nextCell === `PrG`) {
     //console.log("huh?")
     itemPickup(`petRock`);
-    let rockDropTime = random(11000, 35000); // extend timing!! ##
+    let rockDropTime = random(11000, 25000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
@@ -1902,7 +1794,7 @@ function pickItemUp() {
 
   if (nextCell === `EmG`) {
     itemPickup(`emerald`);
-    let rockDropTime = random(11000, 35000); // extend timing!! ##
+    let rockDropTime = random(11000, 25000); // extend timing!! ##
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`) {
       itemToDrop = diamondItem;
@@ -1928,7 +1820,7 @@ function pickItemUp() {
     itemPickup(`petRock`);
   }
   if (nextCell === `DiN`) {
-    itemPickup(`Diamond`);
+    itemPickup(`diamond`);
   }
   if (nextCell === `Pi`) {
     itemPickup(`pie`);
@@ -2007,14 +1899,12 @@ function itemPickup(item) {
 function dropItem(item, dropZone) {
   //
   if (dropZone === item.dropZone) {
-    console.log("wait a minute");
     if (item.name === `peach`) {
       //console.log("this is no pie");
       let fallenPeachIndex = random(dropZone);
       if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
         // if peach tries to fall in a cell where the player is standing, select another cell and try again
-        //fallenPeachIndex = random(dropZone);
-        dropItem(item, dropZone); //dropPeach();
+        dropItem(item, dropZone);
       } else {
         // drop the peach
         gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `PeG`;
@@ -2027,7 +1917,6 @@ function dropItem(item, dropZone) {
       item.name === `petRock`
     ) {
       // HAVE ALL river stones here##
-      //console.log("this is no pie");
       let currentRiverRock = item;
       let fallenEmeraldIndex = random(emeraldItem.dropZone);
       if (
@@ -2035,7 +1924,7 @@ function dropItem(item, dropZone) {
       ) {
         // if peach tries to fall in a cell where the player is standing, select another cell and try again
         fallenEmeraldIndex = random(emeraldItem.dropZone);
-        dropItem(currentRiverRock, item.dropZone); //dropPeach(); ### HAVE random stones!
+        dropItem(currentRiverRock, item.dropZone); // ### HAVE random stones!
       } else {
         // drop the peach
         if (currentRiverRock.name === `emerald`) {
@@ -2051,38 +1940,26 @@ function dropItem(item, dropZone) {
     let npcItemDropIndex = random(adjacentNPC.itemDropZone);
     if (gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      //npcItemDropIndex = random(adjacentNPC.itemDropZone);
       dropItem(item, adjacentNPC.itemDropZone); //dropPie();
     } else {
       // drop the slice of pie
-      console.log(item);
-      console.log(item.cellLabel);
-      console.log(npcItemDropIndex);
       gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] = item.cellLabel;
     }
   }
   //}
 }
 
-// function dropPeach() {
-//   // randomly select a place near the peach tree to drop a peach
-// }
-
-// function dropPie() {
-//   // drop pie in 1 of 2 places, depending on where player is standing
-// }
-
 // mouse used for debugging
 function mouseClicked() {
-  console.log(adjacentNPC);
+  //console.log(adjacentNPC);
   //console.log(currentRelationToPlayer);
-  console.log(selectItem);
+  //console.log(selectItem);
   //console.log(pieItem.name);
-  console.log(gridMap);
+  //console.log(gridMap);
   //console.log(currentDigitPressed);
   //console.log(npcPeachEvent);
-  console.log(npcText);
-  console.log(selectItem.name);
+  //console.log(npcText);
+  //console.log(selectItem.name);
   //console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
     state = "simulation";
