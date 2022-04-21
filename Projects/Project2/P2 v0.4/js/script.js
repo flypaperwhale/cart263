@@ -274,18 +274,40 @@ function titleState() {
     fill(50, 10, 100);
     textAlign(CENTER);
     textSize(54);
-    text("MISH MASH", 225, 150);
+    text("MISH CHAT", 225, 125);
+      text("CHIT MASH", 225, 165);
     textSize(20);
+    textAlign(LEFT);
+    fill("lemonchiffon");
     text(
-      `» use arrow keys to move
+      `
+» use arrow keys to move
 » use spacebar to talk or give item
 » use digit keys to select item in inventory
 `,
-      225,
-      200
+      40,
+      192
     );
-    fill("red");
-    text("click to start!", 225, 300);
+    fill("salmon");
+    textAlign(CENTER);
+    text("click to start!", 225, 310);
+    pop();
+
+    push();
+    imageMode(CENTER);
+    image(imageBank.peachImage, 50, 50, 25, 26);
+    pop();
+    push();
+    imageMode(CENTER);
+    image(imageBank.diamondImage, 150, 50, 25, 26);
+    pop();
+    push();
+    imageMode(CENTER);
+    image(imageBank.valsPaintingImage, 270, 50, 25, 26);
+    pop();
+    push();
+    imageMode(CENTER);
+    image(imageBank.cherryImage, 380, 50, 25, 26);
     pop();
   }
 }
@@ -1478,7 +1500,8 @@ function keyPressed() {
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
                     selectItem !==
-                    { itemName: "empty", itemImageName: "no image" }
+                    { itemName: "empty", itemImageName: "no image" } ||
+                  selectItem !== boatKeyItem
                   ) {
                     // if player is holding out item
                     // go through item name list
@@ -1526,7 +1549,8 @@ function keyPressed() {
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
                     selectItem !==
-                    { itemName: "empty", itemImageName: "no image" }
+                    { itemName: "empty", itemImageName: "no image" } ||
+                  selectItem !== boatKeyItem
                   ) {
                     // if player is holding out item
                     // go through item name list
@@ -1684,15 +1708,6 @@ function keyPressed() {
                     }
                   }
                 }
-
-                if (stopTextBubble === true) {
-                  // when space is pressed beside npc, text bubble is displayed
-                  playerPaused = true; // player is paused
-                  stopTextBubble = false; //  text bubble is not stopped anymore
-                  // npcFriendEvent gets launched after npcPeachEvent is completed
-                }
-
-
               }
             }
           }
@@ -1708,7 +1723,6 @@ function shallowPass() {
     // rows
     for (let x = 0; x < gridMap[y].length; x++) {
       // collumns
-      console.log("try try");
       let cell = gridMap[y][x]; // cell = index
       // check each cell for a key
       if (cell === `Sh`) {
