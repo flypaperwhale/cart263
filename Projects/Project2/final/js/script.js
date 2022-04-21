@@ -11,6 +11,7 @@ The npcs offer different item exchanges: the player can gain access to a boat, a
 
 ("use strict");
 
+let data = undefined; // no data yet, will be the JSON file with npcs and items
 // the playable area of the canvas is seperated in a 27 by 32 cell grid
 // labels in these indexed cells represent NPCs, items, the player, and barriers (Solid `S` or semi-solid `Sh`)
 let gridMap = [
@@ -48,7 +49,6 @@ let gridMap = [
   [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
   [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
 ];
-
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
 let columns = 27;
@@ -80,35 +80,28 @@ let player = {
 let currentPlayerIndex; // indexed grid cell where Player currently is
 let playerPaused = false; // status whether player is paused or not, starts unpaused
 
-let itemToDrop; // item that will be dropped
-
 // initializes selectItem to empty
+let currentDigitPressed = 0; // initialize the first digit pressed to 0 (for inventory)
 let selectItem = { itemName: "empty", itemImageName: "no image" };
 let selectItemNumber = 0; // to manage inventory using digit keys
 let selectItemHeldOut = false; // status whether select item is held out or not, starts item "empty" hidden
-
 let invItemToDisplay; // item that will be displayed, in each box from the inventory
-
-let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
 let adjacentNPC; // npc standing next to player
 let playerAdjacentCells = []; // array to check cells surrounding player
+
 let npcText = undefined; // text to be displayed when player interacts with npcs
+let stopTextBubble = true; // status whether text bubble is displayed or not, starts true so textbox is stopped
 
 // peachEvent variable //
 let npcPeachEvent = 0; // peach event npc state handler, starts at zero and increases with every given peach
-
 // goldEvent variable //
 let npcGoldcoinEvent = 0; // goldcoin event npc state handler, starts at zero and increases with every given goldcoin
-
 // manages the peddler to give valsPainting only once as a unique item
 let firstValue5GiveBack = true;
 
-let currentDigitPressed = 0; // initialize the first digit pressed to 0 (for inventory)
-
-let imageBank = {}; // imageBank is an obect used to manage the item images
-
-let itemNameList = [ // all the items that can be given
+let itemNameList = [
+  // all the items that can be given
   "peach",
   "emerald",
   "diamond",
@@ -121,6 +114,7 @@ let itemNameList = [ // all the items that can be given
   "goldcoin",
   "fish",
 ];
+
 // all the image names
 // decoration
 let bushImage, stoneImage, boatImage;
@@ -137,15 +131,13 @@ let peachImage,
   petRockImage,
   boatKeyImage,
   fishImage;
-
+let imageBank = {}; // imageBank is an obect used to manage the item images
+let currentItemImage;
 // array to select a random river rock to be dropped
 let riverRocks = [`emerald`, `diamond`, `petRock`];
+let itemToDrop; // item that will be dropped
 
 let state = "title"; // can be title or simulation
-
-let data = undefined; // no data yet, will be the JSON file with npcs and items
-
-let currentItemImage;
 
 /**
 preload images
@@ -171,15 +163,15 @@ function preload() {
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
   imageBank.boatKeyImage = loadImage(`assets/images/boatKey.png`);
   imageBank.fishImage = loadImage(`assets/images/fish.png`);
-// decorations
+  // decorations
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
   boatImage = loadImage(`assets/images/boat.png`);
-// the background/map
+  // the background/map
   map = loadImage(`assets/images/mishmashmap.png`);
-// the JSON file with npcs and items
+  // the JSON file with npcs and items
   data = loadJSON(`assets/data/game-objects.json`);
-// background music
+  // background music
   bgmusic1 = loadSound("assets/sounds/Guitar-Gentle.mp3");
 }
 
@@ -191,9 +183,11 @@ This is also where NPC and item data is taken from the JSON file and passed thro
 */
 function setup() {
   createCanvas(450, 380);
-// check each cell in the grid
-  for (let r = 0; r < rows; r++) { // go through each row
-    for (let c = 0; c < columns; c++) { // in each row, go through each collumn
+  // check each cell in the grid
+  for (let r = 0; r < rows; r++) {
+    // go through each row
+    for (let c = 0; c < columns; c++) {
+      // in each row, go through each collumn
       if (gridMap[r][c] === `Pl`) {
         // save player's current position in an object so an index can be appropriately called up and manipulated in the grid
         // to be able to move throughout the gridMap, save the player's initial position in currentPlayerIndex
@@ -250,9 +244,9 @@ function draw() {
   // states
   titleState();
   simulationState();
-    // every frame, load current player index into nextRow and nextCollumn to be able to check what label player moves onto in the keypressed functions
-    nextRow = currentPlayerIndex.playerRow;
-    nextCol = currentPlayerIndex.playerCollum;
+  // every frame, load current player index into nextRow and nextCollumn to be able to check what label player moves onto in the keypressed functions
+  nextRow = currentPlayerIndex.playerRow;
+  nextCol = currentPlayerIndex.playerCollum;
 }
 
 function cameraSetup() {
@@ -292,7 +286,7 @@ function titleState() {
     textAlign(CENTER);
     text("click to start!", 225, 310);
     pop();
-// display item images to make it cute
+    // display item images to make it cute
     push();
     imageMode(CENTER);
     image(imageBank.peachImage, 50, 50, 25, 26);
@@ -332,7 +326,7 @@ function simulationState() {
     displayText();
     // text bubble is displayed when it isn't stopped. player is paused when text bubble is displayed
     displayInventory();
-// inventory is UI, it is always showing
+    // inventory is UI, it is always showing
     checkForAdjacentNPC();
     // this function verifies for an NPC next to the player to permit its specific interactions
   }
@@ -343,7 +337,7 @@ function playBGMusic() {
   push();
   bgmusic1.playMode(`untilDone`); // bg music mode loops forever
   bgmusic1.setVolume(0.2); // not too loud
-  bgmusic1.rate(0.70); // not too quick
+  bgmusic1.rate(0.7); // not too quick
   bgmusic1.play(); // play bg music
   pop();
 }
@@ -371,7 +365,8 @@ function displayText() {
     textSize(12);
     text(npcText, player.x, player.y - 100);
     pop();
-  } else if (stopTextBubble === true) { // if the text bubble is stopped
+  } else if (stopTextBubble === true) {
+    // if the text bubble is stopped
     // do nothing
   }
 }
@@ -425,7 +420,7 @@ function displayGrid() {
           drawSmolItem(`fish`, x, y);
         }
       }
-// Item cell labels
+      // Item cell labels
       if (cell === `PeG` || cell === `PeN`) {
         // Pe for Peach, G from map drop, N for NPC drop (to avoid launching automatic map drop when item picked up from NPC drop)
         drawItem(peachItem.name, x, y);
@@ -474,7 +469,7 @@ function displayGrid() {
         // Fs for Fish
         drawItem(fishItem.name, x, y);
       }
-// NPC cell labels
+      // NPC cell labels
       if (cell === `DEP`) {
         // dep npc
         drawCharacter(x, y, depMate.color);
@@ -495,10 +490,10 @@ function displayGrid() {
         // idler npc
         drawCharacter(x, y, idleMate.color);
       }
-// Barriers and set pieces
+      // Barriers and set pieces
       if (cell === `S`) {
         // S for Solid (barrier)
- // draw nothing
+        // draw nothing
       }
 
       if (cell === `Bh`) {
@@ -898,8 +893,10 @@ function keyPressed() {
         }
       } else if (nextCell === `Bo`) {
         // if player wants to step on the boat
-        for (i = 0; i < player.inventory.length; i++) {   // verify if player has the boatKey
-          if (player.inventory[i].name === "boatKey") { // if they do
+        for (i = 0; i < player.inventory.length; i++) {
+          // verify if player has the boatKey
+          if (player.inventory[i].name === "boatKey") {
+            // if they do
             shallowPass(); // turn "Sh" barrier cells into " "
             gridMap[currentPlayerIndex.playerRow][
               currentPlayerIndex.playerCollumn
@@ -1061,7 +1058,7 @@ function keyPressed() {
           // pick up peach and add it to inventory
           pickItemUp();
         }
-      }  else {
+      } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -1136,7 +1133,7 @@ function keyPressed() {
           // pick up peach and add it to inventory
           pickItemUp();
         }
-      }  else {
+      } else {
         // and if the player steps into an empty cell
         gridMap[currentPlayerIndex.playerRow][
           currentPlayerIndex.playerCollumn
@@ -1218,7 +1215,8 @@ function keyPressed() {
             // if player is paused (in the middle of an interaction)
             stopTextBubble = true; // bubble off
             playerPaused = false; // un-pause
-          } else { // if player is not in the middle of interaction, start one
+          } else {
+            // if player is not in the middle of interaction, start one
             for (let i = 0; i < 8; i++) {
               // go through cells around player
               if (playerAdjacentCells[i] === `DEP`) {
@@ -1227,7 +1225,7 @@ function keyPressed() {
                 //dep mate gives gold coins for fruit edibles types
                 // otherwise he receives items as gifts which improve rel2pl
 
-// FIRST UTTERANCE
+                // FIRST UTTERANCE
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
                   npcText = adjacentNPC.initialDialog; // display npc initial dialog
@@ -1239,7 +1237,7 @@ function keyPressed() {
 
                 npcDialog(); // normal dialog is generic, called upon unless NPC is receiving an item
 
-// NPC events
+                // NPC events
                 if (selectItemHeldOut === true) {
                   //dep mate gives gold coins for fruit edibles types
                   // otherwise he receives items as gifts which improve rel2pl
@@ -1256,7 +1254,8 @@ function keyPressed() {
                         receivedItem = selectItem.name;
                         removeItemFromInv(); // splice item from inventory
 
-                        if ( // if DEP receives 'produce'
+                        if (
+                          // if DEP receives 'produce'
                           receivedItem === `peach` ||
                           receivedItem === `cherry` ||
                           receivedItem === `mushroom` ||
@@ -1268,8 +1267,10 @@ function keyPressed() {
                           playerPaused = true; // player is paused
                           stopTextBubble = false; //  text bubble is not stopped anymore
                           return;
-                        } else if (receivedItem === `goldcoin`) { // if DEP receives goldcoin
-                          let depMateItems = [ // select random item to drop
+                        } else if (receivedItem === `goldcoin`) {
+                          // if DEP receives goldcoin
+                          let depMateItems = [
+                            // select random item to drop
                             peachNPCItem,
                             cherryItem,
                             fireworkItem,
@@ -1280,10 +1281,11 @@ function keyPressed() {
                           playerPaused = true; // player is paused
                           stopTextBubble = false; //  text bubble is not stopped anymore
                           return;
-                        } else { // if npc receives any other item, it is counted as a gift
+                        } else {
+                          // if npc receives any other item, it is counted as a gift
                           npcText = `Thanks for the ${receivedItem}`; // npc text stating received item
                           let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
                             adjacentNPC.relationship2items[receivedItem];
                           adjacentNPC.relationship2player =
                             adjacentNPC.relationship2player +
@@ -1305,7 +1307,7 @@ function keyPressed() {
                 //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
                 // otherwise he receives items as gifts which improve rel2pl
 
-//FIRST UTTERANCE
+                //FIRST UTTERANCE
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
                   npcText = adjacentNPC.initialDialog; // display npc initial dialog
@@ -1317,7 +1319,7 @@ function keyPressed() {
 
                 npcDialog(); // normal dialog is generic, called upon unless NPC is receiving an item
 
-// NPC events
+                // NPC events
                 if (selectItemHeldOut === true) {
                   //dep mate gives gold coins for fruit edibles types
                   // otherwise he receives items as gifts which improve rel2pl
@@ -1334,7 +1336,8 @@ function keyPressed() {
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
 
-                        if (receivedItem === `goldcoin`) { // if npc receives gold coin, add 1 to goldcoin event, at 3 BOT drops boatKey
+                        if (receivedItem === `goldcoin`) {
+                          // if npc receives gold coin, add 1 to goldcoin event, at 3 BOT drops boatKey
                           console.log(npcGoldcoinEvent);
                           npcGoldcoinEvent++;
                           removeItemFromInv(); // splice goldcoin from inventory
@@ -1369,10 +1372,11 @@ function keyPressed() {
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                        } else { // any other items given are received as gifts
+                        } else {
+                          // any other items given are received as gifts
                           npcText = `Thanks for the ${receivedItem}`; // npc text stating received item
                           let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
                             adjacentNPC.relationship2items[receivedItem];
 
                           adjacentNPC.relationship2player =
@@ -1408,8 +1412,7 @@ function keyPressed() {
 
                 npcDialog(); // normal dialog is generic, called upon unless NPC is receiving an item
 
-
-// NPC events
+                // NPC events
                 if (selectItemHeldOut === true) {
                   //hiker receives items as gifts
 
@@ -1445,8 +1448,8 @@ function keyPressed() {
                   }
                 }
               }
-// END HIK
-               else if (playerAdjacentCells[i] === `PDL`) {
+              // END HIK
+              else if (playerAdjacentCells[i] === `PDL`) {
                 adjacentNPC = peddleMate;
                 //pedler exchanges items for equal value item
                 // does not receive gifts
@@ -1521,7 +1524,8 @@ function keyPressed() {
                           }
                           dropItem(giveBackItem, peddleMate.itemDropZone);
                         } else if (giveBackItemValue === 5) {
-                          if (firstValue5GiveBack === true) { // there is a unique item, a pixel art "painting" by an online friend of mine. It can only be received by trading a piece of pie.
+                          if (firstValue5GiveBack === true) {
+                            // there is a unique item, a pixel art "painting" by an online friend of mine. It can only be received by trading a piece of pie.
                             dropItem(valsPaintingItem, peddleMate.itemDropZone);
                             firstValue5GiveBack = false; // this only happens once
                             return;
@@ -1538,12 +1542,12 @@ function keyPressed() {
                 }
               }
               //END PDL
-               else if (playerAdjacentCells[i] === `IDL`) {
+              else if (playerAdjacentCells[i] === `IDL`) {
                 adjacentNPC = idleMate;
                 //idle mate wants 5 peaches in exchange for pie, infinite
                 // anything else is received as a gift
 
-// FIRST UTTERANCE
+                // FIRST UTTERANCE
                 if (adjacentNPC.firstTalk === "true") {
                   // if this is the first time talking to npc
                   npcText = adjacentNPC.initialDialog; // display npc initial dialog
@@ -1555,7 +1559,7 @@ function keyPressed() {
 
                 npcDialog(); // normal dialog is generic, called upon unless NPC is receiving an item
 
-// NPC events
+                // NPC events
                 if (selectItemHeldOut === true) {
                   //idle mate wants 5 peaches in exchange for pie, infinite
                   // anything else is received as a gift
@@ -1572,7 +1576,8 @@ function keyPressed() {
                         console.log(`you've given a ${selectItem.name}`);
                         receivedItem = selectItem.name;
 
-                        if (receivedItem === `peach`) { // peaches received impact peach event
+                        if (receivedItem === `peach`) {
+                          // peaches received impact peach event
                           npcPeachEvent++; // each peach adds 1 to peach event, at 5 IDL drops pie
                           removeItemFromInv(); // splice peach from inventory
                           if (npcPeachEvent === 1) {
@@ -1602,7 +1607,8 @@ function keyPressed() {
                             return;
                           }
 
-                          if (npcPeachEvent === 5) { // 5th peach, IDL drops pie
+                          if (npcPeachEvent === 5) {
+                            // 5th peach, IDL drops pie
                             //dropItem
                             npcText = `You are the bomb! I love you!`;
 
@@ -1612,7 +1618,8 @@ function keyPressed() {
                             npcPeachEvent = 0; // the event is repeated forever, useful to start a peach economy
                             return;
                           }
-                        } else { // any other item is received as gift
+                        } else {
+                          // any other item is received as gift
                           npcText = `Thanks for the ${receivedItem}`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
                           // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
                           let relationshipManipulator =
@@ -1643,7 +1650,8 @@ function keyPressed() {
   }
 }
 
-function shallowPass() { // when player has the boatKey and steps on "Bo" cell, "Sh" barrier becomes passable "BSh"
+function shallowPass() {
+  // when player has the boatKey and steps on "Bo" cell, "Sh" barrier becomes passable "BSh"
   for (let y = 0; y < gridMap.length; y++) {
     // rows
     for (let x = 0; x < gridMap[y].length; x++) {
@@ -1696,7 +1704,8 @@ function npcDialog() {
   }
 }
 
-function removeItemFromInv() { // splicing items from inventory
+function removeItemFromInv() {
+  // splicing items from inventory
   if (
     (selectItem.name === "peach" && selectItemHeldOut === true) ||
     (selectItem.name === "emerald" && selectItemHeldOut === true) ||
@@ -1718,7 +1727,7 @@ function removeItemFromInv() { // splicing items from inventory
 }
 
 function solidBlock() {
-    // do nothing
+  // do nothing
 }
 
 function pickItemUp() {
@@ -1753,7 +1762,7 @@ function pickItemUp() {
   }
   if (nextCell === `PrG`) {
     itemPickup(`petRock`);
-        // when a petRock is picked up, another river rock will be dropped in 11-25 seconds
+    // when a petRock is picked up, another river rock will be dropped in 11-25 seconds
     let rockDropTime = random(11000, 25000);
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`) {
@@ -1772,7 +1781,7 @@ function pickItemUp() {
   }
   if (nextCell === `EmG`) {
     itemPickup(`emerald`);
-        // when a emerald is picked up, another river rock will be dropped in 11-25 seconds
+    // when a emerald is picked up, another river rock will be dropped in 11-25 seconds
     let rockDropTime = random(11000, 25000);
     rockDropSelection = random(riverRocks);
     if (rockDropSelection === `diamond`) {
@@ -1867,8 +1876,10 @@ function itemPickup(item) {
 }
 
 function dropItem(item, dropZone) {
-  //
+  // place item label in the grid
   if (dropZone === item.dropZone) {
+    // if the item is automatically dropped on map, use the drop zone in the item class/JSON
+    // drop peach around peach tree
     if (item.name === `peach`) {
       let fallenPeachIndex = random(dropZone);
       if (gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] === `Pl`) {
@@ -1879,7 +1890,7 @@ function dropItem(item, dropZone) {
         gridMap[fallenPeachIndex.row][fallenPeachIndex.collumn] = `PeG`;
       }
     }
-
+    // drop rive rocks by the mountain river
     if (
       item.name === `emerald` ||
       item.name === `diamond` ||
@@ -1891,11 +1902,11 @@ function dropItem(item, dropZone) {
       if (
         gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] === `Pl`
       ) {
-        // if peach tries to fall in a cell where the player is standing, select another cell and try again
+        // if river rock tries to fall in a cell where the player is standing, select another cell and try again
         fallenEmeraldIndex = random(emeraldItem.dropZone);
-        dropItem(currentRiverRock, item.dropZone); // ### HAVE random stones!
+        dropItem(currentRiverRock, item.dropZone); //
       } else {
-        // drop the peach
+        // drop the river rock
         if (currentRiverRock.name === `emerald`) {
           gridMap[fallenEmeraldIndex.row][fallenEmeraldIndex.collumn] = `EmG`;
         } else if (currentRiverRock.name === `diamond`) {
@@ -1906,30 +1917,20 @@ function dropItem(item, dropZone) {
       }
     }
   } else if (dropZone !== item.dropZone) {
-    let npcItemDropIndex = random(adjacentNPC.itemDropZone);
+    // if the drop zone is NPC's, generic commands!
+    let npcItemDropIndex = random(adjacentNPC.itemDropZone); // load adjacent NPC's drop zone into generic drop zone variable
     if (gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] === `Pl`) {
-      // if peach tries to fall in a cell where the player is standing, select another cell and try again
-      dropItem(item, adjacentNPC.itemDropZone); //dropPie();
+      // if item tries to fall in a cell where the player is standing, select another cell and try again
+      dropItem(item, adjacentNPC.itemDropZone);
     } else {
-      // drop the slice of pie
+      // drop the item
       gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] = item.cellLabel;
     }
   }
-  //}
 }
 
-// mouse used for debugging
+// click mouse to start the game
 function mouseClicked() {
-  //console.log(adjacentNPC);
-  //console.log(currentRelationToPlayer);
-  //console.log(selectItem);
-  //console.log(pieItem.name);
-  //console.log(gridMap);
-  //console.log(currentDigitPressed);
-  //console.log(npcPeachEvent);
-  //console.log(npcText);
-  //console.log(selectItem.name);
-  //console.log(gridMap[nextRow][nextCol]);
   if (state === `title`) {
     state = "simulation";
     playerPaused = false;
