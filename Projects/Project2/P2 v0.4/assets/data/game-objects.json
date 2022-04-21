@@ -10,7 +10,7 @@
       "color": "salmon",
       "personality": "friendly",
       "/* rel. to player range": "-10 to 10 // -10 and less // -9 - 9 neutral // 10 friendly */",
-      "relationship2player": 5,
+      "relationship2player": 8,
       "relationship2items": {
         "range": "-1 to 1 // -1 dislike // 0 neutral // 1 favorite",
         "peach": 0,
@@ -77,7 +77,7 @@
       "neutralDialog": [
         "I'll rent you a boat for 3 gold coins",
         "I don't know what I'd do for something fresh right now",
-        "When work is over, I hop on my boat a fish until the sun sets"
+        "When work is over, I hop on my boat and fish until sun set"
       ],
       "dislikeDialog": ["I don't like you very much"],
       "friendlyDialog": [
@@ -157,7 +157,7 @@
         { "row": 20, "collumn": 18 }
       ],
       "firstTalk": "true",
-      "initialDialog": "Hi there! I'm trading wares, you might find something you like",
+      "initialDialog": "Hi there! I'm trading wares, take a look.",
       "neutralDialog": [],
       "dislikeDialog": ["I've got all sorts of things. What do you want?"],
       "friendlyDialog": []
@@ -380,6 +380,15 @@
       "value": 4,
       "imageName": "goldcoinImage",
       "dropZone": [0]
-    }
+    },
+    "boatKey": {
+      "name": "boatKey",
+      "cellLabel": "Bk",
+      "type": "utility",
+      "/* value range": "1 = common - 5 = precious */",
+      "value": 6,
+      "imageName": "boatKeyImage",
+      "dropZone": [0]
   }
+}
 }

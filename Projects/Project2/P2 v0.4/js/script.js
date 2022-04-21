@@ -128,7 +128,8 @@ let peachImage,
   fireworkImage,
   mushroomImage,
   valsPaintingImage,
-  petRockImage;
+  petRockImage,
+  boatKeyImage;
 
 let riverRocks = [`emerald`, `diamond`, `petRock`];
 
@@ -165,6 +166,7 @@ function preload() {
   imageBank.mushroomImage = loadImage(`assets/images/mushroom.png`);
   imageBank.valsPaintingImage = loadImage(`assets/images/valsPainting.png`);
   imageBank.cherryImage = loadImage(`assets/images/cherry.png`);
+  imageBank.boatKeyImage = loadImage(`assets/images/boatKey.png`);
 
   bushImage = loadImage(`assets/images/bush.png`);
   stoneImage = loadImage(`assets/images/boulder.png`);
@@ -226,7 +228,7 @@ function setup() {
   goldcoinItem = new Item(data.items.goldcoin);
   valsPaintingItem = new Item(data.items.valsPainting);
 
-
+  boatKeyItem = new Item(data.items.boatKey);
 }
 
 /**
@@ -392,6 +394,9 @@ function displayGrid() {
         } else if (selectItem.name === "goldcoin") {
           drawSmolItem(`goldcoin`, x, y);
           //drawSmolPie(x, y);
+        } else if (selectItem.name === "boatKey") {
+          drawSmolItem(`boatKey`, x, y);
+          //drawSmolPie(x, y);
         }
       }
       //  }
@@ -449,6 +454,11 @@ function displayGrid() {
         // Pi for Pie
         //drawPie(x, y);
         drawItem(goldcoinItem.name, x, y);
+      }
+      if (cell === `Bk`) {
+        // Pi for Pie
+        //drawPie(x, y);
+        drawItem(boatKeyItem.name, x, y);
       }
 
       if (cell === `NPC`) {
@@ -566,11 +576,9 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `petRockImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[petRockItem.imageName];
-
       } else if (player.inventory[i].imageName === `cherryImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[cherryItem.imageName];
-
       } else if (player.inventory[i].imageName === `mushroomImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[mushroomItem.imageName];
@@ -583,6 +591,9 @@ function displayInventory() {
       } else if (player.inventory[i].imageName === `goldcoinImage`) {
         //console.log("???");
         invItemToDisplay = imageBank[goldcoinItem.imageName];
+      } else if (player.inventory[i].imageName === `boatKeyImage`) {
+        //console.log("???");
+        invItemToDisplay = imageBank[boatKeyItem.imageName];
       }
 
       push();
@@ -659,6 +670,9 @@ function drawItem(itemName, x, y) {
   if (itemName === `cherry`) {
     currentItemImage = imageBank[cherryItem.imageName];
   }
+  if (itemName === `boatKey`) {
+    currentItemImage = imageBank[boatKeyItem.imageName];
+  }
 
   push();
   imageMode(LEFT);
@@ -697,6 +711,9 @@ function drawSmolItem(itemName, x, y) {
   }
   if (itemName === `goldcoin`) {
     currentItemImage = imageBank[goldcoinItem.imageName]; // ### wont show up??
+  }
+  if (itemName === `boatKey`) {
+    currentItemImage = imageBank[boatKeyItem.imageName]; // ### wont show up??
   }
   push();
   imageMode(CENTER);
@@ -751,7 +768,6 @@ function keyPressed() {
 
         selectItem = player.inventory[1];
         selectItemHeldOut = true;
-
       }
     }
     if (keyCode === 50) {
@@ -765,7 +781,7 @@ function keyPressed() {
         currentDigitPressed = 2;
 
         selectItem = player.inventory[2];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 51) {
@@ -779,7 +795,7 @@ function keyPressed() {
         currentDigitPressed = 3;
 
         selectItem = player.inventory[3];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 52) {
@@ -793,7 +809,7 @@ function keyPressed() {
         currentDigitPressed = 4;
 
         selectItem = player.inventory[4];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 53) {
@@ -807,7 +823,7 @@ function keyPressed() {
         currentDigitPressed = 5;
 
         selectItem = player.inventory[5];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 54) {
@@ -820,7 +836,7 @@ function keyPressed() {
       } else {
         currentDigitPressed = 6;
         selectItem = player.inventory[6];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 55) {
@@ -834,7 +850,7 @@ function keyPressed() {
         currentDigitPressed = 7;
 
         selectItem = player.inventory[7];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 56) {
@@ -848,7 +864,7 @@ function keyPressed() {
         currentDigitPressed = 8;
 
         selectItem = player.inventory[8];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
     if (keyCode === 57) {
@@ -862,7 +878,7 @@ function keyPressed() {
         currentDigitPressed = 9;
 
         selectItem = player.inventory[9];
-                selectItemHeldOut = true;
+        selectItemHeldOut = true;
       }
     }
 
@@ -900,7 +916,8 @@ function keyPressed() {
         nextCell === `Fw` ||
         nextCell === `Pa` ||
         nextCell === `Gc` ||
-        nextCell === `Ch`
+        nextCell === `Ch` ||
+        nextCell === `Bk`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -988,8 +1005,9 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`||
-        nextCell === `Ch`
+        nextCell === `Gc` ||
+        nextCell === `Ch` ||
+        nextCell === `Bk`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1069,8 +1087,9 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`||
-        nextCell === `Ch`
+        nextCell === `Gc` ||
+        nextCell === `Ch` ||
+        nextCell === `Bk`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1149,8 +1168,9 @@ function keyPressed() {
         nextCell === `Mu` ||
         nextCell === `Fw` ||
         nextCell === `Pa` ||
-        nextCell === `Gc`||
-        nextCell === `Ch`
+        nextCell === `Gc` ||
+        nextCell === `Ch` ||
+        nextCell === `Bk`
       ) {
         if (player.inventory.length === 10) {
           alert("inventory is full, item not picked up");
@@ -1272,63 +1292,226 @@ function keyPressed() {
                 // if DEP is adjacent to player
                 adjacentNPC = depMate;
 
-                if (adjacentNPC.firstTalk === "true") {
-                  // if this is the first time talking to npc
-                  console.log("yo");
-                  npcText = adjacentNPC.initialDialog; // display npc initial dialog
-                  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
-                  playerPaused = true; // player is paused
-                  stopTextBubble = false; //  text bubble is not stopped anymore
-                  return;
-                }
-console.log(selectItemHeldOut);
-                if (selectItemHeldOut === false){
-                  console.log("why not?");
-                  // now that rel2ply has been manipulated
+              if (adjacentNPC.firstTalk === "true") {
+                // if this is the first time talking to npc
+                npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                playerPaused = true; // player is paused
+                stopTextBubble = false; //  text bubble is not stopped anymore
+                return;
+                //npcFirstTalk();
+              }
+
+                npcDialog(); // normal dialog is generid
+
+                // if item held out is unique for each npc
+                if (selectItemHeldOut === true) {
+                  //dep mate gives gold coins for fruit edibles types
+                  // otherwise he receives items as gifts which improve rel2pl
                   if (
-                    adjacentNPC.relationship2player >= -9 &&
-                    adjacentNPC.relationship2player <= 9
+                    selectItem !==
+                    { itemName: "empty", itemImageName: "no image" }
                   ) {
-                    let dialogSelection = adjacentNPC.neutralDialog;
-                    let lastNPCText = npcText;
-                    npcText = random(dialogSelection); // use player coordinates
-                    if (npcText === lastNPCText) {
-                      npcText = random(dialogSelection); // use player coordinates
+                    // if player is holding out item
+
+
+                    // go through item name list
+                    for (let i = 0; i < itemNameList.length; i++) {
+
+                      if (itemNameList[i] === selectItem.name) {
+                        console.log(`you've given a ${selectItem.name}`);
+                        //determine how much relationship manipulated
+                        receivedItem = selectItem.name;
+                        removeItemFromInv();
+
+                        if (
+                          receivedItem === `peach` ||
+                          receivedItem === `cherry` ||
+                          receivedItem === `mushroom`
+                        ) {
+                          //dropItem
+                          npcText = `Thanks for the produce! Here's a goldcoin!`;
+
+                          dropItem(goldcoinItem, depMate.itemDropZone);
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        } else if (receivedItem === `goldcoin`) {
+                          let depMateItems = [
+                            peachNPCItem,
+                            cherryItem,
+                            fireworkItem,
+                          ];
+                          depMateItemToDrop = random(depMateItems);
+                          npcText = `Here's a ${depMateItemToDrop.name}`;
+                          dropItem(depMateItemToDrop, depMate.itemDropZone);
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        } else {
+                          npcText = `Thanks for the ${receivedItem}`;
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
+
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
+
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv();
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                      }
                     }
-                    playerPaused = true; // player is paused
-                    stopTextBubble = false; //  text bubble is not stopped anymore
-                    // no effect on rel2pl
-                    // receiving item = true
-                    //return;
-                  } else if (adjacentNPC.relationship2player >= 10) {
-                    let dialogSelection = adjacentNPC.friendlyDialog;
-                    let lastNPCText = npcText;
-                    npcText = random(dialogSelection); // use player coordinates
-                    if (npcText === lastNPCText) {
-                      npcText = random(dialogSelection); // use player coordinates
-                    }
-                    playerPaused = true; // player is paused
-                    stopTextBubble = false; //  text bubble is not stopped anymore
-                    // +.2 on rel2pl
-                    // receiving item = true
-                    //return;
-                  } else if (adjacentNPC.relationship2items <= -10) {
-                    let dialogSelection = adjacentNPC.dislikeDialog;
-                    let lastNPCText = npcText;
-                    npcText = random(dialogSelection); // use player coordinates
-                    if (npcText === lastNPCText) {
-                      npcText = random(dialogSelection); // use player coordinates
-                    }
-                    playerPaused = true; // player is paused
-                    stopTextBubble = false; //  text bubble is not stopped anymore
-                    // -.2 on rel2pl
-                    //receiving item = true
-                    //return;
-                  } else {
-                    // npc receives no gift, no effect on rel2pl
                   }
                 }
-                else if (selectItemHeldOut === true) {
+              }
+
+              //}
+              //}
+              // DEP end
+              else if (playerAdjacentCells[i] === `BOT`) {
+                adjacentNPC = boatMate;
+                //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
+                // otherwise he receives items as gifts which improve rel2pl
+
+            if (adjacentNPC.firstTalk === "true") {
+              // if this is the first time talking to npc
+              npcText = adjacentNPC.initialDialog; // display npc initial dialog
+              adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+              playerPaused = true; // player is paused
+              stopTextBubble = false; //  text bubble is not stopped anymore
+              return;
+              //npcFirstTalk();
+            }
+                //console.log(selectItemHeldOut);
+
+                npcDialog(); // normal dialog is generid
+
+                // if item held out is unique for each npc
+                if (selectItemHeldOut === true) {
+                  //dep mate gives gold coins for fruit edibles types
+                  // otherwise he receives items as gifts which improve rel2pl
+                  if (
+                    selectItem !==
+                      { itemName: "empty", itemImageName: "no image" } ||
+                    selectItem !== boatKeyItem
+                  ) {
+                    // if player is holding out item
+
+                    // go through item name list
+                    for (let i = 0; i < itemNameList.length; i++) {
+
+                      if (itemNameList[i] === selectItem.name) {
+                        console.log(`you've given a ${selectItem.name}`);
+                        //determine how much relationship manipulated
+                        receivedItem = selectItem.name;
+                        removeItemFromInv();
+
+                        if (receivedItem === `goldcoin`) {
+                          //dropItem
+                          npcText = `Be sure to stay in the shallow waters!`;
+
+                          dropItem(boatKeyItem, boatMate.itemDropZone);
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        } else {
+                          npcText = `Thanks for the ${receivedItem}`;
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
+
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
+
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv();
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                      }
+                    }
+                  }
+                }
+
+              } else if (playerAdjacentCells[i] === `HIK`) {
+                adjacentNPC = hikeMate;
+                //hiker receives items as gifts
+
+if (adjacentNPC.firstTalk === "true") {
+  // if this is the first time talking to npc
+  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+  playerPaused = true; // player is paused
+  stopTextBubble = false; //  text bubble is not stopped anymore
+  return;
+  //npcFirstTalk();
+}
+
+
+
+                //console.log(selectItemHeldOut);
+
+                npcDialog(); // normal dialog is generid
+
+                // if item held out is unique for each npc
+                if (selectItemHeldOut === true) {
+                  //dep mate gives gold coins for fruit edibles types
+                  // otherwise he receives items as gifts which improve rel2pl
+                  if (
+                    selectItem !==
+                    { itemName: "empty", itemImageName: "no image" }
+                  ) {
+                    // if player is holding out item
+                    // go through item name list
+                    for (let i = 0; i < itemNameList.length; i++) {
+
+                      if (itemNameList[i] === selectItem.name) {
+                        console.log(`you've given a ${selectItem.name}`);
+                        //determine how much relationship manipulated
+                        receivedItem = selectItem.name;
+
+                          npcText = `Thanks for the ${receivedItem}`;
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
+
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
+
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv();
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                      }
+                    }
+                  }
+                }
+               else if (playerAdjacentCells[i] === `PDL`) {
+                adjacentNPC = peddleMate;
+                //pedler exchanges items for equal value item
+                // does not receive gifts
+              if (adjacentNPC.firstTalk === "true") {
+                // if this is the first time talking to npc
+                npcText = adjacentNPC.initialDialog; // display npc initial dialog
+                adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+                playerPaused = true; // player is paused
+                stopTextBubble = false; //  text bubble is not stopped anymore
+                return;
+                //npcFirstTalk();
+              }
+                //console.log(selectItemHeldOut);
+
+                npcDialog(); // normal dialog is generid
+
+                // if item held out is unique for each npc
+                if (selectItemHeldOut === true) {
                   //dep mate gives gold coins for fruit edibles types
                   // otherwise he receives items as gifts which improve rel2pl
                   if (
@@ -1368,8 +1551,6 @@ console.log(selectItemHeldOut);
                           stopTextBubble = false; //  text bubble is not stopped anymore
                           return;
                         } else if (receivedItem === `goldcoin`) {
-
-
                           let depMateItems = [
                             peachNPCItem,
                             cherryItem,
@@ -1395,62 +1576,33 @@ console.log(selectItemHeldOut);
                           playerPaused = true; // player is paused
                           stopTextBubble = false; //  text bubble is not stopped anymore
                           return;
-
                         }
                       }
                     }
                   }
                 }
 
-
-
-
-
-                }
-
-
-              //}
-              //}
-              // DEP end
-              else if (playerAdjacentCells[i] === `BOT`) {
-                adjacentNPC = boatMate;
-                //boat mate gives boat keys for 3 gold coins. boat key cannot be given.
-                // otherwise he receives items as gifts which improve rel2pl
-              } else if (playerAdjacentCells[i] === `HIK`) {
-                adjacentNPC = hikeMate;
-                //hiker receives items as gifts
-              } else if (playerAdjacentCells[i] === `PDL`) {
-                adjacentNPC = peddleMate;
-                //pedler exchanges items for equal value item
-                // does not receive gifts
               } else if (playerAdjacentCells[i] === `IDL`) {
                 adjacentNPC = idleMate;
                 //idle mate wants 5 peaches in exchange for pie, infinite
                 // anything else is received as a gift
                 //npcText = idleMate.initialDialog; // use player coordinates
                 //}
-
-                if (adjacentNPC.firstTalk === "true") {
-                  console.log("yo");
-                  npcText = adjacentNPC.initialDialog; // use player coordinates
-                  adjacentNPC.firstTalk = "false";
-                  playerPaused = true; // player is paused
-                  stopTextBubble = false; //  text bubble is not stopped anymore
-                  return;
-                }
+if (adjacentNPC.firstTalk === "true") {
+  // if this is the first time talking to npc
+  npcText = adjacentNPC.initialDialog; // display npc initial dialog
+  adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+  playerPaused = true; // player is paused
+  stopTextBubble = false; //  text bubble is not stopped anymore
+  return;
+            //npcFirstTalk();
+          }
 
                 if (stopTextBubble === true) {
                   // when space is pressed beside npc, text bubble is displayed
                   playerPaused = true; // player is paused
                   stopTextBubble = false; //  text bubble is not stopped anymore
                   // npcFriendEvent gets launched after npcPeachEvent is completed
-
-                  // if (adjacentNPC.friendEvent === 1) {
-                  //   adjacentNPC.FriendEvent++;
-                  //   if (adjacentNPC.FriendEvent === 2) {
-                  //     npcText = "Hey, buddy! How's it going?"; // this dialog takes place during npcFriendEvent
-                  // when player presses space beside the npc
-                  // while the player is NOT holding out a peach to give
                 }
 
                 // if player item is out, player gives npc item
@@ -1509,6 +1661,66 @@ console.log(selectItemHeldOut);
   }
 }
 
+// function npcFirstTalk(){
+//   //if (adjacentNPC.firstTalk === "true") {
+//     // if this is the first time talking to npc
+//     npcText = adjacentNPC.initialDialog; // display npc initial dialog
+//     adjacentNPC.firstTalk = "false"; // then turn off first talk to initiate neutral dialog
+//     playerPaused = true; // player is paused
+//     stopTextBubble = false; //  text bubble is not stopped anymore
+//     return;
+//   //}
+// }
+
+function npcDialog() {
+  if (selectItemHeldOut === false) {
+    //console.log("why not?");
+    // now that rel2ply has been manipulated
+    if (
+      adjacentNPC.relationship2player >= -9 &&
+      adjacentNPC.relationship2player <= 9
+    ) {
+      let dialogSelection = adjacentNPC.neutralDialog;
+      let lastNPCText = npcText;
+      npcText = random(dialogSelection); // use player coordinates
+      if (npcText === lastNPCText) {
+        npcText = random(dialogSelection); // use player coordinates
+      }
+      playerPaused = true; // player is paused
+      stopTextBubble = false; //  text bubble is not stopped anymore
+      // no effect on rel2pl
+      // receiving item = true
+      //return;
+    } else if (adjacentNPC.relationship2player >= 10) {
+      let dialogSelection = adjacentNPC.friendlyDialog;
+      let lastNPCText = npcText;
+      npcText = random(dialogSelection); // use player coordinates
+      if (npcText === lastNPCText) {
+        npcText = random(dialogSelection); // use player coordinates
+      }
+      playerPaused = true; // player is paused
+      stopTextBubble = false; //  text bubble is not stopped anymore
+      // +.2 on rel2pl
+      // receiving item = true
+      //return;
+    } else if (adjacentNPC.relationship2items <= -10) {
+      let dialogSelection = adjacentNPC.dislikeDialog;
+      let lastNPCText = npcText;
+      npcText = random(dialogSelection); // use player coordinates
+      if (npcText === lastNPCText) {
+        npcText = random(dialogSelection); // use player coordinates
+      }
+      playerPaused = true; // player is paused
+      stopTextBubble = false; //  text bubble is not stopped anymore
+      // -.2 on rel2pl
+      //receiving item = true
+      //return;
+    } else {
+      // npc receives no gift, no effect on rel2pl
+    }
+  }
+}
+
 function removeItemFromInv() {
   if (
     (selectItem.name === "peach" && selectItemHeldOut === true) ||
@@ -1524,7 +1736,7 @@ function removeItemFromInv() {
   ) {
     player.inventory.splice(selectItemNumber, 1); // remove selectItem from the array
     selectItem = player.inventory[0]; // select item is reset to 0
-        selectItemHeldOut = false;
+    selectItemHeldOut = false;
     currentDigitPressed = 0;
   }
 }
@@ -1634,7 +1846,6 @@ function pickItemUp() {
   if (nextCell === `Mu`) {
     itemPickup(`mushroom`);
   }
-
   if (nextCell === `Fw`) {
     itemPickup(`firework`);
   }
@@ -1646,6 +1857,9 @@ function pickItemUp() {
   }
   if (nextCell === `Ch`) {
     itemPickup(`cherry`);
+  }
+  if (nextCell === `Bk`) {
+    itemPickup(`boatKey`);
   }
 }
 
@@ -1686,6 +1900,10 @@ function itemPickup(item) {
   if (item === `cherry`) {
     //console.log(`hey...`)
     player.inventory.push(cherryItem);
+  }
+  if (item === `boatKey`) {
+    //console.log(`hey...`)
+    player.inventory.push(boatKeyItem);
   }
 }
 
@@ -1733,7 +1951,6 @@ function dropItem(item, dropZone) {
       }
     }
   } else if (dropZone !== item.dropZone) {
-
     let npcItemDropIndex = random(adjacentNPC.itemDropZone);
     if (gridMap[npcItemDropIndex.row][npcItemDropIndex.collumn] === `Pl`) {
       // if peach tries to fall in a cell where the player is standing, select another cell and try again
