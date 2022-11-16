@@ -16,38 +16,934 @@ let data = undefined; // no data yet, will be the JSON file with npcs and items
 // labels in these indexed cells represent NPCs, items, the player, and barriers (Solid `S` or semi-solid `Sh`)
 let gridMap = [
   //0   `1`  `2`  `3`  `4`  `5`  `6`  `7`  `8`  `9` `10` `11` `12` `13` `14` `15` `16` `17` `18` `19` `20` `21` `22` `23` `24` `25` `26`
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [0]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [1]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `St`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [2]
-  [` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, ` `, ` `, ` `], // [3]
-  [` `, ` `, ` `, `S`, `S`, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, `S`, `S`, `HIK`, ` `, ` `, ` `, `S`, ` `, ` `], // [4]
-  [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [5]
-  [` `, `S`, ` `, ` `, ` `, ` `, `S`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `Bh`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, `St`, `S`, ` `], // [6]
-  [` `, `S`, ` `, `Mu`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bh`,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `St`, `S`, ` `], // [7]
-  [` `, ` `, `S`, ` `, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, `EmG`, ` `, ` `, ` `, `St`, `S`, ` `], // [8]
-  [` `, `S`, ` `, `Bh`, `S`, `S`, `S`, `S`, ` `, ` `, `S`, `S`, `Bh`, ` `, ` `,` `, ` `, ` `, ` `, ` `, `St`, ` `, ` `, ` `, `S`, ` `, ` `], // [9]
-  [` `, `S`, ` `, ` `, `DEP`, ` `, ` `, ` `, ` `, ` `, ` `, `Pl`, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `], // [10]
-  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `], // [11]
-  [`S`, `S`, `Sh`, ` `, `Bh`, ` `,`Bh`,`Bh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `], // [12]
-  [` `, `S`, ` `, `Sh`, `Sh`, ` `, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `,`Bh`, ` `, ` `, `St`, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `], // [13]
-  [` `, `S`, ` `, ` `, ` `, `Sh`, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [14]
-  [` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `Sh`, ` `, ` `, ` `, ` `,` `, ` `, ` `, ` `, `Sh`, ` `, `S`, `S`, `S`, ` `, ` `, ` `], // [15]
-  [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, `S`, ` `, ` `], // [16]
-  [` `, ` `, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `S`, `S`, ` `, ` `, ` `, ` `, `Bh`, `Sh`, ` `, ` `, ` `, `S`, ` `, ` `], // [17]
-  [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [18]
-  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `BoT`,`BOT`,` `, ` `, ` `, ` `, ` `,`PDL`, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [19]
-  [` `, `S`, `Sh`, `Sh`, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Bo`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, ` `, ` `], // [20]
-  [` `, `S`, ` `, ` `, ` `, ` `, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, `S`, ` `, ` `], // [21]
-  [` `, `S`, ` `, `S`, `S`, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, `S`, ``, ` `], // [22]
-  [` `, `S`, ` `, `S`, `S`, `IDL`, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, `Sh`, `Sh`, ` `, ` `, ` `, ` `, ` `, `S`, ` `, ` `], // [23]
-  [` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, ` `, ` `], // [24]
-  [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `], // [25]
-  [` `, `S`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `], // [26]
-  [` `, `S`, ` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, ` `, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [27]
-  [` `, `S`, ` `, ` `, `S`, ` `, `PeG`, ` `, ` `, ` `, ` `, ` `, `Sh`, ` `, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [28]
-  [` `, ` `, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [29]
-  [` `, ` `, ` `, `S`, `S`, `S`, `S`, `S`, `S`, `S`, `S`, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [30]
-  [` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `, ` `], // [31]
+  [
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [0]
+  [
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [1]
+  [
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `St`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [2]
+  [
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+  ], // [3]
+  [
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    `HIK`,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [4]
+  [
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+  ], // [5]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `Bh`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    `St`,
+    `S`,
+    ` `,
+  ], // [6]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `Mu`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Bh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `St`,
+    `S`,
+    ` `,
+  ], // [7]
+  [
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `EmG`,
+    ` `,
+    ` `,
+    ` `,
+    `St`,
+    `S`,
+    ` `,
+  ], // [8]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `Bh`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `Bh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `St`,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [9]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    `DEP`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Pl`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+  ], // [10]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [11]
+  [
+    `S`,
+    `S`,
+    `Sh`,
+    ` `,
+    `Bh`,
+    ` `,
+    `Bh`,
+    `Bh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [12]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `Sh`,
+    `Sh`,
+    ` `,
+    `Sh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Bh`,
+    ` `,
+    ` `,
+    `St`,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [13]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [14]
+  [
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+  ], // [15]
+  [
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+  ], // [16]
+  [
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Bh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [17]
+  [
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [18]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `BoT`,
+    `BOT`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `PDL`,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [19]
+  [
+    ` `,
+    `S`,
+    `Sh`,
+    `Sh`,
+    `Sh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Bo`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [20]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [21]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ``,
+    ` `,
+  ], // [22]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    `IDL`,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    `Sh`,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+  ], // [23]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+  ], // [24]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+  ], // [25]
+  [
+    ` `,
+    `S`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [26]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [27]
+  [
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    `PeG`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `Sh`,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [28]
+  [
+    ` `,
+    ` `,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [29]
+  [
+    ` `,
+    ` `,
+    ` `,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    `S`,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [30]
+  [
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+    ` `,
+  ], // [31]
 ];
 // these next three variables are not used by the grid, but are used for convenience sake in for loops to check the grid
 let rows = 32;
@@ -255,8 +1151,8 @@ function cameraSetup() {
   if (mouseIsPressed) camera.zoom = 0.65;
   else camera.zoom = 1;
   //set the camera position to the player position
-  camera.position.x = player.x;
-  camera.position.y = player.y;
+  camera.x = player.x; // used to be camera.position.xyz
+  camera.y = player.y;
 }
 
 function titleState() {
@@ -313,7 +1209,9 @@ function simulationState() {
   and display inventory, which displays the ui boxes where item pngs appear when items are picked up off the grid
   */
   if (state === "simulation") {
-    playBGMusic();
+    camera.on();
+    //console.log(camera.on);
+    //playBGMusic();
     // display the background/map
     push();
     imageMode(CENTER);
@@ -1282,7 +2180,7 @@ function keyPressed() {
                           stopTextBubble = false; //  text bubble is not stopped anymore
                           return;
                         } else {
-                          if (depMate.relationship2items[receivedItem] === -1){
+                          if (depMate.relationship2items[receivedItem] === -1) {
                             // if npc receives any other item, it is counted as a gift
                             npcText = `A ${receivedItem}. no thanks.`; // npc text stating received item
                             let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
@@ -1297,7 +2195,7 @@ function keyPressed() {
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                          if (depMate.relationship2items[receivedItem] === 0){
+                          if (depMate.relationship2items[receivedItem] === 0) {
                             // if npc receives any other item, it is counted as a gift
                             npcText = `Thanks for the ${receivedItem}`; // npc text stating received item
                             let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
@@ -1312,7 +2210,7 @@ function keyPressed() {
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-                          if (depMate.relationship2items[receivedItem] === 1){
+                          if (depMate.relationship2items[receivedItem] === 1) {
                             // if npc receives any other item, it is counted as a gift
                             npcText = `I love a ${receivedItem}!`; // npc text stating received item
                             let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
@@ -1327,7 +2225,6 @@ function keyPressed() {
                             stopTextBubble = false; //  text bubble is not stopped anymore
                             return;
                           }
-
                         }
                       }
                     }
@@ -1406,57 +2303,59 @@ function keyPressed() {
                             return;
                           }
                         } else {
-                          if (boatMate.relationship2items[receivedItem] === -1){
-                          // any other items given are received as gifts
-                          npcText = `I don't want no ${receivedItem}!`; // npc text stating received item
-                          let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                            adjacentNPC.relationship2items[receivedItem];
+                          if (
+                            boatMate.relationship2items[receivedItem] === -1
+                          ) {
+                            // any other items given are received as gifts
+                            npcText = `I don't want no ${receivedItem}!`; // npc text stating received item
+                            let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                              // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                              adjacentNPC.relationship2items[receivedItem];
 
-                          adjacentNPC.relationship2player =
-                            adjacentNPC.relationship2player +
-                            relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                          console.log(adjacentNPC.relationship2player);
-                          removeItemFromInv(); // splice item from inventory
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        }
-                        if (boatMate.relationship2items[receivedItem] === 0){
-                        // any other items given are received as gifts
-                        npcText = `Thanks for the ${receivedItem}`; // npc text stating received item
-                        let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                          adjacentNPC.relationship2items[receivedItem];
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // splice item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (boatMate.relationship2items[receivedItem] === 0) {
+                            // any other items given are received as gifts
+                            npcText = `Thanks for the ${receivedItem}`; // npc text stating received item
+                            let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                              // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                              adjacentNPC.relationship2items[receivedItem];
 
-                        adjacentNPC.relationship2player =
-                          adjacentNPC.relationship2player +
-                          relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                        console.log(adjacentNPC.relationship2player);
-                        removeItemFromInv(); // splice item from inventory
-                        playerPaused = true; // player is paused
-                        stopTextBubble = false; //  text bubble is not stopped anymore
-                        return;
-                      }
-                      if (boatMate.relationship2items[receivedItem] === 1){
-                      // any other items given are received as gifts
-                      npcText = `He he he, a ${receivedItem}, for me?`; // npc text stating received item
-                      let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                        // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                        adjacentNPC.relationship2items[receivedItem];
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // splice item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (boatMate.relationship2items[receivedItem] === 1) {
+                            // any other items given are received as gifts
+                            npcText = `He he he, a ${receivedItem}, for me?`; // npc text stating received item
+                            let relationshipManipulator = // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                              // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                              adjacentNPC.relationship2items[receivedItem];
 
-                      adjacentNPC.relationship2player =
-                        adjacentNPC.relationship2player +
-                        relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                      console.log(adjacentNPC.relationship2player);
-                      removeItemFromInv(); // splice item from inventory
-                      playerPaused = true; // player is paused
-                      stopTextBubble = false; //  text bubble is not stopped anymore
-                      return;
-                    }
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // splice item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
                         }
                       }
                     }
@@ -1498,55 +2397,54 @@ function keyPressed() {
                         //determine how much relationship manipulated
                         receivedItem = selectItem.name;
 
-if (hikeMate.relationship2items[receivedItem] === -1){
-  npcText = `Oh ho, huhum... a ${receivedItem}.`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-  // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-  let relationshipManipulator =
-    adjacentNPC.relationship2items[receivedItem];
+                        if (hikeMate.relationship2items[receivedItem] === -1) {
+                          npcText = `Oh ho, huhum... a ${receivedItem}.`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
 
-  adjacentNPC.relationship2player =
-    adjacentNPC.relationship2player +
-    relationshipManipulator;
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
 
-  console.log(adjacentNPC.relationship2player);
-  removeItemFromInv(); // splice item from inventory
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  return;
-}
-if (hikeMate.relationship2items[receivedItem] === 0){
-  npcText = `Thanks for the ${receivedItem}`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-  // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-  let relationshipManipulator =
-    adjacentNPC.relationship2items[receivedItem];
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv(); // splice item from inventory
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                        if (hikeMate.relationship2items[receivedItem] === 0) {
+                          npcText = `Thanks for the ${receivedItem}`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
 
-  adjacentNPC.relationship2player =
-    adjacentNPC.relationship2player +
-    relationshipManipulator;
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
 
-  console.log(adjacentNPC.relationship2player);
-  removeItemFromInv(); // splice item from inventory
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  return;
-}
-if (hikeMate.relationship2items[receivedItem] === 1){
-  npcText = `Is this ${receivedItem} for me? Ah, I appreciate it!`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-  // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-  let relationshipManipulator =
-    adjacentNPC.relationship2items[receivedItem];
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv(); // splice item from inventory
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
+                        if (hikeMate.relationship2items[receivedItem] === 1) {
+                          npcText = `Is this ${receivedItem} for me? Ah, I appreciate it!`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                          let relationshipManipulator =
+                            adjacentNPC.relationship2items[receivedItem];
 
-  adjacentNPC.relationship2player =
-    adjacentNPC.relationship2player +
-    relationshipManipulator;
+                          adjacentNPC.relationship2player =
+                            adjacentNPC.relationship2player +
+                            relationshipManipulator;
 
-  console.log(adjacentNPC.relationship2player);
-  removeItemFromInv(); // splice item from inventory
-  playerPaused = true; // player is paused
-  stopTextBubble = false; //  text bubble is not stopped anymore
-  return;
-}
-
+                          console.log(adjacentNPC.relationship2player);
+                          removeItemFromInv(); // splice item from inventory
+                          playerPaused = true; // player is paused
+                          stopTextBubble = false; //  text bubble is not stopped anymore
+                          return;
+                        }
                       }
                     }
                   }
@@ -1723,57 +2621,59 @@ if (hikeMate.relationship2items[receivedItem] === 1){
                             return;
                           }
                         } else {
-                          if (idleMate.relationship2items[receivedItem] === -1){
-                          // any other item is received as gift
-                          npcText = `Oh, I'm sorry... I don't like ${receivedItem}s`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                          // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                          let relationshipManipulator =
-                            adjacentNPC.relationship2items[receivedItem];
+                          if (
+                            idleMate.relationship2items[receivedItem] === -1
+                          ) {
+                            // any other item is received as gift
+                            npcText = `Oh, I'm sorry... I don't like ${receivedItem}s`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                            let relationshipManipulator =
+                              adjacentNPC.relationship2items[receivedItem];
 
-                          adjacentNPC.relationship2player =
-                            adjacentNPC.relationship2player +
-                            relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                          console.log(adjacentNPC.relationship2player);
-                          removeItemFromInv(); // remove gifted item from inventory
-                          playerPaused = true; // player is paused
-                          stopTextBubble = false; //  text bubble is not stopped anymore
-                          return;
-                        }
-                        if (idleMate.relationship2items[receivedItem] === 0){
-                        // any other item is received as gift
-                        npcText = `Thanks for the ${receivedItem}`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                        // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                        let relationshipManipulator =
-                          adjacentNPC.relationship2items[receivedItem];
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // remove gifted item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (idleMate.relationship2items[receivedItem] === 0) {
+                            // any other item is received as gift
+                            npcText = `Thanks for the ${receivedItem}`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                            let relationshipManipulator =
+                              adjacentNPC.relationship2items[receivedItem];
 
-                        adjacentNPC.relationship2player =
-                          adjacentNPC.relationship2player +
-                          relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                        console.log(adjacentNPC.relationship2player);
-                        removeItemFromInv(); // remove gifted item from inventory
-                        playerPaused = true; // player is paused
-                        stopTextBubble = false; //  text bubble is not stopped anymore
-                        return;
-                      }
-                      if (idleMate.relationship2items[receivedItem] === 1){
-                      // any other item is received as gift
-                      npcText = `A ${receivedItem} is the greatest gift anyone can give`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
-                      // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
-                      let relationshipManipulator =
-                        adjacentNPC.relationship2items[receivedItem];
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // remove gifted item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
+                          if (idleMate.relationship2items[receivedItem] === 1) {
+                            // any other item is received as gift
+                            npcText = `A ${receivedItem} is the greatest gift anyone can give`; // npc relationship to player is manipulated, going up or down according to npc relationship to received item
+                            // -10 = a bad relationship to player, -9 - 9 is neutral, 10+ is a friendship
+                            let relationshipManipulator =
+                              adjacentNPC.relationship2items[receivedItem];
 
-                      adjacentNPC.relationship2player =
-                        adjacentNPC.relationship2player +
-                        relationshipManipulator;
+                            adjacentNPC.relationship2player =
+                              adjacentNPC.relationship2player +
+                              relationshipManipulator;
 
-                      console.log(adjacentNPC.relationship2player);
-                      removeItemFromInv(); // remove gifted item from inventory
-                      playerPaused = true; // player is paused
-                      stopTextBubble = false; //  text bubble is not stopped anymore
-                      return;
-                    }
+                            console.log(adjacentNPC.relationship2player);
+                            removeItemFromInv(); // remove gifted item from inventory
+                            playerPaused = true; // player is paused
+                            stopTextBubble = false; //  text bubble is not stopped anymore
+                            return;
+                          }
                         }
                       }
                     }
